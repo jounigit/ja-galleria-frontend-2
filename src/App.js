@@ -11,11 +11,13 @@ const App = () => {
       .get('http://localhost:8000/api/pictures')
       .then(response => {
         console.log('promise fulfilled')
-        setPictures(response.data)
+        console.log(response.data)
+        setPictures(response.data.data)
       })
   }, [])
 
-  console.log('Render', Pictures.length, 'products')
+  console.log('Render', Pictures.length, 'pictures')
+  console.log('Render meta', Pictures.meta)
 
   
 
