@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Picture /> Picture renders correctly 1`] = `
+<div
+  className="picture"
+>
+  <img
+    alt="kuva1.jpg"
+    className="App-logo"
+    src="kuva1.jpg"
+  />
+  <h2>
+    Kuva 1
+  </h2>
+  <p>
+    Hieno kuva
+  </p>
+</div>
+`;
