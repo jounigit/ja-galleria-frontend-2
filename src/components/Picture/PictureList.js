@@ -1,26 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import pictureService from '../../services/pictureService'
+import React from 'react'
 import Picture from './Picture'
 
-const PictureList = () => {
-  const [Pictures, setPictures] = useState([])
-
-  useEffect(() => {
-    pictureService
-      .getAll()
-      .then(response => {
-        setPictures(response.data)
-      })
-  }, [])
-
-  const showPictures = () => Pictures.map(picture =>
-    <Picture key={picture.id} picture={picture} />
-  )
-
+const PictureList = ({ pictures }) => {
+  console.log(pictures)
   return (
-    <div>
+    <div className='PictureList'>
       <h2>Kuvat</h2>
-      { showPictures() }
+      {pictures.loading && <div className="loader" />}
+      {pictures.data &&
+        pictures.data.data.length > 0 &&
+        pictures.data.data.map(picture =>
+          <Picture key={picture.id} picture={picture} />
+        )
+      }
     </div>
   )
 }

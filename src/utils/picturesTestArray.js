@@ -1,8 +1,3 @@
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import { render } from '@testing-library/react'
-import PictureList from './PictureList'
-
 const pictures = {
   data: {
     loading: false,
@@ -37,22 +32,3 @@ const pictures = {
     }
   }
 }
-
-describe('<PictureList />', () => {
-  let component
-
-  beforeEach(() => {
-    component = render(
-      <PictureList pictures={pictures} />
-    )
-  })
-
-  console.log(component)
-
-  test(' render all pictures', () => {
-    const pictures = component.container.querySelectorAll('img')
-    expect(pictures.length).toBe(2)
-  })
-})
-
-
