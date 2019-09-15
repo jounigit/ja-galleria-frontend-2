@@ -4,10 +4,18 @@ import useFetch from './utils/useFetch'
 import './App.css'
 import { PictureList } from './components/Picture'
 import { Home } from './components/Home'
+import CategoryList from './components/Category/CategoryList'
+// import Category from './components/Category/Category'
+const baseUrl = 'http://localhost:8000/api'
+
 const App = () => {
   const pictures = useFetch(
-    'http://localhost:8000/api/pictures'
+    `${baseUrl}/pictures`
   )
+  const categories = useFetch(
+    `${baseUrl}/categories`
+  )
+
   const padding = { padding: 5 }
 
   return (
@@ -16,10 +24,16 @@ const App = () => {
         <div>
           <div>
             <Link style={padding} to="/">home</Link>
+            <Link style={padding} to="/categories">categories</Link>
             <Link style={padding} to="/pictures">pictures</Link>
           </div>
           <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/categories" render={() => <CategoryList categories={categories} />} />
           <Route exact path="/pictures" render={() => <PictureList pictures={pictures} />} />
+          {/* <Route exact path="/categories/:id" render={({ match }) =>
+            <Category
+              category = {categories.data.data.find(c => c.id === match.params.id)}
+            />} /> */}
         </div>
       </Router>
     </div>
