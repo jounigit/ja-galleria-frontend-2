@@ -1,28 +1,35 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useReducer } from 'react'
 import axios from 'axios'
 
+const fetchReducer = (state, action) => {
+  switch (action.type) {
+  case 'FAILURE':
+    return { data: null, isLoading: false, errorMessage: action.error }
+  case 'SUCCESS':
+    return { data: action.data, isLoading: false, errorMessage: '' }
+  default:
+    return state
+  }
+}
+
 // custom hook for performing GET request
-const useFetch = (url, initialValue) => {
-  const [data, setData] = useState(initialValue)
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    const fetchData = async function() {
-      try {
-        setLoading(true)
-        const response = await axios.get(url)
-        if (response.status === 200) {
-          setData(response.data)
-        }
-      // eslint-disable-next-line no-useless-catch
-      } catch (error) {
-        throw error
-      } finally {
-        setLoading(false)
-      }
+const useFetch = (url) => {
+  const initialState = { data: null, isLoading: true, errorMessage: '' }
+  const [state, dispatch] = useReducer(fetchReducer, initialState)
+
+  const fetchData = async () => {
+    try {
+      const results = await axios.get(url)
+      dispatch({ type: 'SUCCESS', data: results })
+    } catch (error) {
+      dispatch({ type: 'FAILURE', error: error.message || error })
     }
+  }
+  useEffect(() => {
     fetchData()
   }, [url])
-  return { loading, data }
+
+  return state
 }
 
 export default useFetch
