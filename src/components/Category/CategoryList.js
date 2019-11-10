@@ -12,7 +12,7 @@ const CategoryList = ({ categories }) => {
     <div>
       <h2>Kategoriat</h2>
       {categories.data &&
-        categories.data.map(category =>
+        categories.data.data.map(category =>
           <Category key={category.id} category={category} />
         )
       }

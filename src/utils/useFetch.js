@@ -17,15 +17,15 @@ const useFetch = (url) => {
   const initialState = { data: null, isLoading: true, errorMessage: '' }
   const [state, dispatch] = useReducer(fetchReducer, initialState)
 
-  const fetchData = async () => {
-    try {
-      const results = await axios.get(url)
-      dispatch({ type: 'SUCCESS', data: results })
-    } catch (error) {
-      dispatch({ type: 'FAILURE', error: error.message || error })
-    }
-  }
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const results = await axios.get(url)
+        dispatch({ type: 'SUCCESS', data: results })
+      } catch (error) {
+        dispatch({ type: 'FAILURE', error: error.message || error })
+      }
+    }
     fetchData()
   }, [url])
 

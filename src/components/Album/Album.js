@@ -3,7 +3,7 @@ import { Picture } from '../Picture'
 
 const Album = ( { album }) => {
   const [visible, setVisible] = useState(false)
-  console.log('CAT -- ', album.pictures)
+  console.log('ALBUM PICS -- ', album.pictures)
   const pictures = () => album.pictures.map(p =>
     <Picture key={p.id} picture={p} />
   )
