@@ -3,7 +3,7 @@ import ListItem from './ListItemAlbum'
 
 const Category = ( { category } ) => {
   const [visible, setVisible] = useState(false)
-  console.log('CAT -- ', category)
+  console.log('CATEGORY -- ', category)
   const albums = () => category.albums.map(a =>
     <ListItem key={a.id} album={a} />
   )
