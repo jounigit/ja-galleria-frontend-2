@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router,Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import useFetch from './utils/useFetch'
 import './App.css'
 import { PictureList } from './components/Picture'
@@ -31,18 +31,13 @@ const App = () => {
             <Link style={padding} to="/albums">albums</Link>
             <Link style={padding} to="/pictures">pictures</Link>
           </div>
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/categories" render={() => <CategoryList categories={categories} />} />
-          
-          <Route exact path="/albums" render={() => <AlbumList albums={albums} />} />
-          <Route exact path="/albums/:id"
-            render={({ match }) => <AlbumData match={match} />}
-          />
-          <Route exact path="/pictures" render={() => <PictureList pictures={pictures} />} />
-          {/* <Route exact path="/categories/:id" render={({ match }) =>
-            <Category
-              category = {categories.data.data.find(c => c.id === match.params.id)}
-            />} /> */}
+          <Switch>
+            <Route path="/albums/:id"><AlbumData /></Route>
+            <Route path="/albums"><AlbumList albums={albums} /></Route>
+            <Route path="/categories"><CategoryList categories={categories} /></Route>
+            <Route path="/pictures"><PictureList pictures={pictures} /></Route>
+            <Route path="/"><Home /></Route>
+          </Switch>
         </div>
       </Router>
     </div>

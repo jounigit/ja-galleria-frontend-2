@@ -1,10 +1,11 @@
 import React, { Fragment }  from 'react'
+import { useParams } from 'react-router-dom'
 import useFetch from '../../utils/useFetch'
 import Album from './Album'
 const baseUrl = 'http://localhost:8000/api'
 
-const AlbumData = ({ match }) => {
-  let { id } = match.params
+const AlbumData = () => {
+  let { id } = useParams()
 
   const album = useFetch(
     `${baseUrl}/albums/${id}`
