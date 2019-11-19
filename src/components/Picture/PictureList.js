@@ -1,8 +1,14 @@
 import React from 'react'
+import useFetch from '../../utils/useFetch'
 import Picture from './Picture'
 
-const PictureList = ({ pictures }) => {
-  console.log(pictures.data)
+const baseUrl = 'http://localhost:8000/api'
+
+const PictureList = () => {
+  const pictures = useFetch(
+    `${baseUrl}/pictures`
+  )
+
   return (
     <div className='PictureList'>
       <h2>Kuvat</h2>

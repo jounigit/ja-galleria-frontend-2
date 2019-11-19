@@ -15,8 +15,8 @@ const Category = ( { category } ) => {
   }
 
   return (
-    <div className='category'>
-      <h3 style={linkable} onClick={() => setVisible(!visible)}>
+    <div className='category' data-cy='category'>
+      <h3 style={linkable} onClick={() => setVisible(!visible)} data-cy='linkable'>
         {category.title}
       </h3>
 

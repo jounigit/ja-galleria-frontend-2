@@ -1,0 +1,280 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "category_id": 2,
+        "title": "Album 1",
+        "slug": "album-1",
+        "content": "Veniam fugit et qui optio. Aut eaque ipsam quo officia ut sequi est. Minus nemo placeat aliquid aut quaerat.",
+        "created_at": "2019-09-04 15:33:50",
+        "updated_at": "2019-09-04 15:33:50",
+        "deleted_at": null,
+        "user": {
+            "id": 1,
+            "name": "Ms. Alysa Kassulke",
+            "email": "lemke.ivory@example.net",
+            "email_verified_at": "2019-09-04 15:33:50",
+            "is_admin": 0,
+            "created_at": "2019-09-04 15:33:50",
+            "updated_at": "2019-09-04 15:33:50",
+            "deleted_at": null
+        },
+        "pictures": [
+            
+            {
+                "id": 9,
+                "user_id": 2,
+                "title": "Mrs.",
+                "slug": "at-omnis-voluptatibus-dignissimos-quo",
+                "content": "Ut et omnis quos iusto vero. Libero impedit voluptas facere consequuntur velit ut et. Odio odio debitis quas libero voluptatem.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:51",
+                "updated_at": "2019-09-04 15:33:51",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 1,
+                    "picture_id": 9
+                }
+            },
+            {
+                "id": 10,
+                "user_id": 2,
+                "title": "Mrs.",
+                "slug": "at-omnis-voluptatibus-dignissimos-quo",
+                "content": "Ut et omnis quos iusto vero. Libero impedit voluptas facere consequuntur velit ut et. Odio odio debitis quas libero voluptatem.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:51",
+                "updated_at": "2019-09-04 15:33:51",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 1,
+                    "picture_id": 10
+                }
+            },
+            {
+                "id": 11,
+                "user_id": 2,
+                "title": "Mrs.",
+                "slug": "at-omnis-voluptatibus-dignissimos-quo",
+                "content": "Ut et omnis quos iusto vero. Libero impedit voluptas facere consequuntur velit ut et. Odio odio debitis quas libero voluptatem.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:51",
+                "updated_at": "2019-09-04 15:33:51",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 1,
+                    "picture_id": 11
+                }
+            },
+            {
+                "id": 12,
+                "user_id": 2,
+                "title": "Ms.",
+                "slug": "beatae-molestias-qui-voluptas-iure-omnis-quibusdam",
+                "content": "Recusandae sit quasi molestias assumenda rerum nam. Sequi voluptatibus qui sequi quia consequatur illo at. Minus est eos quidem sequi.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:51",
+                "updated_at": "2019-09-04 15:33:51",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 1,
+                    "picture_id": 12
+                }
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "category_id": 2,
+        "title": "Album 2",
+        "slug": "album-2",
+        "content": "Nobis dignissimos fuga deleniti aspernatur. Voluptatum similique et voluptatibus qui. Omnis voluptas laboriosam dignissimos quia et exercitationem. Ut et qui unde esse sed.",
+        "created_at": "2019-09-04 15:33:50",
+        "updated_at": "2019-09-04 15:33:50",
+        "deleted_at": null,
+        "user": {
+            "id": 2,
+            "name": "Mrs. Chasity Bednar MD",
+            "email": "kylie.dubuque@example.net",
+            "email_verified_at": "2019-09-04 15:33:50",
+            "is_admin": 0,
+            "created_at": "2019-09-04 15:33:50",
+            "updated_at": "2019-09-04 15:33:50",
+            "deleted_at": null
+        },
+        "pictures": [
+            {
+                "id": 1,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "velit-officiis-necessitatibus-iste",
+                "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 2,
+                    "picture_id": 1
+                }
+            },
+            {
+                "id": 2,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "velit-officiis-necessitatibus-iste",
+                "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 2,
+                    "picture_id": 2
+                }
+            },
+            {
+                "id": 3,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "officia-repudiandae-dolore-delectus-voluptates-error-quis-quia",
+                "content": "Numquam eaque necessitatibus nihil ratione eligendi. Exercitationem perferendis incidunt vitae consequatur qui et consequuntur. Est tempore similique et. Natus velit repellendus dolorem est possimus.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 2,
+                    "picture_id": 3
+                }
+            },
+            {
+                "id": 4,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "officia-repudiandae-dolore-delectus-voluptates-error-quis-quia",
+                "content": "Numquam eaque necessitatibus nihil ratione eligendi. Exercitationem perferendis incidunt vitae consequatur qui et consequuntur. Est tempore similique et. Natus velit repellendus dolorem est possimus.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 2,
+                    "picture_id": 4
+                }
+            },
+            {
+                "id": 5,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "saepe-quasi-non-et-consequatur-repudiandae-perferendis-omnis-ut",
+                "content": "Sapiente aspernatur qui possimus rerum mollitia. Quasi maxime et in maiores. Non omnis voluptatum dolorem eos ut quam. Distinctio nobis aliquam distinctio rem nesciunt accusantium.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 2,
+                    "picture_id": 5
+                }
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "user_id": 2,
+        "category_id": 2,
+        "title": "Album 3",
+        "slug": "album-3",
+        "content": "Hic odit veniam veritatis. Veritatis culpa tempora sequi magnam vel molestiae eius. Adipisci cum rerum hic perferendis corporis ratione quae.",
+        "created_at": "2019-09-04 15:33:50",
+        "updated_at": "2019-09-04 15:33:50",
+        "deleted_at": null,
+        "user": {
+            "id": 2,
+            "name": "Mrs. Chasity Bednar MD",
+            "email": "kylie.dubuque@example.net",
+            "email_verified_at": "2019-09-04 15:33:50",
+            "is_admin": 0,
+            "created_at": "2019-09-04 15:33:50",
+            "updated_at": "2019-09-04 15:33:50",
+            "deleted_at": null
+        },
+        "pictures": [
+            {
+                "id": 15,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "velit-officiis-necessitatibus-iste",
+                "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 3,
+                    "picture_id": 15
+                }
+            },
+            {
+                "id": 21,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "velit-officiis-necessitatibus-iste",
+                "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 3,
+                    "picture_id": 21
+                }
+            },
+            {
+                "id": 22,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "officia-repudiandae-dolore-delectus-voluptates-error-quis-quia",
+                "content": "Numquam eaque necessitatibus nihil ratione eligendi. Exercitationem perferendis incidunt vitae consequatur qui et consequuntur. Est tempore similique et. Natus velit repellendus dolorem est possimus.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 3,
+                    "picture_id": 22
+                }
+            },
+            {
+                "id": 23,
+                "user_id": 1,
+                "title": "Prof.",
+                "slug": "officia-repudiandae-dolore-delectus-voluptates-error-quis-quia",
+                "content": "Numquam eaque necessitatibus nihil ratione eligendi. Exercitationem perferendis incidunt vitae consequatur qui et consequuntur. Est tempore similique et. Natus velit repellendus dolorem est possimus.",
+                "image": "https://source.unsplash.com/random",
+                "thumb": "https://source.unsplash.com/random",
+                "created_at": "2019-09-04 15:33:50",
+                "updated_at": "2019-09-04 15:33:50",
+                "deleted_at": null,
+                "pivot": {
+                    "album_id": 3,
+                    "picture_id": 23
+                }
+            }
+        ]
+    }
+]

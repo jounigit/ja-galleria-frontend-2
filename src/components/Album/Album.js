@@ -1,37 +1,30 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Picture } from '../Picture'
 
-const Album = ( { album, visibility = false }) => {
-  const [visible, setVisible] = useState(visibility)
-  // console.log('ALBUM PICS -- ', album.pictures)
+const Album = ({ album = [] }) => {
+
   const pictures = () => album.pictures.map(p =>
     <Picture key={p.id} picture={p} />
   )
 
-  const showWhenVisible = { display: visible ? '' : 'none' }
-  const linkable = {
-    color: 'Blue',
-    textDecoration: 'Underline'
-  }
   console.log('ALBUM -- ', album)
   return (
     <Fragment>
-      <h3 style={linkable} onClick={() => setVisible(!visible)}>
+      <h3 data-cy='album'>
         {album.title}
       </h3>
 
-      <div style={showWhenVisible}>
-        <p>
-          {album.content}
-        </p>
-        {/* <h4>
+      <p>
+        {album.content}
+      </p>
+      {/* <h4>
           {album.user.name}
         </h4> */}
-        <h3>Pictures</h3>
-        <ul>
-          {pictures().length > 0 ? pictures() : 'no albums'}
-        </ul>
-      </div>
+      <h3>Pictures</h3>
+      <ul>
+        {pictures().length > 0 ? pictures() : 'no albums'}
+      </ul>
+
     </Fragment>
   )
 }

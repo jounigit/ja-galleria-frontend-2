@@ -19,7 +19,7 @@ const AlbumData = () => {
 
   return (
     <Fragment>
-      {album.data &&  <Album album={album.data.data.data} visibility='true' />}
+      {album.data &&  <Album album={album.data.data.data} />}
     </Fragment>
   )
 }

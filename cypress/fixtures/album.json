@@ -1,0 +1,93 @@
+{
+    "data": {
+                "id": 1,
+                "title": "Album 1",
+                "content": "Veniam fugit et qui optio. Aut eaque ipsam quo officia ut sequi est. Minus nemo placeat aliquid aut quaerat.",
+                "user": {
+                    "id": 1,
+                    "name": "User Ykkönen",
+                    "email": "user@example.net",
+                    "email_verified_at": "2019-09-04 15:33:50",
+                    "is_admin": 0,
+                    "created_at": "2019-09-04 15:33:50",
+                    "updated_at": "2019-09-04 15:33:50",
+                    "deleted_at": null
+                },
+                "category": {
+                    "id": 2,
+                    "user_id": 5,
+                    "title": "Kategoria 2",
+                    "slug": "provident-officia-eaque-quisquam-sed-sit",
+                    "content": "Voluptatem maxime ipsa molestiae aliquid perspiciatis non debitis sequi. Atque velit ab ad laboriosam quo. Et omnis asperiores molestiae voluptas aut.",
+                    "created_at": "2019-09-04 15:33:50",
+                    "updated_at": "2019-09-04 15:33:52",
+                    "deleted_at": null
+                },
+                "pictures": [
+                    {
+                        "id": 1,
+                        "user_id": 1,
+                        "title": "Kuva 1",
+                        "slug": "kuva-1",
+                        "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                        "image": "https://source.unsplash.com/random",
+                        "thumb": "https://source.unsplash.com/random",
+                        "created_at": "2019-09-04 15:33:50",
+                        "updated_at": "2019-09-04 15:33:50",
+                        "deleted_at": null,
+                        "pivot": {
+                            "album_id": 1,
+                            "picture_id": 1
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "user_id": 1,
+                        "title": "Kuva 2",
+                        "slug": "kuva-2",
+                        "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                        "image": "https://source.unsplash.com/random",
+                        "thumb": "https://source.unsplash.com/random",
+                        "created_at": "2019-09-04 15:33:50",
+                        "updated_at": "2019-09-04 15:33:50",
+                        "deleted_at": null,
+                        "pivot": {
+                            "album_id": 1,
+                            "picture_id": 2
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "user_id": 1,
+                        "title": "Kuva 3",
+                        "slug": "kuva-3",
+                        "content": "Fugit autem mollitia distinctio quasi fugit. Harum nobis minima quidem et. Architecto magni doloribus molestiae reiciendis.",
+                        "image": "https://source.unsplash.com/random",
+                        "thumb": "https://source.unsplash.com/random",
+                        "created_at": "2019-09-04 15:33:50",
+                        "updated_at": "2019-09-04 15:33:50",
+                        "deleted_at": null,
+                        "pivot": {
+                            "album_id": 1,
+                            "picture_id": 3
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "user_id": 1,
+                        "title": "Kuva 4",
+                        "slug": "kuva-4",
+                        "content": "Numquam eaque necessitatibus nihil ratione eligendi. Exercitationem perferendis incidunt vitae consequatur qui et consequuntur. Est tempore similique et. Natus velit repellendus dolorem est possimus.",
+                        "image": "https://source.unsplash.com/random",
+                        "thumb": "https://source.unsplash.com/random",
+                        "created_at": "2019-09-04 15:33:50",
+                        "updated_at": "2019-09-04 15:33:50",
+                        "deleted_at": null,
+                        "pivot": {
+                            "album_id": 1,
+                            "picture_id": 4
+                        }
+                    }
+                ]
+    }
+}

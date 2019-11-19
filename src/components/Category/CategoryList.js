@@ -1,7 +1,13 @@
 import React from 'react'
+import useFetch from '../../utils/useFetch'
 import Category from './Category'
 
-const CategoryList = ({ categories }) => {
+const baseUrl = 'http://localhost:8000/api'
+
+const CategoryList = () => {
+  const categories = useFetch(
+    `${baseUrl}/categories`
+  )
   console.log('DATA -- ', categories.loading)
 
   if(categories.loading) {

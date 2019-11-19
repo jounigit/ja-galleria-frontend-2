@@ -1,7 +1,13 @@
 import React, { Fragment } from 'react'
-import Album from './Album'
+import useFetch from '../../utils/useFetch'
+import AlbumListItem from './AlbumListItem'
 
-const AlbumList = ({ albums }) => {
+const baseUrl = 'http://localhost:8000/api'
+
+const AlbumList = () => {
+  const albums = useFetch(
+    `${baseUrl}/albums`
+  )
   console.log('ALBUMS -- ', albums)
 
   if(albums.loading) {
@@ -13,7 +19,7 @@ const AlbumList = ({ albums }) => {
       <h2>Albumit</h2>
       {albums.data &&
           albums.data.data.map(album =>
-            <Album key={album.id} album={album} />
+            <AlbumListItem key={album.id} album={album} />
           )
       }
     </Fragment>
