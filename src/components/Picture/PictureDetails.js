@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Picture = ({ picture }) => {
+const PictureDetails = ({ picture }) => {
 
-  console.log('PICTURE -', picture)
+  // console.log('PICTURE -', picture)
 
   return (
     <div className='picture' data-cy='picture'>
@@ -17,4 +17,4 @@ const Picture = ({ picture }) => {
   )
 }
 
-export default Picture
+export default PictureDetails

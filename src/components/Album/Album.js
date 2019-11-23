@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import { Picture } from '../Picture'
+import { PictureDetails } from '../Picture'
 
 const Album = ({ album = [] }) => {
 
   const pictures = () => album.pictures.map(p =>
-    <Picture key={p.id} picture={p} />
+    <PictureDetails key={p.id} picture={p} />
   )
 
   console.log('ALBUM -- ', album)

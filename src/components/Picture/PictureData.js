@@ -1,25 +1,20 @@
-import React, { Fragment }  from 'react'
-import useFetch from '../../utils/useFetch'
+import React, { Fragment, useContext }  from 'react'
 import { useParams } from 'react-router-dom'
-import Picture from './Picture'
-const baseUrl = 'http://localhost:8000/api'
+import { PictureContext } from '../../contexts/PictureContext'
+import PictureDetails from './PictureDetails'
+import PictureList from './PictureList'
 
 const PictureData = () => {
+  const { pictures } = useContext(PictureContext)
   let { id } = useParams()
-
-  const picture = useFetch(
-    `${baseUrl}/pictures/${id}`
-  )
-
-  if(picture.loading) {
-    return <div className='loader'>Loading ...</div>
-  }
-
-  console.log('PICTUREDATA -', picture)
+  let picturesData = pictures.data && pictures.data.data.data
 
   return (
     <Fragment>
-      {picture.data &&  <Picture picture={picture.data.data.data} />}
+      {pictures.loading && <div className="loader">Loading ...</div>}
+
+      { !id && pictures.data && <PictureList pictures= { picturesData } /> }
+      { id &&  pictures.data && <PictureDetails picture={ picturesData.find((item) => item.id === parseInt(id)) } /> }
     </Fragment>
   )
 

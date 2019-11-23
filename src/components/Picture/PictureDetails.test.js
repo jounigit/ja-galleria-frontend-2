@@ -2,7 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import renderer from 'react-test-renderer'
-import Picture from './Picture'
+import PictureDetails from './Picture'
 
 
 const picture = {
@@ -17,7 +17,7 @@ describe('<Picture />', () => {
 
   beforeEach(() => {
     component = render(
-      <Picture picture={picture} />
+      <PictureDetails picture={picture} />
     )
   })
 
@@ -39,7 +39,7 @@ describe('<Picture />', () => {
 
   test('Picture renders correctly', () => {
     const tree = renderer
-      .create(<Picture picture={picture} />)
+      .create(<PictureDetails picture={picture} />)
       .toJSON()
     expect(tree).toMatchSnapshot()
   })
