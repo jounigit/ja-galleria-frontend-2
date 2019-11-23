@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import ListItem from './ListItemAlbum'
+import ListItemAlbum from './ListItemAlbum'
 
-const Category = ( { category } ) => {
+const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
   console.log('CATEGORY -- ', category)
   const albums = () => category.albums.map(a =>
-    <ListItem key={a.id} album={a} />
+    <ListItemAlbum key={a.id} album={a} />
   )
 
   const showWhenVisible = { display: visible ? '' : 'none' }
@@ -24,9 +24,9 @@ const Category = ( { category } ) => {
         <p>
           {category.content}
         </p>
-        <h4>
-          {category.user.name}
-        </h4>
+        <h5>
+          Author - {category.user.name}
+        </h5>
         <h3>Albums</h3>
         <ul>
           {albums().length > 0 ? albums() : 'no albums'}
@@ -37,4 +37,5 @@ const Category = ( { category } ) => {
   )
 }
 
-export default Category
+export default CategoryDetails
+

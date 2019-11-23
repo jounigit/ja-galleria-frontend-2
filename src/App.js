@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import './App.css'
 import { Pictures } from './components/Picture'
 import { Home } from './components/Home'
-import { CategoryList } from './components/Category/'
+import { Categories } from './components/Category/'
 import { Albums } from './components/Album'
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
           <Switch>
             <Route path="/albums/:id"><Albums /></Route>
             <Route path="/albums"><Albums /></Route>
-            <Route path="/categories"><CategoryList /></Route>
+            <Route path="/categories"><Categories /></Route>
             <Route path="/pictures/:id"><Pictures /></Route>
             <Route path="/pictures"><Pictures /></Route>
             <Route path="/"><Home /></Route>

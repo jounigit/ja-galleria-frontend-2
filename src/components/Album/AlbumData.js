@@ -16,7 +16,7 @@ const AlbumData = () => {
     <Fragment>
       {albums.loading && <div className="loader">Loading ...</div>}
 
-      { !id && albums.data && <AlbumList albums= { albumsData } /> }
+      { !id && albums.data && <AlbumList albums = { albumsData } /> }
       { id &&
       albums.data &&
       <AlbumDetails album={ albumsData.find((item) => item.id === parseInt(id)) } /> }
