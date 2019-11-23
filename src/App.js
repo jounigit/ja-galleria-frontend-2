@@ -4,7 +4,7 @@ import './App.css'
 import { Pictures } from './components/Picture'
 import { Home } from './components/Home'
 import { CategoryList } from './components/Category/'
-import { AlbumList, AlbumData } from './components/Album'
+import { Albums } from './components/Album'
 
 const App = () => {
 
@@ -21,8 +21,8 @@ const App = () => {
             <Link style={padding} to="/pictures">pictures</Link>
           </div>
           <Switch>
-            <Route path="/albums/:id"><AlbumData /></Route>
-            <Route path="/albums"><AlbumList /></Route>
+            <Route path="/albums/:id"><Albums /></Route>
+            <Route path="/albums"><Albums /></Route>
             <Route path="/categories"><CategoryList /></Route>
             <Route path="/pictures/:id"><Pictures /></Route>
             <Route path="/pictures"><Pictures /></Route>

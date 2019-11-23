@@ -1,28 +1,17 @@
-import React, { Fragment } from 'react'
-import useFetch from '../../utils/useFetch'
-import AlbumListItem from './AlbumListItem'
+import React from 'react'
+import AlbumDetails from './AlbumDetails'
 
-const baseUrl = 'http://localhost:8000/api'
-
-const AlbumList = () => {
-  const albums = useFetch(
-    `${baseUrl}/albums`
-  )
-  console.log('ALBUMS -- ', albums)
-
-  if(albums.loading) {
-    return <div className='loader'>Loading ...</div>
-  }
-
+const AlbumList = ({ albums }) => {
+  console.log('LIST --', albums)
   return (
-    <Fragment>
+    <div className='AlbumList'>
       <h2>Albumit</h2>
-      {albums.data &&
-          albums.data.data.map(album =>
-            <AlbumListItem key={album.id} album={album} />
-          )
+      {
+        albums.map(album =>
+          <AlbumDetails key={album.id} album={album} />
+        )
       }
-    </Fragment>
+    </div>
   )
 }
 

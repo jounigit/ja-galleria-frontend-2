@@ -1,25 +1,25 @@
-import React, { Fragment }  from 'react'
+import React, { Fragment, useContext }  from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from '../../utils/useFetch'
-import Album from './Album'
-const baseUrl = 'http://localhost:8000/api'
+import { AlbumContext } from '../../contexts/AlbumContext'
+import AlbumDetails from './AlbumDetails'
+import AlbumList from './AlbumList'
+
 
 const AlbumData = () => {
+  const { albums } = useContext(AlbumContext)
   let { id } = useParams()
+  let albumsData = albums.data && albums.data.data
 
-  const album = useFetch(
-    `${baseUrl}/albums/${id}`
-  )
-
-  console.log('ALBUMDATA -- ', album)
-
-  if(album.loading) {
-    return <div className='loader'>Loading ...</div>
-  }
+  // console.log('ALBUMDATA -- ', albumsData)
 
   return (
     <Fragment>
-      {album.data &&  <Album album={album.data.data.data} />}
+      {albums.loading && <div className="loader">Loading ...</div>}
+
+      { !id && albums.data && <AlbumList albums= { albumsData } /> }
+      { id &&
+      albums.data &&
+      <AlbumDetails album={ albumsData.find((item) => item.id === parseInt(id)) } /> }
     </Fragment>
   )
 }
