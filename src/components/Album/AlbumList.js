@@ -1,5 +1,5 @@
 import React from 'react'
-import AlbumDetails from './AlbumDetails'
+import AlbumListItem from './AlbumListItem'
 
 const AlbumList = ({ albums }) => {
   console.log('LIST --', albums)
@@ -8,7 +8,7 @@ const AlbumList = ({ albums }) => {
       <h2>Albumit</h2>
       {
         albums.map(album =>
-          <AlbumDetails key={album.id} album={album} />
+          <AlbumListItem key={album.id} album={album} />
         )
       }
     </div>

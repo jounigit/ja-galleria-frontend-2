@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import { Container, Menu } from 'semantic-ui-react'
 import './App.css'
 import { Pictures } from './components/Picture'
 import { Home } from './components/Home'
@@ -8,17 +9,31 @@ import { Albums } from './components/Album'
 
 const App = () => {
 
-  const padding = { padding: 5 }
-
   return (
-    <div>
+    <Container>
       <Router>
         <div>
           <div>
-            <Link style={padding} to="/">home</Link>
-            <Link style={padding} to="/categories">categories</Link>
-            <Link style={padding} to="/albums">albums</Link>
-            <Link style={padding} to="/pictures">pictures</Link>
+            <Menu inverted>
+              <Menu.Item link>
+                <Link to="/">home</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                <Link  to="/categories">categories</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                <Link  to="/albums">albums</Link>
+              </Menu.Item>
+              <Menu.Item link>
+                <Link  to="/pictures">pictures</Link>
+              </Menu.Item>
+              {/* <Menu.Item link>
+                {user
+                  ? <em>{user} logged in</em>
+                  : <Link to="/login">login</Link>
+                }
+              </Menu.Item> */}
+            </Menu>
           </div>
           <Switch>
             <Route path="/albums/:id"><Albums /></Route>
@@ -30,7 +45,7 @@ const App = () => {
           </Switch>
         </div>
       </Router>
-    </div>
+    </Container>
   )
 }
 

@@ -1,29 +1,36 @@
 import React from 'react'
 import PictureDetails from '../Picture/PictureDetails'
+import { Grid, Header, Segment } from 'semantic-ui-react'
 
 const AlbumDetails = ({ album }) => {
-
-  const pictures = () => album.pictures.map(p =>
-    <PictureDetails key={p.id} picture={p} />
-  )
 
   console.log('ALBUMDETAILS -- ', album)
   return (
     <div className='album' data-cy='album'>
-      <h3>
-        {album.title}
-      </h3>
+      <Segment>
+        <Header as='h3'>
+          {album.title}
+          <Header.Subheader>
+            Author - {album.user.name}
+          </Header.Subheader>
+        </Header>
+        <p>
+          {album.content}
+        </p>
+      </Segment>
 
-      <p>
-        {album.content}
-      </p>
-      <h5>
-        Author - {album.user.name}
-      </h5>
       <h3>Pictures</h3>
-      <ul>
-        {pictures().length > 0 ? pictures() : 'no albums'}
-      </ul>
+
+      <Grid doubling columns={3}>
+        {
+          album.pictures.map(picture =>
+            <Grid.Column  key={picture.id}>
+              <PictureDetails key={picture.id} picture={picture} />
+            </Grid.Column>
+          )
+        }
+      </Grid>
+      
     </div>
 
 

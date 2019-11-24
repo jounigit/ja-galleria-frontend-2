@@ -1,30 +1,35 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { Grid, Image, Header } from 'semantic-ui-react'
 
 const Album = ({ album }) => {
 
-  console.log('ALBUM -- ', album)
   const pictures = album.pictures
   return (
-    <Fragment>
-      <h3 data-cy='album'>
-        {album.title}
-      </h3>
-
-      <p>
-        {album.content.substring(0,40) }...
-      </p>
-      <h5>
-       author - {album.user.name}
-      </h5>
-      <h5>
-      Pictures - {pictures.length || 'no pictures'}
-      </h5>
-      <Link to={`/albums/${album.id}`}>
+    <Grid doubling columns={3}>
+      <Grid.Column>
+        <Image src={pictures[0].thumb} />
+      </Grid.Column>
+      <Grid.Column>
+        <Header as='h3'>
+          {album.title}
+          <Header.Subheader>
+            Author - {album.user.name}
+          </Header.Subheader>
+        </Header>
+        <p>
+          {album.content.substring(0,40) }...
+        </p>
+      </Grid.Column>
+      <Grid.Column>
+        <Header as='h4'>
+          {pictures.length + ' - kuvaa' || 'no pictures'}
+        </Header>
+        <Link to={`/albums/${album.id}`}>
             show
-      </Link>
-
-    </Fragment>
+        </Link>
+      </Grid.Column>
+    </Grid>
   )
 }
 
