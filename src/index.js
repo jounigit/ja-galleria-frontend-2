@@ -2,14 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
-import CategoryContextProvider from './contexts/CategoryContext'
+import {
+  CategoryContextProvider,
+  AlbumContextProvider,
+  PictureContextProvider } from './contexts'
+
 import App from './App'
 
 ReactDOM.render(
   <BrowserRouter>
-    <CategoryContextProvider>
-      <App />
-    </CategoryContextProvider>
-
+    <AlbumContextProvider>
+      <PictureContextProvider>
+        <CategoryContextProvider>
+          <App />
+        </CategoryContextProvider>
+      </PictureContextProvider>
+    </AlbumContextProvider>
   </BrowserRouter>, document.getElementById('root'))
 
