@@ -8,7 +8,7 @@ const Album = ({ album }) => {
   return (
     <Grid doubling columns={3}>
       <Grid.Column>
-        <Image src={pictures[0].thumb} />
+        <Image src={pictures[0].thumb} size='small' wrapped />
       </Grid.Column>
       <Grid.Column>
         <Header as='h3'>
