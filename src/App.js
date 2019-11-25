@@ -5,7 +5,7 @@ import Navigation from './components/Shared/Navigation'
 import './App.css'
 import { Pictures } from './components/Picture'
 import { Home } from './components/Home'
-import { Categories } from './components/Category/'
+import { Categories, CategoryData } from './components/Category/'
 import { Albums } from './components/Album'
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
         <Switch>
           <Route path="/albums/:id"><Albums /></Route>
           <Route path="/albums"><Albums /></Route>
-          <Route path="/categories"><Categories /></Route>
+          <Route path="/categories"><CategoryData /></Route>
           <Route path="/pictures/:id"><Pictures /></Route>
           <Route path="/pictures"><Pictures /></Route>
           <Route path="/"><Home /></Route>

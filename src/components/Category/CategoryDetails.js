@@ -16,22 +16,21 @@ const CategoryDetails = ({ category }) => {
 
   return (
     <div className='category' data-cy='category'>
-      <h3 style={linkable} onClick={() => setVisible(!visible)} data-cy='linkable'>
+      <h3 data-cy='linkable'>
         {category.title}
       </h3>
 
-      <div style={showWhenVisible}>
-        <p>
-          {category.content}
-        </p>
-        <h5>
+      <p>
+        {category.content}
+      </p>
+      <h5>
           Author - {category.user.name}
-        </h5>
-        <h3>Albums</h3>
-        <ul>
-          {albums().length > 0 ? albums() : 'no albums'}
-        </ul>
-      </div>
+      </h5>
+      <h3 style={linkable} onClick={() => setVisible(!visible)}>Albums</h3>
+      <ul style={showWhenVisible}>
+        {albums().length > 0 ? albums() : 'no albums'}
+      </ul>
+
 
     </div>
   )
