@@ -18,7 +18,7 @@ const Navigation = () => {
       <Menu.Item as={Link} to="/categories"
         active={activeItem === 'categories'}
         onClick={() => setActiveItem('categories')}>
-        <Link  to="/categories">categories</Link>
+        categories
       </Menu.Item>
       <Menu.Item as={Link} to="/albums"
         active={activeItem === 'albums'}
