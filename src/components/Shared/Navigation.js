@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
+import { AuthContext } from '../../App'
 
 const Navigation = () => {
+  const { state, dispatch } = useContext(AuthContext)
   const [ activeItem, setActiveItem ] = useState()
-  console.log('Active -- ', activeItem)
+  // console.log('Active -- ', activeItem)
 
   const handleItemClick = (e, { name }) => setActiveItem({ name })
-
+  console.log('AUTH STATE --', state.user)
   return (
     <Menu inverted>
       <Menu.Item as={Link} to="/home"
@@ -31,27 +33,23 @@ const Navigation = () => {
         pictures
       </Menu.Item>
       <Menu.Menu position='right'>
-        <Menu.Item
-          name='signup'
-          active={activeItem === 'signup'}
-          onClick={handleItemClick}
-        >
-                  Sign Up
-        </Menu.Item>
-        <Menu.Item
-          name='help'
-          active={activeItem === 'help'}
-          onClick={handleItemClick}
-        >
-                  Login
-        </Menu.Item>
+        {
+          state.user === null ?
+            <Menu.Item as={Link} to="/login"
+              name='login'
+              active={activeItem === 'login'}
+              onClick={handleItemClick}  data-cy='login' >
+              Login
+            </Menu.Item>
+            :
+            <Menu.Item
+              name='logout'
+              active={activeItem === 'logout'}
+              onClick={() => dispatch({ type: 'LOGOUT' })}  data-cy='logout' >
+              Logout - {state.user.name}
+            </Menu.Item>
+        }
       </Menu.Menu>
-      {/* <Menu.Item link>
-                {user
-                  ? <em>{user} logged in</em>
-                  : <Link to="/login">login</Link>
-                }
-              </Menu.Item> */}
     </Menu>
   )
 }

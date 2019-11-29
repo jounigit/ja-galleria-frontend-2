@@ -11,7 +11,6 @@ export const AlbumContext = createContext()
 const AlbumContextProvider = (props) => {
   const [albums, dispatch] = useReducer(albumReducer, [])
 
-  // hook to get all pictures
   useEffect(() => {
     const fetchData = async () => {
       try {

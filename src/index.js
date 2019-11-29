@@ -5,7 +5,8 @@ import './index.css'
 import {
   CategoryContextProvider,
   AlbumContextProvider,
-  PictureContextProvider } from './contexts'
+  PictureContextProvider
+} from './contexts'
 
 import App from './App'
 
@@ -14,7 +15,9 @@ ReactDOM.render(
     <AlbumContextProvider>
       <PictureContextProvider>
         <CategoryContextProvider>
+          
           <App />
+          
         </CategoryContextProvider>
       </PictureContextProvider>
     </AlbumContextProvider>
