@@ -33,7 +33,8 @@ const reducer = (state, action) => {
     return {
       ...state,
       isAuthenticated: false,
-      user: null
+      user: null,
+      token: null
     }
   default:
     return state
@@ -53,13 +54,13 @@ const App = () => {
     }
     const loggedUserJSON = localStorage.getItem('user')
     if (loggedUserJSON && state.user === null) {
-      // console.log('STORAGE EFFECT -- ', loggedUser)
       // debugger
       dispatch({ type: 'LOGIN', payload: loggedUser })
     }
   }, [state])
 
   // console.log('AUTH STATE --', state.user)
+  // console.log('AUTH Token --', state.token)
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

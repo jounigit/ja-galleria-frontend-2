@@ -9,7 +9,7 @@ const Navigation = () => {
   // console.log('Active -- ', activeItem)
 
   const handleItemClick = (e, { name }) => setActiveItem({ name })
-  console.log('AUTH STATE --', state.user)
+
   return (
     <Menu inverted>
       <Menu.Item as={Link} to="/home"
