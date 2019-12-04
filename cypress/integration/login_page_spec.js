@@ -16,6 +16,8 @@ describe('Login page',  function() {
     })
     cy.get('[data-cy=email]').type('testia@t.net')
     cy.get('[data-cy=password]').type('testia')
+    cy.contains('login').click()
+    cy.contains('Logout')
     // cy.get('#username')
     //   .type('mluukkai')
     // cy.get('#password')
