@@ -25,8 +25,24 @@ const Login = () => {
     })
   }
 
+  const handleError = error => {
+    setData({
+      ...data,
+      isSubmitting: false,
+      errorMessage: error
+    })
+  }
+
   const handleFormSubmit = async(event) => {
     event.preventDefault()
+
+    if(data.email === '') {
+      return handleError('email is required!')
+    }
+    if(data.password === '') {
+      return handleError('password is required!')
+    }
+
     setData({
       ...data,
       isSubmitting: true,
@@ -38,8 +54,6 @@ const Login = () => {
           email: data.email,
           password: data.password
         })
-      // console.log('LOGIN AXIOS -- ', result)
-      // console.log('LOGIN AXIOS data -- ', result.data)
       dispatch({
         type: 'LOGIN',
         payload: result.data
@@ -51,13 +65,11 @@ const Login = () => {
         errorMessage: null
       })
     } catch (error) {
-      setData({
-        ...data,
-        isSubmitting: false,
-        errorMessage: error.message || error.statusText
-      })
+      handleError('incorrect email or password!')
     }
+
   }
+  console.log('STATE -- ', data)
 
   return (
     <Card centered style={{ marginTop: 20 }}>
@@ -65,6 +77,11 @@ const Login = () => {
         <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
       </Card.Content>
       <Card.Content>
+
+        {data.errorMessage && (
+          <Header as='h4' color='red' data-cy='error-message'>{data.errorMessage}</Header>
+
+        )}
         <Form onSubmit={ handleFormSubmit }>
           <Form.Field>
             <label>Email</label>
@@ -75,7 +92,7 @@ const Login = () => {
               onChange={handleInputChange}
               name='email'
               id='email'
-              required />
+            />
           </Form.Field>
           <Form.Field>
             <label>Password</label>
@@ -86,12 +103,9 @@ const Login = () => {
               onChange={handleInputChange}
               name='password'
               id='password'
-              required />
+            />
           </Form.Field>
 
-          {data.errorMessage && (
-            <span className='form-error'>{data.errorMessage}</span>
-          )}
 
           <Button data-cy='submit' type='submit'>login</Button>
         </Form>
