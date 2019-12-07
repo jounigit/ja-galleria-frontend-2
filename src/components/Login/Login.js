@@ -69,7 +69,7 @@ const Login = () => {
     }
 
   }
-  console.log('STATE -- ', data)
+  // console.log('STATE -- ', data)
 
   return (
     <Card centered style={{ marginTop: 20 }}>

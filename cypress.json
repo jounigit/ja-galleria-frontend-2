@@ -2,6 +2,9 @@
   "chromeWebSecurity": false,
     "baseUrl": "http://localhost:3000",
     "env": {
-      "serverUrl": "http://localhost:8000"
+      "serverUrl": "http://localhost:8000/api",
+      "email": "testia@t.net",
+      "password": "password",
+      "username": "testia"
     }
   }

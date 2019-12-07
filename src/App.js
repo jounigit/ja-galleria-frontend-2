@@ -28,6 +28,13 @@ const reducer = (state, action) => {
       user: action.payload.user,
       token: action.payload.token
     }
+  case 'LOGGEDIN':
+    return {
+      ...state,
+      isAuthenticated: true,
+      user: action.payload.user,
+      token: action.payload.token
+    }
   case 'LOGOUT':
     localStorage.clear()
     return {
@@ -52,14 +59,13 @@ const App = () => {
       token: storageToken,
       user: storageUser
     }
-    const loggedUserJSON = localStorage.getItem('user')
-    if (loggedUserJSON && state.user === null) {
+    if (storageUser && state.user === null) {
       // debugger
-      dispatch({ type: 'LOGIN', payload: loggedUser })
+      dispatch({ type: 'LOGGEDIN', payload: loggedUser })
     }
   }, [state])
 
-  // console.log('AUTH STATE --', state.user)
+  console.log('STATE user --', state.user)
   // console.log('AUTH Token --', state.token)
 
   return (

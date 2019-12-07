@@ -1,12 +1,8 @@
 /* eslint-disable jest/valid-expect-in-promise */
 describe('Login page',  function() {
-  const email = 'testia@t.net'
-  const password = 'password'
-  const username = 'testia'
-
-  // beforeEach(function() {
-  //   cy.visit('http://localhost:3000')
-  // })
+  const email = Cypress.env('email')
+  const password = Cypress.env('password')
+  const username = Cypress.env('username')
 
   it('login form can be opened', function() {
     cy.visit('/')
@@ -49,20 +45,22 @@ describe('Login page',  function() {
     })
   })
 
-  // context('Reusable "login" custom command', function () {
-  //   beforeEach(function () {
-  //     // login before each test
-  //     cy.loginByForm(email, password)
-  //   })
+  context('Reusable "login" custom command', function () {
+    beforeEach(function () {
+      // login before each test
+      cy.loginByForm(email, password)
+    })
 
-  //   it.only('username is visible', function() {
-  //     cy.visit('/')
-  //     cy.get('[data-cy=logout]').should('contain', username)
-  //   })
-  // })
+    it('username is visible', function() {
+      cy.visit('/')
+      cy.get('[data-cy=logout]').should('contain', username)
+    })
+
+    it('user can logout', function() {
+      cy.visit('/')
+      cy.get('[data-cy=logout]').click()
+      cy.get('[data-cy=login]').should('be.visible')
+    })
+  })
 
 })
-
-// "name": "testia",
-//         "email": "testia@t.net"
-// password: password
