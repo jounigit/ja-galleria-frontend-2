@@ -1,28 +1,87 @@
+/* eslint-disable jest/no-focused-tests */
 describe('The Albums Page', function() {
-  // beforeEach(function() {
-  //   cy.init()
-  // })
+  const email = Cypress.env('email')
+  const password = Cypress.env('password')
+  // const username = Cypress.env('username')
+  let newId
 
-  it('get all albums', function() {
-    cy.server()
-    cy.route('albums', 'fixture:albums').as('getAlbums')
-    cy.visit('http://localhost:3000/albums')
-    cy.wait('@getAlbums')
-    cy.get('h2').should('contain', 'Albumit')
-    cy.get('[data-cy=album]').its('length').should('eq', 3)
+  context('open public pages', function() {
+    it('get all albums', function() {
+      cy.server()
+      cy.route('albums', 'fixture:albums').as('getAlbums')
+      cy.visit('/albums')
+      cy.wait('@getAlbums')
+      cy.get('h2').should('contain', 'Albumit')
+      cy.get('[data-cy=albumListItem]').its('length').should('eq', 3)
+    })
+
+    it('get one album', function() {
+      cy.visit('/albums/1')
+
+      cy.get('[data-cy=album]').its('length').should('eq', 1)
+    })
   })
 
-  it('get one album', function() {
-    cy.visit('http://localhost:3000/albums/1')
+  context('logged in user', function() {
+    beforeEach(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/albums')
+    })
 
-    cy.get('[data-cy=album]').its('length').should('eq', 1)
+    it('can see form', function() {
+      cy.get('[data-cy=addNewAlbum]').should('be.visible')
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('h2').should('contain', 'Lisää uusi albumi')
+      cy.get('[data-cy=title]').should('be.visible')
+      cy.get('[data-cy=content]').should('be.visible')
+    })
+
+    // it.only('can see delete button', function() {
+    //   cy.get('[data-cy=albumListItem]').last().as('last')
+    //   cy.get('@last').should('contain', 'delete')
+    // })
+
+    it('can add new album', function() {
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('[data-cy=title]').type('Tosi uusi albumi')
+      cy.get('[data-cy=content]').type('Hienoa sisältöä taas.')
+      cy.get('form').submit()
+      cy.get('[data-cy=message]').should('contain', 'Album stored successfully.')
+    })
+
+    it('can update album', function() {
+      //
+    })
+
+    it('can delete album', function() {
+      //
+    })
+
+    it('title is required', function() {
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('input[name=content]').type('content{enter}')
+      cy.get('[data-cy=error-message]').should('be.visible')
+      cy.get('[data-cy=error-message]').should('contain', 'title is required!')
+    })
   })
 
-  // it('get one album', function() {
-  //   // cy.route('albums/:id', 'fixture:album').as('getAlbum')
-  //   cy.route('albums/*', 'fixture:album').as('getAlbum')
-  //   cy.visit('http://localhost:3000/albums/1')
-  //   cy.wait('@getAlbum')
-  //   cy.get('[data-cy=album]').its('length').should('eq', 1)
-  // })
+  context('logged out user', function() {
+    beforeEach(function() {
+      cy.loginByForm(email, password)
+      cy.get('[data-cy=logout]').click()
+    })
+
+    it('can not see form', function() {
+      cy.get('[data-cy=addNewAlbum]').should('not.be.visible')
+    })
+  })
+
 })
+
+// it('get one album', function() {
+//   // cy.route('albums/:id', 'fixture:album').as('getAlbum')
+//   cy.route('albums/*', 'fixture:album').as('getAlbum')
+//   cy.visit('http://localhost:3000/albums/1')
+//   cy.wait('@getAlbum')
+//   cy.get('[data-cy=album]').its('length').should('eq', 1)
+// })

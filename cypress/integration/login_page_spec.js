@@ -49,15 +49,14 @@ describe('Login page',  function() {
     beforeEach(function () {
       // login before each test
       cy.loginByForm(email, password)
+      cy.visit('/')
     })
 
     it('username is visible', function() {
-      cy.visit('/')
       cy.get('[data-cy=logout]').should('contain', username)
     })
 
     it('user can logout', function() {
-      cy.visit('/')
       cy.get('[data-cy=logout]').click()
       cy.get('[data-cy=login]').should('be.visible')
     })

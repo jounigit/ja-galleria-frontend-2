@@ -65,7 +65,7 @@ const App = () => {
     }
   }, [state])
 
-  console.log('STATE user --', state.user)
+  // console.log('STATE user --', state.user)
   // console.log('AUTH Token --', state.token)
 
   return (
@@ -74,6 +74,7 @@ const App = () => {
         <div>
           <Navigation />
         </div>
+        {state.user && <h4>User: {state.user.name}</h4>}
         <div>
           <Switch>
             <Route path='/login'><Login /></Route>

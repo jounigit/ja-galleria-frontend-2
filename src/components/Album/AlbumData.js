@@ -8,7 +8,7 @@ import AlbumList from './AlbumList'
 const AlbumData = () => {
   const { albums } = useContext(AlbumContext)
   let { id } = useParams()
-  let albumsData = albums.data && albums.data.data
+  let albumsData = albums.data && albums.data
 
   // console.log('ALBUMDATA -- ', albumsData)
 
