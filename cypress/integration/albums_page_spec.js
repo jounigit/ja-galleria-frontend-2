@@ -36,24 +36,11 @@ describe('The Albums Page', function() {
       cy.get('[data-cy=content]').should('be.visible')
     })
 
-    // it.only('can see delete button', function() {
-    //   cy.get('[data-cy=albumListItem]').last().as('last')
-    //   cy.get('@last').should('contain', 'delete')
-    // })
-
-    it('can add new album', function() {
-      cy.get('[data-cy=addNewAlbum]').click()
-      cy.get('[data-cy=title]').type('Tosi uusi albumi')
-      cy.get('[data-cy=content]').type('Hienoa sisältöä taas.')
-      cy.get('form').submit()
-      cy.get('[data-cy=message]').should('contain', 'Album stored successfully.')
+    it('can see delete button', function() {
+      cy.get('[data-cy=delete]').should('contain', 'delete')
     })
 
     it('can update album', function() {
-      //
-    })
-
-    it('can delete album', function() {
       //
     })
 
@@ -65,14 +52,64 @@ describe('The Albums Page', function() {
     })
   })
 
+  context('create album', function() {
+    const title = 'Luo otsikko'
+    const content = 'Luo sisältöä.'
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/albums')
+    })
+
+    after(function() {
+      cy.get('[data-cy=delete]').first().as('firstDeleteButton')
+      cy.get('@firstDeleteButton').click()
+    })
+
+    it('can add new album', function() {
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.get('[data-cy=message]').should('contain', 'Album stored successfully.')
+    })
+  })
+
+  context('create and delete album', function() {
+    const title = 'Poista albumi'
+    const content = 'Poista sisältöä taas.'
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/albums')
+    })
+    beforeEach(function() {
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/albums')
+    })
+
+    it('delete last created album', function() {
+      cy.get('[data-cy=delete]').first().as('firstDeleteButton')
+      cy.get('@firstDeleteButton').should('contain', 'delete')
+      cy.get('@firstDeleteButton').click()
+      cy.get('[data-cy=albumListItem]').first().as('firstItem')
+      cy.get('@firstItem').should('not.contain', title)
+
+    })
+  })
+
   context('logged out user', function() {
     beforeEach(function() {
-      cy.loginByForm(email, password)
-      cy.get('[data-cy=logout]').click()
+      cy.visit('/albums')
     })
 
     it('can not see form', function() {
       cy.get('[data-cy=addNewAlbum]').should('not.be.visible')
+    })
+
+    it('can not see delete button', function() {
+      cy.get('[data-cy=delete]').should('not.be.visible')
     })
   })
 

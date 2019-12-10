@@ -15,7 +15,7 @@ const AlbumContextProvider = (props) => {
     const fetchData = async () => {
       try {
         const results = await axios.get(url)
-        console.log('RESULT ---', results.data)
+        // console.log('RESULT ---', results.data)
         dispatch({ type: 'INIT_ALBUMS', data: results.data })
       } catch (error) {
         dispatch({ type: 'FAILURE', error: error.message || error })

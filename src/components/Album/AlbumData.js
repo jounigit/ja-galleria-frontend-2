@@ -10,13 +10,16 @@ const AlbumData = () => {
   let { id } = useParams()
   let albumsData = albums.data && albums.data
 
-  // console.log('ALBUMDATA -- ', albumsData)
+  console.log('ALBUMDATA -- ', albumsData)
 
   return (
     <Fragment>
       {albums.loading && <div className="loader">Loading ...</div>}
 
-      { !id && albums.data && <AlbumList albums = { albumsData } /> }
+      { !id
+      && !albums.loading
+      && albums.data
+      && <AlbumList albums = { albumsData } /> }
       { id &&
       albums.data &&
       <AlbumDetails album={ albumsData.find((item) => item.id === parseInt(id)) } /> }

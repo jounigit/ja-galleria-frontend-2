@@ -1,26 +1,22 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../App'
-import { Button } from 'semantic-ui-react'
-import AlbumForm from './AlbumForm'
+import NewAlbum from './NewAlbum'
 
 const AlbumList = ({ albums }) => {
   const { state } = useContext(AuthContext)
-  const [formVisibility, setFormVisibility] = useState(false)
 
-  const showWhenVisible = { display: formVisibility ? '' : 'none' }
+  const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
 
-  // console.log('LIST --', albums)
-  // console.log('STATE album user --', state.user)
+  // console.log('ALBUMLIST --', albums)
+
   return (
     <div className='AlbumList'>
-      {state.user && <Button data-cy='addNewAlbum'  onClick={() => setFormVisibility(!formVisibility)}>new album</Button>}
-      <div style={showWhenVisible}>
-        <AlbumForm />
-      </div>
+      {state.user && <NewAlbum />}
+
       <h2>Albumit</h2>
       {
-        albums.map(album =>
+        sortedAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} user={state.user} />
         )
       }
