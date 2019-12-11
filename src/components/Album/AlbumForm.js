@@ -6,12 +6,13 @@ const AlbumForm = ({
   title,
   content,
   handleFormSubmit,
-  handleInputChange }) => {
+  handleInputChange,
+  formHeader }) => {
 
   return (
     <Card centered style={{ marginTop: 20 }}>
       <Card.Content>
-        <Header as='h2' color='green'>Lisää uusi albumi</Header>
+        <Header as='h2' color='green'>{ formHeader }</Header>
       </Card.Content>
       <Card.Content>
 

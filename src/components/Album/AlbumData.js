@@ -10,7 +10,8 @@ const AlbumData = () => {
   let { id } = useParams()
   let albumsData = albums.data && albums.data
 
-  console.log('ALBUMDATA -- ', albumsData)
+  // console.log('ALBUMDATA -- ', albums)
+  // console.log('ALBUMDATA -- ', albumsData)
 
   return (
     <Fragment>

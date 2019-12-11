@@ -1,6 +1,7 @@
 export const INIT_ALBUMS = 'INIT_ALBUMS'
 export const CREATE_ALBUM = 'CREATE_ALBUM'
 export const DELETE_ALBUM = 'DELETE_ALBUM'
+export const UPDATE_ALBUM = 'UPDATE_ALBUM'
 
 export const INIT_USERS = 'INIT_USERS'
 

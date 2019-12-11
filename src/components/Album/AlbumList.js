@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../App'
-import NewAlbum from './NewAlbum'
+import CreateAlbum from './CreateAlbum'
 
 const AlbumList = ({ albums }) => {
   const { state } = useContext(AuthContext)
@@ -12,7 +12,7 @@ const AlbumList = ({ albums }) => {
 
   return (
     <div className='AlbumList'>
-      {state.user && <NewAlbum />}
+      {state.user && <CreateAlbum />}
 
       <h2>Albumit</h2>
       {

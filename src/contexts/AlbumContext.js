@@ -1,10 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import albumReducer from '../reducers/albumReducer'
-import axios from 'axios'
-
-const baseUrl = 'http://localhost:8000/api'
-
-const url = `${baseUrl}/albums`
+import apiService from '../services/apiService'
 
 export const AlbumContext = createContext()
 
@@ -14,9 +10,9 @@ const AlbumContextProvider = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const results = await axios.get(url)
+        const result = await apiService.getAll()
         // console.log('RESULT ---', results.data)
-        dispatch({ type: 'INIT_ALBUMS', data: results.data })
+        dispatch({ type: 'INIT_ALBUMS', data: result })
       } catch (error) {
         dispatch({ type: 'FAILURE', error: error.message || error })
       }

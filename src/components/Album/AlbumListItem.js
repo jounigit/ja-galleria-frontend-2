@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Image, Header, Button, Segment } from 'semantic-ui-react'
+import { Grid, Image, Header, Button, ButtonGroup, Icon, Segment } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import albumService from '../../services/albumService'
+import apiService from '../../services/apiService'
+import UpdateAlbum from './UpdateAlbum'
 import {
   DELETE_ALBUM,
   FAILURE
@@ -11,9 +12,12 @@ import {
 
 const Album = ({ album }) => {
   const { state } = useContext(AuthContext)
-  const { albums, dispatch } = useContext(AlbumContext)
-  // set token for api
-  albumService.setToken(state.token)
+  const { dispatch } = useContext(AlbumContext)
+  const [formVisibility, setFormVisibility] = useState(false)
+
+  const showWhenVisible = { display: formVisibility ? '' : 'none' }
+
+
   const pictures = album.pictures
   const firstPic = pictures && pictures.length > 0 ?
     <Image src={pictures[0].thumb} size='small' wrapped /> : 'No pictures yet.'
@@ -24,14 +28,10 @@ const Album = ({ album }) => {
       return
     }
     try {
-      console.log('ListItem :::', albums.data)
-      const res = await albumService.remove(id)
-      console.log('ListItem res :::', res)
-      const newAlbums = albums.data.filter(d => d.id !== id)
-      console.log('ListItem new :::', newAlbums)
+      await apiService.remove(id)
       dispatch({
         type: DELETE_ALBUM,
-        data: newAlbums
+        id
       })
     } catch(error) {
       dispatch({
@@ -40,9 +40,40 @@ const Album = ({ album }) => {
     }
   }
 
+  const actionButtons = (
+    <ButtonGroup>
+      <Button
+        color='green'
+        size='tiny'
+        data-cy='update'
+        onClick={() => setFormVisibility(!formVisibility)}
+      >
+        <Icon name='edit' />
+      </Button>
+      <Button
+        color='red'
+        size='tiny'
+        data-cy='delete'
+        onClick={() => deleteAlbum( album.id, album.title, album.user.name ) }>
+        <Icon name='trash' />
+      </Button>
+    </ButtonGroup>
+  )
+
   return (
     <div data-cy='albumListItem'>
       <Segment>
+        <Grid doubling columns={3}>
+          <Grid.Column></Grid.Column>
+          <Grid.Column>
+            <div style={showWhenVisible}>
+              <UpdateAlbum id={ album.id } setFormVisibility={setFormVisibility} formVisibility={formVisibility} />
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            { state.user && actionButtons }
+          </Grid.Column>
+        </Grid>
         <Grid doubling columns={3}>
           <Grid.Column>
             { firstPic }
@@ -66,16 +97,7 @@ const Album = ({ album }) => {
                 </Header>
                 <Link to={`/albums/${album.id}`}>show</Link>
               </Grid.Column>
-              <Grid.Column>
-                { state.user &&
-                  <Button
-                    color='red'
-                    size='mini'
-                    data-cy='delete'
-                    onClick={() => deleteAlbum( album.id, album.title, album.user.name ) }>
-                      delete
-                  </Button> }
-              </Grid.Column>
+              
             </Grid>
           </Grid.Column>
         </Grid>

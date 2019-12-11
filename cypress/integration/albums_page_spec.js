@@ -37,7 +37,7 @@ describe('The Albums Page', function() {
     })
 
     it('can see delete button', function() {
-      cy.get('[data-cy=delete]').should('contain', 'delete')
+      cy.get('[data-cy=delete]').should('be', 'visible')
     })
 
     it('can update album', function() {
@@ -70,7 +70,7 @@ describe('The Albums Page', function() {
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
-      cy.get('[data-cy=message]').should('contain', 'Album stored successfully.')
+      cy.get('[data-cy=albumListItem]').should('contain', title)
     })
   })
 
@@ -91,11 +91,9 @@ describe('The Albums Page', function() {
 
     it('delete last created album', function() {
       cy.get('[data-cy=delete]').first().as('firstDeleteButton')
-      cy.get('@firstDeleteButton').should('contain', 'delete')
       cy.get('@firstDeleteButton').click()
       cy.get('[data-cy=albumListItem]').first().as('firstItem')
       cy.get('@firstItem').should('not.contain', title)
-
     })
   })
 

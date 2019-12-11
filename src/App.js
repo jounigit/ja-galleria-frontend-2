@@ -8,6 +8,7 @@ import { Home } from './components/Home'
 import { CategoryData } from './components/Category/'
 import { AlbumData } from './components/Album'
 import Login from './components/Login/Login'
+import apiService from './services/apiService'
 
 export const AuthContext = createContext()
 
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
   case 'LOGIN':
     localStorage.setItem('user', JSON.stringify(action.payload.user))
     localStorage.setItem('token', JSON.stringify(action.payload.token))
+    // set token for api
+    apiService.setToken(state.token)
     return {
       ...state,
       isAuthenticated: true,
@@ -55,12 +58,14 @@ const App = () => {
   useEffect(() => {
     let storageToken = JSON.parse(localStorage.getItem('token'))
     let storageUser = JSON.parse(localStorage.getItem('user'))
+    apiService.setToken(state.token)
     const loggedUser = {
       token: storageToken,
       user: storageUser
     }
     if (storageUser && state.user === null) {
-      // debugger
+      // set token for api
+
       dispatch({ type: 'LOGGEDIN', payload: loggedUser })
     }
   }, [state])

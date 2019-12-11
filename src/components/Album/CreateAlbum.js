@@ -1,9 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
+import { Header, Button, Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import albumService from '../../services/albumService'
+import apiService from '../../services/apiService'
 import { CREATE_ALBUM } from '../../reducers/actionTypes'
-import { AuthContext } from '../../App'
 import AlbumForm from './AlbumForm'
 
 const initialState = {
@@ -14,13 +13,10 @@ const initialState = {
   message: null
 }
 
-const NewAlbum = () => {
+const CreateAlbum = () => {
   const [data, setData] = useState(initialState)
   const [formVisibility, setFormVisibility] = useState(false)
-  const { albums, dispatch } = useContext(AlbumContext)
-  const { state } = useContext(AuthContext)
-  // set token for api
-  albumService.setToken(state.token)
+  const { dispatch } = useContext(AlbumContext)
 
   const showWhenVisible = { display: formVisibility ? '' : 'none' }
 
@@ -59,14 +55,12 @@ const NewAlbum = () => {
     })
 
     try {
-      const result = await albumService.create(newData)
-      console.log('Form result --', result)
+      const result = await apiService.create(newData)
       const newAlbum = result.data
-      const albumsArray = [...albums.data, newAlbum]
 
       dispatch({
         type: CREATE_ALBUM,
-        data: albumsArray
+        data: newAlbum
       })
       setData({
         title: '',
@@ -101,7 +95,8 @@ const NewAlbum = () => {
           title={data.title}
           content={data.content}
           handleFormSubmit={handleFormSubmit}
-          handleInputChange={handleInputChange} 
+          handleInputChange={handleInputChange}
+          formHeader={'Uusi albumi'}
         />
       </div>
     </Container>
@@ -110,4 +105,4 @@ const NewAlbum = () => {
 
 }
 
-export default NewAlbum
+export default CreateAlbum
