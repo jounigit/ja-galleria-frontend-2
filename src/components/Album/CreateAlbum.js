@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Header, Button, Container } from 'semantic-ui-react'
+import { Header, Button, Container, Modal, Icon } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
 import { CREATE_ALBUM } from '../../reducers/actionTypes'
@@ -8,6 +8,7 @@ import AlbumForm from './AlbumForm'
 const initialState = {
   title: '',
   content: '',
+  category: '',
   isSubmitting: false,
   errorMessage: null,
   message: null
@@ -17,8 +18,6 @@ const CreateAlbum = () => {
   const [data, setData] = useState(initialState)
   const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(AlbumContext)
-
-  const showWhenVisible = { display: formVisibility ? '' : 'none' }
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -45,7 +44,8 @@ const CreateAlbum = () => {
 
     const newData = {
       title: data.title,
-      content: data.content
+      content: data.content,
+      category_id: data.category
     }
 
     setData({
@@ -85,20 +85,31 @@ const CreateAlbum = () => {
     )
   }
 
-  return (
-    <Container>
-      <Button color='green' size='small' data-cy='addNewAlbum'  onClick={() => setFormVisibility(!formVisibility)}>new album</Button>
+  const createButton = <Button
+    color='green'
+    size='tiny'
+    data-cy='addNewAlbum'
+  >
+    <Icon name='edit' />
+    new album
+  </Button>
 
-      <div style={showWhenVisible}>
-        <AlbumForm
-          errorMessage={data.errorMessage}
-          title={data.title}
-          content={data.content}
-          handleFormSubmit={handleFormSubmit}
-          handleInputChange={handleInputChange}
-          formHeader={'Uusi albumi'}
-        />
-      </div>
+  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+    <Container>
+      <Modal trigger={createButton}  size='tiny'>
+        <Modal.Header>Uusi Albumi</Modal.Header>
+        <Modal.Content>
+          <AlbumForm
+            errorMessage={data.errorMessage}
+            title={data.title}
+            content={data.content}
+            category={data.category}
+            handleFormSubmit={handleFormSubmit}
+            handleInputChange={handleInputChange}
+            formHeader={'Uusi albumi'}
+          />
+        </Modal.Content>
+      </Modal>
     </Container>
 
   )

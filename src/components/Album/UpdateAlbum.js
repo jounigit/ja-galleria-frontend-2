@@ -1,27 +1,23 @@
 import React, { useState, useContext } from 'react'
-import { Container } from 'semantic-ui-react'
+import { Container, Header, Icon, Button, Modal } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 
 import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 
-const initialState = {
-  title: '',
-  content: '',
-  category: '',
-  isSubmitting: false,
-  errorMessage: null,
-  message: null
-}
-
-const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
+const UpdateAlbum = ({ id, title, content, category }) => {
+  const initialState = {
+    title: title,
+    content: content,
+    category: category,
+    isSubmitting: false,
+    errorMessage: null,
+    message: null
+  }
   // Component's state
   const [data, setData] = useState(initialState)
-  // const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(AlbumContext) // Album actions
-
-  // const showWhenVisible = { display: formVisibility ? '' : 'none' }
 
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
@@ -39,7 +35,7 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
       errorMessage: error
     })
   }
-  console.log('INPUTS :::', data)
+  // console.log('INPUTS :::', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -52,7 +48,7 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
       content: data.content,
       category_id: data.category
     }
-    console.log('NEWDATA :::', newData)
+    // console.log('NEWDATA :::', newData)
 
     setData({
       ...data,
@@ -70,34 +66,51 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
         data: newAlbum
       })
       setData({
-        title: '',
-        content: '',
-        category: '',
+        ...data,
         isSubmitting: false,
         errorMessage: null,
         message: result.message
       })
-      setFormVisibility(!formVisibility)
     } catch (error) {
       handleError('failed updating album!')
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
+  if (data.message) {
+    setTimeout(() => setData({ ...data, message: null }), 4000)
+    return (
+      <Container>
+        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
+      </Container>
+    )
+  }
+
+  const updateButton = <Button floated='right'
+    color='green'
+    size='tiny'
+    data-cy='update'
+  >
+    <Icon name='edit' />
+  </Button>
 
   return (
 
-    <Container>
-      <AlbumForm
-        errorMessage={data.errorMessage}
-        title={data.title}
-        content={data.content}
-        category={data.category}
-        handleFormSubmit={handleFormSubmit}
-        handleInputChange={handleInputChange}
-        formHeader={'Päivitä albumi'}
-      />
-    </Container>
+    <Modal trigger={ updateButton }  size='tiny'>
+      <Modal.Header>Päivitä Albumi</Modal.Header>
+      <Modal.Content>
+        <AlbumForm
+          errorMessage={data.errorMessage}
+          title={data.title}
+          content={data.content}
+          category={data.category}
+          handleFormSubmit={handleFormSubmit}
+          handleInputChange={handleInputChange}
+          formHeader={'Päivitä albumi'}
+        />
+      </Modal.Content>
+    </Modal>
+
 
   )
 }

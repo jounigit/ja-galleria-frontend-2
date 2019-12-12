@@ -3,7 +3,8 @@ describe('The Albums Page', function() {
   const email = Cypress.env('email')
   const password = Cypress.env('password')
   // const username = Cypress.env('username')
-  let newId
+  const title = 'Luo otsikko'
+  const content = 'Luo sisältöä.'
 
   context('open public pages', function() {
     it('get all albums', function() {
@@ -33,14 +34,16 @@ describe('The Albums Page', function() {
       cy.get('[data-cy=addNewAlbum]').click()
       cy.get('[data-cy=title]').should('be.visible')
       cy.get('[data-cy=content]').should('be.visible')
+      cy.get('label').should('contain', 'category')
+      // cy.get('select').should('have.property', 'name', 'category')
     })
 
     it('can see delete button', function() {
-      cy.get('[data-cy=delete]').should('be', 'visible')
+      cy.get('[data-cy=delete]').should('be.visible')
     })
 
-    it('can update album', function() {
-      //
+    it('can see update button', function() {
+      cy.get('[data-cy=update]').should('be.visible')
     })
 
     it('title is required', function() {
@@ -52,8 +55,6 @@ describe('The Albums Page', function() {
   })
 
   context('create album', function() {
-    const title = 'Luo otsikko'
-    const content = 'Luo sisältöä.'
     before(function() {
       cy.loginByForm(email, password)
       cy.visit('/albums')
@@ -73,9 +74,40 @@ describe('The Albums Page', function() {
     })
   })
 
+  context('update album', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/albums')
+    })
+
+    beforeEach(function() {
+      cy.get('[data-cy=addNewAlbum]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/albums')
+    })
+
+    after(function() {
+      cy.get('[data-cy=delete]').first().as('firstDeleteButton')
+      cy.get('@firstDeleteButton').click()
+    })
+
+    it('can update album', function() {
+      const newType = 'Updated'
+      cy.get('[data-cy=update]').first().as('firstUpdateButton')
+      cy.get('@firstUpdateButton').click()
+      cy.get('[type="title"]').clear()
+      cy.get('[data-cy=title]').type(newType)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('select').find('option').first()
+      cy.get('form').submit()
+      cy.get(':nth-child(3) > .divided > .item > .content > .header').should('contain', newType)
+
+    })
+  })
+
   context('create and delete album', function() {
-    const title = 'Poista albumi'
-    const content = 'Poista sisältöä taas.'
     before(function() {
       cy.loginByForm(email, password)
       cy.visit('/albums')

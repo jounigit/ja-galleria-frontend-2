@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Modal, Item } from 'semantic-ui-react'
+import { Button, Icon, Item } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
@@ -13,11 +13,10 @@ import {
 const Album = ({ album }) => {
   const { state } = useContext(AuthContext)
   const { dispatch } = useContext(AlbumContext)
-  const [formVisibility, setFormVisibility] = useState(false)
 
   const pictures = album.pictures
 
-  const firstPic2 = pictures && pictures.length > 0 ?
+  const firstPic = pictures && pictures.length > 0 ?
     pictures[0].thumb : ''
 
   const deleteAlbum = async (id, title, author) => {
@@ -38,15 +37,6 @@ const Album = ({ album }) => {
     }
   }
 
-  const updateButton = <Button floated='right'
-    color='green'
-    size='tiny'
-    data-cy='update'
-    // onClick={() => setFormVisibility(!formVisibility)}
-  >
-    <Icon name='edit' />
-  </Button>
-
   const deleteButton = <Button floated='right'
     color='red'
     size='tiny'
@@ -59,7 +49,7 @@ const Album = ({ album }) => {
     <div data-cy='albumListItem'>
       <Item.Group divided>
         <Item>
-          <Item.Image size='small' src={firstPic2} />
+          <Item.Image size='small' src={firstPic} />
           <Item.Content>
             <Item.Header>{album.title}</Item.Header>
             <Item.Meta>
@@ -73,21 +63,21 @@ const Album = ({ album }) => {
               <Link to={`/albums/${album.id}`}>show</Link>
               { state.user && deleteButton }
               { state.user &&
-               <Modal trigger={updateButton}>
-                 <Modal.Header>Päivitä</Modal.Header>
-                 <Modal.Content>
-                   <UpdateAlbum id={ album.id } setFormVisibility={setFormVisibility} formVisibility={formVisibility} />
-                 </Modal.Content>
-               </Modal>
+
+                   <UpdateAlbum
+                     id={ album.id }
+                     title={album.title}
+                     content={album.content}
+                     category={album.category}
+                   />
+
               }
 
             </Item.Extra>
           </Item.Content>
         </Item>
       </Item.Group>
-      {/* <Segment>
 
-      </Segment> */}
       <div className="ui divider"></div>
     </div>
 
