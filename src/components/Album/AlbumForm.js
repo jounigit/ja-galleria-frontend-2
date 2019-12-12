@@ -1,13 +1,19 @@
-import React from 'react'
-import { Card, Header, Form, Button } from 'semantic-ui-react'
+import React, { useContext } from 'react'
+import { Card, Header, Form, Input, Button } from 'semantic-ui-react'
+import { CategoryContext } from '../../contexts/CategoryContext'
 
 const AlbumForm = ({
   errorMessage,
   title,
   content,
+  category,
   handleFormSubmit,
   handleInputChange,
   formHeader }) => {
+
+  const { categories } = useContext(CategoryContext) //
+
+  const catOptions = categories.data.data.map(cat => <option key={cat.id} value={cat.id}>{cat.title}</option>)
 
   return (
     <Card centered style={{ marginTop: 20 }}>
@@ -22,8 +28,15 @@ const AlbumForm = ({
 
         <Form onSubmit={ handleFormSubmit }>
           <Form.Field>
-            <label>Title</label>
-            <input
+            <label>category</label>
+            <select name='category' value={category} onChange={handleInputChange}>
+              { catOptions }
+            </select>
+          </Form.Field>
+
+          <Form.Field>
+            <label>title</label>
+            <Input
               data-cy='title'
               type='title'
               value={title}
@@ -34,7 +47,7 @@ const AlbumForm = ({
           </Form.Field>
           <Form.Field>
             <label>Content</label>
-            <input
+            <Input
               data-cy='content'
               type='content'
               value={content}

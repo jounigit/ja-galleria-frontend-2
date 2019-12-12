@@ -31,7 +31,6 @@ describe('The Albums Page', function() {
     it('can see form', function() {
       cy.get('[data-cy=addNewAlbum]').should('be.visible')
       cy.get('[data-cy=addNewAlbum]').click()
-      cy.get('h2').should('contain', 'Lisää uusi albumi')
       cy.get('[data-cy=title]').should('be.visible')
       cy.get('[data-cy=content]').should('be.visible')
     })
@@ -105,6 +104,10 @@ describe('The Albums Page', function() {
     it('can not see form', function() {
       cy.get('[data-cy=addNewAlbum]').should('not.be.visible')
     })
+
+    // it.only('can not see update button', function() {
+    //   cy.get('[data-cy=update]').should('not.be.visible')
+    // })
 
     it('can not see delete button', function() {
       cy.get('[data-cy=delete]').should('not.be.visible')

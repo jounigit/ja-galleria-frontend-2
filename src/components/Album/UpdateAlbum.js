@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
+
 import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
@@ -8,6 +9,7 @@ import AlbumForm from './AlbumForm'
 const initialState = {
   title: '',
   content: '',
+  category: '',
   isSubmitting: false,
   errorMessage: null,
   message: null
@@ -21,9 +23,8 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
 
   // const showWhenVisible = { display: formVisibility ? '' : 'none' }
 
-
   // :::::::::::::::::::::::::::::::::::: //
-  // hande input values
+  // handle input values
   const handleInputChange = event => {
     setData({
       ...data,
@@ -38,7 +39,7 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
       errorMessage: error
     })
   }
-
+  console.log('INPUTS :::', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -48,8 +49,10 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
 
     const newData = {
       title: data.title,
-      content: data.content
+      content: data.content,
+      category_id: data.category
     }
+    console.log('NEWDATA :::', newData)
 
     setData({
       ...data,
@@ -69,6 +72,7 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
       setData({
         title: '',
         content: '',
+        category: '',
         isSubmitting: false,
         errorMessage: null,
         message: result.message
@@ -88,6 +92,7 @@ const UpdateAlbum = ({ id, setFormVisibility, formVisibility }) => {
         errorMessage={data.errorMessage}
         title={data.title}
         content={data.content}
+        category={data.category}
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
         formHeader={'Päivitä albumi'}

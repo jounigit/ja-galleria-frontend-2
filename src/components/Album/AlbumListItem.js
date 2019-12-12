@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Image, Header, Button, ButtonGroup, Icon, Segment } from 'semantic-ui-react'
+import { Button, Icon, Modal, Item } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
@@ -15,12 +15,10 @@ const Album = ({ album }) => {
   const { dispatch } = useContext(AlbumContext)
   const [formVisibility, setFormVisibility] = useState(false)
 
-  const showWhenVisible = { display: formVisibility ? '' : 'none' }
-
-
   const pictures = album.pictures
-  const firstPic = pictures && pictures.length > 0 ?
-    <Image src={pictures[0].thumb} size='small' wrapped /> : 'No pictures yet.'
+
+  const firstPic2 = pictures && pictures.length > 0 ?
+    pictures[0].thumb : ''
 
   const deleteAlbum = async (id, title, author) => {
     const ok = window.confirm(`remove blog '${title}' by ${author}?`)
@@ -40,68 +38,57 @@ const Album = ({ album }) => {
     }
   }
 
-  const actionButtons = (
-    <ButtonGroup>
-      <Button
-        color='green'
-        size='tiny'
-        data-cy='update'
-        onClick={() => setFormVisibility(!formVisibility)}
-      >
-        <Icon name='edit' />
-      </Button>
-      <Button
-        color='red'
-        size='tiny'
-        data-cy='delete'
-        onClick={() => deleteAlbum( album.id, album.title, album.user.name ) }>
-        <Icon name='trash' />
-      </Button>
-    </ButtonGroup>
-  )
+  const updateButton = <Button floated='right'
+    color='green'
+    size='tiny'
+    data-cy='update'
+    // onClick={() => setFormVisibility(!formVisibility)}
+  >
+    <Icon name='edit' />
+  </Button>
+
+  const deleteButton = <Button floated='right'
+    color='red'
+    size='tiny'
+    data-cy='delete'
+    onClick={() => deleteAlbum( album.id, album.title, album.user.name ) }>
+    <Icon name='trash' />
+  </Button>
 
   return (
     <div data-cy='albumListItem'>
-      <Segment>
-        <Grid doubling columns={3}>
-          <Grid.Column></Grid.Column>
-          <Grid.Column>
-            <div style={showWhenVisible}>
-              <UpdateAlbum id={ album.id } setFormVisibility={setFormVisibility} formVisibility={formVisibility} />
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            { state.user && actionButtons }
-          </Grid.Column>
-        </Grid>
-        <Grid doubling columns={3}>
-          <Grid.Column>
-            { firstPic }
-          </Grid.Column>
-          <Grid.Column>
-            <Header as='h3'>
-              {album.title}
-              <Header.Subheader>
-            Author - {album.user.name}
-              </Header.Subheader>
-            </Header>
-            <p>
-              {album.content.substring(0,40) }...
-            </p>
-          </Grid.Column>
-          <Grid.Column>
-            <Grid columns={2}>
-              <Grid.Column>
-                <Header as='h4'>
-                  {pictures.length + ' - kuvaa' || 'no pictures'}
-                </Header>
-                <Link to={`/albums/${album.id}`}>show</Link>
-              </Grid.Column>
-              
-            </Grid>
-          </Grid.Column>
-        </Grid>
-      </Segment>
+      <Item.Group divided>
+        <Item>
+          <Item.Image size='small' src={firstPic2} />
+          <Item.Content>
+            <Item.Header>{album.title}</Item.Header>
+            <Item.Meta>
+              <span className='stay'>Author - {album.user.name}</span>
+            </Item.Meta>
+            <Item.Meta>
+              {pictures.length + ' - kuvaa' || 'no pictures'}
+            </Item.Meta>
+            <Item.Description>{album.content.substring(0,260) }...</Item.Description>
+            <Item.Extra>
+              <Link to={`/albums/${album.id}`}>show</Link>
+              { state.user && deleteButton }
+              { state.user &&
+               <Modal trigger={updateButton}>
+                 <Modal.Header>Päivitä</Modal.Header>
+                 <Modal.Content>
+                   <UpdateAlbum id={ album.id } setFormVisibility={setFormVisibility} formVisibility={formVisibility} />
+                 </Modal.Content>
+               </Modal>
+              }
+
+            </Item.Extra>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+      {/* <Segment>
+
+      </Segment> */}
+      <div className="ui divider"></div>
     </div>
 
   )
