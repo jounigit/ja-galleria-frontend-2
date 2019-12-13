@@ -5,7 +5,7 @@ import { Grid } from 'semantic-ui-react'
 
 const Home = () => {
   const { categories } = useContext(CategoryContext)
-  const categoriesData = categories.data && categories.data.data
+  const categoriesData = categories.data && categories.data
 
   return (
     <div>

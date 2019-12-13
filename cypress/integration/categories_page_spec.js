@@ -37,6 +37,10 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=content]').should('be.visible')
     })
 
+    it('can see delete button', function() {
+      cy.get('[data-cy=delete]').should('be.visible')
+    })
+
     // it('title is required', function() {
     //   cy.get('[data-cy=addCategory]').click()
     //   cy.get('input[name=content]').type('content{enter}')
@@ -62,6 +66,27 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
       cy.get('[data-cy=category]').should('contain', title)
+    })
+  })
+
+  context('create and delete category', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/categories')
+    })
+    beforeEach(function() {
+      cy.get('[data-cy=addCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/categories')
+    })
+
+    it.only('delete last created categories', function() {
+      cy.get('[data-cy=delete]').last().as('lastDeleteButton')
+      cy.get('@lastDeleteButton').click()
+      cy.get('[data-cy=category]').last().as('lastItem')
+      cy.get('@lastItem').should('not.contain', title)
     })
   })
 

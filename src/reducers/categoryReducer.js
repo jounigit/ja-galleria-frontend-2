@@ -24,8 +24,8 @@ const categoryReducer = (state, action) => {
 
     return { data: newData, isLoading: false, errorMessage: '' }
   case DELETE_CATEGORY:
-
-    return { data: newData, isLoading: false, errorMessage: '' }
+    const delData = state.data.filter(d => d.id !== action.id)
+    return { data: delData, isLoading: false, errorMessage: '' }
   default:
     return state
   }
