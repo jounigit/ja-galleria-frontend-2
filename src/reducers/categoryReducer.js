@@ -20,6 +20,12 @@ const categoryReducer = (state, action) => {
   case CREATE_CATEGORY:
     const newData = [...state.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '' }
+  case UPDATE_CATEGORY:
+
+    return { data: newData, isLoading: false, errorMessage: '' }
+  case DELETE_CATEGORY:
+
+    return { data: newData, isLoading: false, errorMessage: '' }
   default:
     return state
   }

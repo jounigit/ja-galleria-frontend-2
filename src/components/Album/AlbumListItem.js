@@ -25,7 +25,7 @@ const Album = ({ album }) => {
       return
     }
     try {
-      await apiService.remove(id)
+      await apiService.remove('albums', id)
       dispatch({
         type: DELETE_ALBUM,
         id

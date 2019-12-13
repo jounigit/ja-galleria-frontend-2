@@ -1,8 +1,6 @@
 import axios from 'axios'
 const apiUrl = 'http://localhost:8000/api'
 
-const baseUrl = 'http://localhost:8000/api/albums'
-
 let token = null
 let config = []
 
@@ -23,20 +21,15 @@ const create = async ( url, newObject ) => {
   return response.data
 }
 
-const update = async (id, newObject) => {
-  const response = await axios.put(`${baseUrl}/${id}`, newObject, config)
+const update = async (url, id, newObject) => {
+  const response = await axios.put(`${apiUrl}/${url}/${id}`, newObject, config)
   return response.data
 }
 
-const remove = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`, config)
+const remove = async (url, id) => {
+  const response = await axios.delete(`${apiUrl}/${url}/${id}`, config)
   return response.data
 }
 
-// ::::::::::::::::::::::::::::::::::::: (`${baseUrl}/${id}/comments`, newObject)
-export const getAlbums = () => {
-  const url = `${apiUrl}/albums`
-  getAll(url)
-}
 
 export default { getAll, create, update, remove, setToken }

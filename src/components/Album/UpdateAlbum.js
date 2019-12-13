@@ -57,7 +57,7 @@ const UpdateAlbum = ({ id, title, content, category }) => {
     })
 
     try {
-      const result = await apiService.update(id, newData)
+      const result = await apiService.update('albums', id, newData)
       const newAlbum = result.data
       console.log('UPDATE :::', newAlbum)
 
