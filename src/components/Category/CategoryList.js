@@ -6,8 +6,6 @@ import CreateCategory from './CreateCategory'
 const CategoryList = ({ categories }) => {
   const { state } = useContext(AuthContext)
 
-  console.log('CATEGORIESlist -- ', categories)
-
   return (
     <div className='CategoryList'>
       {state.user && <CreateCategory />}

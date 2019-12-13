@@ -14,7 +14,6 @@ const CategoryDetails = ({ category }) => {
     color: 'Blue',
     textDecoration: 'Underline'
   }
-  console.log('CATEGORY -- ', category.id)
 
   return (
     <div className='category' data-cy='category'>
@@ -33,7 +32,6 @@ const CategoryDetails = ({ category }) => {
       <ul style={showWhenVisible}>
         {albums().length > 0 ? albums() : 'no albums'}
       </ul>
-      
 
       <hr />
     </div>
