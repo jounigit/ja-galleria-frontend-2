@@ -4,7 +4,8 @@ import CategoryList from './CategoryList'
 
 const CategoryData = () => {
   const { categories } = useContext(CategoryContext)
-  const categoriesData = categories.data && categories.data.data
+
+  const categoriesData = categories.data && categories.data
 
   return (
     <Fragment>

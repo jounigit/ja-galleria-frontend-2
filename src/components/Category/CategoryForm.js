@@ -1,19 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Header, Form, Input, Button, Container } from 'semantic-ui-react'
-import { CategoryContext } from '../../contexts/CategoryContext'
 
-const AlbumForm = ({
+const CategoryForm = ({
   errorMessage,
   title,
   content,
-  category,
   handleFormSubmit,
   handleInputChange
 }) => {
-
-  const { categories } = useContext(CategoryContext) //
-
-  const catOptions = categories.data.map(cat => <option key={cat.id} value={cat.id}>{cat.title}</option>)
 
   return (
     <Container>
@@ -22,12 +16,6 @@ const AlbumForm = ({
       )}
 
       <Form onSubmit={ handleFormSubmit }>
-        <Form.Field>
-          <label>category</label>
-          <select data-cy='category' name='category' value={category} onChange={handleInputChange}>
-            { catOptions }
-          </select>
-        </Form.Field>
 
         <Form.Field>
           <label>title</label>
@@ -55,8 +43,7 @@ const AlbumForm = ({
         <Button data-cy='submit' type='submit'>submit</Button>
       </Form>
     </Container>
-
   )
 }
 
-export default AlbumForm
+export default CategoryForm

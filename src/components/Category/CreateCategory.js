@@ -1,23 +1,21 @@
 import React, { useState, useContext } from 'react'
 import { Header, Button, Container, Modal, Icon } from 'semantic-ui-react'
-import { AlbumContext } from '../../contexts/AlbumContext'
+import { CategoryContext } from '../../contexts/CategoryContext'
 import apiService from '../../services/apiService'
-import { CREATE_ALBUM } from '../../reducers/actionTypes'
-import AlbumForm from './AlbumForm'
+import { CREATE_CATEGORY } from '../../reducers/actionTypes'
+import CategoryForm from './CategoryForm'
 
 const initialState = {
   title: '',
   content: '',
-  category: '',
   isSubmitting: false,
   errorMessage: null,
   message: null
 }
 
-const CreateAlbum = () => {
+const CreateCategory = () => {
   const [data, setData] = useState(initialState)
-  const [formVisibility, setFormVisibility] = useState(false)
-  const { dispatch } = useContext(AlbumContext)
+  const { dispatch } = useContext(CategoryContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -44,8 +42,7 @@ const CreateAlbum = () => {
 
     const newData = {
       title: data.title,
-      content: data.content,
-      category_id: data.category
+      content: data.content
     }
 
     setData({
@@ -55,11 +52,11 @@ const CreateAlbum = () => {
     })
 
     try {
-      const result = await apiService.create('albums', newData)
+      const result = await apiService.create('categories', newData)
       const newAlbum = result.data
 
       dispatch({
-        type: CREATE_ALBUM,
+        type: CREATE_CATEGORY,
         data: newAlbum
       })
       setData({
@@ -69,10 +66,10 @@ const CreateAlbum = () => {
         errorMessage: null,
         message: result.message
       })
-      setFormVisibility(!formVisibility)
     } catch (error) {
-      handleError('failed storing album!')
+      handleError('failed storing category!')
     }
+
   }
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -88,25 +85,25 @@ const CreateAlbum = () => {
   const createButton = <Button
     color='green'
     size='tiny'
-    data-cy='addNewAlbum'
+    data-cy='addCategory'
   >
     <Icon name='edit' />
-    new album
+        new category
   </Button>
 
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
     <Container>
       <Modal trigger={createButton}  size='tiny'>
-        <Modal.Header>Uusi Albumi</Modal.Header>
+        <Modal.Header>Uusi Category</Modal.Header>
         <Modal.Content>
-          <AlbumForm
+          <CategoryForm
             errorMessage={data.errorMessage}
             title={data.title}
             content={data.content}
             category={data.category}
             handleFormSubmit={handleFormSubmit}
             handleInputChange={handleInputChange}
-            formHeader={'Uusi albumi'}
+            formHeader={'Uusi kategoria'}
           />
         </Modal.Content>
       </Modal>
@@ -116,4 +113,4 @@ const CreateAlbum = () => {
 
 }
 
-export default CreateAlbum
+export default CreateCategory

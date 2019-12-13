@@ -10,7 +10,7 @@ const AlbumContextProvider = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await apiService.getAll()
+        const result = await apiService.getAll('albums')
         // console.log('RESULT ---', results.data)
         dispatch({ type: 'INIT_ALBUMS', data: result })
       } catch (error) {

@@ -1,10 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import categoryReducer from '../reducers/categoryReducer'
-import axios from 'axios'
-
-const baseUrl = 'http://localhost:8000/api'
-
-const url = `${baseUrl}/categories`
+import apiService from '../services/apiService'
+import { INIT_CATEGORIES } from '../reducers/actionTypes'
 
 export const CategoryContext = createContext()
 
@@ -15,9 +12,9 @@ const CategoryContextProvider = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const results = await axios.get(url)
-        // console.log('categories RESULT ---', results)
-        dispatch({ type: 'INIT_CATEGORY', data: results })
+        const results = await apiService.getAll('categories')
+        // console.log('categories RESULT ---', categories)
+        dispatch({ type: INIT_CATEGORIES, data: results })
       } catch (error) {
         dispatch({ type: 'FAILURE', error: error.message || error })
       }
