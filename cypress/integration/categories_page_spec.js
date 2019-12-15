@@ -37,6 +37,10 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=content]').should('be.visible')
     })
 
+    it('can see update button', function() {
+      cy.get('[data-cy=update]').should('be.visible')
+    })
+
     it('can see delete button', function() {
       cy.get('[data-cy=delete]').should('be.visible')
     })
@@ -55,10 +59,9 @@ describe('The Categories Page', function() {
       cy.visit('/categories')
     })
 
-    // after(function() {
-    //   cy.get('[data-cy=delete]').first().as('firstDeleteButton')
-    //   cy.get('@firstDeleteButton').click()
-    // })
+    after(function() {
+      cy.get('[data-cy=delete]').last().click()
+    })
 
     it('can add new category', function() {
       cy.get('[data-cy=addCategory]').click()
@@ -66,6 +69,37 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
       cy.get('[data-cy=category]').should('contain', title)
+    })
+  })
+
+  context('update category', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/categories')
+    })
+
+    beforeEach(function() {
+      cy.get('[data-cy=addCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/categories')
+    })
+
+    after(function() {
+      cy.get('[data-cy=delete]').last().click()
+    })
+
+    it('can update category', function() {
+      const newType = 'Updated'
+      cy.get('[data-cy=update]').last().click()
+      // cy.get('@lasttUpdateButton').click()
+      cy.get('[type="title"]').clear()
+      cy.get('[data-cy=title]').type(newType)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.get('[data-cy=header]').last().should('contain', newType)
+
     })
   })
 
@@ -82,7 +116,7 @@ describe('The Categories Page', function() {
       cy.visit('/categories')
     })
 
-    it.only('delete last created categories', function() {
+    it('delete last created categories', function() {
       cy.get('[data-cy=delete]').last().as('lastDeleteButton')
       cy.get('@lastDeleteButton').click()
       cy.get('[data-cy=category]').last().as('lastItem')

@@ -6,7 +6,7 @@ const CategoryData = () => {
   const { categories } = useContext(CategoryContext)
 
   const categoriesData = categories.data && categories.data
-
+console.log('CATS :::', categoriesData)
   return (
     <Fragment>
       {categories.loading && <div className="loader">Loading ...</div>}
