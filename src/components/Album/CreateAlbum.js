@@ -8,7 +8,7 @@ import AlbumForm from './AlbumForm'
 const initialState = {
   title: '',
   content: '',
-  category: '',
+  category_id: '',
   isSubmitting: false,
   errorMessage: null,
   message: null
@@ -45,7 +45,7 @@ const CreateAlbum = () => {
     const newData = {
       title: data.title,
       content: data.content,
-      category_id: data.category
+      category_id: data.category_id
     }
 
     setData({
@@ -103,7 +103,7 @@ const CreateAlbum = () => {
             errorMessage={data.errorMessage}
             title={data.title}
             content={data.content}
-            category={data.category}
+            category_id={data.category_id}
             handleFormSubmit={handleFormSubmit}
             handleInputChange={handleInputChange}
             formHeader={'Uusi albumi'}

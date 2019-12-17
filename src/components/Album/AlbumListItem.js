@@ -41,7 +41,7 @@ const Album = ({ album }) => {
                      id={ album.id }
                      title={album.title}
                      content={album.content}
-                     category={album.category}
+                     category_id={album.category_id}
                    />
 
               }

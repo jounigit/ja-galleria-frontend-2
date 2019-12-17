@@ -1,19 +1,22 @@
 import React, { useContext } from 'react'
-import { Header, Form, Input, Button, Container } from 'semantic-ui-react'
+import { Header, Form, Input, Button, Container, TextArea } from 'semantic-ui-react'
 import { CategoryContext } from '../../contexts/CategoryContext'
 
 const AlbumForm = ({
   errorMessage,
   title,
   content,
-  category,
+  category_id,
   handleFormSubmit,
   handleInputChange
 }) => {
 
   const { categories } = useContext(CategoryContext) //
+  const defaultVal = [{ id:'', title:'choose category...' }]
+  const cats = defaultVal.concat(categories.data)
+  console.log('cocat :::', defaultVal.concat(categories.data))
 
-  const catOptions = categories.data.map(cat => <option key={cat.id} value={cat.id}>{cat.title}</option>)
+  const catOptions = cats.map((cat, i) => <option key={i} value={cat.id}>{cat.title}</option>)
 
   return (
     <Container>
@@ -23,33 +26,41 @@ const AlbumForm = ({
 
       <Form onSubmit={ handleFormSubmit }>
         <Form.Field>
-          <label>category</label>
-          <select data-cy='category' name='category' value={category} onChange={handleInputChange}>
-            { catOptions }
-          </select>
+          <label>category
+            <select
+              data-cy='category'
+              name='category_id'
+              value={category_id}
+              onChange={handleInputChange}
+            >
+              { catOptions }
+            </select>
+          </label>
         </Form.Field>
 
         <Form.Field>
-          <label>title</label>
-          <Input
-            data-cy='title'
-            type='title'
-            value={title}
-            onChange={handleInputChange}
-            name='title'
-            id='title'
-          />
+          <label>title
+            <Input
+              data-cy='title'
+              type='title'
+              value={title}
+              onChange={handleInputChange}
+              name='title'
+              id='title'
+            />
+          </label>
         </Form.Field>
         <Form.Field>
-          <label>Content</label>
-          <Input
-            data-cy='content'
-            type='content'
-            value={content}
-            onChange={handleInputChange}
-            name='content'
-            id='content'
-          />
+          <label>Content
+            <TextArea
+              data-cy='content'
+              type='content'
+              value={content}
+              onChange={handleInputChange}
+              name='content'
+              id='content'
+            />
+          </label>
         </Form.Field>
 
         <Button data-cy='submit' type='submit'>submit</Button>

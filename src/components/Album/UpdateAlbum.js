@@ -6,11 +6,11 @@ import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 
-const UpdateAlbum = ({ id, title, content, category }) => {
+const UpdateAlbum = ({ id, title, content, category_id }) => {
   const initialState = {
     title: title,
     content: content,
-    category: category,
+    category_id: category_id,
     isSubmitting: false,
     errorMessage: null,
     message: null
@@ -35,7 +35,7 @@ const UpdateAlbum = ({ id, title, content, category }) => {
       errorMessage: error
     })
   }
-  // console.log('INPUTS :::', data)
+  console.log('INPUTS :::', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -46,7 +46,7 @@ const UpdateAlbum = ({ id, title, content, category }) => {
     const newData = {
       title: data.title,
       content: data.content,
-      category_id: data.category
+      category_id: data.category_id
     }
     // console.log('NEWDATA :::', newData)
 
@@ -103,7 +103,7 @@ const UpdateAlbum = ({ id, title, content, category }) => {
           errorMessage={data.errorMessage}
           title={data.title}
           content={data.content}
-          category={data.category}
+          category_id={data.category_id}
           handleFormSubmit={handleFormSubmit}
           handleInputChange={handleInputChange}
           formHeader={'Päivitä albumi'}
