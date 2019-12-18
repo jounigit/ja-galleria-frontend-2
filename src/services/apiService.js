@@ -16,6 +16,11 @@ const getAll = async (url) => {
   return response.data
 }
 
+const getOne = async (url, id) => {
+  const response = await axios.get(`${apiUrl}/${url}/${id}`)
+  return response.data
+}
+
 const create = async ( url, newObject ) => {
   const response = await axios.post(`${apiUrl}/${url}`, newObject, config)
   return response.data
@@ -32,4 +37,4 @@ const remove = async (url, id) => {
 }
 
 
-export default { getAll, create, update, remove, setToken }
+export default { getAll, getOne, create, update, remove, setToken }

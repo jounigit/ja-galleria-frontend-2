@@ -1,25 +1,15 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import categoryReducer from '../reducers/categoryReducer'
-import apiService from '../services/apiService'
 import { INIT_CATEGORIES } from '../reducers/actionTypes'
+import { fetchData } from '../components/Category/actions/fetchData'
 
 export const CategoryContext = createContext()
 
 const CategoryContextProvider = (props) => {
   const [categories, dispatch] = useReducer(categoryReducer, [])
-
   // hook to get all records
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await apiService.getAll('categories')
-        // console.log('categories RESULT ---', categories)
-        dispatch({ type: INIT_CATEGORIES, data: results })
-      } catch (error) {
-        dispatch({ type: 'FAILURE', error: error.message || error })
-      }
-    }
-    fetchData()
+    fetchData(dispatch, INIT_CATEGORIES)
   }, [dispatch])
 
   return (

@@ -16,8 +16,6 @@ const UpdateCategory = ({ id, title, content } ) => {
   const [data, setData] = useState(initialState)
   const { dispatch } = useContext(CategoryContext)
 
-  console.log('UPDATE :::', title, ' --', content)
-
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
   const handleInputChange = event => {

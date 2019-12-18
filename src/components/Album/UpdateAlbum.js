@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Container, Header, Icon, Button, Modal } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
-
 import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
+// import UpdateCategoryAlbums from '../Category/actions/UpdateCategoryAlbums'
 
 const UpdateAlbum = ({ id, title, content, category_id }) => {
   const initialState = {
@@ -17,6 +17,7 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
   }
   // Component's state
   const [data, setData] = useState(initialState)
+  // const [categoryId, setCategoryId] = useState('')
   const { dispatch } = useContext(AlbumContext) // Album actions
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -35,7 +36,8 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
       errorMessage: error
     })
   }
-  console.log('INPUTS :::', data)
+  // console.log('INPUTS :::', data)
+
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -59,8 +61,8 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
     try {
       const result = await apiService.update('albums', id, newData)
       const newAlbum = result.data
-      console.log('UPDATE :::', newAlbum)
-
+      console.log('UPDATE :::', newAlbum.category.id)
+      // setCategoryId(newAlbum.category.id)
       dispatch({
         type: UPDATE_ALBUM,
         data: newAlbum
@@ -78,6 +80,7 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
+    localStorage.setItem('reloadPage', 'categories')
     setTimeout(() => setData({ ...data, message: null }), 4000)
     return (
       <Container>
@@ -110,7 +113,6 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
         />
       </Modal.Content>
     </Modal>
-
 
   )
 }
