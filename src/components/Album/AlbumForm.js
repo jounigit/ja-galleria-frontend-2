@@ -53,11 +53,9 @@ const AlbumForm = ({
           <label>Content
             <TextArea
               data-cy='content'
-              type='content'
               value={content}
               onChange={handleInputChange}
               name='content'
-              id='content'
             />
           </label>
         </Form.Field>

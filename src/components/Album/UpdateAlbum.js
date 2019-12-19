@@ -98,22 +98,22 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
   </Button>
 
   return (
-
-    <Modal trigger={ updateButton }  size='tiny'>
-      <Modal.Header>Päivitä Albumi</Modal.Header>
-      <Modal.Content>
-        <AlbumForm
-          errorMessage={data.errorMessage}
-          title={data.title}
-          content={data.content}
-          category_id={data.category_id}
-          handleFormSubmit={handleFormSubmit}
-          handleInputChange={handleInputChange}
-          formHeader={'Päivitä albumi'}
-        />
-      </Modal.Content>
-    </Modal>
-
+    <Container>
+      <Modal trigger={ updateButton }  size='tiny'>
+        <Modal.Header>Päivitä Albumi</Modal.Header>
+        <Modal.Content>
+          <AlbumForm
+            errorMessage={data.errorMessage}
+            title={data.title}
+            content={data.content}
+            category_id={data.category_id}
+            handleFormSubmit={handleFormSubmit}
+            handleInputChange={handleInputChange}
+            formHeader={'Päivitä albumi'}
+          />
+        </Modal.Content>
+      </Modal>
+    </Container>
   )
 }
 
