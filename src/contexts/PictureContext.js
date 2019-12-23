@@ -1,10 +1,8 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import pictureReducer from '../reducers/pictureReducer'
-import axios from 'axios'
-
-const baseUrl = 'http://localhost:8000/api'
-
-const url = `${baseUrl}/pictures`
+import { INIT_PICTURES } from '../reducers/actionTypes'
+import { fetchData } from '../actions/fetchData'
+// import axios from 'axios'
 
 export const PictureContext = createContext()
 
@@ -13,15 +11,7 @@ const PictureContextProvider = (props) => {
 
   // hook to get all pictures
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const results = await axios.get(url)
-        dispatch({ type: 'INIT_PICTURES', data: results.data.data })
-      } catch (error) {
-        dispatch({ type: 'FAILURE', error: error.message || error })
-      }
-    }
-    fetchData()
+    fetchData(dispatch, INIT_PICTURES, 'pictures')
   }, [dispatch])
 
   return (

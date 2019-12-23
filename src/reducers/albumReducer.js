@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-// import albumService from '../services/albumService'
 import {
   INIT_ALBUMS,
   CREATE_ALBUM,
@@ -16,13 +15,14 @@ const albumReducer = (state, action) => {
   case LOADING:
     return { data: state.data, isLoading: true, errorMessage: '' }
   case INIT_ALBUMS:
+
+      console.log('AL REDUC state---', action.data)
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_ALBUM:
     const newData = [...state.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '' }
   case UPDATE_ALBUM:
     const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
-    console.log('REDUCER updeted :::', updated)
     return { data: updated, isLoading: false, errorMessage: '' }
   case DELETE_ALBUM:
     const delData = state.data.filter(d => d.id !== action.id)

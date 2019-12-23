@@ -20,7 +20,6 @@ const pictureReducer = (state, action) => {
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_PICTURE:
     console.log('REDUC state---', state.data)
-
     console.log('REDUC new state---', action.data)
     const newData = [...state.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '' }

@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import albumReducer from '../reducers/albumReducer'
-import apiService from '../services/apiService'
+import { INIT_ALBUMS } from '../reducers/actionTypes'
+import { fetchData } from '../actions/fetchData'
 
 export const AlbumContext = createContext()
 
@@ -8,16 +9,7 @@ const AlbumContextProvider = (props) => {
   const [albums, dispatch] = useReducer(albumReducer, [])
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await apiService.getAll('albums')
-        // console.log('RESULT ---', results.data)
-        dispatch({ type: 'INIT_ALBUMS', data: result })
-      } catch (error) {
-        dispatch({ type: 'FAILURE', error: error.message || error })
-      }
-    }
-    fetchData()
+    fetchData(dispatch, INIT_ALBUMS, 'albums')
   }, [dispatch])
 
   return (

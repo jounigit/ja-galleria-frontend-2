@@ -5,7 +5,7 @@ import CreatePicture from './CreatePicture'
 
 
 const PictureListContext = ({ pictures }) => {
-
+// console.log('List ---', pictures)
   const sortedPics = pictures.sort((a,b) =>  b.id-a.id )
 
   return (
