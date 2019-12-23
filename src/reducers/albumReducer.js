@@ -15,8 +15,6 @@ const albumReducer = (state, action) => {
   case LOADING:
     return { data: state.data, isLoading: true, errorMessage: '' }
   case INIT_ALBUMS:
-
-      console.log('AL REDUC state---', action.data)
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_ALBUM:
     const newData = [...state.data, action.data]

@@ -26,7 +26,8 @@ const pictureReducer = (state, action) => {
   case UPDATE_PICTURE:
     return { data: action.data, isLoading: false, errorMessage: '' }
   case DELETE_PICTURE:
-    return { data: action.data, isLoading: false, errorMessage: '' }
+    const delData = state.data.filter(d => d.id !== action.id)
+    return { data: delData, isLoading: false, errorMessage: '' }
   default:
     return state
   }

@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 import { Button, Icon, Container } from 'semantic-ui-react'
-// import { AuthContext } from '../../App'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import apiService from '../../services/apiService'
-import { DELETE_ALBUM, FAILURE } from '../../reducers/actionTypes'
+import { DELETE_ALBUM } from '../../reducers/actionTypes'
+import { removeData } from '../../actions/fetchData'
 
 const RemoveAlbum = ({ id, title, author } ) => {
   const { dispatch } = useContext(AlbumContext)
@@ -14,17 +13,7 @@ const RemoveAlbum = ({ id, title, author } ) => {
       return
     }
 
-    try {
-      await apiService.remove('albums', id)
-      dispatch({
-        type: DELETE_ALBUM,
-        id
-      })
-    } catch(error) {
-      dispatch({
-        type: FAILURE, error
-      })
-    }
+    removeData(dispatch, DELETE_ALBUM, 'albums', id)
 
   }
   return (

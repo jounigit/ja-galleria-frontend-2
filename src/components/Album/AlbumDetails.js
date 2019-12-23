@@ -30,7 +30,7 @@ const AlbumDetails = ({ album }) => {
           )
         }
       </Grid>
-      
+
     </div>
 
 

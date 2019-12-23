@@ -1,22 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import { AuthContext } from '../../App'
+import RemovePicture from './RemovePicture'
 
 const PictureDetails = ({ picture }) => {
-
-  // console.log('PICTURE -', picture)
+  const { state } = useContext(AuthContext)
 
   return (
     <div data-cy='picture'>
       <Card>
         <Image src={picture.thumb} wrapped ui={false} />
+        <Card.Content header={picture.title} />
         <Card.Content>
-          <Card.Header>{picture.title}</Card.Header>
           <Card.Meta>
             <span className='date'>{picture.created_at}</span>
           </Card.Meta>
-          <Card.Description>
-            {picture.content}
-          </Card.Description>
+        </Card.Content>
+        <Card.Content description={picture.content} />
+        <Card.Content extra>
+          { state.user &&
+              <RemovePicture
+                id={ picture.id }
+                title={ picture.title }
+              />
+          }
         </Card.Content>
       </Card>
     </div>
