@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import {
-//   Header,
-//   Button,
+  Header,
+  Button,
   Container,
-//   Modal,
-//   Icon
+  Modal,
+  Icon
 } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
 import apiService from '../../services/apiService'
@@ -48,7 +48,7 @@ const CreatePicture = () => {
     })
   }
 
-  // console.log('PIC inputs ---', data)
+  console.log('PIC inputs ---', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -56,11 +56,6 @@ const CreatePicture = () => {
       return handleError('title is required!')
     }
 
-    // const newData = {
-    //   title: data.title,
-    //   content: data.content,
-    //   file: data.file
-    // }
     const formData = new FormData()
     formData.append('image',data.file)
     formData.append('title',data.title)
@@ -91,20 +86,42 @@ const CreatePicture = () => {
     }
   }
 
+  // :::::::::::::::::::::::::::::::::::: //
+  if (data.message) {
+    setTimeout(() => setData({ ...data, message: null }), 4000)
+    return (
+      <Container>
+        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
+      </Container>
+    )
+  }
+
+  const createButton = <Button
+    color='green'
+    size='tiny'
+    data-cy='addCategory'
+  >
+    <Icon name='edit' />
+          new picture
+  </Button>
+
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
     <Container>
-
-      <PictureForm
-        errorMessage={data.errorMessage}
-        title={data.title}
-        content={data.content}
-        category_id={data.category_id}
-        handleFormSubmit={handleFormSubmit}
-        handleInputChange={handleInputChange}
-        handleFileInputChange={handleFileInputChange}
-        formHeader={'Uusi kuva'}
-      />
-
+      <Modal trigger={createButton}  size='tiny'>
+        <Modal.Header>Uusi Kuva</Modal.Header>
+        <Modal.Content>
+          <PictureForm
+            errorMessage={data.errorMessage}
+            title={data.title}
+            content={data.content}
+            category_id={data.category_id}
+            handleFormSubmit={handleFormSubmit}
+            handleInputChange={handleInputChange}
+            handleFileInputChange={handleFileInputChange}
+            formHeader={'Uusi kuva'}
+          />
+        </Modal.Content>
+      </Modal>
     </Container>
 
   )

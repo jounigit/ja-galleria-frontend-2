@@ -17,6 +17,8 @@ const PictureForm = ({
         <Header as='h4' color='red' data-cy='error-message'>{errorMessage}</Header>
       )}
 
+      {file && 'file ok'}
+
       <Form onSubmit={ handleFormSubmit }>
 
         <Form.Field>
