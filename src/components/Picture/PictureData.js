@@ -7,7 +7,7 @@ import PictureList from './PictureList'
 const PictureData = () => {
   const { pictures } = useContext(PictureContext)
   let { id } = useParams()
-  let picturesData = pictures.data && pictures.data.data.data
+  let picturesData = pictures.data && pictures.data
 
   return (
     <Fragment>

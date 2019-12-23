@@ -6,6 +6,9 @@ import {
 //   Modal,
 //   Icon
 } from 'semantic-ui-react'
+import { PictureContext } from '../../contexts/PictureContext'
+import apiService from '../../services/apiService'
+import { CREATE_PICTURE } from '../../reducers/actionTypes'
 import PictureForm from './PictureForm'
 
 const initialState = {
@@ -20,6 +23,7 @@ const initialState = {
 const CreatePicture = () => {
   const [data, setData] = useState(initialState)
   //   const [formVisibility, setFormVisibility] = useState(false)
+  const { dispatch } = useContext(PictureContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -44,7 +48,7 @@ const CreatePicture = () => {
     })
   }
 
-  console.log('PIC inputs ---', data)
+  // console.log('PIC inputs ---', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -52,13 +56,39 @@ const CreatePicture = () => {
       return handleError('title is required!')
     }
 
-    const newData = {
-      title: data.title,
-      content: data.content,
-      file: data.file
-    }
+    // const newData = {
+    //   title: data.title,
+    //   content: data.content,
+    //   file: data.file
+    // }
+    const formData = new FormData()
+    formData.append('image',data.file)
+    formData.append('title',data.title)
+    formData.append('content',data.content)
 
-    console.log('NewData ---', newData)
+    try {
+      const result = await apiService.create('pictures', formData)
+      const newPicture = result.data
+      console.log('NewPic ---', result)
+      console.log('NewPic data ---', newPicture)
+
+      dispatch({
+        type: CREATE_PICTURE,
+        data: newPicture
+      })
+      setData({
+        title: '',
+        content: '',
+        file: null,
+        isSubmitting: false,
+        errorMessage: null,
+        message: result.message
+      })
+
+    } catch (error) {
+      console.error()
+      handleError('failed storing picture!')
+    }
   }
 
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">

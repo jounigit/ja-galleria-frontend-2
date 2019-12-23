@@ -5,13 +5,16 @@ import CreatePicture from './CreatePicture'
 
 
 const PictureListContext = ({ pictures }) => {
+
+  const sortedPics = pictures.sort((a,b) =>  b.id-a.id )
+
   return (
     <div className='PictureList'>
       <h2>Kuvat</h2>
       <CreatePicture />
       <Grid doubling columns={3}>
         {
-          pictures.map(picture =>
+          sortedPics.map(picture =>
             <Grid.Column  key={picture.id}>
               <PictureDetails key={picture.id} picture={picture} />
             </Grid.Column>

@@ -8,6 +8,11 @@ export const CREATE_ALBUM = 'CREATE_ALBUM'
 export const DELETE_ALBUM = 'DELETE_ALBUM'
 export const UPDATE_ALBUM = 'UPDATE_ALBUM'
 
+export const INIT_PICTURES = 'INIT_PICTURES'
+export const CREATE_PICTURE = 'CREATE_PICTURE'
+export const DELETE_PICTURE = 'DELETE_PICTURE'
+export const UPDATE_PICTURE = 'UPDATE_PICTURE'
+
 export const INIT_USERS = 'INIT_USERS'
 
 export const LOGIN = 'LOGIN'

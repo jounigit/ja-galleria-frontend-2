@@ -16,7 +16,7 @@ const PictureContextProvider = (props) => {
     const fetchData = async () => {
       try {
         const results = await axios.get(url)
-        dispatch({ type: 'INIT_PICTURES', data: results })
+        dispatch({ type: 'INIT_PICTURES', data: results.data.data })
       } catch (error) {
         dispatch({ type: 'FAILURE', error: error.message || error })
       }
