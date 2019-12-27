@@ -19,12 +19,13 @@ const pictureReducer = (state, action) => {
   case INIT_PICTURES:
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_PICTURE:
-    console.log('REDUC state---', state.data)
-    console.log('REDUC new state---', action.data)
     const newData = [...state.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '' }
   case UPDATE_PICTURE:
-    return { data: action.data, isLoading: false, errorMessage: '' }
+    console.log('REDUC state---', state.data)
+    const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
+    console.log('REDUC new state---', updated)
+    return { data: updated, isLoading: false, errorMessage: '' }
   case DELETE_PICTURE:
     const delData = state.data.filter(d => d.id !== action.id)
     return { data: delData, isLoading: false, errorMessage: '' }

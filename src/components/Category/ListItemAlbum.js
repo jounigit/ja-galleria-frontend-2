@@ -8,7 +8,7 @@ const ListItem = ({ album }) => {
         {album.title}
       </h3>
       <p>
-        {album.content.substring(0,40) }...
+        {album.content && album.content.substring(0,40) }...
       </p>
       <Link to={`/albums/${album.id}`}>
             show

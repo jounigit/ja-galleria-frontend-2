@@ -1,49 +1,53 @@
 import React from 'react'
-import { Header, Form, Input, Button, Container, TextArea } from 'semantic-ui-react'
+import { Header, Image, Form, Input, Button, Container, TextArea } from 'semantic-ui-react'
 
 const PictureForm = ({
   errorMessage,
   title,
   content,
-  file,
+  thumb,
   handleFormSubmit,
-  handleFileInputChange,
+  // handleFileInputChange,
   handleInputChange
 }) => {
-
+  console.log('form ---', thumb)
   return (
     <Container>
       {errorMessage && (
         <Header as='h4' color='red' data-cy='error-message'>{errorMessage}</Header>
       )}
 
-      {file && 'file ok'}
 
-      <Form onSubmit={ handleFormSubmit }>
-
+      <Form>
+        <Image src={thumb} wrapped ui={false} />
+        {/* <Form.Field>
+          <label>
+            Image
+            <Input
+              data-cy='file'
+              type='file'
+              value={file}
+              onChange={handleFileInputChange}
+              name='file'
+            />
+          </label>
+        </Form.Field> */}
         <Form.Field>
-          <label>Image</label>
-          <Input
-            data-cy='file'
-            type='file'
-            value={file}
-            onChange={handleFileInputChange}
-            name='file'
-          />
+          <label>
+            title
+            <Input
+              data-cy='title'
+              type='title'
+              value={title}
+              onChange={handleInputChange}
+              name='title'
+              id='title'
+            />
+          </label>
         </Form.Field>
         <Form.Field>
-          <label>title</label>
-          <Input
-            data-cy='title'
-            type='title'
-            value={title}
-            onChange={handleInputChange}
-            name='title'
-            id='title'
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Content
+          <label>
+            Content
             <TextArea
               data-cy='content'
               value={content}
@@ -53,7 +57,9 @@ const PictureForm = ({
           </label>
         </Form.Field>
 
-        <Button data-cy='submit' type='submit'>submit</Button>
+        {/* <input type="button" value="Upload as Form" onClick={handleFormSubmit} /> */}
+
+        <Button data-cy='submit' type='submit'  value="Upload" onClick={handleFormSubmit} />
       </Form>
     </Container>
   )

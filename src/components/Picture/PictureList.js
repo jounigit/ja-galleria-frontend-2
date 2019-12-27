@@ -1,7 +1,8 @@
 import React from 'react'
 import PictureDetails from './PictureDetails'
 import { Grid, Divider } from 'semantic-ui-react'
-import CreatePicture from './CreatePicture'
+// import CreatePicture from './CreatePicture'
+import UploadPicture from './UploadPicture'
 
 
 const PictureListContext = ({ pictures }) => {
@@ -11,7 +12,8 @@ const PictureListContext = ({ pictures }) => {
   return (
     <div className='PictureList'>
       <h2>Kuvat</h2>
-      <CreatePicture />
+      <UploadPicture />
+      {/* <CreatePicture /> */}
       <Divider />
       <Grid doubling columns={3}>
         {

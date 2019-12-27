@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Card, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import RemovePicture from './RemovePicture'
+import UpdatePicture from './UpdatePicture'
 
 const PictureDetails = ({ picture }) => {
   const { state } = useContext(AuthContext)
@@ -22,6 +23,14 @@ const PictureDetails = ({ picture }) => {
               <RemovePicture
                 id={ picture.id }
                 title={ picture.title }
+              />
+          }
+          { state.user &&
+              <UpdatePicture
+                id={ picture.id }
+                title={ picture.title }
+                content={ picture.content || '' }
+                thumb={ picture.thumb }
               />
           }
         </Card.Content>

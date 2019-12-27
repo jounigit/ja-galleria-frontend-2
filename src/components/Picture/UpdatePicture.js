@@ -8,21 +8,19 @@ import {
 } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
 import apiService from '../../services/apiService'
-import { CREATE_PICTURE } from '../../reducers/actionTypes'
+import { UPDATE_PICTURE } from '../../reducers/actionTypes'
 import PictureForm from './PictureForm'
 
-const initialState = {
-  title: '',
-  content: '',
-  file: null,
-  isSubmitting: false,
-  errorMessage: null,
-  message: null
-}
-
-const CreatePicture = () => {
+const UpdatePicture = ({ id, title, content, thumb }) => {
+  const initialState = {
+    title: title,
+    content: content,
+    thumb: thumb,
+    isSubmitting: false,
+    errorMessage: null,
+    message: null
+  }
   const [data, setData] = useState(initialState)
-  //   const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(PictureContext)
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -48,7 +46,7 @@ const CreatePicture = () => {
     })
   }
 
-  console.log('PIC inputs ---', data)
+  // console.log('PIC inputs ---', data)
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -56,20 +54,19 @@ const CreatePicture = () => {
       return handleError('title is required!')
     }
 
-    const formData = new FormData()
-    formData.append('image',data.file)
-    formData.append('title',data.title)
-    formData.append('content',data.content)
-    console.log('FormData ---', formData)
+    const newData = {
+      title: data.title,
+      content: data.content
+    }
 
     try {
-      const result = await apiService.create('pictures', formData)
+      const result = await apiService.update('pictures', id, newData)
       const newPicture = result.data
       console.log('NewPic ---', result)
       console.log('NewPic data ---', newPicture)
 
       dispatch({
-        type: CREATE_PICTURE,
+        type: UPDATE_PICTURE,
         data: newPicture
       })
       setData({
@@ -83,10 +80,9 @@ const CreatePicture = () => {
 
     } catch (error) {
       console.error()
-      handleError('failed storing picture!')
+      handleError('failed updating picture!')
     }
   }
-
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
     setTimeout(() => setData({ ...data, message: null }), 4000)
@@ -97,28 +93,28 @@ const CreatePicture = () => {
     )
   }
 
-  const createButton = <Button
+  const updateButton = <Button floated='right'
     color='green'
     size='tiny'
-    data-cy='addCategory'
+    data-cy='update'
   >
     <Icon name='edit' />
-          new picture
   </Button>
 
-  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+  return (
     <Container>
-      <Modal trigger={createButton}  size='tiny'>
-        <Modal.Header>Uusi Kuva</Modal.Header>
+      <Modal trigger={updateButton}  size='tiny'>
+        <Modal.Header>Päivitä Kuva</Modal.Header>
         <Modal.Content>
           <PictureForm
             errorMessage={data.errorMessage}
             title={data.title}
             content={data.content}
+            thumb={data.thumb}
             handleFormSubmit={handleFormSubmit}
             handleInputChange={handleInputChange}
             handleFileInputChange={handleFileInputChange}
-            formHeader={'Uusi kuva'}
+            formHeader={'Päivitä kuva'}
           />
         </Modal.Content>
       </Modal>
@@ -127,4 +123,4 @@ const CreatePicture = () => {
   )
 }
 
-export default CreatePicture
+export default UpdatePicture

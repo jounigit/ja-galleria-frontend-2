@@ -7,7 +7,7 @@ import PictureList from './PictureList'
 const PictureData = () => {
   const { pictures } = useContext(PictureContext)
   let { id } = useParams()
-  console.log('Picdata ---', pictures)
+  // console.log('Picdata ---', pictures)
   let picturesData = pictures.data && pictures.data
 
   return (

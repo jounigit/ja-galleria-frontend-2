@@ -9,7 +9,7 @@ export const fetchData = async (dispatch, TYPE, path) => {
     } else {
       dispatch({ type: TYPE, data: results })
     }
-    console.log('!! fetchData ---', path, ' -- ', results)
+    // console.log('!! fetchData ---', path, ' -- ', results)
   } catch (error) {
     dispatch({ type: 'FAILURE', error: error.message || error })
   }

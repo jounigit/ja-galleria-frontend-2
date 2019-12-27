@@ -26,7 +26,7 @@ const Album = ({ album }) => {
             <Item.Meta>
               {pictures.length + ' - kuvaa' || 'no pictures'}
             </Item.Meta>
-            <Item.Description>{album.content.substring(0,260) }...</Item.Description>
+            <Item.Description>{album.content && album.content.substring(0,260) }...</Item.Description>
             <Item.Extra>
               <Link to={`/albums/${album.id}`}>show</Link>
               { state.user &&

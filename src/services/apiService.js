@@ -6,6 +6,12 @@ let config = []
 
 const setToken = (newToken) => {
   token = `Bearer ${newToken}`
+
+  // config = {
+  //   headers: {
+  //     'Authorization': token,
+  //     'Content-Type': 'multipart/form-data' }
+  // }
   config = {
     headers: { 'Authorization': token }
   }
