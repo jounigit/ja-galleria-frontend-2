@@ -43,7 +43,12 @@ const PictureForm = ({
           </label>
         </Form.Field>
 
-        <Button data-cy='submit' type='submit'  value="Upload" onClick={handleFormSubmit} />
+        <Button
+          data-cy='submit'
+          type='submit'
+          content='lähetä'
+          value="Upload" onClick={handleFormSubmit}
+        />
       </Form>
     </Container>
   )

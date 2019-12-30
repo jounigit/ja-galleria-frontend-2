@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { PictureContext } from '../../contexts/PictureContext'
 import { Header, Container, Button } from 'semantic-ui-react'
+import { InputFile } from 'semantic-ui-react-input-file'
 import apiService from '../../services/apiService'
 import { CREATE_PICTURE } from '../../reducers/actionTypes'
 
@@ -32,6 +33,10 @@ const UploadPicture = ({ ...props }) => {
     }
 
     reader.readAsDataURL(event.target.files[0])
+  }
+  const clearInput = () => {
+    setData({ ...data, file: null })
+    setPreviewUrl(null)
   }
   // handle errors
   const handleError = error => {
@@ -91,18 +96,36 @@ const UploadPicture = ({ ...props }) => {
       <Container>
         <img src={previewUrl} alt="icon" width="200" />
         <Header as='h5' content='valittu' />
-        <Button onClick={submit} > Upload </Button>
+        <Button
+          size='tiny'
+          positive
+          content='upload'
+          onClick={submit}
+        />
+        <Button
+          size='tiny'
+          color='orange'
+          content='change'
+          onClick={ clearInput }
+        />
       </Container>
     )
   }
-
+  const buttonProps = <Button content='valitse' type="button" />
   // :::::::::::::::::::::::::::::::::::: //
   return(
     <Container>
-      <Button as='label' htmlFor='file' type="button">
+      <InputFile
+        // button={{ ...buttonProps }}
+        input={{
+          id: 'input-control-id',
+          onChange: fileChangedHandler
+        }}
+      />
+      {/* <Button as='label' htmlFor='file' type="button">
         Some button stuff
       </Button>
-      <input type='file' id='file' style={{ display: 'hidden' }} onChange={fileChangedHandler} />
+      <input type='file' id='file' style={{ display: 'hidden' }} onChange={fileChangedHandler} /> */}
 
       {/* </div> */}
 
