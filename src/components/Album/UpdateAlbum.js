@@ -4,7 +4,6 @@ import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
-// import UpdateCategoryAlbums from '../Category/actions/UpdateCategoryAlbums'
 
 const UpdateAlbum = ({ ...props }) => {
   const initialState = {
@@ -60,7 +59,7 @@ const UpdateAlbum = ({ ...props }) => {
     try {
       const result = await apiService.update('albums', props.id, newData)
       const newAlbum = result.data
-      console.log('UPDATE :::', newAlbum.category.id)
+
       dispatch({
         type: UPDATE_ALBUM,
         data: newAlbum

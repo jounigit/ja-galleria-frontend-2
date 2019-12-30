@@ -48,7 +48,6 @@ const CreateAlbum = ({ ...props }) => {
       category_id: data.category_id
     }
 
-    console.log('NEWdata --', newData)
     setData({
       ...data,
       isSubmitting: true,
@@ -59,7 +58,6 @@ const CreateAlbum = ({ ...props }) => {
       const result = await apiService.create('albums', newData)
       const newAlbum = result.data
 
-      console.log('RESULT --', newAlbum)
       dispatch({
         type: CREATE_ALBUM,
         data: newAlbum

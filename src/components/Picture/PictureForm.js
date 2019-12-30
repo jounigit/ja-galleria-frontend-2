@@ -7,7 +7,6 @@ const PictureForm = ({
   content,
   thumb,
   handleFormSubmit,
-  // handleFileInputChange,
   handleInputChange
 }) => {
   console.log('form ---', thumb)
@@ -43,8 +42,6 @@ const PictureForm = ({
             />
           </label>
         </Form.Field>
-
-        {/* <input type="button" value="Upload as Form" onClick={handleFormSubmit} /> */}
 
         <Button data-cy='submit' type='submit'  value="Upload" onClick={handleFormSubmit} />
       </Form>

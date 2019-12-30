@@ -1,11 +1,5 @@
 import React, { useState, useContext } from 'react'
-import {
-  Header,
-  // Button,
-  Container,
-  // Modal,
-  // Icon
-} from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
 import apiService from '../../services/apiService'
 import { UPDATE_PICTURE } from '../../reducers/actionTypes'
@@ -62,7 +56,6 @@ const SavePictureData = ({ ...props }) => {
     try {
       const result = await apiService.update('pictures', props.id, newData)
       const newPicture = result.data
-      console.log('NewPic ---', result)
       console.log('NewPic data ---', newPicture)
 
       dispatch({

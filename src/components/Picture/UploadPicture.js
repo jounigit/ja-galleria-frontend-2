@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { PictureContext } from '../../contexts/PictureContext'
-import { Header, Container } from 'semantic-ui-react'
+import { Header, Container, Button } from 'semantic-ui-react'
 import apiService from '../../services/apiService'
 import { CREATE_PICTURE } from '../../reducers/actionTypes'
 
@@ -85,22 +85,25 @@ const UploadPicture = ({ ...props }) => {
     )
   }
 
-  const $imagePreview = previewUrl ?
-    <img src={previewUrl} alt="icon" width="200" /> :
-    <Header as='h4'>Please select an Image for Preview</Header>
+  // :::::::::::::::::::::::::::::::::::: //
+  if (previewUrl) {
+    return (
+      <Container>
+        <img src={previewUrl} alt="icon" width="200" />
+        <Header as='h5' content='valittu' />
+        <Button onClick={submit} > Upload </Button>
+      </Container>
+    )
+  }
 
   // :::::::::::::::::::::::::::::::::::: //
   return(
     <Container>
-      {/* <div style={hideWhenVisible}>
-        {createButton}
-      </div>
-      <div style={showWhenVisible}> */}
-      <input type="file" name="avatar" onChange={fileChangedHandler} />
-      <button type="button" onClick={submit} > Upload </button>
+      <Button as='label' htmlFor='file' type="button">
+        Some button stuff
+      </Button>
+      <input type='file' id='file' style={{ display: 'hidden' }} onChange={fileChangedHandler} />
 
-      { $imagePreview &&
-      <img src={previewUrl} alt="icon" width="200" /> }
       {/* </div> */}
 
     </Container>

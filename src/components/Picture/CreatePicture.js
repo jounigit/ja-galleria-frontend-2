@@ -13,7 +13,7 @@ const CreatePicture = ({ ...props }) => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (dataSaved) {
-    setTimeout(() => props.setModalOpen(), 3000)
+    setTimeout(() => props.setModalOpen(), 2000)
   }
 
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">

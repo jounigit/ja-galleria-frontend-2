@@ -2,7 +2,6 @@ import React from 'react'
 import PictureDetails from './PictureDetails'
 import { Grid, Divider } from 'semantic-ui-react'
 import CreatePicture from './CreatePicture'
-// import UploadPicture from './UploadPicture'
 import ModalSection from '../Shared/modal/ModalSection'
 
 
@@ -19,8 +18,6 @@ const PictureListContext = ({ pictures }) => {
         compToModal={ CreatePicture }
         headerContent={'New Picture'}
       />
-      {/* <UploadPicture /> */}
-      {/* <CreatePicture /> */}
       <Divider />
       <Grid doubling columns={3}>
         {

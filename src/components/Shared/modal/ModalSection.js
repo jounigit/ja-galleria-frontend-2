@@ -4,7 +4,6 @@ import { Button } from 'semantic-ui-react'
 
 const ModalSection = ({ ...props }) => {
   const [modalOpen, setModalOpen] = useState(false)
-// console.log('Mod --', props)
   return([
     <Button // Button to click to activate the Modal
       key='button1'
