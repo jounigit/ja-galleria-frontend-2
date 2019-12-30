@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button, Icon, Container } from 'semantic-ui-react'
+import { Button, Container } from 'semantic-ui-react'
 import { DELETE_PICTURE } from '../../reducers/actionTypes'
 import { removeData } from '../../actions/fetchData'
 import { PictureContext } from '../../contexts/PictureContext'
@@ -19,14 +19,14 @@ const RemovePicture = ({ id, title } ) => {
   return (
     <div>
       <Container>
-        <Button floated='right'
-          color='red'
+        <Button
+          floated='left'
           size='tiny'
+          negative
           data-cy='delete'
+          icon='trash'
           onClick={() => remove( id, title ) }
-        >
-          <Icon name='trash' />
-        </Button>
+        />
       </Container>
     </div>
   )

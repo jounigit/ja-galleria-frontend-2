@@ -3,10 +3,12 @@ import { Card, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import RemovePicture from './RemovePicture'
 import UpdatePicture from './UpdatePicture'
+import ModalSection from '../Shared/modal/ModalSection'
 
 const PictureDetails = ({ picture }) => {
   const { state } = useContext(AuthContext)
 
+  // console.log('DETAIL ---', picture)
   return (
     <div data-cy='picture'>
       <Card>
@@ -26,7 +28,10 @@ const PictureDetails = ({ picture }) => {
               />
           }
           { state.user &&
-              <UpdatePicture
+              <ModalSection
+                btnIcon={'edit'}
+                compToModal={ UpdatePicture }
+                headerContent={'Update Picture'}
                 id={ picture.id }
                 title={ picture.title }
                 content={ picture.content || '' }

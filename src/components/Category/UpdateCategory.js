@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react'
-import { Header, Button, Container, Modal, Icon } from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../contexts/CategoryContext'
 import apiService from '../../services/apiService'
 import { UPDATE_CATEGORY } from '../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
 
-const UpdateCategory = ({ id, title, content } ) => {
+const UpdateCategory = ({ ...props } ) => {
   const initialState = {
-    title: title,
-    content: content,
+    title: props.title,
+    content: props.content,
     isSubmitting: false,
     errorMessage: null,
     message: null
@@ -51,7 +51,7 @@ const UpdateCategory = ({ id, title, content } ) => {
     })
 
     try {
-      const result = await apiService.update('categories', id, newData)
+      const result = await apiService.update('categories', props.id, newData)
       const newAlbum = result.data
 
       dispatch({
@@ -72,7 +72,7 @@ const UpdateCategory = ({ id, title, content } ) => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
-    setTimeout(() => setData({ ...data, message: null }), 4000)
+    setTimeout(() => props.setModalOpen(), 2000)
     return (
       <Container>
         <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
@@ -80,29 +80,16 @@ const UpdateCategory = ({ id, title, content } ) => {
     )
   }
 
-  const updateButton = <Button floated='right'
-    color='green'
-    size='tiny'
-    data-cy='update'
-  >
-    <Icon name='edit' />
-  </Button>
-
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
     <Container>
-      <Modal trigger={ updateButton }  size='tiny'>
-        <Modal.Header>Uusi Category</Modal.Header>
-        <Modal.Content>
-          <CategoryForm
-            errorMessage={data.errorMessage}
-            title={data.title}
-            content={data.content}
-            handleFormSubmit={handleFormSubmit}
-            handleInputChange={handleInputChange}
-            formHeader={'Päivitä kategoria'}
-          />
-        </Modal.Content>
-      </Modal>
+      <CategoryForm
+        errorMessage={data.errorMessage}
+        title={data.title}
+        content={data.content}
+        handleFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        formHeader={'Päivitä kategoria'}
+      />
     </Container>
 
   )

@@ -17,21 +17,8 @@ const PictureForm = ({
         <Header as='h4' color='red' data-cy='error-message'>{errorMessage}</Header>
       )}
 
-
       <Form>
         <Image src={thumb} wrapped ui={false} />
-        {/* <Form.Field>
-          <label>
-            Image
-            <Input
-              data-cy='file'
-              type='file'
-              value={file}
-              onChange={handleFileInputChange}
-              name='file'
-            />
-          </label>
-        </Form.Field> */}
         <Form.Field>
           <label>
             title

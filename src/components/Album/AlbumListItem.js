@@ -4,6 +4,7 @@ import { Item } from 'semantic-ui-react'
 import { AuthContext } from '../../App'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
+import ModalSection from '../Shared/modal/ModalSection'
 
 const Album = ({ album }) => {
   const { state } = useContext(AuthContext)
@@ -12,7 +13,7 @@ const Album = ({ album }) => {
 
   const firstPic = pictures && pictures.length > 0 ?
     pictures[0].thumb : ''
-
+    console.log('LIST --', album)
   return (
     <div data-cy='albumListItem'>
       <Item.Group divided>
@@ -37,13 +38,15 @@ const Album = ({ album }) => {
               />
               }
               { state.user &&
-                   <UpdateAlbum
-                     id={ album.id }
-                     title={album.title}
-                     content={album.content}
-                     category_id={album.category_id}
-                   />
-
+              <ModalSection
+                btnIcon={'edit'}
+                compToModal={ UpdateAlbum }
+                headerContent={'Update Album'}
+                id={ album.id }
+                title={album.title}
+                content={album.content}
+                category_id={album.category_id}
+              />
               }
 
             </Item.Extra>

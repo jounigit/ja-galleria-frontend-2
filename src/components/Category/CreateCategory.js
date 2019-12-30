@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Header, Button, Container, Modal, Icon } from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../contexts/CategoryContext'
 import apiService from '../../services/apiService'
 import { CREATE_CATEGORY } from '../../reducers/actionTypes'
@@ -13,7 +13,7 @@ const initialState = {
   message: null
 }
 
-const CreateCategory = () => {
+const CreateCategory = ({ ...props }) => {
   const [data, setData] = useState(initialState)
   const { dispatch } = useContext(CategoryContext)
 
@@ -74,7 +74,8 @@ const CreateCategory = () => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
-    setTimeout(() => setData({ ...data, message: null }), 4000)
+    setTimeout(() => props.setModalOpen(), 2000)
+
     return (
       <Container>
         <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
@@ -82,31 +83,17 @@ const CreateCategory = () => {
     )
   }
 
-  const createButton = <Button
-    color='green'
-    size='tiny'
-    data-cy='addCategory'
-  >
-    <Icon name='edit' />
-        new category
-  </Button>
-
-  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+  return (
     <Container>
-      <Modal trigger={createButton}  size='tiny'>
-        <Modal.Header>Uusi Category</Modal.Header>
-        <Modal.Content>
-          <CategoryForm
-            errorMessage={data.errorMessage}
-            title={data.title}
-            content={data.content}
-            category={data.category}
-            handleFormSubmit={handleFormSubmit}
-            handleInputChange={handleInputChange}
-            formHeader={'Uusi kategoria'}
-          />
-        </Modal.Content>
-      </Modal>
+      <CategoryForm
+        errorMessage={data.errorMessage}
+        title={data.title}
+        content={data.content}
+        category={data.category}
+        handleFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        formHeader={'Uusi kategoria'}
+      />
     </Container>
 
   )

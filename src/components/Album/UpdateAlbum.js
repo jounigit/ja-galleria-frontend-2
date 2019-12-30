@@ -1,23 +1,22 @@
 import React, { useState, useContext } from 'react'
-import { Container, Header, Icon, Button, Modal } from 'semantic-ui-react'
+import { Container, Header } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 // import UpdateCategoryAlbums from '../Category/actions/UpdateCategoryAlbums'
 
-const UpdateAlbum = ({ id, title, content, category_id }) => {
+const UpdateAlbum = ({ ...props }) => {
   const initialState = {
-    title: title,
-    content: content,
-    category_id: category_id,
+    title: props.title,
+    content: props.content,
+    category_id: props.category_id,
     isSubmitting: false,
     errorMessage: null,
     message: null
   }
   // Component's state
   const [data, setData] = useState(initialState)
-  // const [categoryId, setCategoryId] = useState('')
   const { dispatch } = useContext(AlbumContext) // Album actions
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -59,10 +58,9 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
     })
 
     try {
-      const result = await apiService.update('albums', id, newData)
+      const result = await apiService.update('albums', props.id, newData)
       const newAlbum = result.data
       console.log('UPDATE :::', newAlbum.category.id)
-      // setCategoryId(newAlbum.category.id)
       dispatch({
         type: UPDATE_ALBUM,
         data: newAlbum
@@ -81,7 +79,7 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
     localStorage.setItem('reloadPage', 'categories')
-    setTimeout(() => setData({ ...data, message: null }), 4000)
+    setTimeout(() => props.setModalOpen(), 2000)
     return (
       <Container>
         <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
@@ -89,30 +87,17 @@ const UpdateAlbum = ({ id, title, content, category_id }) => {
     )
   }
 
-  const updateButton = <Button floated='right'
-    color='green'
-    size='tiny'
-    data-cy='update'
-  >
-    <Icon name='edit' />
-  </Button>
-
   return (
     <Container>
-      <Modal trigger={ updateButton }  size='tiny'>
-        <Modal.Header>Päivitä Albumi</Modal.Header>
-        <Modal.Content>
-          <AlbumForm
-            errorMessage={data.errorMessage}
-            title={data.title}
-            content={data.content}
-            category_id={data.category_id}
-            handleFormSubmit={handleFormSubmit}
-            handleInputChange={handleInputChange}
-            formHeader={'Päivitä albumi'}
-          />
-        </Modal.Content>
-      </Modal>
+      <AlbumForm
+        errorMessage={data.errorMessage}
+        title={data.title}
+        content={data.content}
+        category_id={data.category_id}
+        handleFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        formHeader={'Päivitä albumi'}
+      />
     </Container>
   )
 }

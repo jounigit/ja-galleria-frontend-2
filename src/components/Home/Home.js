@@ -10,6 +10,7 @@ const Home = () => {
   return (
     <div>
       <h1>Kuvagalleria</h1>
+
       <Grid doubling columns={3}>
         { categoriesData &&
           categoriesData.map(category =>

@@ -22,7 +22,6 @@ const categoryReducer = (state, action) => {
     return { data: newData, isLoading: false, errorMessage: '' }
   case UPDATE_CATEGORY:
     const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
-    console.log('REDUCER updeted :::', updated)
     return { data: updated, isLoading: false, errorMessage: '' }
   case DELETE_CATEGORY:
     const delData = state.data.filter(d => d.id !== action.id)

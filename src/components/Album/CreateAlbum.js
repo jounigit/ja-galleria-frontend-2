@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Header, Button, Container, Modal, Icon } from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import apiService from '../../services/apiService'
 import { CREATE_ALBUM } from '../../reducers/actionTypes'
@@ -14,9 +14,8 @@ const initialState = {
   message: null
 }
 
-const CreateAlbum = () => {
+const CreateAlbum = ({ ...props }) => {
   const [data, setData] = useState(initialState)
-  const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(AlbumContext)
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -35,6 +34,7 @@ const CreateAlbum = () => {
       errorMessage: error
     })
   }
+
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
     event.preventDefault()
@@ -48,6 +48,7 @@ const CreateAlbum = () => {
       category_id: data.category_id
     }
 
+    console.log('NEWdata --', newData)
     setData({
       ...data,
       isSubmitting: true,
@@ -58,6 +59,7 @@ const CreateAlbum = () => {
       const result = await apiService.create('albums', newData)
       const newAlbum = result.data
 
+      console.log('RESULT --', newAlbum)
       dispatch({
         type: CREATE_ALBUM,
         data: newAlbum
@@ -69,7 +71,6 @@ const CreateAlbum = () => {
         errorMessage: null,
         message: result.message
       })
-      setFormVisibility(!formVisibility)
     } catch (error) {
       handleError('failed storing album!')
     }
@@ -77,7 +78,7 @@ const CreateAlbum = () => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
-    setTimeout(() => setData({ ...data, message: null }), 4000)
+    setTimeout(() => props.setModalOpen(), 2000)
     return (
       <Container>
         <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
@@ -85,31 +86,17 @@ const CreateAlbum = () => {
     )
   }
 
-  const createButton = <Button
-    color='green'
-    size='tiny'
-    data-cy='addNewAlbum'
-  >
-    <Icon name='edit' />
-    new album
-  </Button>
-
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
     <Container>
-      <Modal trigger={createButton}  size='tiny'>
-        <Modal.Header>Uusi Albumi</Modal.Header>
-        <Modal.Content>
-          <AlbumForm
-            errorMessage={data.errorMessage}
-            title={data.title}
-            content={data.content}
-            category_id={data.category_id}
-            handleFormSubmit={handleFormSubmit}
-            handleInputChange={handleInputChange}
-            formHeader={'Uusi albumi'}
-          />
-        </Modal.Content>
-      </Modal>
+      <AlbumForm
+        errorMessage={data.errorMessage}
+        title={data.title}
+        content={data.content}
+        category_id={data.category_id}
+        handleFormSubmit={handleFormSubmit}
+        handleInputChange={handleInputChange}
+        formHeader={'Uusi albumi'}
+      />
     </Container>
 
   )

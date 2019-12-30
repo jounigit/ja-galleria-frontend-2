@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../App'
 import CreateAlbum from './CreateAlbum'
+import ModalSection from '../Shared/modal/ModalSection'
 
 const AlbumList = ({ albums }) => {
   const { state } = useContext(AuthContext)
@@ -12,7 +13,14 @@ const AlbumList = ({ albums }) => {
 
   return (
     <div className='AlbumList'>
-      {state.user && <CreateAlbum />}
+      {state.user &&
+      <ModalSection
+        btnIcon={'edit'}
+        btnContent={'new album'}
+        compToModal={ CreateAlbum }
+        headerContent={'New Album'}
+      />
+      }
 
       <h2>Albumit</h2>
       {

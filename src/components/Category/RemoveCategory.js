@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 // import { AuthContext } from '../../App'
 import { CategoryContext } from '../../contexts/CategoryContext'
 import apiService from '../../services/apiService'
@@ -32,14 +32,14 @@ const RemoveCategory = ({ id, title, author } ) => {
   }
   return (
     <div>
-      <Button floated='right'
-        color='red'
+      <Button
+        floated='left'
         size='tiny'
+        negative
         data-cy='delete'
+        icon='trash'
         onClick={() => remove( id, title, author ) }
-      >
-        <Icon name='trash' />
-      </Button>
+      />
     </div>
   )
 }

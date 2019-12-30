@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ListItemAlbum from './ListItemAlbum'
 import RemoveCategory from './RemoveCategory'
 import UpdateCategory from './UpdateCategory'
+import ModalSection from '../Shared/modal/ModalSection'
 
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
@@ -19,7 +20,15 @@ const CategoryDetails = ({ category }) => {
   return (
     <div className='category' data-cy='category'>
       <RemoveCategory id={category.id} title={category.title} author={category.user.name} />
-      <UpdateCategory id={category.id} title={category.title} content={category.content} author={category.user.name} />
+      <ModalSection
+        btnIcon={'edit'}
+        compToModal={ UpdateCategory }
+        headerContent={'Update Category'}
+        id={category.id}
+        title={category.title}
+        content={category.content}
+        author={category.user.name}
+      />
       <h3 data-cy='header'>
         {category.title}
       </h3>

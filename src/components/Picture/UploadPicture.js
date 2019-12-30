@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { PictureContext } from '../../contexts/PictureContext'
-import { Header, Button, Icon, Container } from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import apiService from '../../services/apiService'
 import { CREATE_PICTURE } from '../../reducers/actionTypes'
 
@@ -11,18 +11,11 @@ const initialState = {
   message: null
 }
 
-const UploadPicture = () => {
+const UploadPicture = ({ ...props }) => {
   const [data, setData] = useState(initialState)
   const [previewUrl, setPreviewUrl] = useState(null)
   const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(PictureContext)
-
-  const hideWhenVisible = { display: formVisibility ? 'none' : '' }
-  const showWhenVisible = { display: formVisibility ? '' : 'none' }
-
-  const toggleVisibility = () => {
-    setFormVisibility( !formVisibility )
-  }
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -59,13 +52,15 @@ const UploadPicture = () => {
     try {
       const result = await apiService.create('pictures', formData)
       const newPicture = result.data
-      console.log('NewPic ---', result)
+      // console.log('NewPic ---', result)
       console.log('NewPic data ---', newPicture)
 
       dispatch({
         type: CREATE_PICTURE,
         data: newPicture
       })
+      props.setUploaded(newPicture)
+      // props.setMessage(result.message)
       setData({
         file: null,
         isSubmitting: false,
@@ -81,41 +76,32 @@ const UploadPicture = () => {
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  // if (data.message) {
-  //   setFormVisibility( !formVisibility )
-  //   setTimeout(() => setData({ ...data, message: null }), 4000)
-  //   return (
-  //     <Container>
-  //       <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-  //     </Container>
-  //   )
-  // }
+  if (data.message) {
+    return (
+      <Container>
+        <img src={props.uploaded.thumb} alt="icon" width="200" />
+        <Header as='h4' color='green' data-cy='message'>{data.message}</Header>
+      </Container>
+    )
+  }
 
   const $imagePreview = previewUrl ?
     <img src={previewUrl} alt="icon" width="200" /> :
     <Header as='h4'>Please select an Image for Preview</Header>
 
-  const createButton = <Button
-    color='green'
-    size='tiny'
-    onClick={toggleVisibility}
-  >
-    <Icon name='edit' />
-          new picture
-  </Button>
-
   // :::::::::::::::::::::::::::::::::::: //
   return(
     <Container>
-      <div style={hideWhenVisible}>
+      {/* <div style={hideWhenVisible}>
         {createButton}
       </div>
-      <div style={showWhenVisible}>
-        <input type="file" name="avatar" onChange={fileChangedHandler} />
-        <button type="button" onClick={submit} > Upload </button>
+      <div style={showWhenVisible}> */}
+      <input type="file" name="avatar" onChange={fileChangedHandler} />
+      <button type="button" onClick={submit} > Upload </button>
 
-        { $imagePreview }
-      </div>
+      { $imagePreview &&
+      <img src={previewUrl} alt="icon" width="200" /> }
+      {/* </div> */}
 
     </Container>
   )
