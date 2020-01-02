@@ -111,7 +111,7 @@ const UploadPicture = ({ ...props }) => {
       </Container>
     )
   }
-  const buttonProps = <Button content='valitse' type="button" />
+  // const buttonProps = <Button content='valitse' type="button" />
   // :::::::::::::::::::::::::::::::::::: //
   return(
     <Container>
