@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PictureDetails from '../Picture/PictureDetails'
-import { Grid, Header, Segment } from 'semantic-ui-react'
+import { Grid, Header, Segment, Divider } from 'semantic-ui-react'
+import ChoosePicture from './ChoosePicture'
+import ModalSection from '../Shared/modal/ModalSection'
+import { PictureContext } from '../../contexts/PictureContext'
 
 const AlbumDetails = ({ album }) => {
+  const { pictures } = useContext(PictureContext)
 
-  console.log('ALBUMDETAILS -- ', album)
+  // console.log('ALBUMDETAILS -- ', album)
+  console.log('A pics -- ', pictures)
   return (
     <div className='album' data-cy='album'>
       <Segment>
@@ -19,8 +24,17 @@ const AlbumDetails = ({ album }) => {
         </p>
       </Segment>
 
-      <h3>Pictures</h3>
+      <Header as='h3' content='Pictures' />
 
+      <ModalSection
+        btnIcon={'edit'}
+        btnContent={'choose/delete pictures'}
+        compToModal={ ChoosePicture }
+        headerContent={'Choose pictures to album'}
+        id={ album.id }
+        albumPics={ album.pictures }
+      />
+      <Divider />
       <Grid doubling columns={3}>
         {
           album.pictures.map(picture =>

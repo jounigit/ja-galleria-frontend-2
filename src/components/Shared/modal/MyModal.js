@@ -27,6 +27,7 @@ const MyModal = ({ ...props }) => {
           author={props.author}
           thumb={ props.thumb }
           category_id={props.category_id}
+          albumPics={ props.albumPics }
         />
       </Modal.Content>
     </Modal>

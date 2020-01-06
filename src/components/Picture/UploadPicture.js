@@ -15,7 +15,6 @@ const initialState = {
 const UploadPicture = ({ ...props }) => {
   const [data, setData] = useState(initialState)
   const [previewUrl, setPreviewUrl] = useState(null)
-  const [formVisibility, setFormVisibility] = useState(false)
   const { dispatch } = useContext(PictureContext)
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -58,7 +57,7 @@ const UploadPicture = ({ ...props }) => {
       const result = await apiService.create('pictures', formData)
       const newPicture = result.data
       // console.log('NewPic ---', result)
-      console.log('NewPic data ---', newPicture)
+      // console.log('NewPic data ---', newPicture)
 
       dispatch({
         type: CREATE_PICTURE,
@@ -72,7 +71,6 @@ const UploadPicture = ({ ...props }) => {
         errorMessage: null,
         message: result.message
       })
-      setFormVisibility( !formVisibility )
 
     } catch (error) {
       console.error()
@@ -122,13 +120,6 @@ const UploadPicture = ({ ...props }) => {
           onChange: fileChangedHandler
         }}
       />
-      {/* <Button as='label' htmlFor='file' type="button">
-        Some button stuff
-      </Button>
-      <input type='file' id='file' style={{ display: 'hidden' }} onChange={fileChangedHandler} /> */}
-
-      {/* </div> */}
-
     </Container>
   )
 }

@@ -35,6 +35,7 @@ const ModalSection = ({ ...props }) => {
       thumb={ props.thumb }
       author={props.author}
       category_id={props.category_id}
+      albumPics={ props.albumPics }
     />
   ])
 
