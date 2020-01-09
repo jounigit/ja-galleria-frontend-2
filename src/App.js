@@ -85,7 +85,9 @@ const App = () => {
           <ResponsiveContainer>
             <Switch>
               <Route path={routes.CATEGORIES} component={CategoryData} />
+              <Route path={routes.ALBUM} component={AlbumData} />
               <Route path={routes.ALBUMS} component={AlbumData} />
+              <Route path={routes.PICTURE} component={PictureData} />
               <Route path={routes.PICTURES} component={PictureData} />
               {/* <Route path={routes.ADMIN} component={Admin} /> */}
               <Route path={routes.LOGIN} component={Login} />
@@ -100,3 +102,12 @@ const App = () => {
 }
 
 export default App
+{/* <Switch>
+            <Route path='/login'><Login /></Route>
+            <Route path='/albums/:id'><AlbumData /></Route>
+            <Route path='/albums'><AlbumData /></Route>
+            <Route path='/categories'><CategoryData /></Route>
+            <Route path='/pictures/:id'><PictureData /></Route>
+            <Route path='/pictures'><PictureData /></Route>
+            <Route path='/'><Home /></Route>
+          </Switch> */}
