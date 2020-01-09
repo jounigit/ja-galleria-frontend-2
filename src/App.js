@@ -1,16 +1,21 @@
-import React, { createContext, useEffect } from 'react'
+import React, {
+  createContext,
+  useEffect,
+  // lazy,
+  Suspense
+} from 'react'
 import {  Route, Switch } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
-// import Navigation from './components/Shared/Navigation'
 import './App.css'
 import { ResponsiveContainer } from './components/UI/containers/ResponsiveContainer'
 import * as routes from './shared/constants/routes'
+import apiService from './services/apiService'
+
 import { PictureData } from './components/Picture'
 import { Home } from './components/Home'
 import { CategoryData } from './components/Category'
 import { AlbumData } from './components/Album'
 import Login from './components/Login/Login'
-import apiService from './services/apiService'
 import Footer from './components/UI/footers/AppFooter'
 
 export const AuthContext = createContext()
@@ -74,13 +79,9 @@ const App = () => {
   }, [state])
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
-      <Container>
-        {/* <div>
-          <Navigation />
-        </div> */}
-        {/* {state.user && <h4>User: {state.user.name}</h4>} */}
-        <div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthContext.Provider value={{ state, dispatch }}>
+        <Container>
           <ResponsiveContainer>
             <Switch>
               <Route path={routes.CATEGORIES} component={CategoryData} />
@@ -91,22 +92,11 @@ const App = () => {
               <Route component={Home} />
             </Switch>
           </ResponsiveContainer>
-        </div>
-        <Footer />
-      </Container>
-    </AuthContext.Provider>
-
+          <Footer />
+        </Container>
+      </AuthContext.Provider>
+    </Suspense>
   )
 }
 
 export default App
-
-// <Switch>
-// <Route path='/login'><Login /></Route>
-// <Route path='/albums/:id'><AlbumData /></Route>
-// <Route path='/albums'><AlbumData /></Route>
-// <Route path='/categories'><CategoryData /></Route>
-// <Route path='/pictures/:id'><PictureData /></Route>
-// <Route path='/pictures'><PictureData /></Route>
-// <Route path='/'><Home /></Route>
-// </Switch>
