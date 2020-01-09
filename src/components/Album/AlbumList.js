@@ -3,6 +3,7 @@ import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../App'
 import CreateAlbum from './CreateAlbum'
 import ModalSection from '../Shared/modal/ModalSection'
+import { Header } from 'semantic-ui-react'
 
 const AlbumList = ({ albums }) => {
   const { state } = useContext(AuthContext)
@@ -22,7 +23,8 @@ const AlbumList = ({ albums }) => {
       />
       }
 
-      <h2>Albumit</h2>
+      <Header as='h2' dividing content='Albumit' />
+
       {
         sortedAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} user={state.user} />

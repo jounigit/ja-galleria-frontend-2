@@ -3,6 +3,7 @@ import CategoryDetails from './CategoryDetails'
 import { AuthContext } from '../../App'
 import CreateCategory from './CreateCategory'
 import ModalSection from '../Shared/modal/ModalSection'
+import { Header } from 'semantic-ui-react'
 
 const CategoryList = ({ categories }) => {
   const { state } = useContext(AuthContext)
@@ -17,7 +18,7 @@ const CategoryList = ({ categories }) => {
         headerContent={'New Category'}
       />}
 
-      <h2>Kategoriat</h2>
+      <Header as='h2' dividing content='Kategoriat' />
       {
         categories.map(category =>
           <CategoryDetails key={category.id} category={category} />

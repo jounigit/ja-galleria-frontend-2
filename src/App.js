@@ -1,14 +1,17 @@
 import React, { createContext, useEffect } from 'react'
 import {  Route, Switch } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
-import Navigation from './components/Shared/Navigation'
+// import Navigation from './components/Shared/Navigation'
 import './App.css'
+import { ResponsiveContainer } from './components/UI/containers/ResponsiveContainer'
+import * as routes from './shared/constants/routes'
 import { PictureData } from './components/Picture'
 import { Home } from './components/Home'
-import { CategoryData } from './components/Category/'
+import { CategoryData } from './components/Category'
 import { AlbumData } from './components/Album'
 import Login from './components/Login/Login'
 import apiService from './services/apiService'
+import Footer from './components/UI/footers/AppFooter'
 
 export const AuthContext = createContext()
 
@@ -70,27 +73,26 @@ const App = () => {
     }
   }, [state])
 
-  // console.log('STATE user --', state.user)
-  // console.log('AUTH Token --', state.token)
-
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
       <Container>
-        <div>
+        {/* <div>
           <Navigation />
-        </div>
-        {state.user && <h4>User: {state.user.name}</h4>}
+        </div> */}
+        {/* {state.user && <h4>User: {state.user.name}</h4>} */}
         <div>
-          <Switch>
-            <Route path='/login'><Login /></Route>
-            <Route path='/albums/:id'><AlbumData /></Route>
-            <Route path='/albums'><AlbumData /></Route>
-            <Route path='/categories'><CategoryData /></Route>
-            <Route path='/pictures/:id'><PictureData /></Route>
-            <Route path='/pictures'><PictureData /></Route>
-            <Route path='/'><Home /></Route>
-          </Switch>
+          <ResponsiveContainer>
+            <Switch>
+              <Route path={routes.CATEGORIES} component={CategoryData} />
+              <Route path={routes.ALBUMS} component={AlbumData} />
+              <Route path={routes.PICTURES} component={PictureData} />
+              {/* <Route path={routes.ADMIN} component={Admin} /> */}
+              <Route path={routes.LOGIN} component={Login} />
+              <Route component={Home} />
+            </Switch>
+          </ResponsiveContainer>
         </div>
+        <Footer />
       </Container>
     </AuthContext.Provider>
 
@@ -98,3 +100,13 @@ const App = () => {
 }
 
 export default App
+
+// <Switch>
+// <Route path='/login'><Login /></Route>
+// <Route path='/albums/:id'><AlbumData /></Route>
+// <Route path='/albums'><AlbumData /></Route>
+// <Route path='/categories'><CategoryData /></Route>
+// <Route path='/pictures/:id'><PictureData /></Route>
+// <Route path='/pictures'><PictureData /></Route>
+// <Route path='/'><Home /></Route>
+// </Switch>
