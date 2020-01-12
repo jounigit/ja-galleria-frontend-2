@@ -32,13 +32,6 @@ const Album = ({ album }) => {
             </Item.Extra>
             <Item.Extra>
               { state.user &&
-              <RemoveAlbum
-                id={ album.id }
-                title={album.title}
-                author={album.user.name}
-              />
-              }
-              { state.user &&
               <ModalSection
                 btnIcon={'edit'}
                 compToModal={ UpdateAlbum }
@@ -49,7 +42,13 @@ const Album = ({ album }) => {
                 category_id={album.category_id}
               />
               }
-
+              { state.user &&
+              <RemoveAlbum
+                id={ album.id }
+                title={album.title}
+                author={album.user.name}
+              />
+              }
             </Item.Extra>
           </Item.Content>
         </Item>

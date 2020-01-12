@@ -18,6 +18,7 @@ const AlbumList = ({ albums }) => {
       <ModalSection
         btnIcon={'edit'}
         btnContent={'new album'}
+        dataCy={'addNewAlbum'}
         compToModal={ CreateAlbum }
         headerContent={'New Album'}
       />

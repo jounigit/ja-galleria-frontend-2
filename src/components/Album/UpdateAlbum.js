@@ -80,7 +80,7 @@ const UpdateAlbum = ({ ...props }) => {
     localStorage.setItem('reloadPage', 'categories')
     setTimeout(() => props.setModalOpen(), 2000)
     return (
-      <Container>
+      <Container data-cy='success-message'>
         <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
       </Container>
     )

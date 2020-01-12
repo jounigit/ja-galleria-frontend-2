@@ -28,17 +28,18 @@ describe('The Categories Page', function() {
     before(function() {
       cy.loginByForm(email, password)
       cy.visit('/categories')
+      cy.get('.CategoryList button:first').as('createButton')
     })
 
-    it('can see form', function() {
-      cy.get('[data-cy=addCategory]').should('be.visible')
-      cy.get('[data-cy=addCategory]').click()
+    it.only('can see form', function() {
+      cy.get('@createButton').should('contain', 'new category')
+      cy.get('@createButton').click()
       cy.get('[data-cy=title]').should('be.visible')
       cy.get('[data-cy=content]').should('be.visible')
     })
 
     it('can see update button', function() {
-      cy.get('[data-cy=update]').should('be.visible')
+      cy.get('[data-cy=category] .edit').should('be.visible')
     })
 
     it('can see delete button', function() {
@@ -63,8 +64,9 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=delete]').last().click()
     })
 
-    it('can add new category', function() {
-      cy.get('[data-cy=addCategory]').click()
+    it.only('can add new category', function() {
+      cy.get('.CategoryList button:first').as('createButton')
+      cy.get('@createButton').click()
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
