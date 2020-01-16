@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import CategoryDetails from './CategoryDetails'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 import CreateCategory from './CreateCategory'
 import ModalSection from '../Shared/modal/ModalSection'
 import { Header } from 'semantic-ui-react'
 
 const CategoryList = ({ categories }) => {
-  const { state } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   return (
     <div className='CategoryList'>
-      {state.user &&
+      {auth.user &&
       <ModalSection
         btnIcon={'edit'}
         btnContent={'new category'}

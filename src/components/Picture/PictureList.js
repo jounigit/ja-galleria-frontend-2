@@ -3,17 +3,17 @@ import PictureDetails from './PictureDetails'
 import { Grid, Header } from 'semantic-ui-react'
 import CreatePicture from './CreatePicture'
 import ModalSection from '../Shared/modal/ModalSection'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 
 
-const PictureListContext = ({ pictures }) => {
-  const { state } = useContext(AuthContext)
+const PictureList = ({ pictures }) => {
+  const { auth } = useContext(AuthContext)
 
   const sortedPics = pictures.sort((a,b) =>  b.id-a.id )
 
   return (
     <div className='PictureList'>
-      { state.user &&
+      { auth.user &&
       <ModalSection
         btnIcon={'edit'}
         btnContent={'new picture'}
@@ -37,4 +37,4 @@ const PictureListContext = ({ pictures }) => {
   )
 }
 
-export default PictureListContext
+export default PictureList

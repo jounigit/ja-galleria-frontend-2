@@ -3,11 +3,11 @@ import ListItemAlbum from './ListItemAlbum'
 import RemoveCategory from './RemoveCategory'
 import UpdateCategory from './UpdateCategory'
 import ModalSection from '../Shared/modal/ModalSection'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
-  const { state } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const albums = () => category.albums.map(a =>
     <ListItemAlbum key={a.id} album={a} />
@@ -21,13 +21,13 @@ const CategoryDetails = ({ category }) => {
 
   return (
     <div className='category' data-cy='category'>
-      { state.user &&
+      { auth.user &&
        <RemoveCategory
          id={category.id}
          title={category.title}
          author={category.user.name}
        /> }
-      { state.user &&
+      { auth.user &&
       <ModalSection
         btnIcon={'edit'}
         compToModal={ UpdateCategory }

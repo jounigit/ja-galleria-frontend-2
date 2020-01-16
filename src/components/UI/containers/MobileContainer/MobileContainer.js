@@ -10,11 +10,11 @@ import {
 import { NavLink, Link } from 'react-router-dom'
 import AppHeader from '../../headers/AppHeader/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
-import { AuthContext } from '../../../../App'
+import { AuthContext } from '../../../../contexts/AuthContext'
 
 export default function MobileContainer({ children }) {
   const [sidebarOpened, setSidebarOpened] = useState(false)
-  const { state, dispatch } = useContext(AuthContext)
+  const { auth, dispatch } = useContext(AuthContext)
 
   return (
     <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
@@ -72,7 +72,7 @@ export default function MobileContainer({ children }) {
                 {/* ------ right, login logout ------------ */}
                 <Menu.Item position='right'>
                   {
-                    state.user === null ?
+                    auth.user === null ?
                       <Button as={Link}
                         to={routes.LOGIN}
                         name='login'
@@ -83,7 +83,7 @@ export default function MobileContainer({ children }) {
                       <Button as='a'
                         onClick={() => dispatch({ type: 'LOGOUT' })}
                         inverted>
-                      Logout - {state.user.name}
+                      Logout - {auth.user.name}
                       </Button>
                   }
                 </Menu.Item>

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 import CreateAlbum from './CreateAlbum'
 import ModalSection from '../Shared/modal/ModalSection'
 import { Header } from 'semantic-ui-react'
 
 const AlbumList = ({ albums }) => {
-  const { state } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
 
@@ -14,7 +14,7 @@ const AlbumList = ({ albums }) => {
 
   return (
     <div className='AlbumList'>
-      {state.user &&
+      {auth.user &&
       <ModalSection
         btnIcon={'edit'}
         btnContent={'new album'}
@@ -28,7 +28,7 @@ const AlbumList = ({ albums }) => {
 
       {
         sortedAlbums.map(album =>
-          <AlbumListItem key={album.id} album={album} user={state.user} />
+          <AlbumListItem key={album.id} album={album} user={auth.user} />
         )
       }
     </div>

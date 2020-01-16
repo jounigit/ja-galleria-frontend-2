@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Card, Header, Form, Button } from 'semantic-ui-react'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 
 
 const baseUrl = 'http://localhost:8000/api'

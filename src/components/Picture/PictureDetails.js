@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Card, Image } from 'semantic-ui-react'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 import RemovePicture from './RemovePicture'
 import UpdatePicture from './UpdatePicture'
 import ModalSection from '../Shared/modal/ModalSection'
 
 const PictureDetails = ({ picture }) => {
-  const { state } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   // console.log('DETAIL ---', picture)
   return (
@@ -21,13 +21,13 @@ const PictureDetails = ({ picture }) => {
         </Card.Content>
         <Card.Content description={picture.content} />
         <Card.Content extra>
-          { state.user &&
+          { auth.user &&
               <RemovePicture
                 id={ picture.id }
                 title={ picture.title }
               />
           }
-          { state.user &&
+          { auth.user &&
               <ModalSection
                 btnIcon={'edit'}
                 compToModal={ UpdatePicture }

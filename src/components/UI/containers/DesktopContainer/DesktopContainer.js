@@ -11,11 +11,11 @@ import {
 import { NavLink, Link } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
-import { AuthContext } from '../../../../App'
+import { AuthContext } from '../../../../contexts/AuthContext'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
-  const { state, dispatch } = useContext(AuthContext)
+  const { auth, dispatch } = useContext(AuthContext)
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
@@ -69,7 +69,7 @@ export default function DesktopContainer({ children }) {
               {/* ------ right, login logout ------------ */}
               <Menu.Item position='right'>
                 {
-                  state.user === null ?
+                  auth.user === null ?
                     <Button as={Link}
                       to={routes.LOGIN}
                       name='login'
@@ -80,7 +80,7 @@ export default function DesktopContainer({ children }) {
                     <Button as='a'
                       onClick={() => dispatch({ type: 'LOGOUT' })}
                       inverted size='tiny'>
-                      Logout - {state.user.name}
+                      Logout - {auth.user.name}
                     </Button>
                 }
 
