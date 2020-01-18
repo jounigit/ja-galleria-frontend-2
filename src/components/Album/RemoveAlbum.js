@@ -14,6 +14,7 @@ const RemoveAlbum = ({ id, title, author } ) => {
     }
 
     removeData(dispatch, DELETE_ALBUM, 'albums', id)
+    localStorage.setItem('reloadPage', 'categories')
 
   }
   return (

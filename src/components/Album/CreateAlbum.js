@@ -76,6 +76,7 @@ const CreateAlbum = ({ ...props }) => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
+    localStorage.setItem('reloadPage', 'categories')
     setTimeout(() => props.setModalOpen(), 2000)
     return (
       <Container>
