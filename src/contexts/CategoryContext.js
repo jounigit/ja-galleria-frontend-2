@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import categoryReducer from '../reducers/categoryReducer'
 import { INIT_CATEGORIES } from '../reducers/actionTypes'
-import { fetchData } from '../actions/fetchData'
+import { fetchData } from '../actions/dataActions'
 
 export const CategoryContext = createContext()
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useContext }  from 'react'
 import { CategoryContext } from '../../contexts/CategoryContext'
 import CategoryList from './CategoryList'
-import { fetchData } from './actions/fetchData'
+import { fetchData } from '../../actions/dataActions'
 import { INIT_CATEGORIES } from '../../reducers/actionTypes'
 
 
@@ -10,7 +10,7 @@ const CategoryData = () => {
   const reloadState = localStorage.getItem('reloadPage')
 
   if (reloadState === 'categories') {
-    fetchData(dispatch, INIT_CATEGORIES)
+    fetchData(dispatch, INIT_CATEGORIES, 'categories')
     localStorage.setItem('reloadPage', '')
   }
 

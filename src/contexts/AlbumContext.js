@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import albumReducer from '../reducers/albumReducer'
 import { INIT_ALBUMS } from '../reducers/actionTypes'
-import { fetchData } from '../actions/fetchData'
+import { fetchData } from '../actions/dataActions'
 
 export const AlbumContext = createContext()
 
