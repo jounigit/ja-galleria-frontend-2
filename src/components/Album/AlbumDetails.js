@@ -4,11 +4,11 @@ import { Grid, Header, Segment, Divider } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
 import ModalSection from '../Shared/modal/ModalSection'
 import { PictureContext } from '../../contexts/PictureContext'
-import { AuthContext } from '../../App'
+import { AuthContext } from '../../contexts/AuthContext'
 
 const AlbumDetails = ({ album }) => {
   const { pictures } = useContext(PictureContext)
-  const { state } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   // console.log('ALBUMDETAILS -- ', album)
   console.log('A pics -- ', pictures)
@@ -28,7 +28,7 @@ const AlbumDetails = ({ album }) => {
 
       <Header as='h3' content='Pictures' />
 
-      { state.user &&
+      { auth.user &&
       <ModalSection
         btnIcon={'edit'}
         btnContent={'choose/delete pictures'}
