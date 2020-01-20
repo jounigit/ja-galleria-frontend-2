@@ -72,12 +72,14 @@ export default function DesktopContainer({ children }) {
                   auth.user === null ?
                     <Button as={Link}
                       to={routes.LOGIN}
+                      data-cy='login'
                       name='login'
                       inverted size='tiny'
                       content='Log in'
                     />
                     :
                     <Button as='a'
+                      data-cy='logout'
                       onClick={() => dispatch({ type: 'LOGOUT' })}
                       inverted size='tiny'>
                       Logout - {auth.user.name}
