@@ -39,12 +39,13 @@ describe('Login page',  function() {
       cy.get('[data-cy=error-message]').should('contain', 'incorrect email or password!')
     })
 
-    it('user can login', function() {
-      cy.get('[data-cy=email]').type(email)
-      cy.get('[data-cy=password]').type(password)
-      cy.get('form').submit()
-      cy.get('[data-cy=logout]').should('be.visible')
-    })
+    // it('user can login', function() {
+    //   cy.get('[data-cy=email]').type(email)
+    //   cy.get('[data-cy=password]').type(password)
+    //   cy.get('form').submit()
+    //   cy.visit('/')
+    //   cy.get('[data-cy=logout]').should('contain', username)
+    // })
   })
 
   context('Reusable "login" custom command', function () {

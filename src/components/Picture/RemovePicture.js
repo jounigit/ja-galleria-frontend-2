@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button, Container } from 'semantic-ui-react'
 import { DELETE_PICTURE } from '../../reducers/actionTypes'
-import { removeData } from '../../actions/dataActions'
+import { removeData } from '../../services/apiService'
 import { PictureContext } from '../../contexts/PictureContext'
 
 const RemovePicture = ({ id, title } ) => {

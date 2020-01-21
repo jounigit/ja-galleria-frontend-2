@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Button, Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import { DELETE_ALBUM } from '../../reducers/actionTypes'
-import { removeData } from '../../actions/dataActions'
+import { removeData } from '../../services/apiService'
 
 const RemoveAlbum = ({ id, title, author } ) => {
   const { dispatch } = useContext(AlbumContext)

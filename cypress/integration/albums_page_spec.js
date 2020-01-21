@@ -72,6 +72,7 @@ describe('The Albums Page', function() {
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
+      cy.visit('/albums')
       cy.get('[data-cy=albumListItem]').should('contain', title)
     })
   })
@@ -84,6 +85,7 @@ describe('The Albums Page', function() {
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
+      cy.visit('/albums')
     })
 
     after(function() {
@@ -102,6 +104,7 @@ describe('The Albums Page', function() {
       cy.get('select').find('option').first()
       cy.get('form').submit()
       cy.get('[data-cy=success-message]').should('be.visible')
+      cy.visit('/albums')
       // cy.get(':nth-child(3) > .divided > .item > .content > .header').should('contain', newType)
 
     })
@@ -112,15 +115,20 @@ describe('The Albums Page', function() {
       cy.loginByForm(email, password)
       cy.visit('/albums')
     })
-    beforeEach(function() {
+    // beforeEach(function() {
+    //   cy.get('[data-cy=addNewAlbum]').click()
+    //   cy.get('[data-cy=title]').type(title)
+    //   cy.get('[data-cy=content]').type(content)
+    //   cy.get('form').submit()
+    //   cy.visit('/albums')
+    // })
+
+    it('delete last created album', function() {
       cy.get('[data-cy=addNewAlbum]').click()
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
       cy.visit('/albums')
-    })
-
-    it('delete last created album', function() {
       cy.get('[data-cy=delete]').first().as('firstDeleteButton')
       cy.get('@firstDeleteButton').click()
       cy.get('[data-cy=albumListItem]').first().as('firstItem')

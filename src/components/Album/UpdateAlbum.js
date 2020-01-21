@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Container, Header } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import apiService from '../../services/apiService'
 import { UPDATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
+import { updateData } from '../../services/apiService'
 
 const UpdateAlbum = ({ ...props }) => {
   const initialState = {
@@ -16,7 +16,7 @@ const UpdateAlbum = ({ ...props }) => {
   }
   // Component's state
   const [data, setData] = useState(initialState)
-  const { dispatch } = useContext(AlbumContext) // Album actions
+  const { albums, dispatch } = useContext(AlbumContext) // Album actions
 
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
@@ -48,7 +48,6 @@ const UpdateAlbum = ({ ...props }) => {
       content: data.content,
       category_id: data.category_id
     }
-    // console.log('NEWDATA :::', newData)
 
     setData({
       ...data,
@@ -56,22 +55,15 @@ const UpdateAlbum = ({ ...props }) => {
       errorMessage: null
     })
 
-    try {
-      const result = await apiService.update('albums', props.id, newData)
-      const newAlbum = result.data
-
-      dispatch({
-        type: UPDATE_ALBUM,
-        data: newAlbum
-      })
+    updateData(dispatch, UPDATE_ALBUM, 'albums', props.id, newData)
+    if( !albums.isLoading && albums.errorMessage==='') {
       setData({
-        ...data,
+        title: '',
+        content: '',
         isSubmitting: false,
         errorMessage: null,
-        message: result.message
+        message: 'Album updated successfully.'
       })
-    } catch (error) {
-      handleError('failed updating album!')
     }
   }
 

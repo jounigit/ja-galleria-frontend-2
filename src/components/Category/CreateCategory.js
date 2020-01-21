@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Header, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../contexts/CategoryContext'
-import apiService from '../../services/apiService'
+// import apiService from '../../services/apiService'
 import { CREATE_CATEGORY } from '../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
+import { createData } from '../../services/apiService'
 
 const initialState = {
   title: '',
@@ -15,7 +16,7 @@ const initialState = {
 
 const CreateCategory = ({ ...props }) => {
   const [data, setData] = useState(initialState)
-  const { dispatch } = useContext(CategoryContext)
+  const { categories, dispatch } = useContext(CategoryContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -51,25 +52,18 @@ const CreateCategory = ({ ...props }) => {
       errorMessage: null
     })
 
-    try {
-      const result = await apiService.create('categories', newData)
-      const newAlbum = result.data
+    createData(dispatch, CREATE_CATEGORY, 'categories', newData)
 
-      dispatch({
-        type: CREATE_CATEGORY,
-        data: newAlbum
-      })
+    console.log('CAT state --', categories)
+    if( !categories.isLoading && categories.errorMessage==='') {
       setData({
         title: '',
         content: '',
         isSubmitting: false,
         errorMessage: null,
-        message: result.message
+        message: 'Category stored successfully.'
       })
-    } catch (error) {
-      handleError('failed storing category!')
     }
-
   }
 
   // :::::::::::::::::::::::::::::::::::: //

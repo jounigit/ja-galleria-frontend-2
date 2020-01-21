@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Header, Container } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
-import apiService from '../../services/apiService'
 import { UPDATE_PICTURE } from '../../reducers/actionTypes'
 import PictureForm from './PictureForm'
+import { updateData } from '../../services/apiService'
 
 const SavePictureData = ({ ...props }) => {
   const initialState = {
@@ -15,16 +15,9 @@ const SavePictureData = ({ ...props }) => {
     message: null
   }
   const [data, setData] = useState(initialState)
-  const { dispatch } = useContext(PictureContext)
-  // console.log('SAVE ---', data)
+  const { pictures, dispatch } = useContext(PictureContext)
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
-  const handleFileInputChange = event => {
-    setData({
-      ...data,
-      file: event.target.files[0]
-    })
-  }
   const handleInputChange = event => {
     setData({
       ...data,
@@ -53,28 +46,16 @@ const SavePictureData = ({ ...props }) => {
       content: data.content
     }
 
-    try {
-      const result = await apiService.update('pictures', props.id, newData)
-      const newPicture = result.data
-      console.log('NewPic data ---', newPicture)
-
-      dispatch({
-        type: UPDATE_PICTURE,
-        data: newPicture
-      })
+    updateData(dispatch, UPDATE_PICTURE, 'pictures', props.id, newData)
+    if( !pictures.isLoading && pictures.errorMessage==='') {
       setData({
         title: '',
         content: '',
-        file: null,
         isSubmitting: false,
         errorMessage: null,
-        message: result.message
+        message: 'Picture updated successfully.'
       })
       props.setDataSaved(true)
-
-    } catch (error) {
-      console.error()
-      handleError('failed updating picture!')
     }
   }
   // :::::::::::::::::::::::::::::::::::: //
@@ -96,7 +77,6 @@ const SavePictureData = ({ ...props }) => {
           thumb={data.thumb}
           handleFormSubmit={handleFormSubmit}
           handleInputChange={handleInputChange}
-          handleFileInputChange={handleFileInputChange}
           formHeader={'Päivitä kuva'}
         />
       }

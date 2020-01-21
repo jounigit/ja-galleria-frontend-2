@@ -14,6 +14,7 @@ const CategoryList = ({ categories }) => {
       <ModalSection
         btnIcon={'edit'}
         btnContent={'new category'}
+        dataCy={'addNewCategory'}
         compToModal={ CreateCategory }
         headerContent={'New Category'}
       />}

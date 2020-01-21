@@ -1,7 +1,7 @@
 import React, { Fragment, useContext }  from 'react'
 import { CategoryContext } from '../../contexts/CategoryContext'
 import CategoryList from './CategoryList'
-import { fetchData } from '../../actions/dataActions'
+import { fetchData } from '../../services/apiService'
 import { INIT_CATEGORIES } from '../../reducers/actionTypes'
 
 

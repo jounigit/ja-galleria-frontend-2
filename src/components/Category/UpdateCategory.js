@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Header, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../contexts/CategoryContext'
-import apiService from '../../services/apiService'
 import { UPDATE_CATEGORY } from '../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
+import { updateData } from '../../services/apiService'
 
 const UpdateCategory = ({ ...props } ) => {
   const initialState = {
@@ -14,7 +14,7 @@ const UpdateCategory = ({ ...props } ) => {
     message: null
   }
   const [data, setData] = useState(initialState)
-  const { dispatch } = useContext(CategoryContext)
+  const { categories, dispatch } = useContext(CategoryContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -50,24 +50,16 @@ const UpdateCategory = ({ ...props } ) => {
       errorMessage: null
     })
 
-    try {
-      const result = await apiService.update('categories', props.id, newData)
-      const newAlbum = result.data
-
-      dispatch({
-        type: UPDATE_CATEGORY,
-        data: newAlbum
-      })
+    updateData(dispatch, UPDATE_CATEGORY, 'categories', props.id, newData)
+    if( !categories.isLoading && categories.errorMessage==='') {
       setData({
-        ...data,
+        title: '',
+        content: '',
         isSubmitting: false,
         errorMessage: null,
-        message: result.message
+        message: 'Category updated successfully.'
       })
-    } catch (error) {
-      handleError('failed updating category!')
     }
-
   }
 
   // :::::::::::::::::::::::::::::::::::: //

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Header, Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import apiService from '../../services/apiService'
 import { CREATE_ALBUM } from '../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
+import { createData } from '../../services/apiService'
 
 const initialState = {
   title: '',
@@ -16,7 +16,7 @@ const initialState = {
 
 const CreateAlbum = ({ ...props }) => {
   const [data, setData] = useState(initialState)
-  const { dispatch } = useContext(AlbumContext)
+  const { albums, dispatch } = useContext(AlbumContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -54,23 +54,16 @@ const CreateAlbum = ({ ...props }) => {
       errorMessage: null
     })
 
-    try {
-      const result = await apiService.create('albums', newData)
-      const newAlbum = result.data
+    createData(dispatch, CREATE_ALBUM, 'albums', newData)
 
-      dispatch({
-        type: CREATE_ALBUM,
-        data: newAlbum
-      })
+    if( !albums.isLoading && albums.errorMessage==='') {
       setData({
         title: '',
         content: '',
         isSubmitting: false,
         errorMessage: null,
-        message: result.message
+        message: 'Album stored successfully.'
       })
-    } catch (error) {
-      handleError('failed storing album!')
     }
   }
 

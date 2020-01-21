@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import pictureReducer from '../reducers/pictureReducer'
 import { INIT_PICTURES } from '../reducers/actionTypes'
-import { fetchData } from '../actions/dataActions'
+import { fetchData } from '../services/apiService'
 // import axios from 'axios'
 
 export const PictureContext = createContext()

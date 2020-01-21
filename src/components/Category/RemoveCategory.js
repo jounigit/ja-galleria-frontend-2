@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
 import { Button } from 'semantic-ui-react'
-// import { AuthContext } from '../../App'
 import { CategoryContext } from '../../contexts/CategoryContext'
-import apiService from '../../services/apiService'
 import {
-  DELETE_CATEGORY,
-  FAILURE
+  DELETE_CATEGORY
 } from '../../reducers/actionTypes'
+import { removeData } from '../../services/apiService'
 
 const RemoveCategory = ({ id, title, author } ) => {
   const { dispatch } = useContext(CategoryContext)
@@ -17,17 +15,7 @@ const RemoveCategory = ({ id, title, author } ) => {
       return
     }
 
-    try {
-      await apiService.remove('categories', id)
-      dispatch({
-        type: DELETE_CATEGORY,
-        id
-      })
-    } catch(error) {
-      dispatch({
-        type: FAILURE, error
-      })
-    }
+    removeData(dispatch, DELETE_CATEGORY, 'categories', id)
 
   }
   return (

@@ -3,8 +3,8 @@ describe('The Categories Page', function() {
   const email = Cypress.env('email')
   const password = Cypress.env('password')
   // // const username = Cypress.env('username')
-  const title = 'Category test'
-  const content = 'Test content.'
+  let title = 'Category test'
+  let content = 'Test content.'
 
   context('open public pages', function() {
     before(function() {
@@ -31,7 +31,7 @@ describe('The Categories Page', function() {
       cy.get('.CategoryList button:first').as('createButton')
     })
 
-    it.only('can see form', function() {
+    it('can see form', function() {
       cy.get('@createButton').should('contain', 'new category')
       cy.get('@createButton').click()
       cy.get('[data-cy=title]').should('be.visible')
@@ -62,14 +62,15 @@ describe('The Categories Page', function() {
 
     after(function() {
       cy.get('[data-cy=delete]').last().click()
+      cy.visit('/categories')
     })
 
-    it.only('can add new category', function() {
-      cy.get('.CategoryList button:first').as('createButton')
-      cy.get('@createButton').click()
+    it('can add new category', function() {
+      cy.get('[data-cy=addNewCategory]').click()
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
+      cy.visit('/categories')
       cy.get('[data-cy=category]').should('contain', title)
     })
   })
@@ -80,28 +81,25 @@ describe('The Categories Page', function() {
       cy.visit('/categories')
     })
 
-    beforeEach(function() {
-      cy.get('[data-cy=addCategory]').click()
-      cy.get('[data-cy=title]').type(title)
-      cy.get('[data-cy=content]').type(content)
-      cy.get('form').submit()
-      cy.visit('/categories')
-    })
-
     after(function() {
       cy.get('[data-cy=delete]').last().click()
+      cy.visit('/categories')
     })
 
     it('can update category', function() {
       const newType = 'Updated'
-      cy.get('[data-cy=update]').last().click()
-      // cy.get('@lasttUpdateButton').click()
+      cy.get('[data-cy=addNewCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/categories')
+      cy.get('.CategoryList .edit:last').click()
       cy.get('[type="title"]').clear()
       cy.get('[data-cy=title]').type(newType)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
+      cy.visit('/categories')
       cy.get('[data-cy=header]').last().should('contain', newType)
-
     })
   })
 
@@ -111,7 +109,8 @@ describe('The Categories Page', function() {
       cy.visit('/categories')
     })
     beforeEach(function() {
-      cy.get('[data-cy=addCategory]').click()
+      let title = 'Last Category'
+      cy.get('[data-cy=addNewCategory]').click()
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
@@ -119,6 +118,7 @@ describe('The Categories Page', function() {
     })
 
     it('delete last created categories', function() {
+      let title = 'Last Category'
       cy.get('[data-cy=delete]').last().as('lastDeleteButton')
       cy.get('@lastDeleteButton').click()
       cy.get('[data-cy=category]').last().as('lastItem')

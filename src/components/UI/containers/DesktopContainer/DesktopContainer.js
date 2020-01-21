@@ -35,6 +35,7 @@ export default function DesktopContainer({ children }) {
         >
           <AppHeader />
           <Menu
+            data-cy='menu'
             fixed={fixed ? 'top' : null}
             inverted
             pointing={!fixed}
