@@ -15,6 +15,7 @@ import { CategoryData } from './components/Category'
 import { AlbumData } from './components/Album'
 import Login from './components/Login/Login'
 import Footer from './components/UI/footers/AppFooter'
+import Admin from './components/Admin/Admin'
 
 export const AuthContext = createContext()
 
@@ -23,18 +24,18 @@ const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Container>
-        <ResponsiveContainer>
-          <Switch>
+        <Switch>
+          <Route path={routes.ADMIN} component={Admin} />
+          <ResponsiveContainer>
             <Route path={routes.CATEGORIES} component={CategoryData} />
             <Route path={routes.ALBUM} component={AlbumData} />
             <Route path={routes.ALBUMS} component={AlbumData} />
             <Route path={routes.PICTURE} component={PictureData} />
             <Route path={routes.PICTURES} component={PictureData} />
-            {/* <Route path={routes.ADMIN} component={Admin} /> */}
             <Route path={routes.LOGIN} component={Login} />
             <Route component={Home} />
-          </Switch>
-        </ResponsiveContainer>
+          </ResponsiveContainer>
+        </Switch>
         <Footer />
       </Container>
     </Suspense>

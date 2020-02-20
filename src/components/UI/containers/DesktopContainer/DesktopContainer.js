@@ -20,6 +20,25 @@ export default function DesktopContainer({ children }) {
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
 
+  const adminButtons = () => {
+    return (
+      <>
+        <Button as='a'
+          data-cy='logout'
+          onClick={() => dispatch({ type: 'LOGOUT' })}
+          inverted size='tiny'>
+                      Logout - {auth.user.name}
+        </Button>
+        <Button as={NavLink}
+          data-cy='admin'
+          to={routes.ADMIN}
+          inverted size='tiny'>
+                admin
+        </Button>
+      </>
+    )
+  }
+
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
       <Visibility
@@ -79,12 +98,7 @@ export default function DesktopContainer({ children }) {
                       content='Log in'
                     />
                     :
-                    <Button as='a'
-                      data-cy='logout'
-                      onClick={() => dispatch({ type: 'LOGOUT' })}
-                      inverted size='tiny'>
-                      Logout - {auth.user.name}
-                    </Button>
+                    adminButtons()
                 }
 
                 <Button as='a' inverted primary={fixed} style={{ marginLeft: '0.5em' }}>
