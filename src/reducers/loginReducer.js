@@ -31,6 +31,7 @@ const loginReducer = (state, action) => {
     return {
       ...state,
       isAuthenticated: false,
+      loggedOut: true,
       user: null,
       token: null
     }

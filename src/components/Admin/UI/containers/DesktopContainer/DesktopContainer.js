@@ -8,7 +8,7 @@ import {
   Button,
   // Header
 } from 'semantic-ui-react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../../shared/constants/routes'
 import { AuthContext } from '../../../../../contexts/AuthContext'
@@ -19,8 +19,6 @@ export default function DesktopContainer({ children }) {
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
-
-  console.log('USER --', auth)
 
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -54,11 +52,11 @@ export default function DesktopContainer({ children }) {
                     as={NavLink}
                     to={routes.ADMIN}
                     name='adminHome'
-                    content='Home admin'
+                    content='Home'
                   />
                   <Menu.Item
                     as={NavLink}
-                    to={routes.CATEGORIES}
+                    to={routes.ADMINCATEGORIES}
                     name='categories'
                     content='Categories'
                   />

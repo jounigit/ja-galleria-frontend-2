@@ -1,0 +1,111 @@
+/* eslint-disable jest/no-focused-tests */
+describe('The Categories Page', function() {
+  const email = Cypress.env('email')
+  const password = Cypress.env('password')
+  // // const username = Cypress.env('username')
+  let title = 'Category test'
+  let content = 'Test content.'
+
+  context('logged in user', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/admin/categories')
+      cy.get('.CategoryList button:first').as('createButton')
+    })
+
+    it('can see form', function() {
+      cy.get('@createButton').should('contain', 'new category')
+      cy.get('@createButton').click()
+      cy.get('[data-cy=title]').should('be.visible')
+      cy.get('[data-cy=content]').should('be.visible')
+    })
+
+    it('can see update button', function() {
+      cy.get('[data-cy=category] .edit').should('be.visible')
+    })
+
+    it('can see delete button', function() {
+      cy.get('[data-cy=delete]').should('be.visible')
+    })
+
+    // it('title is required', function() {
+    //   cy.get('[data-cy=addCategory]').click()
+    //   cy.get('input[name=content]').type('content{enter}')
+    //   cy.get('[data-cy=error-message]').should('be.visible')
+    //   cy.get('[data-cy=error-message]').should('contain', 'title is required!')
+    // })
+  })
+
+  context('create category', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/admin/categories')
+    })
+
+    after(function() {
+      cy.get('[data-cy=delete]').last().click()
+      cy.visit('/admin/categories')
+    })
+
+    it('can add new category', function() {
+      cy.get('[data-cy=addNewCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/categories')
+      cy.get('[data-cy=category]').should('contain', title)
+    })
+  })
+
+  context('update category', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/admin/categories')
+    })
+
+    after(function() {
+      cy.get('[data-cy=delete]').last().click()
+      cy.visit('/admin/categories')
+    })
+
+    it('can update category', function() {
+      const newType = 'Updated'
+      cy.get('[data-cy=addNewCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/admin/categories')
+      cy.get('.CategoryList .edit:last').click()
+      cy.get('[type="title"]').clear()
+      cy.get('[data-cy=title]').type(newType)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/admin/categories')
+      cy.get('[data-cy=header]').last().should('contain', newType)
+    })
+  })
+
+  context('create and delete category', function() {
+    before(function() {
+      cy.loginByForm(email, password)
+      cy.visit('/admin/categories')
+    })
+    beforeEach(function() {
+      let title = 'Last Category'
+      cy.get('[data-cy=addNewCategory]').click()
+      cy.get('[data-cy=title]').type(title)
+      cy.get('[data-cy=content]').type(content)
+      cy.get('form').submit()
+      cy.visit('/admin/categories')
+    })
+
+    it('delete last created categories', function() {
+      let title = 'Last Category'
+      cy.get('[data-cy=delete]').last().as('lastDeleteButton')
+      cy.get('@lastDeleteButton').click()
+      cy.get('[data-cy=category]').last().as('lastItem')
+      cy.get('@lastItem').should('not.contain', title)
+    })
+  })
+
+})
