@@ -62,13 +62,13 @@ export default function DesktopContainer({ children }) {
                   />
                   <Menu.Item
                     as={NavLink}
-                    to={routes.ALBUMS}
+                    to={routes.ADMINALBUMS}
                     name='album'
                     content='Albums'
                   />
                   <Menu.Item
                     as={NavLink}
-                    to={routes.PICTURES}
+                    to={routes.ADMINPICTURES}
                     name='pictures'
                     content='Pictures'
                   />
