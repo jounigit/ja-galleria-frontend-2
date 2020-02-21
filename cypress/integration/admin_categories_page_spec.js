@@ -52,7 +52,7 @@ describe('The Categories Page', function() {
       cy.get('[data-cy=title]').type(title)
       cy.get('[data-cy=content]').type(content)
       cy.get('form').submit()
-      cy.visit('/categories')
+      cy.visit('/admin/categories')
       cy.get('[data-cy=category]').should('contain', title)
     })
   })
