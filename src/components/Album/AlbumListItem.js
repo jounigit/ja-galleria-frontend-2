@@ -1,13 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Item } from 'semantic-ui-react'
-import { AuthContext } from '../../contexts/AuthContext'
-import UpdateAlbum from './UpdateAlbum'
-import RemoveAlbum from './RemoveAlbum'
-import ModalSection from '../Shared/modal/ModalSection'
 
 const Album = ({ album }) => {
-  const { auth } = useContext(AuthContext)
 
   const pictures = album.pictures
 
@@ -29,26 +24,6 @@ const Album = ({ album }) => {
             <Item.Description>{album.content && album.content.substring(0,260) }...</Item.Description>
             <Item.Extra>
               <Link to={`/albums/${album.id}`}>show</Link>
-            </Item.Extra>
-            <Item.Extra>
-              { auth.user &&
-              <ModalSection
-                btnIcon={'edit'}
-                compToModal={ UpdateAlbum }
-                headerContent={'Update Album'}
-                id={ album.id }
-                title={album.title}
-                content={album.content}
-                category_id={album.category_id}
-              />
-              }
-              { auth.user &&
-              <RemoveAlbum
-                id={ album.id }
-                title={album.title}
-                author={album.user.name}
-              />
-              }
             </Item.Extra>
           </Item.Content>
         </Item>

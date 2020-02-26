@@ -31,6 +31,7 @@ const AlbumList = ({ albums }) => {
           <AlbumListItem key={album.id} album={album} user={auth.user} />
         )
       }
+
     </div>
   )
 }
