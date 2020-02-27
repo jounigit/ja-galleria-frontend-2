@@ -10,7 +10,7 @@ const ListItem = ({ album }) => {
       <p>
         {album.content && album.content.substring(0,40) }...
       </p>
-      <Link to={`/albums/${album.id}`}>
+      <Link to={`/album/${album.id}`}>
             show
       </Link>
     </li>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
 
-const PictureDetails = ({ picture }) => {
+const Picture = ({ picture }) => {
 
   // console.log('DETAIL ---', picture)
   return (
@@ -13,4 +13,4 @@ const PictureDetails = ({ picture }) => {
   )
 }
 
-export default PictureDetails
+export default Picture

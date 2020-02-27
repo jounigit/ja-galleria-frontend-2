@@ -41,14 +41,13 @@ const AlbumDetails = ({ album }) => {
       <Container>
         <Grid columns={2} padded='horizontally'>
           <Grid.Column color='grey'>
-            <Header as='h1'>Album</Header>
+            <Header as='h2'>Album</Header>
             { updateAction() }
             { removeAction() }
 
           </Grid.Column>
           <Grid.Column color='grey'>
             <Header as='h3' content='Pictures' />
-
             { auth.user && chooseAction() }
           </Grid.Column>
         </Grid>

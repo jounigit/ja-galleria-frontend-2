@@ -7,13 +7,14 @@ import RemoveAlbum from './RemoveAlbum'
 import ModalSection from '../../Shared/modal/ModalSection'
 import ChoosePicture from './ChoosePicture'
 
-const Album = ({ album }) => {
+const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
 
   const pictures = album.pictures
-
   const firstPic = pictures && pictures.length > 0 ?
     pictures[0].thumb : ''
+
+  console.log('AlbumListItem -> Album')
   return (
     <div className='album' data-cy='albumListItem'>
       { auth.user &&
@@ -76,4 +77,4 @@ const Album = ({ album }) => {
   )
 }
 
-export default Album
+export default AlbumListItem

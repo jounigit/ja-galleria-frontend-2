@@ -33,7 +33,8 @@ const App = () => {
             <Route path={routes.PICTURE} component={PictureData} />
             <Route path={routes.PICTURES} component={PictureList} />
             <Route path={routes.LOGIN} component={Login} />
-            <Route component={Home} />
+            <Route path={routes.HOME} component={Home} />
+            <Route exact path="/" component={Home} />
           </ResponsiveContainer>
         </Switch>
         <Footer />

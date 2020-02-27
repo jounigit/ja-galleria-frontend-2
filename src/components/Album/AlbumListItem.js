@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Image, Header, Segment } from 'semantic-ui-react'
 
-const Album = ({ album }) => {
+const AlbumListItem = ({ album }) => {
 
   const pictures = album.pictures
 
@@ -26,7 +26,7 @@ const Album = ({ album }) => {
         {album.content && album.content.substring(0,260) }...
       </Segment>
 
-      <Link to={`/album/${album.id}`} data-cy='showAlbumLink'>show</Link>
+      <Link to={`/album/${album.id}`} data-cy='showAlbumListItemLink'>show</Link>
 
 
       {/* <Card>
@@ -50,4 +50,4 @@ const Album = ({ album }) => {
   )
 }
 
-export default Album
+export default AlbumListItem
