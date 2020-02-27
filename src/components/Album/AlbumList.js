@@ -1,25 +1,32 @@
 import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
-import { AuthContext } from '../../contexts/AuthContext'
-import { Header } from 'semantic-ui-react'
+import { AlbumContext } from '../../contexts/AlbumContext'
+import { Header, Grid } from 'semantic-ui-react'
 
-const AlbumList = ({ albums }) => {
-  const { auth } = useContext(AuthContext)
+const AlbumList = () => {
+  const { albums } = useContext(AlbumContext)
 
-  const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
-
-  // console.log('ALBUMLIST --', albums)
+  const sortedAlbums = albums.data
+  && albums.data.sort((a,b) =>  b.id-a.id )
 
   return (
     <div className='AlbumList'>
+      {albums.loading && <div className="loader">Loading ...</div>}
 
       <Header as='h2' dividing content='Albumit' />
 
-      {
-        sortedAlbums.map(album =>
-          <AlbumListItem key={album.id} album={album} user={auth.user} />
-        )
-      }
+      <Grid>
+        { !albums.loading
+      && albums.data
+      && sortedAlbums.map(album =>
+        <Grid.Column mobile={16} tablet={8} computer={4}  key={album.id}>
+          <AlbumListItem album={album} />
+        </Grid.Column>
+
+      )
+        }
+      </Grid>
+
     </div>
   )
 }

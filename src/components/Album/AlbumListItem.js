@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Item } from 'semantic-ui-react'
+import { Image, Header, Segment } from 'semantic-ui-react'
 
 const Album = ({ album }) => {
 
@@ -10,24 +10,39 @@ const Album = ({ album }) => {
     pictures[0].thumb : ''
   return (
     <div data-cy='albumListItem'>
-      <Item.Group divided>
-        <Item>
-          <Item.Image size='small' src={firstPic} />
-          <Item.Content>
-            <Item.Header>{album.title}</Item.Header>
-            <Item.Meta>
-              <span className='stay'>Author - {album.user.name}</span>
-            </Item.Meta>
-            <Item.Meta>
-              {pictures.length + ' - kuvaa' || 'no pictures'}
-            </Item.Meta>
-            <Item.Description>{album.content && album.content.substring(0,260) }...</Item.Description>
-            <Item.Extra>
-              <Link to={`/albums/${album.id}`}>show</Link>
-            </Item.Extra>
-          </Item.Content>
-        </Item>
-      </Item.Group>
+
+      <Image size='medium' src={firstPic} />
+
+      <Header as='h2'>
+        {album.title}
+        <Header.Subheader>
+            Author - {album.user.name}
+        </Header.Subheader>
+        <Header.Subheader>
+          {pictures.length + ' - kuvaa' || 'no pictures'}
+        </Header.Subheader>
+      </Header>
+      <Segment basic>
+        {album.content && album.content.substring(0,260) }...
+      </Segment>
+
+      <Link to={`/album/${album.id}`} data-cy='showAlbumLink'>show</Link>
+
+
+      {/* <Card>
+        <Image size='medium' src={firstPic} />
+        <Card.Content>
+          <Card.Header>{album.title}</Card.Header>
+          <Card.Meta>Author - {album.user.name}</Card.Meta>
+          <Card.Meta>{pictures.length + ' - kuvaa' || 'no pictures'}</Card.Meta>
+          <Card.Description>
+            {album.content && album.content.substring(0,260) }...
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <Link to={`/album/${album.id}`}>show</Link>
+        </Card.Content>
+      </Card> */}
 
       <div className="ui divider"></div>
     </div>
