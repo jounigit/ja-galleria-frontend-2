@@ -16,14 +16,12 @@ const AlbumList = () => {
       <Header as='h2' dividing content='Albumit' />
 
       <Grid>
-        { !albums.loading
-      && albums.data
-      && sortedAlbums.map(album =>
-        <Grid.Column mobile={16} tablet={8} computer={4}  key={album.id}>
-          <AlbumListItem album={album} />
-        </Grid.Column>
-
-      )
+        { !albums.loading && albums.data &&
+        sortedAlbums.map(album =>
+          <Grid.Column mobile={16} tablet={8} computer={4}  key={album.id}>
+            <AlbumListItem album={album} />
+          </Grid.Column>
+        )
         }
       </Grid>
 

@@ -9,7 +9,7 @@ import './App.css'
 import { ResponsiveContainer } from './components/UI/containers/ResponsiveContainer'
 import * as routes from './shared/constants/routes'
 
-import { PictureData } from './components/Picture'
+import { PictureData, PictureList } from './components/Picture'
 import { Home } from './components/Home'
 import { CategoryData } from './components/Category'
 import { AlbumList, AlbumDetails } from './components/Album'
@@ -31,7 +31,7 @@ const App = () => {
             <Route path={routes.ALBUM} component={AlbumDetails} />
             <Route path={routes.ALBUMS} component={AlbumList} />
             <Route path={routes.PICTURE} component={PictureData} />
-            <Route path={routes.PICTURES} component={PictureData} />
+            <Route path={routes.PICTURES} component={PictureList} />
             <Route path={routes.LOGIN} component={Login} />
             <Route component={Home} />
           </ResponsiveContainer>

@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import PictureDetails from '../Picture/PictureDetails'
+import { PictureListItem } from '../Picture'
 import { Grid, Header } from 'semantic-ui-react'
 
 const AlbumDetails = () => {
   const { albums } = useContext(AlbumContext)
   let { id } = useParams()
-  let album = albums.data
-  && albums.data.find((item) => item.id === parseInt(id))
+  let album = albums.data &&
+  albums.data.find((item) => item.id === parseInt(id))
 
   return (
     <div className='album' data-cy='album'>
@@ -30,7 +30,7 @@ const AlbumDetails = () => {
           {
             album.pictures.map(picture =>
               <Grid.Column  key={picture.id}>
-                <PictureDetails key={picture.id} picture={picture} />
+                <PictureListItem key={picture.id} picture={picture} />
               </Grid.Column>
             )
           }

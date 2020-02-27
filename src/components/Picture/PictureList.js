@@ -1,34 +1,28 @@
 import React, { useContext } from 'react'
-import PictureDetails from './PictureDetails'
+import PictureListItem from './PictureListItem'
 import { Grid, Header } from 'semantic-ui-react'
-import CreatePicture from './CreatePicture'
-import ModalSection from '../Shared/modal/ModalSection'
-import { AuthContext } from '../../contexts/AuthContext'
+import { PictureContext } from '../../contexts/PictureContext'
 
 
-const PictureList = ({ pictures }) => {
-  const { auth } = useContext(AuthContext)
+const PictureList = () => {
+  const { pictures } = useContext(PictureContext)
 
-  const sortedPics = pictures.sort((a,b) =>  b.id-a.id )
+  const sortedPics = pictures.data && pictures.data.sort((a,b) =>  b.id-a.id )
 
   return (
     <div className='PictureList'>
-      { auth.user &&
-      <ModalSection
-        btnIcon={'edit'}
-        btnContent={'new picture'}
-        compToModal={ CreatePicture }
-        headerContent={'New Picture'}
-      />
-      }
+      {pictures.loading && <div className="loader">Loading ...</div>}
 
       <Header as='h2' dividing content='Kuvat' />
 
-      <Grid doubling columns={3}>
-        {
+      <Grid>
+        { !pictures.loading && pictures.data &&
           sortedPics.map(picture =>
-            <Grid.Column  key={picture.id}>
-              <PictureDetails key={picture.id} picture={picture} />
+            <Grid.Column
+              color='grey'
+              mobile={16} tablet={8} computer={2}
+              key={picture.id}>
+              <PictureListItem picture={picture} />
             </Grid.Column>
           )
         }
