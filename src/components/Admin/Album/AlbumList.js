@@ -10,8 +10,6 @@ const AlbumList = ({ albums }) => {
 
   const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
 
-  // console.log('ALBUMLIST --', albums)
-
   return (
     <div className='AlbumList'>
       {auth.user &&

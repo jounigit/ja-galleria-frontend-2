@@ -11,7 +11,7 @@ const PictureListItem = ({ picture }) => {
         <Popup
           content={picture.content}
           header={picture.title}
-          trigger={<Image src={picture.image} size='medium' fluid />}
+          trigger={<Image src={picture.image} data-cy='picture' fluid />}
         />
 
       </Container>
@@ -21,23 +21,3 @@ const PictureListItem = ({ picture }) => {
 }
 
 export default PictureListItem
-
-{/* <Image src={picture.image} size='medium' fluid />
-      <Header as='h2'>{picture.title}</Header> */}
-{/* <Segment> */}
-{/* <Image src={picture.image} size='medium' fluid /> */}
-{/* <Image src={picture.image} size='medium' centered /> */}
-{/* <Header as='h2'>{picture.title}</Header> */}
-{/* {picture.content} */}
-{/* </Segment> */}
-
-{/* <Card>
-          <Image src={picture.thumb} wrapped ui={false} />
-          <Card.Content header={picture.title} />
-          <Card.Content>
-            <Card.Meta>
-              <span className='date'>{picture.created_at}</span>
-            </Card.Meta>
-          </Card.Content>
-          <Card.Content description={picture.content} />
-        </Card> */}

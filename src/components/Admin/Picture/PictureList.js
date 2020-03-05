@@ -24,7 +24,7 @@ const PictureList = ({ pictures }) => {
 
       <Header as='h2' dividing content='Kuvat' />
 
-      <Grid doubling columns={3}>
+      <Grid doubling columns={4}>
         {
           sortedPics.map(picture =>
             <Grid.Column  key={picture.id}>

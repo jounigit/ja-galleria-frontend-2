@@ -29,7 +29,7 @@ export default function MobileContainer({ children }) {
           <Menu.Item
             name='categories'
             as={NavLink}
-            to={routes.CATEGORIES}
+            to={routes.ADMINCATEGORIES}
             onClick={() => setSidebarOpened(false)}
             content='Categories'
           />
@@ -37,7 +37,7 @@ export default function MobileContainer({ children }) {
           <Menu.Item
             name='albums'
             as={NavLink}
-            to={routes.ALBUMS}
+            to={routes.ADMINALBUMS}
             onClick={() => setSidebarOpened(false)}
             content='Albums'
           />
@@ -45,7 +45,7 @@ export default function MobileContainer({ children }) {
           <Menu.Item
             name='pictures'
             as={NavLink}
-            to={routes.PICTURES}
+            to={routes.ADMINPICTURES}
             onClick={() => setSidebarOpened(false)}
             content='Pictures'
           />
@@ -60,7 +60,9 @@ export default function MobileContainer({ children }) {
             inverted
             textAlign="center"
             vertical
-            style={{ minHeight: '100px', padding: '1em 0em' }}
+            style={{ minHeight: '100px',
+              padding: '1em 0em',
+              marginBottom: '10px' }}
           >
             <AppHeader mobile />
             <Container>
@@ -71,6 +73,12 @@ export default function MobileContainer({ children }) {
                 />
                 {/* ------ right, login logout ------------ */}
                 <Menu.Item position='right'>
+                  <Menu.Item
+                    as={NavLink}
+                    to={routes.HOME}
+                    name='publicPage'
+                    content='Public page'
+                  />
                   {
                     auth.user === null ?
                       <Button as={Link}

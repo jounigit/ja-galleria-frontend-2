@@ -16,6 +16,25 @@ export default function MobileContainer({ children }) {
   const [sidebarOpened, setSidebarOpened] = useState(false)
   const { auth, dispatch } = useContext(AuthContext)
 
+  const adminButtons = () => {
+    return (
+      <>
+        <Button as={NavLink}
+          data-cy='admin'
+          to={routes.ADMIN}
+          inverted size='tiny'>
+                admin
+        </Button>
+        <Button as='a'
+          data-cy='logout'
+          onClick={() => dispatch({ type: 'LOGOUT' })}
+          inverted size='tiny'>
+                      Logout - {auth.user.name}
+        </Button>
+      </>
+    )
+  }
+
   return (
     <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
       <Sidebar.Pushable>
@@ -60,7 +79,9 @@ export default function MobileContainer({ children }) {
             inverted
             textAlign="center"
             vertical
-            style={{ minHeight: '100px', padding: '1em 0em' }}
+            style={{ minHeight: '100px',
+              padding: '1em 0em',
+              marginBottom: '10px' }}
           >
             <AppHeader mobile />
             <Container>
@@ -71,6 +92,12 @@ export default function MobileContainer({ children }) {
                 />
                 {/* ------ right, login logout ------------ */}
                 <Menu.Item position='right'>
+                  <Menu.Item
+                    as={NavLink}
+                    to={routes.HOME}
+                    name='publicPage'
+                    content='Public page'
+                  />
                   {
                     auth.user === null ?
                       <Button as={Link}
@@ -80,11 +107,7 @@ export default function MobileContainer({ children }) {
                         content='Log in'
                       />
                       :
-                      <Button as='a'
-                        onClick={() => dispatch({ type: 'LOGOUT' })}
-                        inverted>
-                      Logout - {auth.user.name}
-                      </Button>
+                      adminButtons()
                   }
                 </Menu.Item>
               </Menu>

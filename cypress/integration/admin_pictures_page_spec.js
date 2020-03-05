@@ -13,12 +13,12 @@ describe('The Pictures Page', function() {
     cy.get('[data-cy=picture]').its('length').should('eq', 15)
   })
 
-  it('get one picture', function() {
-    // cy.server()
-    // cy.route('pictures/*', 'fixture:picture').as('getPicture')
-    cy.visit('http://localhost:3000/pictures/1')
-    // cy.wait('@getPicture')
+  // it('get one picture', function() {
+  //   // cy.server()
+  //   // cy.route('pictures/*', 'fixture:picture').as('getPicture')
+  //   cy.visit('http://localhost:3000/pictures/1')
+  //   // cy.wait('@getPicture')
 
-    cy.get('[data-cy=picture]').its('length').should('eq', 1)
-  })
+  //   cy.get('[data-cy=picture]').its('length').should('eq', 1)
+  // })
 })

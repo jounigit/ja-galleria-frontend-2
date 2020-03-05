@@ -63,12 +63,7 @@ describe('The Albums Page', function() {
   context('update album', function() {
     before(function() {
       cy.loginByForm(email, password)
-      cy.visit('/admin/albums')
-      cy.get('[data-cy=addNewAlbum]').click()
-      cy.get('[data-cy=title]').type(title)
-      cy.get('[data-cy=content]').type(content)
-      cy.get('form').submit()
-      cy.visit('/admin/albums')
+      cy.createAlbum('Album', 'create by command')
     })
 
     after(function() {
@@ -79,7 +74,6 @@ describe('The Albums Page', function() {
     it('can update album', function() {
       const newType = 'Updated'
       cy.get('[data-cy=albumListItem] .edit').first().as('firstUpdateButton')
-      // cy.get('[data-cy=update]').first().as('firstUpdateButton')
       cy.get('@firstUpdateButton').click()
       cy.get('[type="title"]').clear()
       cy.get('[data-cy=title]').type(newType)
@@ -88,23 +82,16 @@ describe('The Albums Page', function() {
       cy.get('form').submit()
       cy.get('[data-cy=success-message]').should('be.visible')
       cy.visit('/admin/albums')
-      // cy.get(':nth-child(3) > .divided > .item > .content > .header').should('contain', newType)
-
     })
   })
 
   context('create and delete album', function() {
     before(function() {
       cy.loginByForm(email, password)
-      cy.visit('/admin/albums')
+      cy.createAlbum('Album', 'delete last album')
     })
 
     it('delete last created album', function() {
-      cy.get('[data-cy=addNewAlbum]').click()
-      cy.get('[data-cy=title]').type(title)
-      cy.get('[data-cy=content]').type(content)
-      cy.get('form').submit()
-      cy.visit('/admin/albums')
       cy.get('[data-cy=delete]').first().as('firstDeleteButton')
       cy.get('@firstDeleteButton').click()
       cy.get('[data-cy=albumListItem]').first().as('firstItem')

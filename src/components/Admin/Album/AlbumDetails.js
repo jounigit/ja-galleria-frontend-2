@@ -10,13 +10,13 @@ import { AuthContext } from '../../../contexts/AuthContext'
 const AlbumDetails = ({ album }) => {
   const { auth } = useContext(AuthContext)
 
-  const removeAction = () =>  <RemoveAlbum
+  const removeAction = <RemoveAlbum
     id={ album.id }
     title={album.title}
     author={album.user.name}
   />
 
-  const updateAction = () => <ModalSection
+  const updateAction = <ModalSection
     btnIcon={'edit'}
     compToModal={ UpdateAlbum }
     headerContent={'Update Album'}
@@ -26,7 +26,7 @@ const AlbumDetails = ({ album }) => {
     category_id={album.category_id}
   />
 
-  const chooseAction = () => <ModalSection
+  const chooseAction = <ModalSection
     btnIcon={'file image outline'}
     btnContent={'choose/delete pictures'}
     compToModal={ ChoosePicture }
@@ -42,13 +42,13 @@ const AlbumDetails = ({ album }) => {
         <Grid columns={2} padded='horizontally'>
           <Grid.Column color='grey'>
             <Header as='h2'>Album</Header>
-            { updateAction() }
-            { removeAction() }
+            { updateAction }
+            { removeAction }
 
           </Grid.Column>
           <Grid.Column color='grey'>
             <Header as='h3' content='Pictures' />
-            { auth.user && chooseAction() }
+            { auth.user && chooseAction }
           </Grid.Column>
         </Grid>
         <Grid columns={2} divided>

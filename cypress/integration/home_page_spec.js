@@ -37,6 +37,4 @@ describe('The Home Page', function() {
       cy.get('@menuLinks').should('contain', 'Logout - ' + username)
     })
   })
-
-
 })

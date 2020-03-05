@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Picture } from '../Picture'
-import { Grid, Header, Container, Segment, Divider } from 'semantic-ui-react'
+import { Grid, Header, Container, Divider } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
 import ModalSection from '../../Shared/modal/ModalSection'
 import UpdateAlbum from './UpdateAlbum'
@@ -51,7 +51,6 @@ const AlbumDetailsMobile = ({ album }) => {
         </p>
         <Divider />
         <Grid>
-          {/* <Grid.Column color='grey'> */}
           <Grid.Column mobile={2}>
             { updateAction }
           </Grid.Column>
@@ -77,40 +76,8 @@ const AlbumDetailsMobile = ({ album }) => {
           )
         }
 
-        {/* <Grid columns={16}>
-            <Grid.Column>
-              <Header as='h2'>
-                {album.title}
-                <Header.Subheader>
-            Author - {album.user.name}
-                </Header.Subheader>
-              </Header>
-              <p>
-                {album.content}
-              </p>
-            </Grid.Column>
-
-            <Grid.Column color='grey'>
-              <Header as='h3' content='Pictures' />
-              { auth.user && chooseAction() }
-            </Grid.Column>
-          </Grid>
-        
-          <Grid columns={16}>
-            {
-              album.pictures.map(picture =>
-                <Grid.Column  key={picture.id}>
-                  <Picture key={picture.id} picture={picture} />
-                </Grid.Column>
-              )
-            }
-          </Grid>
-
-        </Grid> */}
-
       </Container>
     </div>
-
 
   )
 }

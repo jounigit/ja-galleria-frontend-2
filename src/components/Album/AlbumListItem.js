@@ -26,23 +26,7 @@ const AlbumListItem = ({ album }) => {
         {album.content && album.content.substring(0,260) }...
       </Segment>
 
-      <Link to={`/album/${album.id}`} data-cy='showAlbumListItemLink'>show</Link>
-
-
-      {/* <Card>
-        <Image size='medium' src={firstPic} />
-        <Card.Content>
-          <Card.Header>{album.title}</Card.Header>
-          <Card.Meta>Author - {album.user.name}</Card.Meta>
-          <Card.Meta>{pictures.length + ' - kuvaa' || 'no pictures'}</Card.Meta>
-          <Card.Description>
-            {album.content && album.content.substring(0,260) }...
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Link to={`/album/${album.id}`}>show</Link>
-        </Card.Content>
-      </Card> */}
+      <Link to={`/album/${album.id}`} data-cy='albumListItemLink'>show</Link>
 
       <div className="ui divider"></div>
     </div>

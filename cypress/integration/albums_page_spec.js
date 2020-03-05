@@ -6,7 +6,7 @@ describe('The Albums Page', function() {
       cy.server()
       cy.route('albums', 'fixture:albums').as('getAlbums')
       cy.visit('/albums')
-      cy.wait('@getAlbums')
+      // cy.wait('@getAlbums')
     })
 
     it('get all albums', function() {
@@ -15,18 +15,14 @@ describe('The Albums Page', function() {
     })
 
     it('can see show link', function() {
-      cy.get('[data-cy=showAlbumLink]').first().should('contain', 'show')
+      cy.get('[data-cy=albumListItem]').first().should('contain', 'show')
     })
 
     it('can open first album', function() {
-      cy.get('[data-cy=showAlbumLink]').first().click()
+      cy.get('[data-cy=albumListItemLink]').first().click()
       cy.get('[data-cy=album]').its('length').should('eq', 1)
     })
 
-    // it('get one album', function() {
-    //   cy.visit('/album/1')
-    //   cy.get('[data-cy=album]').its('length').should('eq', 1)
-    // })
   })
 
 })
