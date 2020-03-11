@@ -21,6 +21,9 @@ module.exports = {
     "plugins": [
       "react", "jest" 
     ],
+    "globals": {
+      "process": true
+    },
     "rules": {
       "indent": [
         "error",

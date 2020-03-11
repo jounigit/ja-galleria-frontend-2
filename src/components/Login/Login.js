@@ -4,7 +4,7 @@ import { Card, Header, Form, Button } from 'semantic-ui-react'
 import { AuthContext } from '../../contexts/AuthContext'
 
 
-const baseUrl = 'http://localhost:8000/api'
+const baseUrl = process.env.REACT_APP_API
 
 const url = `${baseUrl}/login`
 

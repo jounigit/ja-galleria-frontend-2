@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { FAILURE } from '../reducers/actionTypes'
-const apiUrl = 'http://localhost:8000/api'
+const apiUrl = process.env.REACT_APP_API
 
 let token = null
 let config = []
