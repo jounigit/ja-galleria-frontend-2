@@ -3,11 +3,13 @@ import { Container } from 'semantic-ui-react'
 
 const PictureListItem = ({ picture }) => {
 
-  // console.log('DETAIL ---', picture)
+  console.log('DETAIL ---', picture)
+  // const img_src = picture.image
+  // const img_url = `https://$picture.image`
   return (
     <div data-cy='pictureListItem'>
       <Container>
-        <img src ={picture.image} alt='KUVA' />
+        <img src ={ 'https://' + picture.image }  alt='KUVA' />
 
         {/* <Popup
           content={picture.content}
