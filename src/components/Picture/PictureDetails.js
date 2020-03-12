@@ -3,7 +3,7 @@ import { Card, Image } from 'semantic-ui-react'
 
 const PictureDetails = ({ picture }) => {
 
-  // console.log('DETAIL ---', picture)
+  console.log('PICTURE ---', picture.thumb)
   return (
     <div data-cy='picture'>
       <Card>
