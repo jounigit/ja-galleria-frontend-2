@@ -12,7 +12,7 @@ const PictureDetails = ({ picture }) => {
   return (
     <div data-cy='picture'>
       <Card>
-        <Image src={picture.thumb} wrapped ui={false} />
+        <Image src={picture.image} wrapped ui={false} />
         <Card.Content header={picture.title} />
         <Card.Content>
           <Card.Meta>
@@ -35,7 +35,7 @@ const PictureDetails = ({ picture }) => {
                 id={ picture.id }
                 title={ picture.title }
                 content={ picture.content || '' }
-                thumb={ picture.thumb }
+                thumb={ picture.image }
               />
           }
         </Card.Content>

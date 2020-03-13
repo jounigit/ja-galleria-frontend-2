@@ -1,21 +1,24 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
+import {
+  Container,
+  Popup,
+  Image
+} from 'semantic-ui-react'
 
 const PictureListItem = ({ picture }) => {
 
-  console.log('DETAIL ---', picture)
-  // const img_src = picture.image
-  // const img_url = `https://$picture.image`
+  // console.log('DETAIL ---', picture)
+  // console.log('PIC DETAIL url ---', picture.image)
+
   return (
     <div data-cy='pictureListItem'>
       <Container>
-        <img src ={ 'https://' + picture.image }  alt='KUVA' />
 
-        {/* <Popup
+        <Popup
           content={picture.content}
           header={picture.title}
           trigger={<Image src={picture.image} data-cy='picture' fluid />}
-        /> */}
+        />
 
       </Container>
 

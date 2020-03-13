@@ -17,7 +17,7 @@ const PictureForm = ({
       )}
 
       <Form>
-        <Image src={thumb} wrapped ui={false} />
+        <Image src={thumb} fluid />
         <Form.Field>
           <label>
             title

@@ -5,7 +5,6 @@ import CreatePicture from './CreatePicture'
 import ModalSection from '../../Shared/modal/ModalSection'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-
 const PictureList = ({ pictures }) => {
   const { auth } = useContext(AuthContext)
 
