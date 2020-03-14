@@ -82,7 +82,7 @@ const ChoosePicture = ({ id, albumPics }) => {
               <UnChooseForm
                 handleDelete={handleDelete}
                 picture_id={pic.id}
-                thumb={pic.thumb}
+                thumb={pic.image}
               />
             </Grid.Column>
           )

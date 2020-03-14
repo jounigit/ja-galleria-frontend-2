@@ -20,25 +20,6 @@ export default function DesktopContainer({ children }) {
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
 
-  const adminButtons = () => {
-    return (
-      <>
-        <Button as='a'
-          data-cy='logout'
-          onClick={() => dispatch({ type: 'LOGOUT' })}
-          inverted size='tiny'>
-                      Logout - {auth.user.name}
-        </Button>
-        <Button as={NavLink}
-          data-cy='admin'
-          to={routes.ADMIN}
-          inverted size='tiny'>
-                admin
-        </Button>
-      </>
-    )
-  }
-
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
       <Visibility
@@ -89,6 +70,17 @@ export default function DesktopContainer({ children }) {
               {/* ------ right, login logout ------------ */}
               <Menu.Item position='right'>
                 {
+                  auth.user &&
+                  <Menu.Item
+                    as={NavLink}
+                    data-cy='admin'
+                    to={routes.ADMIN}
+                    name='admin'
+                    content='Admin page'
+                  />
+                }
+
+                {
                   auth.user === null ?
                     <Button as={Link}
                       to={routes.LOGIN}
@@ -98,12 +90,17 @@ export default function DesktopContainer({ children }) {
                       content='Log in'
                     />
                     :
-                    adminButtons()
+                    <Button as='a'
+                      data-cy='logout'
+                      onClick={() => dispatch({ type: 'LOGOUT' })}
+                      inverted size='tiny'>
+                      Logout - {auth.user.name}
+                    </Button>
                 }
 
-                <Button as='a' inverted primary={fixed} style={{ marginLeft: '0.5em' }}>
+                {/* <Button as='a' inverted primary={fixed} style={{ marginLeft: '0.5em' }}>
                     Sign Up
-                </Button>
+                </Button> */}
               </Menu.Item>
             </Container>
           </Menu>
