@@ -37,8 +37,8 @@ const ChoosePicture = ({ id, albumPics }) => {
 
     const all = await apiService.getAll('album-pictures')
     const filtered = all.filter(ob => ob.album_id === id && ob.picture_id === picture_id)
-    // console.log('ALL --', all)
-    // console.log('FIT --', filtered)
+    console.log('ALL --', all)
+    console.log('FIT --', filtered)
     console.log('FITid --', filtered[0].id)
 
 
