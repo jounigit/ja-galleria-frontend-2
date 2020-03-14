@@ -38,7 +38,7 @@ const AlbumListItem = ({ album }) => {
     author={album.user.name}
   />
 
-  console.log('AlbumListItem -> Album')
+  // console.log('AlbumListItem -> Album')
   return (
     <div className='album' data-cy='albumListItem'>
       { auth.user &&

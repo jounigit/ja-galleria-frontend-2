@@ -15,7 +15,7 @@ const Album = () => {
   <AlbumDetailsMobile album={ albumsData.find((item) => item.id === parseInt(id)) } />
 
 
-  console.log('Album -> Album')
+  // console.log('Album -> Album')
   return (
     <div className="Albums">
       {albums.loading && <div className="loader">Loading ...</div>}

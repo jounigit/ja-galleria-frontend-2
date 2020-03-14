@@ -12,6 +12,8 @@ import { Home } from './Home'
 const Admin = () => {
   const { auth } = useContext(AuthContext)
 
+  console.log('User --', auth)
+
   return (
     <ResponsiveContainer>
       { auth.loggedOut && <Redirect to='/home' /> }

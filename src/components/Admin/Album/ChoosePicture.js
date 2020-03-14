@@ -20,6 +20,9 @@ const ChoosePicture = ({ id, albumPics }) => {
 
   const sortedPics = choosable.sort((a,b) =>  b.id-a.id )
 
+  console.log('Valitut kuvat --', albumPics)
+  console.log('Valittavat kuvat --', sortedPics)
+
   //
   const handleSelected = picture_id =>  saveSelected( picture_id )
   const handleDelete = picture_id =>  removeSelected( picture_id )
