@@ -8,14 +8,17 @@ import { AuthContext } from '../../../contexts/AuthContext'
 const PictureList = ({ pictures }) => {
   const { auth } = useContext(AuthContext)
 
-  const userId = auth && auth.user.id
+  // const userId = auth && auth.user.id
 
-  const usersPics = auth && pictures.filter(p => userId === p.user_id)
+  // const usersPics = auth && pictures.filter(p => userId === p.user_id)
 
-  console.log('userId --', userId)
-  console.log('userPics --', usersPics)
+  // console.log('userId --', userId)
+  // console.log('userPics --', usersPics)
 
-  const sortedPics = auth.user && usersPics.sort((a,b) =>  b.id-a.id )
+  // const sortedPics = auth.user && usersPics.sort((a,b) =>  b.id-a.id )
+
+
+  const sortedPics = auth.user && pictures.sort((a,b) =>  b.id-a.id )
 
   return (
     <div className='PictureList'>

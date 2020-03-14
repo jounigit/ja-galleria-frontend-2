@@ -5,7 +5,7 @@ import { removeData } from '../../../services/apiService'
 import { PictureContext } from '../../../contexts/PictureContext'
 
 const RemovePicture = ({ id, title } ) => {
-  const { dispatch } = useContext(PictureContext)
+  const { pictures, dispatch } = useContext(PictureContext)
 
   const remove = async (id, title) => {
     const ok = window.confirm(`remove picture '${title}'?`)
@@ -14,10 +14,13 @@ const RemovePicture = ({ id, title } ) => {
     }
 
     try {
-      removeData(dispatch, DELETE_PICTURE, 'pictures', id)
+      const response = removeData(dispatch, DELETE_PICTURE, 'pictures', id)
+      console.log('Remove data --', response.data)
     } catch (error) {
       console.error()
     }
+
+    console.log('Pics state --', pictures)
 
   }
   return (
