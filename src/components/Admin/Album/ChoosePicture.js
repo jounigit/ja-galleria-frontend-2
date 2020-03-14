@@ -100,7 +100,7 @@ const ChoosePicture = ({ id, albumPics }) => {
               <ChooseForm
                 handleSelected={handleSelected}
                 picture_id={picture.id}
-                thumb={picture.thumb} />
+                thumb={picture.image} />
             </Grid.Column>
           )
         }

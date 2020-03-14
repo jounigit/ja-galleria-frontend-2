@@ -12,7 +12,7 @@ const AlbumListItem = ({ album }) => {
 
   const pictures = album.pictures
   const firstPic = pictures && pictures.length > 0 ?
-    pictures[0].thumb : ''
+    pictures[0].image : ''
 
   const chooseAction = <ModalSection
     btnIcon={'file image outline'}
