@@ -7,7 +7,7 @@ import { PictureContext } from '../../../contexts/PictureContext'
 const RemovePicture = ({ id, title } ) => {
   const { pictures, dispatch } = useContext(PictureContext)
 
-  // const remove = async (id, title) => {
+  const remove = async (id) => {
   //   const ok = window.confirm(`remove picture '${title}'?`)
   //   if ( ok===false) {
   //     return
