@@ -82,8 +82,16 @@ const UploadPicture = ({ ...props }) => {
   if (data.message) {
     return (
       <Container>
-        <img src={props.uploaded.thumb} alt="icon" width="200" />
+        <img src={props.uploaded.image} alt="icon" width="200" />
         <Header as='h4' color='green' data-cy='message'>{data.message}</Header>
+      </Container>
+    )
+  }
+
+  if (data.errorMessage) {
+    return (
+      <Container>
+        <Header as='h4' color='red' data-cy='message'>{data.errorMessage}</Header>
       </Container>
     )
   }

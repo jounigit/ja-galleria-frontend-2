@@ -39,7 +39,7 @@ const ChoosePicture = ({ id, albumPics }) => {
     const filtered = all.filter(ob => ob.album_id === id && ob.picture_id === picture_id)
     // console.log('ALL --', all)
     // console.log('FIT --', filtered)
-    // console.log('FITid --', filtered[0].id)
+    console.log('FITid --', filtered[0].id)
 
 
     try {
