@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button, Container } from 'semantic-ui-react'
 import { DELETE_PICTURE } from '../../../reducers/actionTypes'
-import { removeData } from '../../../services/apiService'
+import apiService from '../../../services/apiService'
 import { PictureContext } from '../../../contexts/PictureContext'
 
 const RemovePicture = ({ id, title } ) => {
@@ -14,8 +14,14 @@ const RemovePicture = ({ id, title } ) => {
     }
 
     try {
-      const response = removeData(dispatch, DELETE_PICTURE, 'pictures', id)
+      const response = await apiService.remove('pictures', id)
+      // const response = removeData(dispatch, DELETE_PICTURE, 'pictures', id)
       console.log('Remove data --', response.data)
+
+      dispatch({
+        type: DELETE_PICTURE,
+        id
+      })
     } catch (error) {
       console.error()
     }
