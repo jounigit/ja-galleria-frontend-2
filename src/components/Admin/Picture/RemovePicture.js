@@ -13,7 +13,11 @@ const RemovePicture = ({ id, title } ) => {
       return
     }
 
-    removeData(dispatch, DELETE_PICTURE, 'pictures', id)
+    try {
+      removeData(dispatch, DELETE_PICTURE, 'pictures', id)
+    } catch (error) {
+      console.error()
+    }
 
   }
   return (
