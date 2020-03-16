@@ -8,10 +8,10 @@ const RemovePicture = ({ id, title } ) => {
   const { pictures, dispatch } = useContext(PictureContext)
 
   const remove = async (id) => {
-  //   const ok = window.confirm(`remove picture '${title}'?`)
-  //   if ( ok===false) {
-  //     return
-  //   }
+    const ok = window.confirm(`remove picture '${title}'?`)
+    if ( ok===false) {
+      return
+    }
 
     try {
       const response = await apiService.remove('pictures', id)

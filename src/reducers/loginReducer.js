@@ -16,6 +16,7 @@ const loginReducer = (state, action) => {
     return {
       ...state,
       isAuthenticated: true,
+      loggedOut: false,
       user: action.payload.user,
       token: action.payload.token
     }
@@ -23,6 +24,7 @@ const loginReducer = (state, action) => {
     return {
       ...state,
       isAuthenticated: true,
+      loggedOut: false,
       user: action.payload.user,
       token: action.payload.token
     }
