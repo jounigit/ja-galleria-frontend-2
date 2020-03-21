@@ -13,6 +13,7 @@ import { Home } from './components/Home'
 import { CategoryData } from './components/Category'
 import { AlbumList, AlbumDetails } from './components/Album'
 import Login from './components/Login/Login'
+import Signup from './components/Signup/Signup'
 import Footer from './components/UI/footers/AppFooter'
 import Admin from './components/Admin/Admin'
 
@@ -32,6 +33,7 @@ const App = () => {
             <Route path={routes.PICTURE} component={PictureData} />
             <Route path={routes.PICTURES} component={PictureList} />
             <Route path={routes.LOGIN} component={Login} />
+            <Route path={routes.SIGNUP} component={Signup} />
             <Route path={routes.HOME} component={Home} />
             <Route exact path="/" component={Home} />
           </ResponsiveContainer>

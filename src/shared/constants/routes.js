@@ -1,4 +1,5 @@
 export const LOGIN = '/login'
+export const SIGNUP = '/signup'
 export const REGISTER = '/register'
 export const FORGOTPASSWORD = '/forgotpassword'
 export const PROPERTIES = '/properties'

@@ -109,6 +109,12 @@ export default function MobileContainer({ children }) {
                       :
                       adminButtons()
                   }
+                  <Button as='a'
+                    data-cy='signup'
+                    inverted
+                    style={{ marginLeft: '0.5em' }}
+                    content='Sign Up'
+                  />
                 </Menu.Item>
               </Menu>
 
