@@ -12,13 +12,26 @@ import { NavLink, Link } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
 import { AuthContext } from '../../../../contexts/AuthContext'
+import { UserContext } from '../../../../contexts/UserContext'
+import { removeData } from '../../../../services/apiService'
+import { DELETE_USER, LOGOUT } from '../../../../reducers/actionTypes'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
   const { auth, dispatch } = useContext(AuthContext)
+  const { userDispatch } = useContext(UserContext)
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
+
+  const handleResign = () => () => {
+    const ok = window.confirm(`remove user ${auth.user.name}?`)
+    if ( ok===false) {
+      return
+    }
+    removeData(userDispatch, DELETE_USER, 'users', auth.user.id)
+    dispatch({ type: LOGOUT })
+  }
 
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -92,7 +105,7 @@ export default function DesktopContainer({ children }) {
                     :
                     <Button as='a'
                       data-cy='logout'
-                      onClick={() => dispatch({ type: 'LOGOUT' })}
+                      onClick={() => dispatch({ type: LOGOUT })}
                       inverted size='tiny'>
                       Logout - {auth.user.name}
                     </Button>
@@ -106,6 +119,16 @@ export default function DesktopContainer({ children }) {
                     inverted primary={fixed}
                     style={{ marginLeft: '0.5em' }}
                     content='Sign Up'
+                  />
+                }
+                {
+                  auth.user &&
+                  <Button as='a'
+                    data-cy='resign'
+                    onClick={ handleResign() }
+                    inverted primary={fixed}
+                    style={{ marginLeft: '0.5em' }}
+                    content='Resign'
                   />
                 }
               </Menu.Item>

@@ -19,7 +19,6 @@ const userReducer = (state, action) => {
     const newData = [...state.data.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '' }
   case DELETE_USER:
-    console.log('USERreducer --', state.data.data,' --ACTION --', action)
     const delData = state.data.data.filter(d => d.id !== action.id)
     return { data: delData, isLoading: false, errorMessage: '' }
   default:

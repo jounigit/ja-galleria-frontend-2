@@ -14,11 +14,8 @@ const RemoveAlbum = ({ id, user } ) => {
     if ( ok===false) {
       return
     }
-
     removeData(userDispatch, DELETE_USER, 'users', id)
     dispatch({ type: LOGOUT })
-
-
   }
   return (
     <div>
