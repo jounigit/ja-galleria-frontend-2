@@ -12,6 +12,11 @@ const setToken = (newToken) => {
   }
 }
 
+const getAllProtected = async (url) => {
+  const response = await axios.get(`${apiUrl}/${url}`, config)
+  return response.data
+}
+
 const getAll = async (url) => {
   const response = await axios.get(`${apiUrl}/${url}`)
   return response.data
@@ -38,6 +43,15 @@ const remove = async (url, id) => {
 }
 
 // ::::::::::::::::: actions :::::::::::::::::::::::::::::::: //
+export const fetchProtectedData = async (dispatch, TYPE, path) => {
+  try {
+    const results = await getAllProtected(path)
+    dispatch({ type: TYPE, data: results })
+  } catch (error) {
+    dispatch({ type: FAILURE, error: error.message || error })
+  }
+}
+
 export const fetchData = async (dispatch, TYPE, path) => {
   try {
     const results = await getAll(path)
@@ -93,4 +107,4 @@ export const removeData = async (dispatch, TYPE, path, id) => {
   }
 }
 
-export default { getAll, getOne, create, update, remove, setToken }
+export default { getAllProtected, getAll, getOne, create, update, remove, setToken }

@@ -8,6 +8,7 @@ import { CategoryData } from './Category'
 import { Albums, Album } from './Album'
 import { PictureData } from './Picture'
 import { Home } from './Home'
+import { Users } from './User'
 
 const Admin = () => {
   const { auth } = useContext(AuthContext)
@@ -16,12 +17,16 @@ const Admin = () => {
 
   return (
     <ResponsiveContainer>
-      { auth.loggedOut && <Redirect to='/home' /> }
+      {
+        !auth.isAuthenticated &&
+        <Redirect to='/home' />
+      }
       <Route path={routes.ADMINCATEGORIES} component={CategoryData} />
       <Route path={routes.ADMINALBUMS} component={Albums} />
       <Route path={routes.ADMINALBUM} component={Album} />
       <Route path={routes.ADMINPICTURES} component={PictureData} />
       <Route path={routes.ADMINPICTURE} component={PictureData} />
+      <Route path={routes.ADMINUSERS} component={Users} />
       <Route path={routes.ADMINHOME} component={Home} />
       <Route exact path={routes.ADMIN} component={Home} />
 

@@ -98,13 +98,16 @@ export default function DesktopContainer({ children }) {
                     </Button>
                 }
 
-                <Button as={Link}
-                  to={routes.SIGNUP}
-                  data-cy='signup'
-                  inverted primary={fixed}
-                  style={{ marginLeft: '0.5em' }}
-                  content='Sign Up'
-                />
+                {
+                  auth.user === null &&
+                  <Button as={Link}
+                    to={routes.SIGNUP}
+                    data-cy='signup'
+                    inverted primary={fixed}
+                    style={{ marginLeft: '0.5em' }}
+                    content='Sign Up'
+                  />
+                }
               </Menu.Item>
             </Container>
           </Menu>

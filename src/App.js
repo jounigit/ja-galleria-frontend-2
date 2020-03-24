@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  Suspense
 } from 'react'
 import {  Route, Switch } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
@@ -22,25 +21,23 @@ export const AuthContext = createContext()
 const App = () => {
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Container>
-        <Switch>
-          <Route path={routes.ADMIN} component={Admin} />
-          <ResponsiveContainer>
-            <Route path={routes.CATEGORIES} component={CategoryData} />
-            <Route path={routes.ALBUM} component={AlbumDetails} />
-            <Route path={routes.ALBUMS} component={AlbumList} />
-            <Route path={routes.PICTURE} component={PictureData} />
-            <Route path={routes.PICTURES} component={PictureList} />
-            <Route path={routes.LOGIN} component={Login} />
-            <Route path={routes.SIGNUP} component={Signup} />
-            <Route path={routes.HOME} component={Home} />
-            <Route exact path="/" component={Home} />
-          </ResponsiveContainer>
-        </Switch>
-        <Footer />
-      </Container>
-    </Suspense>
+    <Container>
+      <Switch>
+        <Route path={routes.ADMIN} component={Admin} />
+        <ResponsiveContainer>
+          <Route path={routes.CATEGORIES} component={CategoryData} />
+          <Route path={routes.ALBUM} component={AlbumDetails} />
+          <Route path={routes.ALBUMS} component={AlbumList} />
+          <Route path={routes.PICTURE} component={PictureData} />
+          <Route path={routes.PICTURES} component={PictureList} />
+          <Route path={routes.LOGIN} component={Login} />
+          <Route path={routes.SIGNUP} component={Signup} />
+          <Route path={routes.HOME} component={Home} />
+          <Route exact path="/" component={Home} />
+        </ResponsiveContainer>
+      </Switch>
+      <Footer />
+    </Container>
   )
 }
 

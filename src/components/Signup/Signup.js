@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
+import { Card, Header, Form, Button } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 
 const baseUrl = process.env.REACT_APP_API
@@ -42,6 +42,9 @@ const Signup = () => {
     if(data.email === '') {
       return handleError('email is required!')
     }
+    if(data.password.length < 6) {
+      return handleError('The password must be at least 6 characters!')
+    }
     if(data.password === '') {
       return handleError('password is required!')
     }
@@ -52,8 +55,6 @@ const Signup = () => {
       errorMessage: null
     })
 
-
-    // console.log('DATA --', data)
     try {
       await axios.post(url,
         {
@@ -61,9 +62,6 @@ const Signup = () => {
           email: data.email,
           password: data.password
         })
-
-      // console.log('RES --', response)
-      // console.log('RES id --', response.data.user.id)
 
       setData({
         username: '',
@@ -74,6 +72,7 @@ const Signup = () => {
         message: 'User signed up successfully'
       })
     } catch (error) {
+      console.log('=ERROR: ', error.message)
       handleError('incorrect email or password!')
     }
 
@@ -81,14 +80,7 @@ const Signup = () => {
   // console.log('STATE -- ', data)
   // :::::::::::::::::::::::::::::::::::: //
   if (data.message) {
-    const urlTo = <Redirect to='/login' />
-    // setTimeout(() => <Redirect to='/login' />, 2000)
-    return (
-      <Container>
-        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-        { setTimeout(() => urlTo, 2000) }
-      </Container>
-    )
+    return <Redirect to='/login' />
   }
 
   return (

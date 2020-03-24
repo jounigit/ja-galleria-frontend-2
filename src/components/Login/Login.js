@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
-import { Card, Header, Form, Button } from 'semantic-ui-react'
+import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
 import { AuthContext } from '../../contexts/AuthContext'
+import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 
 
 const baseUrl = process.env.REACT_APP_API
@@ -14,7 +15,8 @@ const Login = () => {
     email: '',
     password: '',
     isSubmitting: false,
-    errorMessage: null
+    errorMessage: null,
+    message: null
   }
   const [data, setData] = useState(initialState)
 
@@ -58,11 +60,13 @@ const Login = () => {
         type: 'LOGIN',
         payload: result.data
       })
+      console.log('=LOGIN ==', result)
       setData({
         email: '',
         password: '',
         isSubmitting: false,
-        errorMessage: null
+        errorMessage: null,
+        message: result.statusText
       })
     } catch (error) {
       handleError('incorrect email or password!')
@@ -72,45 +76,50 @@ const Login = () => {
   // console.log('STATE -- ', data)
 
   return (
-    <Card centered style={{ marginTop: 20 }}>
-      <Card.Content>
-        <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
-      </Card.Content>
-      <Card.Content>
+    <Container>
+      { data.message &&
+        <MessageWithRedirect message='Login successfully!' path='home' />
+      }
+      <Card centered style={{ marginTop: 20 }}>
+        <Card.Content>
+          <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
+        </Card.Content>
+        <Card.Content>
 
-        {data.errorMessage && (
-          <Header as='h4' color='red' data-cy='error-message'>{data.errorMessage}</Header>
+          {data.errorMessage && (
+            <Header as='h4' color='red' data-cy='error-message'>{data.errorMessage}</Header>
 
-        )}
-        <Form onSubmit={ handleFormSubmit }>
-          <Form.Field>
-            <label>Email</label>
-            <input
-              data-cy='email'
-              type='email'
-              value={data.email}
-              onChange={handleInputChange}
-              name='email'
-              id='email'
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              data-cy='password'
-              type='password'
-              value={data.password}
-              onChange={handleInputChange}
-              name='password'
-              id='password'
-            />
-          </Form.Field>
+          )}
+          <Form onSubmit={ handleFormSubmit }>
+            <Form.Field>
+              <label>Email</label>
+              <input
+                data-cy='email'
+                type='email'
+                value={data.email}
+                onChange={handleInputChange}
+                name='email'
+                id='email'
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input
+                data-cy='password'
+                type='password'
+                value={data.password}
+                onChange={handleInputChange}
+                name='password'
+                id='password'
+              />
+            </Form.Field>
 
 
-          <Button data-cy='submit' type='submit'>login</Button>
-        </Form>
-      </Card.Content>
-    </Card>
+            <Button data-cy='submit' type='submit'>login</Button>
+          </Form>
+        </Card.Content>
+      </Card>
+    </Container>
   )
 }
 

@@ -92,12 +92,12 @@ export default function MobileContainer({ children }) {
                 />
                 {/* ------ right, login logout ------------ */}
                 <Menu.Item position='right'>
-                  <Menu.Item
+                  {/* <Menu.Item
                     as={NavLink}
                     to={routes.HOME}
                     name='publicPage'
                     content='Public page'
-                  />
+                  /> */}
                   {
                     auth.user === null ?
                       <Button as={Link}
@@ -109,12 +109,17 @@ export default function MobileContainer({ children }) {
                       :
                       adminButtons()
                   }
-                  <Button as='a'
-                    data-cy='signup'
-                    inverted
-                    style={{ marginLeft: '0.5em' }}
-                    content='Sign Up'
-                  />
+
+                  {
+                    auth.user === null &&
+                    <Button as='a'
+                      data-cy='signup'
+                      inverted
+                      style={{ marginLeft: '0.5em' }}
+                      content='Sign Up'
+                    />
+                  }
+
                 </Menu.Item>
               </Menu>
 

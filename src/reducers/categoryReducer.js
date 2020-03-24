@@ -1,5 +1,4 @@
 /* eslint-disable no-case-declarations */
-// import albumService from '../services/albumService'
 import {
   INIT_CATEGORIES,
   CREATE_CATEGORY,

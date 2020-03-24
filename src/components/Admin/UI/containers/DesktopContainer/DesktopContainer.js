@@ -72,6 +72,12 @@ export default function DesktopContainer({ children }) {
                     name='pictures'
                     content='Pictures'
                   />
+                  <Menu.Item
+                    as={NavLink}
+                    to={routes.ADMINUSERS}
+                    name='users'
+                    content='Users'
+                  />
 
                   {/* ------ right, login logout ------------ */}
                   <Menu.Item position='right'>

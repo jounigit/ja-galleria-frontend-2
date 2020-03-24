@@ -14,6 +14,8 @@ export const DELETE_PICTURE = 'DELETE_PICTURE'
 export const UPDATE_PICTURE = 'UPDATE_PICTURE'
 
 export const INIT_USERS = 'INIT_USERS'
+export const CREATE_USER = 'CREATE_USER'
+export const DELETE_USER = 'DELETE_USER'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'

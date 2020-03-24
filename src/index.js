@@ -6,7 +6,8 @@ import {
   CategoryContextProvider,
   AlbumContextProvider,
   PictureContextProvider,
-  AuthContextProvider
+  AuthContextProvider,
+  UserContextProvider
 } from './contexts'
 
 import App from './App'
@@ -17,7 +18,9 @@ ReactDOM.render(
       <AlbumContextProvider>
         <PictureContextProvider>
           <CategoryContextProvider>
-            <App />
+            <UserContextProvider>
+              <App />
+            </UserContextProvider>
           </CategoryContextProvider>
         </PictureContextProvider>
       </AlbumContextProvider>
