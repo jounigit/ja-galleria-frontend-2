@@ -43,11 +43,11 @@ const Signup = () => {
       return handleError('email is required!')
     }
     if(data.password.length < 6) {
-      return handleError('The password must be at least 6 characters!')
+      return handleError('password must be at least 6 characters!')
     }
-    if(data.password === '') {
-      return handleError('password is required!')
-    }
+    // if(data.password === '') {
+    //   return handleError('password is required!')
+    // }
 
     setData({
       ...data,

@@ -75,6 +75,7 @@ export default function DesktopContainer({ children }) {
                   <Menu.Item
                     as={NavLink}
                     to={routes.ADMINUSERS}
+                    data-cy='usersLink'
                     name='users'
                     content='Users'
                   />

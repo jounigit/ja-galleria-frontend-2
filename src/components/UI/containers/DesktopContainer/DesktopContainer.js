@@ -88,6 +88,7 @@ export default function DesktopContainer({ children }) {
                     as={NavLink}
                     data-cy='admin'
                     to={routes.ADMIN}
+                    data-cy='adminLink'
                     name='admin'
                     content='Admin page'
                   />

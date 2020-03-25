@@ -1,9 +1,5 @@
 
 Cypress.Commands.add('loginByForm', (email, password) => {
-  // Cypress.log({
-  //   name: 'loginByForm',
-  //   message: `${email} | ${password}`,
-  // })
   const url = Cypress.env('serverUrl')+'/login'
 
   cy.request({
@@ -30,7 +26,7 @@ Cypress.Commands.add('createCategory', ({ title, content }) => {
     failOnStatusCode: false,
     body: { title, content },
     headers: {
-      'Authorization': `bearer ${JSON.parse(localStorage.getItem('token'))}`
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
     }
   })
 
@@ -45,7 +41,7 @@ Cypress.Commands.add('createAlbum', ({ title, content }) => {
     failOnStatusCode: false,
     body: { title, content },
     headers: {
-      'Authorization': `bearer ${JSON.parse(localStorage.getItem('token'))}`
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
     }
   })
 
@@ -70,36 +66,41 @@ Cypress.Commands.add('createAlbumByForm', (title, content) => {
     })
 })
 
-Cypress.Commands.add('deleteUser', (email, password) => {
-  const url = Cypress.env('serverUrl')+'/login'
+Cypress.Commands.add('signUpByCommand', (name, email, password) => {
+  const url = Cypress.env('serverUrl')+'/register'
 
   cy.request({
     method: 'POST',
     url,
+    failOnStatusCode: false,
+    form: true,
     body: {
+      name,
       email,
       password,
     },
   })
     .then((response) => {
-      let deleteId = response.body.user.id
-      window.localStorage.setItem('user', JSON.stringify(response.body.user))
-      window.localStorage.setItem('token', JSON.stringify(response.body.token))
-      cy.log('Cy res --', deleteId)
-      const deleteUrl = Cypress.env('serverUrl')+'/users/'+deleteId
+      cy.log('=Cy SignUpByCommand ==', response)
+    })
+})
 
-      cy.request({
-        method: 'DELETE',
-        url: deleteUrl,
-        failOnStatusCode: false,
-        headers: {
-          'Authorization': `bearer ${JSON.parse(localStorage.getItem('token'))}`
-        }
-      })
-        .then((response) => {
-          let res = response.body
-          cy.log('Cy delete --', res)
-        })
+Cypress.Commands.add('deleteUser', () => {
+  const user = JSON.parse(localStorage.getItem('user'))
+  const url = Cypress.env('serverUrl')+'/users/'+user.id
+  cy.log('=Cy url ==', url)
+
+  cy.request({
+    method: 'DELETE',
+    url,
+    failOnStatusCode: false,
+    headers: {
+      'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+    }
+  })
+    .then((response) => {
+      let body = response.body
+      cy.log('=Cy delete ==', body)
     })
 
 })
