@@ -86,7 +86,6 @@ export default function DesktopContainer({ children }) {
                   auth.user &&
                   <Menu.Item
                     as={NavLink}
-                    data-cy='admin'
                     to={routes.ADMIN}
                     data-cy='adminLink'
                     name='admin'
