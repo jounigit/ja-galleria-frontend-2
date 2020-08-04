@@ -1,12 +1,9 @@
-import React, {
-  createContext,
-} from 'react'
+import React from 'react'
 import {  Route, Switch } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import './App.css'
 import { ResponsiveContainer } from './components/UI/containers/ResponsiveContainer'
 import * as routes from './shared/constants/routes'
-
 import { PictureData, PictureList } from './components/Picture'
 import { Home } from './components/Home'
 import { CategoryData } from './components/Category'
@@ -15,8 +12,7 @@ import Login from './components/Login/Login'
 import Signup from './components/Signup/Signup'
 import Footer from './components/UI/footers/AppFooter'
 import Admin from './components/Admin/Admin'
-
-export const AuthContext = createContext()
+import Notification from './components/Shared/Notification'
 
 const App = () => {
 
@@ -25,6 +21,7 @@ const App = () => {
       <Switch>
         <Route path={routes.ADMIN} component={Admin} />
         <ResponsiveContainer>
+          <Notification />
           <Route path={routes.CATEGORIES} component={CategoryData} />
           <Route path={routes.ALBUM} component={AlbumDetails} />
           <Route path={routes.ALBUMS} component={AlbumList} />

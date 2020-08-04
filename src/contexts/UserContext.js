@@ -7,17 +7,15 @@ import React,
 } from 'react'
 import userReducer from '../reducers/userReducer'
 import { INIT_USERS } from '../reducers/actionTypes'
-import { fetchProtectedData } from '../services/apiService'
-// import { AuthContext } from '../../../contexts/AuthContext'
+import { fetchData } from '../services/apiService'
 
 export const UserContext = createContext()
 
 const UserContextProvider = (props) => {
-  // const { auth } = useContext(AuthContext)
   const [users, userDispatch] = useReducer(userReducer, [])
 
   useEffect(() => {
-    fetchProtectedData(userDispatch, INIT_USERS, 'users')
+    fetchData(userDispatch, INIT_USERS, 'users')
   }, [userDispatch])
 
   return (

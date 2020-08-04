@@ -1,24 +1,22 @@
 import React, {
-  useState,
-  useEffect
+  // useState,
+  useContext
+  // useEffect
 } from 'react'
-import { Container, Header } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
+import { NotificationContext, notify } from '../../contexts/NotificationContext'
 
-const MessageWithRedirect = ({ message, path }) => {
-  const [redirect, setRedirect] = useState(false)
+const MessageWithRedirect = ({ message, color, path = null }) => {
+  const { msgDispatch } = useContext(NotificationContext)
   const pathTo = `/${path}`
-  // console.log('=STATE: ', redirect ,'= TO: ', path)
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => setRedirect(true), 2000)
-    return () => clearTimeout(timeOut)
-  }, [redirect])
 
   return (
     <Container>
-      { redirect && <Redirect to={pathTo} /> }
-      <Header as='h3' color='green' data-cy='message'>{message}</Header>
+      { notify( msgDispatch, message, 5, color) }
+      { path &&
+      <Redirect to={pathTo} /> &&
+      setTimeout(() => notify( msgDispatch, message, 5, color), 3000) }
     </Container>
   )
 }

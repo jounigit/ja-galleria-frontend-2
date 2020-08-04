@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Container, Header } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
 import { UPDATE_ALBUM } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
@@ -11,12 +11,11 @@ const UpdateAlbum = ({ ...props }) => {
     content: props.content,
     category_id: props.category_id,
     isSubmitting: false,
-    errorMessage: null,
-    message: null
+    errorMessage: null
   }
   // Component's state
   const [data, setData] = useState(initialState)
-  const { albums, dispatch } = useContext(AlbumContext) // Album actions
+  const { albums, dispatch } = useContext(AlbumContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
@@ -61,22 +60,15 @@ const UpdateAlbum = ({ ...props }) => {
         title: '',
         content: '',
         isSubmitting: false,
-        errorMessage: null,
-        message: 'Album updated successfully.'
+        errorMessage: null
       })
+
+      localStorage.setItem('reloadPage', 'categories')
+      props.setModalOpen()
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  if (data.message) {
-    localStorage.setItem('reloadPage', 'categories')
-    setTimeout(() => props.setModalOpen(), 2000)
-    return (
-      <Container data-cy='success-message'>
-        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-      </Container>
-    )
-  }
 
   return (
     <Container>

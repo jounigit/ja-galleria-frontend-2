@@ -15,24 +15,33 @@ import { AuthContext } from '../../../../contexts/AuthContext'
 import { UserContext } from '../../../../contexts/UserContext'
 import { removeData } from '../../../../services/apiService'
 import { DELETE_USER, LOGOUT } from '../../../../reducers/actionTypes'
+import { NotificationContext, notify } from '../../../../contexts/NotificationContext'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
   const { auth, dispatch } = useContext(AuthContext)
   const { userDispatch } = useContext(UserContext)
+  const { msgDispatch } = useContext(NotificationContext)
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
 
+  // resign actions
   const handleResign = () => () => {
     const ok = window.confirm(`remove user ${auth.user.name}?`)
-    if ( ok===false) {
-      return
-    }
+    if ( ok===false) { return }
     removeData(userDispatch, DELETE_USER, 'users', auth.user.id)
     dispatch({ type: LOGOUT })
+    notify( msgDispatch, `user ${auth.user.name} resigned`, 5, 'orange' )
   }
 
+  // logout actions
+  const handleLogout = () => () => {
+    dispatch({ type: LOGOUT })
+    notify( msgDispatch, 'User logged out.', 5, 'teal' )
+  }
+
+  // ----------------- menu, navigation -------------------------- //
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
       <Visibility
@@ -105,7 +114,7 @@ export default function DesktopContainer({ children }) {
                     :
                     <Button as='a'
                       data-cy='logout'
-                      onClick={() => dispatch({ type: LOGOUT })}
+                      onClick={ handleLogout() }
                       inverted size='tiny'>
                       Logout - {auth.user.name}
                     </Button>

@@ -2,8 +2,7 @@ import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
 import { AuthContext } from '../../contexts/AuthContext'
-import MessageWithRedirect from '../Shared/MessageWtihRedirect'
-
+import { Redirect } from 'react-router'
 
 const baseUrl = process.env.REACT_APP_API
 
@@ -60,7 +59,7 @@ const Login = () => {
         type: 'LOGIN',
         payload: result.data
       })
-      console.log('=LOGIN ==', result)
+
       setData({
         email: '',
         password: '',
@@ -73,12 +72,15 @@ const Login = () => {
     }
 
   }
-  // console.log('STATE -- ', data)
 
+  // :::::::::::::::::::::::::::::::::::: //
   return (
     <Container>
       { data.message &&
-        <MessageWithRedirect message='Login successfully!' path='home' />
+      <Redirect to='/home' />
+        // notify( msgDispatch, 'Login successfully!', 5, 'olive')
+        // &&
+        // setTimeout(() => <Redirect to='/home' />, 6000)
       }
       <Card centered style={{ marginTop: 20 }}>
         <Card.Content>

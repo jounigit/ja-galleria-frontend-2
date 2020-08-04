@@ -7,10 +7,11 @@ import {
   AlbumContextProvider,
   PictureContextProvider,
   AuthContextProvider,
-  UserContextProvider
+  UserContextProvider,
+  NotificationContextProvider
 } from './contexts'
-
 import App from './App'
+
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,7 +20,9 @@ ReactDOM.render(
         <PictureContextProvider>
           <CategoryContextProvider>
             <UserContextProvider>
-              <App />
+              <NotificationContextProvider>
+                <App />
+              </NotificationContextProvider>
             </UserContextProvider>
           </CategoryContextProvider>
         </PictureContextProvider>

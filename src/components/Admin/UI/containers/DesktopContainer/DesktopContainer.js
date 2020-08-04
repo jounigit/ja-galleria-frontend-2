@@ -12,14 +12,24 @@ import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../../shared/constants/routes'
 import { AuthContext } from '../../../../../contexts/AuthContext'
+import {  LOGOUT } from '../../../../../reducers/actionTypes'
+import { NotificationContext, notify } from '../../../../../contexts/NotificationContext'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
   const { auth, dispatch } = useContext(AuthContext)
+  const { msgDispatch } = useContext(NotificationContext)
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
 
+  // logout actions
+  const handleLogout = () => () => {
+    dispatch({ type: LOGOUT })
+    notify( msgDispatch, 'User logged out.', 5, 'teal' )
+  }
+  
+  // ----------------- menu, navigation -------------------------- //
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
       <Visibility
@@ -91,7 +101,7 @@ export default function DesktopContainer({ children }) {
 
                     <Button as='a'
                       data-cy='logout'
-                      onClick={() => dispatch({ type: 'LOGOUT' })}
+                      onClick={ handleLogout() }
                       inverted size='tiny'>
                       Logout - {auth.user.name}
                     </Button>

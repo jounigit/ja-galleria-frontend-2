@@ -29,3 +29,5 @@ export const HIDE_MSG = 'HIDE_MSG'
 
 export const ADD_ERROR = 'ADD_ERROR'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
+
+export const CLEAR_MSG = 'CLEAR_MSG'

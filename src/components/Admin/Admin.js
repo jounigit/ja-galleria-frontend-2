@@ -9,18 +9,19 @@ import { Albums, Album } from './Album'
 import { PictureData } from './Picture'
 import { Home } from './Home'
 import { Users } from './User'
+import Notification from '../Shared/Notification'
 
 const Admin = () => {
   const { auth } = useContext(AuthContext)
 
-  console.log('User --', auth)
+  // console.log('User --', auth)
 
   return (
     <ResponsiveContainer>
-      {
-        !auth.isAuthenticated &&
-        <Redirect to='/home' />
-      }
+      { !auth.isAuthenticated && <Redirect to='/home' /> }
+
+      <Notification />
+
       <Route path={routes.ADMINCATEGORIES} component={CategoryData} />
       <Route path={routes.ADMINALBUMS} component={Albums} />
       <Route path={routes.ADMINALBUM} component={Album} />

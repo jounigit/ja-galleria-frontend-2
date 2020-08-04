@@ -4,7 +4,7 @@ import UserList from './UserList'
 
 const Users = () => {
   const { users } = useContext(UserContext)
-  const usersData = users.data && users.data.data
+  const usersData = users && users.data
 
   return (
     <div className="Users">

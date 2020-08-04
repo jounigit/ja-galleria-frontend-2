@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Header, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
 import { UPDATE_CATEGORY } from '../../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
@@ -59,18 +59,19 @@ const UpdateCategory = ({ ...props } ) => {
         errorMessage: null,
         message: 'Category updated successfully.'
       })
+      props.setModalOpen()
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  if (data.message) {
-    setTimeout(() => props.setModalOpen(), 2000)
-    return (
-      <Container>
-        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-      </Container>
-    )
-  }
+  // if (data.message) {
+  //   setTimeout(() => props.setModalOpen(), 2000)
+  //   return (
+  //     <Container>
+  //       <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
+  //     </Container>
+  //   )
+  // }
 
   return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
     <Container>

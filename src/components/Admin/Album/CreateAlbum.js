@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
-import { Header, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
 import { CREATE_ALBUM } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 import { createData } from '../../../services/apiService'
+import { NotificationContext, notify } from '../../../contexts/NotificationContext'
 
 const initialState = {
   title: '',
@@ -17,6 +18,7 @@ const initialState = {
 const CreateAlbum = ({ ...props }) => {
   const [data, setData] = useState(initialState)
   const { albums, dispatch } = useContext(AlbumContext)
+  const { msgDispatch } = useContext(NotificationContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -64,21 +66,16 @@ const CreateAlbum = ({ ...props }) => {
         errorMessage: null,
         message: 'Album stored successfully.'
       })
+      // update Categories, message, close modal
+      localStorage.setItem('reloadPage', 'categories')
+      notify( msgDispatch, 'Album stored successfully.', 4, 'green')
+      props.setModalOpen()
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  if (data.message) {
-    localStorage.setItem('reloadPage', 'categories')
-    setTimeout(() => props.setModalOpen(), 2000)
-    return (
-      <Container>
-        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-      </Container>
-    )
-  }
 
-  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+  return (
     <Container>
       <AlbumForm
         errorMessage={data.errorMessage}

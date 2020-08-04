@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Header, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
 // import apiService from '../../services/apiService'
 import { CREATE_CATEGORY } from '../../../reducers/actionTypes'
@@ -63,19 +63,11 @@ const CreateCategory = ({ ...props }) => {
         errorMessage: null,
         message: 'Category stored successfully.'
       })
+      props.setModalOpen()
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  if (data.message) {
-    setTimeout(() => props.setModalOpen(), 2000)
-
-    return (
-      <Container>
-        <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-      </Container>
-    )
-  }
 
   return (
     <Container>

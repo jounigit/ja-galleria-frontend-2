@@ -34,6 +34,7 @@ const create = async ( url, newObject ) => {
 
 const update = async (url, id, newObject) => {
   const response = await axios.put(`${apiUrl}/${url}/${id}`, newObject, config)
+  console.log('== Service update response ==', response.data)
   return response.data
 }
 
@@ -46,7 +47,7 @@ const remove = async (url, id) => {
 export const fetchProtectedData = async (dispatch, TYPE, path) => {
   try {
     const results = await getAllProtected(path)
-    dispatch({ type: TYPE, data: results })
+    dispatch({ type: TYPE, data: results.data })
   } catch (error) {
     dispatch({ type: FAILURE, error: error.message || error })
   }
@@ -70,7 +71,8 @@ export const createData = async (dispatch, TYPE, path, data) => {
     const result = await create(path, data)
     dispatch({
       type: TYPE,
-      data: result.data
+      data: result.data,
+      message: result.message
     })
   } catch (error) {
     dispatch({
@@ -84,7 +86,8 @@ export const updateData = async (dispatch, TYPE, path, id, data) => {
     const result = await update(path, id, data)
     dispatch({
       type: TYPE,
-      data: result.data
+      data: result.data,
+      message: result.message
     })
   } catch (error) {
     dispatch({
