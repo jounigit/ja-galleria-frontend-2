@@ -76,7 +76,7 @@ const Login = () => {
   if (data.message) {
     return (
       <MessageWithRedirect
-        message={data.message}
+        message='Login successfully!'
         color='green'
         path='home'
       />
