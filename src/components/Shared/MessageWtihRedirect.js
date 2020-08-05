@@ -1,22 +1,32 @@
 import React, {
-  // useState,
-  useContext
-  // useEffect
+  useState,
+  useEffect
 } from 'react'
-import { Container } from 'semantic-ui-react'
+import { Container, Header, Card } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
-import { NotificationContext, notify } from '../../contexts/NotificationContext'
 
 const MessageWithRedirect = ({ message, color, path = null }) => {
-  const { msgDispatch } = useContext(NotificationContext)
+  const [redirect, setRedirect] = useState(false)
   const pathTo = `/${path}`
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRedirect(true)
+    }, 3000)
+    return () => clearInterval(interval)
+  }, [])
+
+  if (redirect) {
+    return <Redirect to={pathTo} />
+  }
 
   return (
     <Container>
-      { notify( msgDispatch, message, 5, color) }
-      { path &&
-      <Redirect to={pathTo} /> &&
-      setTimeout(() => notify( msgDispatch, message, 5, color), 3000) }
+      <Card centered style={{ marginTop: 20 }}>
+        <Card.Content>
+          <Header as='h3' color={color} data-cy='message'>{message}</Header>
+        </Card.Content>
+      </Card>
     </Container>
   )
 }

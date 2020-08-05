@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Card, Header, Form, Button } from 'semantic-ui-react'
-// import { Redirect } from 'react-router'
 import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 import { UserContext } from '../../contexts/UserContext'
 import { CREATE_USER } from '../../reducers/actionTypes'
@@ -87,18 +86,21 @@ const Signup = () => {
     }
 
   }
-  // console.log('STATE -- ', data)
-  // :::::::::::::::::::::::::::::::::::: //
 
+  // :::::::::::::::::::::::::::::::::::: //
+  if (data.message) {
+    return (
+      <MessageWithRedirect
+        message={data.message}
+        color='green'
+        path='login'
+      />
+    )
+  }
+
+  // :::::::::::::::::::::::::::::::::::: //
   return (
     <>
-      { data.message &&
-        <MessageWithRedirect
-          message={data.message}
-          color='green'
-          path='login'
-        />
-      }
       <Card centered style={{ marginTop: 20 }}>
         <Card.Content>
           <Header as='h2' color='green'>Sign up</Header>

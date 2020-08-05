@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
 import { AuthContext } from '../../contexts/AuthContext'
-import { Redirect } from 'react-router'
+import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 
 const baseUrl = process.env.REACT_APP_API
 
@@ -72,16 +72,20 @@ const Login = () => {
     }
 
   }
+  // :::::::::::::::::::::::::::::::::::: //
+  if (data.message) {
+    return (
+      <MessageWithRedirect
+        message={data.message}
+        color='green'
+        path='home'
+      />
+    )
+  }
 
   // :::::::::::::::::::::::::::::::::::: //
   return (
     <Container>
-      { data.message &&
-      <Redirect to='/home' />
-        // notify( msgDispatch, 'Login successfully!', 5, 'olive')
-        // &&
-        // setTimeout(() => <Redirect to='/home' />, 6000)
-      }
       <Card centered style={{ marginTop: 20 }}>
         <Card.Content>
           <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
