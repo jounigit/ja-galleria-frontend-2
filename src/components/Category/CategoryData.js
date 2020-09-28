@@ -15,6 +15,7 @@ const CategoryData = () => {
   }
 
   const categoriesData = categories.data && categories.data
+  console.log('CategoriesData: ', categoriesData)
 
   return (
     <Fragment>

@@ -3,6 +3,7 @@ import ListItemAlbum from './ListItemAlbum'
 
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
+  console.log('CategoryDt: ', category.user)
 
   const albums = () => category.albums.map(a =>
     <ListItemAlbum key={a.id} album={a} />
@@ -25,7 +26,7 @@ const CategoryDetails = ({ category }) => {
         {category.content}
       </p>
       <h5>
-          Author - {category.user.name}
+          Author - { category.user && category.user.username }
       </h5>
       <h3  data-cy='linkable' style={linkable} onClick={() => setVisible(!visible)}>Albums</h3>
       <ul style={showWhenVisible}>
