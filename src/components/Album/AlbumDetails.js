@@ -19,7 +19,7 @@ const AlbumDetails = () => {
           <Header as='h2'>
             {album.title}
             <Header.Subheader>
-        Author - {album.user.name}
+        Author - {album.user.username}
             </Header.Subheader>
           </Header>
           <p>

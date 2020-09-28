@@ -3,7 +3,6 @@ import ListItemAlbum from './ListItemAlbum'
 
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
-  console.log('CategoryDt: ', category.user)
 
   const albums = () => category.albums.map(a =>
     <ListItemAlbum key={a.id} album={a} />
