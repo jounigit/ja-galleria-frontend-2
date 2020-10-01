@@ -55,6 +55,8 @@ const Login = () => {
           email: data.email,
           password: data.password
         })
+
+      console.log('Login result: ', result.data)
       dispatch({
         type: 'LOGIN',
         payload: result.data
