@@ -35,7 +35,7 @@ const CategoryData = () => {
     <Fragment>
       {categories.loading && <div className="loader">Loading ...</div>}
 
-      { categoriesData && <CategoryList categories = { categoriesData } /> }
+      { categoriesData && <CategoryList categories = { categoriesData.reverse() } /> }
     </Fragment>
   )
 }

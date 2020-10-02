@@ -27,7 +27,6 @@ const CategoryDetails = ({ category }) => {
     id={category.id}
     title={category.title}
     content={category.content}
-    author={category.user.name}
   />
 
   const removeAction = <RemoveCategory
@@ -47,7 +46,7 @@ const CategoryDetails = ({ category }) => {
 
           <Grid.Column mobile={16} tablet={16} computer={10}>
             <p>{category.content}</p>
-            <Header as='h5'>Author - {category.user.name}</Header>
+            <Header as='h5'>Author - {category.user.username}</Header>
           </Grid.Column>
           <Grid.Column  mobile={1} tablet={1} computer={1}>
             { editAction }
