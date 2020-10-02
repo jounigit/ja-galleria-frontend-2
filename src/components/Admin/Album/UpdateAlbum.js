@@ -55,6 +55,7 @@ const UpdateAlbum = ({ ...props }) => {
     })
 
     updateData(dispatch, UPDATE_ALBUM, 'albums', props.id, newData)
+
     if( !albums.isLoading && albums.errorMessage==='') {
       setData({
         title: '',

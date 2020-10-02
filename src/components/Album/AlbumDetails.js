@@ -8,7 +8,8 @@ const AlbumDetails = () => {
   const { albums } = useContext(AlbumContext)
   let { id } = useParams()
   let album = albums.data &&
-  albums.data.find((item) => item.id === parseInt(id))
+  albums.data.find((item) => item.id === id)
+  // console.log('Album: ', album)
 
   return (
     <div className='album' data-cy='album'>

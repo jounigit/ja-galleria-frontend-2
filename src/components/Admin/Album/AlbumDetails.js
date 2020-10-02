@@ -6,9 +6,16 @@ import ModalSection from '../../Shared/modal/ModalSection'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
+import { AlbumContext } from '../../../contexts/AlbumContext'
+import { useParams } from 'react-router'
 
-const AlbumDetails = ({ album }) => {
+const AlbumDetails = () => {
   const { auth } = useContext(AuthContext)
+  const { albums } = useContext(AlbumContext)
+  let { id } = useParams()
+  let album = albums.data &&
+  albums.data.find((item) => item.id === id)
+  console.log('AlbumDetail: ', album)
 
   const removeAction = <RemoveAlbum
     id={ album.id }
@@ -57,7 +64,7 @@ const AlbumDetails = ({ album }) => {
             <Header as='h2'>
               {album.title}
               <Header.Subheader>
-            Author - {album.user.name}
+                Author - {album.user.username}
               </Header.Subheader>
             </Header>
             <p>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Image, Header, Segment } from 'semantic-ui-react'
 
 const AlbumListItem = ({ album }) => {
+  // console.log('Album: ', album)
 
   const pictures = album.pictures
 
@@ -16,7 +17,7 @@ const AlbumListItem = ({ album }) => {
       <Header as='h2'>
         {album.title}
         <Header.Subheader>
-            Author - {album.user.name}
+            Author - {album.user.username}
         </Header.Subheader>
         <Header.Subheader>
           {pictures.length + ' - kuvaa' || 'no pictures'}

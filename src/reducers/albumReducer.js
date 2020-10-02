@@ -23,9 +23,11 @@ const albumReducer = (state, action) => {
   case INIT_ALBUMS:
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_ALBUM:
+    console.log('Album reducer: ', action.data)
     const newData = [...state.data, action.data]
     return { data: newData, isLoading: false, errorMessage: '', message: action.message }
   case UPDATE_ALBUM:
+    console.log('Album reducer: ', action.data)
     const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
     console.log('== Reudcer album ==', updated)
     return { data: updated, isLoading: false, errorMessage: '', message: action.message }

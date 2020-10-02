@@ -53,7 +53,7 @@ const AlbumForm = ({
           <label>Content
             <TextArea
               data-cy='content'
-              value={content}
+              value={content || ''}
               onChange={handleInputChange}
               name='content'
             />

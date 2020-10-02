@@ -28,7 +28,7 @@ export default function DesktopContainer({ children }) {
 
   // resign actions
   const handleResign = () => () => {
-    const ok = window.confirm(`remove user ${auth.user.name}?`)
+    const ok = window.confirm(`remove user ${auth.user}?`)
     if ( ok===false) { return }
     removeData(userDispatch, DELETE_USER, 'users', auth.user.id)
     dispatch({ type: LOGOUT })
@@ -116,7 +116,7 @@ export default function DesktopContainer({ children }) {
                       data-cy='logout'
                       onClick={ handleLogout() }
                       inverted size='tiny'>
-                      Logout - {auth.user.name}
+                      Logout - {auth.user}
                     </Button>
                 }
 

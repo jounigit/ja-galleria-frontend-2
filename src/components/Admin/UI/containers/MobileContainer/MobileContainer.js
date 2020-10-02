@@ -91,7 +91,7 @@ export default function MobileContainer({ children }) {
                       <Button as='a'
                         onClick={() => dispatch({ type: 'LOGOUT' })}
                         inverted>
-                      Logout - {auth.user.name}
+                      Logout - {auth.user}
                       </Button>
                   }
                 </Menu.Item>

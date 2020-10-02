@@ -68,7 +68,8 @@ export const fetchData = async (dispatch, TYPE, path) => {
 
 export const createData = async (dispatch, TYPE, path, data) => {
   try {
-    const result = await create(path, data)
+    const result = await axios.post(`${apiUrl}/${path}`, data, config)
+    // const result = await create(path, data)
     dispatch({
       type: TYPE,
       data: result.data,
@@ -83,7 +84,9 @@ export const createData = async (dispatch, TYPE, path, data) => {
 
 export const updateData = async (dispatch, TYPE, path, id, data) => {
   try {
-    const result = await update(path, id, data)
+    const result = await axios.put(`${apiUrl}/${path}/${id}`, data, config)
+    // const result = await update(path, id, data)
+    console.log('== Service updateData ==', result.data)
     dispatch({
       type: TYPE,
       data: result.data,

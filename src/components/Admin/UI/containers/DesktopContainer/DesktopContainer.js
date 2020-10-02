@@ -103,7 +103,7 @@ export default function DesktopContainer({ children }) {
                       data-cy='logout'
                       onClick={ handleLogout() }
                       inverted size='tiny'>
-                      Logout - {auth.user.name}
+                      Logout - {auth.user}
                     </Button>
                   </Menu.Item>
                 </Container>
