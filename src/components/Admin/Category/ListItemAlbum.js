@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { AlbumContext } from '../../../contexts/AlbumContext'
 
-const ListItem = ({ album }) => {
+const ListItem = ({ albumID }) => {
+  const { albums } = useContext(AlbumContext)
+
+  const album = albums.data &&
+    albums.data.find((item) => item.id === albumID)
+  console.log('A item: ', album)
   return(
     <li>
       <h3>
-        {album.title}
+        {album && album.title}
       </h3>
       <p>
-        {album.content && album.content.substring(0,40) }...
+        {album && album.content.substring(0,40) }...
       </p>
-      <Link to={`/albums/${album.id}`}>
+      <Link to={`/album/${album && album.id}`}>
             show
       </Link>
     </li>

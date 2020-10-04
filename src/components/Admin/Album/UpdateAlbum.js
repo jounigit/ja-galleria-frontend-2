@@ -45,7 +45,7 @@ const UpdateAlbum = ({ ...props }) => {
     const newData = {
       title: data.title,
       content: data.content,
-      category_id: data.category_id
+      category: data.category_id
     }
 
     setData({

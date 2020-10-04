@@ -9,9 +9,10 @@ import { Segment, Grid, Header } from 'semantic-ui-react'
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
   const { auth } = useContext(AuthContext)
+  console.log('Cat detail: ', category)
 
   const albums = () => category.albums.map(a =>
-    <ListItemAlbum key={a.id} album={a} />
+    <ListItemAlbum key={a} albumID={a} />
   )
 
   const showWhenVisible = { display: visible ? '' : 'none' }
@@ -67,24 +68,6 @@ const CategoryDetails = ({ category }) => {
       </Segment>
 
       }
-
-
-      {/* <h3 data-cy='header'>
-        {category.title}
-      </h3>
-
-      <p>
-        {category.content}
-      </p>
-      <h5>
-          Author - {category.user.name}
-      </h5>
-      <h3  data-cy='linkable' style={linkable} onClick={() => setVisible(!visible)}>Albums</h3>
-      <ul style={showWhenVisible}>
-        {albums().length > 0 ? albums() : 'no albums'}
-      </ul>
-
-      <hr /> */}
     </div>
   )
 }
