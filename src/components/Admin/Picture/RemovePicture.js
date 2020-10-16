@@ -16,7 +16,7 @@ const RemovePicture = ({ id, title } ) => {
     try {
       const response = await apiService.remove('pictures', id)
       // const response = removeData(dispatch, DELETE_PICTURE, 'pictures', id)
-      console.log('Remove data --', response.data)
+      console.log('Remove data --', response)
 
       dispatch({
         type: DELETE_PICTURE,

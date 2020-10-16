@@ -4,6 +4,7 @@ import {
   CREATE_ALBUM,
   DELETE_ALBUM,
   UPDATE_ALBUM,
+  UPDATE_ALBUM_PICTURE,
   LOADING,
   FAILURE,
   CLEAR_ERROR,
@@ -23,14 +24,14 @@ const albumReducer = (state, action) => {
   case INIT_ALBUMS:
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_ALBUM:
-    console.log('Album reducer: ', action.data)
-    const newData = [...state.data, action.data]
+    const newData = [...state.data, action.data]  // console.log('Album reducer: ', action.data)
     return { data: newData, isLoading: false, errorMessage: '', message: action.message }
-  case UPDATE_ALBUM:
-    console.log('Album reducer: ', action.data)
+  case UPDATE_ALBUM: // console.log('Album reducer to update: ', action.data)
     const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
-    console.log('== Reudcer album ==', updated)
     return { data: updated, isLoading: false, errorMessage: '', message: action.message }
+  case UPDATE_ALBUM_PICTURE: //  console.log('Album reducer to update: ', action.data)
+    const updatedPics = state.data.map(b => b.id !== action.data.id ? b : action.data)
+    return { data: updatedPics, isLoading: false, errorMessage: '', message: action.message }
   case DELETE_ALBUM:
     const delData = state.data.filter(d => d.id !== action.id)
     return { data: delData, isLoading: false, errorMessage: '' }

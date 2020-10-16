@@ -33,6 +33,7 @@ const UploadPicture = ({ ...props }) => {
 
     reader.readAsDataURL(event.target.files[0])
   }
+  // clear input
   const clearInput = () => {
     setData({ ...data, file: null })
     setPreviewUrl(null)
@@ -54,10 +55,10 @@ const UploadPicture = ({ ...props }) => {
     formData.append('image', data.file)
 
     try {
-      const result = await apiService.create('pictures', formData)
-      const newPicture = result.data
-      // console.log('NewPic ---', result)
-      // console.log('NewPic data ---', newPicture)
+      const result = await apiService.upload('pictures', formData)
+      const newPicture = result
+      console.log('NewPic ---', result)
+      console.log('NewPic data ---', newPicture)
 
       dispatch({
         type: CREATE_PICTURE,

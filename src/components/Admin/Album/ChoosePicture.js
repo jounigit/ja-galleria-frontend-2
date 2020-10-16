@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { PictureContext } from '../../../contexts/PictureContext'
 import { Container, Grid, Header, Divider } from 'semantic-ui-react'
 import ChooseForm from './ChooseForm'
-import apiService from '../../../services/apiService'
+import { removeAlbumPicture, addAlbumPicture } from '../../../services/apiService'
 import { AlbumContext } from '../../../contexts/AlbumContext'
 import { UPDATE_ALBUM } from '../../../reducers/actionTypes'
 import UnChooseForm from './UnChooseForm'
@@ -13,14 +13,16 @@ const ChoosePicture = ({ id, albumPics }) => {
 
   // ::::::::: handle pictures ::::::::::::::::: //
   const pics = pictures.data
-  const ids = albumPics.map(p => p.id)
+  const ids = albumPics
+
+  const chosen = pics.map(p => ids.includes(p.id) ? p : null).filter(p => p !== null)
 
   const choosable = pics.map(a =>
     ids.includes(a.id) ? null : a).filter(a => a !== null)
 
   const sortedPics = choosable.sort((a,b) =>  b.id-a.id )
 
-  console.log('Valitut kuvat --', albumPics)
+  console.log('Valitut kuvat --', chosen)
   console.log('Valittavat kuvat --', sortedPics)
 
   //
@@ -28,59 +30,24 @@ const ChoosePicture = ({ id, albumPics }) => {
   const handleDelete = picture_id =>  removeSelected( picture_id )
 
   // ::::::::::: actions ::::::::::::::::::::::::: //
-  const removeSelected = async( picture_id ) => {
-    const data = {
-      album_id: id,
-      picture_id: picture_id
-    }
-    console.log('DATA --', data)
-
-    const all = await apiService.getAll('album-pictures')
-    const filtered = all.filter(ob => ob.album_id === id && ob.picture_id === picture_id)
-    console.log('ALL --', all)
-    console.log('FIT --', filtered)
-    console.log('FITid --', filtered[0].id)
-
-
-    try {
-      const result = await apiService.remove('album-pictures', filtered[0].id)
-      const newAlbum = result.data
-      console.log('API --', result)
-
-      dispatch({
-        type: UPDATE_ALBUM,
-        data: newAlbum
-      })
-    } catch (error) {
-      console.error()
-    }
+  const removeSelected = async (pictureID) => {
+    const res = await removeAlbumPicture(dispatch, UPDATE_ALBUM, 'albums', id, pictureID)
+    console.log('Album picture delete: ', res)
   }
   // save
-  const saveSelected = async( picture_id ) => {
-    const data = {
-      album_id: id,
-      picture_id: picture_id
-    }
-
-    try {
-      const result = await apiService.create('album-pictures', data)
-      const newAlbum = result.data
-
-      dispatch({
-        type: UPDATE_ALBUM,
-        data: newAlbum
-      })
-    } catch (error) {
-      console.error()
-    }
+  const saveSelected = async (pictureID) => {
+    console.log('Album picture id: ', pictureID)
+    const result = await addAlbumPicture(dispatch, UPDATE_ALBUM, id, pictureID)
+    console.log('Album picture saved: ', result)
   }
+
   // :::::::::::::::::::::::::::::::::::: //
   return (
     <Container>
       <Grid doubling columns={4}>
         <Header as='h4' content='Valitut' />
         {
-          albumPics.map(pic =>
+          chosen.map(pic =>
             <Grid.Column key={pic.id}>
               <UnChooseForm
                 handleDelete={handleDelete}

@@ -7,16 +7,27 @@ import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { AlbumContext } from '../../../contexts/AlbumContext'
+import { PictureContext } from '../../../contexts/PictureContext'
 import { useParams } from 'react-router'
 
 const AlbumDetails = () => {
-  const { auth } = useContext(AuthContext)
   const { albums } = useContext(AlbumContext)
+  const { pictures } = useContext(PictureContext)
+  const { auth } = useContext(AuthContext)
   let { id } = useParams()
-  let album = albums.data &&
-  albums.data.find((item) => item.id === id)
-  console.log('AlbumDetail: ', album)
 
+  // :::::::::: find album :::::::::::::::::::: //
+  let album = albums.data && albums.data.find((item) => item.id === id)
+
+  console.log('AlbumDetails: ', album)
+  // :::::::::: find pictures ::::::::::::::::: //
+  const ids = album && album.pictures
+  const pics = pictures.data
+
+  const albumPictures = pics && ids &&
+    pics.map(p => ids.includes(p.id) ? p : null).filter(p => p !== null)
+
+  // ::::::::::: actions ::::::::::::::::::::::::: //
   const removeAction = <RemoveAlbum
     id={ album.id }
     title={album.title}
@@ -42,19 +53,19 @@ const AlbumDetails = () => {
     albumPics={ album.pictures }
   />
 
-  //console.log('A pics -- ', pictures)
   return (
     <div className='album' data-cy='album'>
       <Container>
         <Grid columns={2} padded='horizontally'>
-          <Grid.Column color='grey'>
-            <Header as='h2'>Album</Header>
+          <Grid.Column>
+            {/* <Header as='h2'>Album</Header> */}
             { updateAction }
             { removeAction }
 
           </Grid.Column>
-          <Grid.Column color='grey'>
-            <Header as='h3' content='Pictures' />
+          <Grid.Column>
+          {/* <Grid.Column color='grey'> */}
+            {/* <Header as='h3' content='Pictures' /> */}
             { auth.user && chooseAction }
           </Grid.Column>
         </Grid>
@@ -64,7 +75,7 @@ const AlbumDetails = () => {
             <Header as='h2'>
               {album.title}
               <Header.Subheader>
-                Author - {album.user.username}
+            Author - {album.user.name}
               </Header.Subheader>
             </Header>
             <p>
@@ -73,14 +84,13 @@ const AlbumDetails = () => {
           </Grid.Column>
           <Grid columns={4}>
             {
-              album.pictures.map(picture =>
+              albumPictures.map(picture =>
                 <Grid.Column  key={picture.id}>
                   <Picture key={picture.id} picture={picture} />
                 </Grid.Column>
               )
             }
           </Grid>
-          {/* </Grid.Row> */}
         </Grid>
 
       </Container>

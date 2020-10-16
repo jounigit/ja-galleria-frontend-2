@@ -17,6 +17,7 @@ const pictureReducer = (state, action) => {
   case LOADING:
     return { data: null, isLoading: true, errorMessage: '' }
   case INIT_PICTURES:
+    // console.log('Pic reducer---', action.data)
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_PICTURE:
     const newData = [...state.data, action.data]

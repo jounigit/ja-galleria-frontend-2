@@ -7,14 +7,14 @@ const ListItem = ({ albumID }) => {
 
   const album = albums.data &&
     albums.data.find((item) => item.id === albumID)
-  console.log('A item: ', album)
+  // console.log('A item: ', album)
   return(
     <li>
       <h3>
         {album && album.title}
       </h3>
       <p>
-        {album && album.content.substring(0,40) }...
+        {/* {album && album.content.substring(0,40) }... */}
       </p>
       <Link to={`/album/${album && album.id}`}>
             show

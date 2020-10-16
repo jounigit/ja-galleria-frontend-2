@@ -47,9 +47,8 @@ const CreateAlbum = ({ ...props }) => {
     const newData = {
       title: data.title,
       content: data.content,
-      category: data.category_id
+      category_id: data.category_id
     }
-    // console.log('Newdata: ', newData)
 
     setData({
       ...data,

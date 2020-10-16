@@ -8,11 +8,11 @@ import ModalSection from '../../Shared/modal/ModalSection'
 const PictureDetails = ({ picture }) => {
   const { auth } = useContext(AuthContext)
 
-  // console.log('DETAIL ---', picture)
+  console.log('PICTURE DETAIL ---', picture)
   return (
     <div data-cy='picture'>
       <Card>
-        <Image src={picture.image} wrapped ui={false} />
+        <Image src={picture.thumb} wrapped ui={false} />
         <Card.Content header={picture.title} />
         <Card.Content>
           <Card.Meta>
@@ -35,7 +35,7 @@ const PictureDetails = ({ picture }) => {
                 id={ picture.id }
                 title={ picture.title }
                 content={ picture.content || '' }
-                thumb={ picture.image }
+                thumb={ picture.thumb }
               />
           }
         </Card.Content>

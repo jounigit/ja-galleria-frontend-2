@@ -7,7 +7,7 @@ const Picture = ({ picture }) => {
   return (
     <div data-cy='picture'>
       <Card>
-        <Image src={picture.image} wrapped ui={false} />
+        <Image src={picture.thumb} wrapped ui={false} />
       </Card>
     </div>
   )

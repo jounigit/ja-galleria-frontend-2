@@ -11,8 +11,8 @@ const CategoryDetails = ({ category }) => {
   const { auth } = useContext(AuthContext)
   console.log('Cat detail: ', category)
 
-  const albums = () => category.albums.map(a =>
-    <ListItemAlbum key={a} albumID={a} />
+  const albums = () => category.albums.map((a, i ) =>
+    <ListItemAlbum key={i} albumID={a} />
   )
 
   const showWhenVisible = { display: visible ? '' : 'none' }

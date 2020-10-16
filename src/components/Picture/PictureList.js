@@ -6,6 +6,8 @@ import { PictureContext } from '../../contexts/PictureContext'
 
 const PictureList = () => {
   const { pictures } = useContext(PictureContext)
+  console.log('Pic list ---', pictures)
+  console.log('Pic data ---', pictures.data)
 
   const sortedPics = pictures.data && pictures.data.sort((a,b) =>  b.id-a.id )
 
@@ -23,6 +25,8 @@ const PictureList = () => {
       {pictures.loading && <div className="loader">Loading ...</div>}
 
       <Header as='h2' content='Kuvat' />
+
+      { pictures.data && !pictures.data.length > 0 && <h3>no pictures yet!</h3>}
 
       <Grid padded>
         <Grid.Column color='grey'>

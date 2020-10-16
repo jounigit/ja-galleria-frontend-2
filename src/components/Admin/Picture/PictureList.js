@@ -8,17 +8,10 @@ import { AuthContext } from '../../../contexts/AuthContext'
 const PictureList = ({ pictures }) => {
   const { auth } = useContext(AuthContext)
 
-  // const userId = auth && auth.user.id
 
-  // const usersPics = auth && pictures.filter(p => userId === p.user_id)
-
-  // console.log('userId --', userId)
-  // console.log('userPics --', usersPics)
-
-  // const sortedPics = auth.user && usersPics.sort((a,b) =>  b.id-a.id )
-
-
-  const sortedPics = auth.user && pictures.sort((a,b) =>  b.id-a.id )
+  const sortedPics = auth.user &&
+    pictures &&
+    pictures.sort((a,b) =>  b.id-a.id )
 
   return (
     <div className='PictureList'>
@@ -33,8 +26,10 @@ const PictureList = ({ pictures }) => {
 
       <Header as='h2' dividing content='Kuvat' />
 
+      { pictures && !pictures.length > 0 && <h3>no pictures yet!</h3>}
+
       <Grid doubling columns={4}>
-        { auth.user &&
+        { sortedPics &&
           sortedPics.map(picture =>
             <Grid.Column  key={picture.id}>
               <PictureDetails key={picture.id} picture={picture} />

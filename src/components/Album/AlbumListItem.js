@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Image, Header, Segment } from 'semantic-ui-react'
+import { PictureContext } from '../../contexts/PictureContext'
 
 const AlbumListItem = ({ album }) => {
-  // console.log('Album: ', album)
+  const { pictures } = useContext(PictureContext)
+  console.log('AlbumListItem: ', album)
 
-  const pictures = album.pictures
+  const albumPictures = album.pictures
+  const getFirst = albumPictures && albumPictures.length && albumPictures[0]
 
-  const firstPic = pictures && pictures.length > 0 ?
-    pictures[0].image : ''
+  const firstPic = getFirst && pictures.data &&
+    pictures.data.filter(p => p.id === getFirst)
+
+
   return (
     <div data-cy='albumListItem'>
 
-      <Image size='medium' src={firstPic} />
+      { firstPic ?
+        <Image size='medium' src={firstPic && firstPic[0].image} /> : ''
+      }
 
       <Header as='h2'>
         {album.title}
@@ -20,7 +27,10 @@ const AlbumListItem = ({ album }) => {
             Author - {album.user.username}
         </Header.Subheader>
         <Header.Subheader>
-          {pictures.length + ' - kuvaa' || 'no pictures'}
+          { 
+            albumPictures.length ?
+            albumPictures.length + ' - kuvaa' : 'no pictures'
+          }
         </Header.Subheader>
       </Header>
       <Segment basic>

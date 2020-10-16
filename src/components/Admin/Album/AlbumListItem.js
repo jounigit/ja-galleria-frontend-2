@@ -6,14 +6,19 @@ import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import ModalSection from '../../Shared/modal/ModalSection'
 import ChoosePicture from './ChoosePicture'
+import { PictureContext } from '../../../contexts/PictureContext'
 
 const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
+  const { pictures } = useContext(PictureContext)
 
-  const pictures = album.pictures
-  const firstPic = pictures && pictures.length > 0 ?
-    pictures[0].image : ''
+  const albumPictures = album.pictures
+  const getFirst = albumPictures && albumPictures.length && albumPictures[0]
 
+  const firstPic = getFirst && pictures.data &&
+    pictures.data.filter(p => p.id === getFirst)
+
+  // ::::::::::: actions ::::::::::::::::::::::::: //  
   const chooseAction = <ModalSection
     btnIcon={'file image outline'}
     compToModal={ ChoosePicture }
@@ -35,10 +40,10 @@ const AlbumListItem = ({ album }) => {
   const removeAction = <RemoveAlbum
     id={ album.id }
     title={album.title}
-    author={album.user.name}
+    author={album.user.username}
   />
 
-  // console.log('AlbumListItem -> Album')
+  // console.log('AlbumListItem -> Album', album)
   return (
     <div className='album' data-cy='albumListItem'>
       { auth.user &&
@@ -46,7 +51,9 @@ const AlbumListItem = ({ album }) => {
         <Grid>
 
           <Grid.Column  mobile={16} tablet={8} computer={4}>
-            <Image size='small' src={firstPic} />
+          { firstPic ?
+            <Image size='small' src={firstPic && firstPic[0].image} /> : ''
+          }
           </Grid.Column>
 
           <Grid.Column  mobile={16} tablet={8} computer={9}>
@@ -56,7 +63,10 @@ const AlbumListItem = ({ album }) => {
                 Author - {album.user.username}
               </Header.Subheader>
               <Header.Subheader>
-                {pictures.length + ' - kuvaa' || 'no pictures'}
+              { 
+                albumPictures.length ?
+                albumPictures.length + ' - kuvaa' : 'no pictures'
+              }
               </Header.Subheader>
             </Header>
             <p>{album.content && album.content.substring(0,260) }...</p>

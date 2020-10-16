@@ -7,14 +7,14 @@ import PictureList from './PictureList'
 const PictureData = () => {
   const { pictures } = useContext(PictureContext)
   let { id } = useParams()
-  // console.log('Picdata ---', pictures)
+  console.log('Picdata admin ---', pictures)
   let picturesData = pictures.data && pictures.data
 
   return (
     <Fragment>
       {pictures.loading && <div className="loader">Loading ...</div>}
 
-      { !id && pictures.data && <PictureList pictures= { picturesData } /> }
+      { !id && <PictureList pictures= { picturesData } /> }
       { id &&  pictures.data && <PictureDetails picture={ picturesData.find((item) => item.id === parseInt(id)) } /> }
     </Fragment>
   )
