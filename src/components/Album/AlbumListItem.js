@@ -27,9 +27,9 @@ const AlbumListItem = ({ album }) => {
             Author - {album.user.username}
         </Header.Subheader>
         <Header.Subheader>
-          { 
+          {
             albumPictures.length ?
-            albumPictures.length + ' - kuvaa' : 'no pictures'
+              albumPictures.length + ' - kuvaa' : 'no pictures'
           }
         </Header.Subheader>
       </Header>

@@ -32,6 +32,11 @@ const create = async ( url, newObject ) => {
   return response.data
 }
 
+const createUser = async ( url, newObject ) => {
+  const response = await axios.post(`${apiUrl}/${url}`, newObject)
+  return response.data
+}
+
 const update = async (url, id, newObject) => {
   const response = await axios.put(`${apiUrl}/${url}/${id}`, newObject, config)
   console.log('== Service update response ==', response.data)
@@ -142,6 +147,8 @@ export const removeAlbumPicture = async (dispatch, TYPE, path, id, pictureID) =>
 
 export const removeData = async (dispatch, TYPE, path, id) => {
   try {
+
+    console.log('== Service remove data: ', path, ' id: ', id)
     await remove(path, id)
     dispatch({
       type: TYPE,
@@ -159,6 +166,7 @@ export default {
   getAll,
   getOne,
   create,
+  createUser,
   update,
   remove,
   setToken,

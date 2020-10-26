@@ -10,7 +10,7 @@ const Notification = () => {
 
   return (
     <div style={visibility}>
-      <Container>
+      <Container data-cy='message'>
         <Message color={ colorIn } >
           <Message.Header>{message.content}</Message.Header>
         </Message>

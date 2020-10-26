@@ -26,13 +26,15 @@ export default function DesktopContainer({ children }) {
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
 
+  // console.log('Desktop user: ', auth)
   // resign actions
   const handleResign = () => () => {
+    // console.log('Resign user: ', auth)
     const ok = window.confirm(`remove user ${auth.user}?`)
     if ( ok===false) { return }
-    removeData(userDispatch, DELETE_USER, 'users', auth.user.id)
+    removeData(userDispatch, DELETE_USER, 'users', auth.id)
     dispatch({ type: LOGOUT })
-    notify( msgDispatch, `user ${auth.user.name} resigned`, 5, 'orange' )
+    notify( msgDispatch, 'user resigned successfully', 5, 'orange' )
   }
 
   // logout actions

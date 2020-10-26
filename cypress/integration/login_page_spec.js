@@ -6,14 +6,18 @@ describe('Login page',  function() {
   const password = Cypress.env('password')
   const username = Cypress.env('username')
 
+  beforeEach(function () {
+    cy.resetDatabase()
+    cy.signUp({ username, email, password })
+  })
+
   it('login form can be opened', function() {
     cy.visit('/')
     cy.get('[data-cy=login]').click()
     cy.get('h2').should('contain', 'Kirjaudu sovellukseen')
   })
-  // ..
 
-  context('HTML form submission', function() {
+  describe('login fails', function() {
     beforeEach(function () {
       cy.visit('/login')
     })
@@ -33,34 +37,35 @@ describe('Login page',  function() {
 
     it('incorrect email or password', function() {
       cy.get('[data-cy=email]').type(email)
-      cy.get('[data-cy=password]').type('qwe')
+      cy.get('[data-cy=password]').type('eikay')
       cy.get('form').submit()
       cy.get('[data-cy=error-message]').should('be.visible')
       cy.get('[data-cy=error-message]').should('contain', 'incorrect email or password!')
     })
 
-    // it('user can login', function() {
-    //   cy.get('[data-cy=email]').type(email)
-    //   cy.get('[data-cy=password]').type(password)
-    //   cy.get('form').submit()
-    //   cy.visit('/')
-    //   cy.get('[data-cy=logout]').should('contain', username)
-    // })
   })
 
-  context('Reusable "login" custom command', function () {
-    beforeEach(function () {
-      // login before each test
-      cy.loginByForm(email, password)
-      cy.visit('/')
+  describe('can login', () => {
+    it('user can login', function() {
+      cy.visit('/login')
+      cy.get('[data-cy=email]').type(email)
+      cy.get('[data-cy=password]').type(password)
+      cy.get('form').submit()
+      cy.get('[data-cy=message]').should('be.visible')
+      cy.get('[data-cy=message]').should('contain', 'Login successfully!')
     })
+  })
 
+
+  describe('can logout', function () {
     it('username is visible', function() {
       cy.get('[data-cy=logout]').should('contain', username)
     })
 
     it('user can logout', function() {
       cy.get('[data-cy=logout]').click()
+      cy.get('[data-cy=message]').should('contain', 'User logged out.')
+      cy.get('[data-cy=message]').should('be.visible')
       cy.get('[data-cy=login]').should('be.visible')
     })
   })

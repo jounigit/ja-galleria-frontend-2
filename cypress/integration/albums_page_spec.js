@@ -4,8 +4,10 @@ describe('The Albums Page', function() {
   context('open public pages with cy server', function() {
     beforeEach(function() {
       cy.server()
+      cy.route('pictures', 'fixture:pictures').as('getPictures')
       cy.route('albums', 'fixture:albums').as('getAlbums')
       cy.visit('/albums')
+      cy.wait('@getPictures')
       // cy.wait('@getAlbums')
     })
 

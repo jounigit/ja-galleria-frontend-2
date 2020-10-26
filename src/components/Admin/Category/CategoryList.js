@@ -20,6 +20,9 @@ const CategoryList = ({ categories }) => {
       />}
 
       <Header as='h2' dividing content='Kategoriat' />
+
+      { categories.length < 1 && <p>no albums yet.</p> }
+
       {
         categories.map(category =>
           <CategoryDetails key={category.id} category={category} />

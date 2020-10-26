@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react'
-import axios from 'axios'
 import { Card, Header, Form, Button } from 'semantic-ui-react'
 import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 import { UserContext } from '../../contexts/UserContext'
 import { CREATE_USER } from '../../reducers/actionTypes'
+import createUser from '../../services/apiService'
+import axios from 'axios'
 
 const baseUrl = process.env.REACT_APP_API
 
-const url = `${baseUrl}/register`
+const url = `${baseUrl}/users`
 
 const initialState = {
   username: '',
@@ -40,6 +41,7 @@ const Signup = () => {
   //---------------- form handling -----------------------------
   const handleFormSubmit = async(event) => {
     event.preventDefault()
+
     if(data.username === '') {
       return handleError('username is required!')
     }
@@ -47,7 +49,7 @@ const Signup = () => {
     if(data.email === '') {
       return handleError('email is required!')
     }
-    if(data.password.length < 6) {
+    if(data.password.length < 5) {
       return handleError('password must be at least 6 characters!')
     }
 
@@ -57,18 +59,24 @@ const Signup = () => {
       errorMessage: null
     })
 
+    console.log('Signup data: ', data)
+
     try {
+
+      const userToServer = {
+        username: data.username,
+        email: data.email,
+        password: data.password
+      }
+      console.log('Signup obj: ', userToServer)
       // signup new user
-      const response = await axios.post(url,
-        {
-          name: data.username,
-          email: data.email,
-          password: data.password
-        })
+      // const response = createUser('users', userToServer)
+      const response = await axios.post(url, userToServer)
 
-      console.log('= Signup response ==', response.data.user)
+      console.log('= Signup response ==', response)
 
-      const newUser = response.data.user
+      const newUser = response.data
+      console.log('= Signup rnew ==', newUser)
       userDispatch({ type: CREATE_USER, data: newUser })
 
       setData({
@@ -82,7 +90,7 @@ const Signup = () => {
 
     } catch (error) {
       console.log('=ERROR: ', error.message)
-      handleError('incorrect email or password!')
+      handleError(error)
     }
 
   }

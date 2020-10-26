@@ -34,6 +34,7 @@ const Login = () => {
     })
   }
 
+  //---------------- form handling -----------------------------
   const handleFormSubmit = async(event) => {
     event.preventDefault()
 
@@ -49,6 +50,7 @@ const Login = () => {
       isSubmitting: true,
       errorMessage: null
     })
+
     try {
       const result = await axios.post(url,
         {

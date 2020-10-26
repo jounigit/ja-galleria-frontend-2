@@ -8,6 +8,7 @@ export const AuthContext = createContext()
 const initialState = {
   isAuthenticated: false,
   user: null,
+  id: null,
   token: null,
 }
 
@@ -17,10 +18,12 @@ const AuthContextProvider = (props) => {
   useEffect(() => {
     let storageToken = JSON.parse(localStorage.getItem('token'))
     let storageUser = JSON.parse(localStorage.getItem('user'))
+    let storageID = JSON.parse(localStorage.getItem('id'))
     apiService.setToken(auth.token)
     const loggedUser = {
       token: storageToken,
-      user: storageUser
+      user: storageUser,
+      id: storageID
     }
     if (storageUser && auth.user === null) {
       // set token for api

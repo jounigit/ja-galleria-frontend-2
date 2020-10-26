@@ -18,7 +18,7 @@ const AlbumListItem = ({ album }) => {
   const firstPic = getFirst && pictures.data &&
     pictures.data.filter(p => p.id === getFirst)
 
-  // ::::::::::: actions ::::::::::::::::::::::::: //  
+  // ::::::::::: actions ::::::::::::::::::::::::: //
   const chooseAction = <ModalSection
     btnIcon={'file image outline'}
     compToModal={ ChoosePicture }
@@ -51,9 +51,9 @@ const AlbumListItem = ({ album }) => {
         <Grid>
 
           <Grid.Column  mobile={16} tablet={8} computer={4}>
-          { firstPic ?
-            <Image size='small' src={firstPic && firstPic[0].image} /> : ''
-          }
+            { firstPic ?
+              <Image size='small' src={firstPic && firstPic[0].image} /> : ''
+            }
           </Grid.Column>
 
           <Grid.Column  mobile={16} tablet={8} computer={9}>
@@ -63,10 +63,10 @@ const AlbumListItem = ({ album }) => {
                 Author - {album.user.username}
               </Header.Subheader>
               <Header.Subheader>
-              { 
-                albumPictures.length ?
-                albumPictures.length + ' - kuvaa' : 'no pictures'
-              }
+                {
+                  albumPictures.length ?
+                    albumPictures.length + ' - kuvaa' : 'no pictures'
+                }
               </Header.Subheader>
             </Header>
             <p>{album.content && album.content.substring(0,260) }...</p>

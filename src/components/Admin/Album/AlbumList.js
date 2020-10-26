@@ -24,6 +24,8 @@ const AlbumList = ({ albums }) => {
 
       <Header as='h2' dividing content='Albumit' />
 
+      { albums.length < 1 && <p>no albums yet.</p> }
+
       {
         sortedAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} user={auth.user} />

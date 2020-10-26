@@ -10,6 +10,7 @@ const loginReducer = (state, action) => {
   switch (action.type) {
   case LOGIN:
     localStorage.setItem('user', JSON.stringify(action.payload.user))
+    localStorage.setItem('id', JSON.stringify(action.payload.id))
     localStorage.setItem('token', JSON.stringify(action.payload.token))
     // set token for api
     apiService.setToken(state.token)
@@ -17,6 +18,7 @@ const loginReducer = (state, action) => {
       ...state,
       isAuthenticated: true,
       user: action.payload.user,
+      id: action.payload.id,
       token: action.payload.token
     }
   case LOGGEDIN:

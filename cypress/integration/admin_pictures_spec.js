@@ -1,7 +1,18 @@
-describe('The Pictures Page', function() {
-  // beforeEach(function() {
-  //   cy.init()
-  // })
+describe('Admin picture', function() {
+  const username = 'testi'
+  const email = 'testi@mail.com'
+  const password = 'testippass'
+  // let title = 'Test picture'
+
+  beforeEach(function () {
+    cy.resetDatabase()
+    cy.signUp({ username, email, password })
+    cy.login({ email, password })
+    cy.createAlbum({ title: 'Album 1' })
+    cy.visit('/')
+    cy.get('[data-cy=adminLink]').click()
+    cy.get('[href="/admin/albums"]').click()
+  })
 
   it('get all pictures', function() {
     cy.server()

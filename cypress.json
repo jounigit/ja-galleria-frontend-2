@@ -1,8 +1,9 @@
 {
   "chromeWebSecurity": false,
     "baseUrl": "http://localhost:3000",
+    "supportFile": "cypress/support/index.js",
     "env": {
-      "serverUrl": "http://localhost:8000/api",
+      "serverUrl": "http://localhost:3001/api",
       "email": "testia@t.net",
       "password": "password",
       "username": "testia"
