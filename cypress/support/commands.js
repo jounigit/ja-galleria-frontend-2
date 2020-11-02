@@ -1,7 +1,14 @@
+import 'cypress-file-upload'
+
 Cypress.Commands.add('resetDatabase', () => {
   // reset database url
   const url = Cypress.env('serverUrl')+'/testing/reset'
   cy.request('POST', url)
+})
+
+Cypress.Commands.add('upload', () => {
+  const yourFixturePath = 'testikuva.jpg'
+  cy.get('[data-cy="file-input"]').attachFile(yourFixturePath)
 })
 
 Cypress.Commands.add('login', ({ email, password }) => {

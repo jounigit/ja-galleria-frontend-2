@@ -105,6 +105,7 @@ const UploadPicture = ({ ...props }) => {
         <Header as='h5' content='valittu' />
         <Button
           size='tiny'
+          data-cy='uploadButton'
           positive
           content='upload'
           onClick={submit}

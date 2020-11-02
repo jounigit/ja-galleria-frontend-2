@@ -18,6 +18,7 @@ const PictureList = ({ pictures }) => {
       { auth.user &&
       <ModalSection
         btnIcon={'edit'}
+        dataCy={'newPicture'}
         btnContent={'new picture'}
         compToModal={ CreatePicture }
         headerContent={'New Picture'}
