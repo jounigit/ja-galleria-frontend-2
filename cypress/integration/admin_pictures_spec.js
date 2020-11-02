@@ -1,5 +1,3 @@
-const { it } = require("mocha")
-const { ItemContent } = require("semantic-ui-react")
 
 describe('Admin picture', function() {
   const username = 'testi'
@@ -17,34 +15,42 @@ describe('Admin picture', function() {
   })
 
   describe('upload picture', () => {
-    it('upload', function() {
-      // cy.get('[data-cy=delete]').click()
-    // const yourFixturePath = 'testikuva.jpg'
-    // cy.get('[data-cy="file-input"]').attachFile(yourFixturePath)
-    cy.upload()
+    beforeEach(function () {
+      cy.get('[data-cy=newPicture]').click()
+    })
 
-    cy.visit('/pictures')
-    cy.get('h2').should('contain', 'Kuvat')
-    cy.get('[data-cy=picture]').its('length').should('eq', 15)
+    it('should upload image', function() {
+      const filePath = 'testikuva.jpg'
+      cy.get('#file_upload').attachFile(filePath)
+
+      cy.get('#file-submit').click()
+
+      cy.get('#message').should('contain', 'Picture uploaded!')
+
+    // cy.visit('/pictures')
+    // cy.get('h2').should('contain', 'Kuvat')
+    // cy.get('[data-cy=picture]').its('length').should('eq', 15)
     })
 
 
-  // it('get all pictures', function() {
-  //   cy.server()
-  //   cy.route('pictures', 'fixture:pictures').as('getPictures')
-  //   cy.visit('http://localhost:3000/pictures')
-  //   cy.wait('@getPictures')
+    // it('get all pictures', function() {
+    //   cy.server()
+    //   cy.route('pictures', 'fixture:pictures').as('getPictures')
+    //   cy.visit('http://localhost:3000/pictures')
+    //   cy.wait('@getPictures')
 
-  //   cy.get('h2').should('contain', 'Kuvat')
-  //   cy.get('[data-cy=picture]').its('length').should('eq', 15)
-  // })
+    //   cy.get('h2').should('contain', 'Kuvat')
+    //   cy.get('[data-cy=picture]').its('length').should('eq', 15)
+    // })
 
-  // it('get one picture', function() {
-  //   // cy.server()
-  //   // cy.route('pictures/*', 'fixture:picture').as('getPicture')
-  //   cy.visit('http://localhost:3000/pictures/1')
-  //   // cy.wait('@getPicture')
+    // it('get one picture', function() {
+    //   // cy.server()
+    //   // cy.route('pictures/*', 'fixture:picture').as('getPicture')
+    //   cy.visit('http://localhost:3000/pictures/1')
+    //   // cy.wait('@getPicture')
 
   //   cy.get('[data-cy=picture]').its('length').should('eq', 1)
   // })
+  })
+
 })

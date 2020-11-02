@@ -84,7 +84,7 @@ const UploadPicture = ({ ...props }) => {
     return (
       <Container>
         <img src={props.uploaded.image} alt="icon" width="200" />
-        <Header as='h4' color='green' data-cy='message'>{data.message}</Header>
+        <Header as='h4' color='green' id='message' data-cy='message'>{data.message}</Header>
       </Container>
     )
   }
@@ -104,8 +104,8 @@ const UploadPicture = ({ ...props }) => {
         <img src={previewUrl} alt="icon" width="200" />
         <Header as='h5' content='valittu' />
         <Button
+          id='file-submit'
           size='tiny'
-          data-cy='uploadButton'
           positive
           content='upload'
           onClick={submit}
@@ -126,7 +126,7 @@ const UploadPicture = ({ ...props }) => {
       <InputFile
         // button={{ ...buttonProps }}
         input={{
-          id: 'input-control-id',
+          id: 'file-upload',
           onChange: fileChangedHandler
         }}
       />
