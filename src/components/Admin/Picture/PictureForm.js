@@ -17,7 +17,8 @@ const PictureForm = ({
       )}
 
       <Form>
-        <Image src={thumb} size='small' />
+        <Image src={thumb} size='medium' />
+        <Header as='h3' color='green' content='Update picture info' />
         <Form.Field>
           <label>
             title

@@ -8,12 +8,14 @@ import { CREATE_PICTURE } from '../../../reducers/actionTypes'
 const initialState = {
   file: null,
   isSubmitting: false,
+  loaded: false,
   errorMessage: null,
   message: null
 }
 
 const UploadPicture = ({ ...props }) => {
   const [data, setData] = useState(initialState)
+  // const [pictureSaved, setPictureSaved] = useState(false)
   const [previewUrl, setPreviewUrl] = useState(null)
   const { dispatch } = useContext(PictureContext)
 
@@ -64,13 +66,16 @@ const UploadPicture = ({ ...props }) => {
         type: CREATE_PICTURE,
         data: newPicture
       })
+      props.setMessage('Picture loaded and saved!')
       props.setUploaded(newPicture)
+
       // props.setMessage(result.message)
       setData({
         file: null,
         isSubmitting: false,
+        loaded: true,
         errorMessage: null,
-        message: result.message
+        message: 'Picture loaded!'
       })
 
     } catch (error) {
@@ -80,14 +85,14 @@ const UploadPicture = ({ ...props }) => {
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  if (data.message) {
-    return (
-      <Container>
-        <img src={props.uploaded.image} alt="icon" width="200" />
-        <Header as='h4' color='green' id='message' data-cy='message'>{data.message}</Header>
-      </Container>
-    )
-  }
+  // if (data.message) {
+  //   return (
+  //     <Container>
+  //       {/* <img src={props.uploaded.image} alt="icon" width="200" /> */}
+  //       <Header as='h4' color='green' id='message'>{data.message}</Header>
+  //     </Container>
+  //   )
+  // }
 
   if (data.errorMessage) {
     return (
@@ -124,9 +129,9 @@ const UploadPicture = ({ ...props }) => {
   return(
     <Container>
       <InputFile
+        id= 'file-upload'
         // button={{ ...buttonProps }}
         input={{
-          id: 'file-upload',
           onChange: fileChangedHandler
         }}
       />

@@ -5,6 +5,8 @@ describe('Admin picture', function() {
   const password = 'testippass'
   // let title = 'Test picture'
 
+
+
   beforeEach(function () {
     cy.resetDatabase()
     cy.signUp({ username, email, password })
@@ -21,36 +23,52 @@ describe('Admin picture', function() {
 
     it('should upload image', function() {
       const filePath = 'testikuva.jpg'
-      cy.get('#file_upload').attachFile(filePath)
+      cy.get('input[type=file]').attachFile(filePath)
 
       cy.get('#file-submit').click()
 
-      cy.get('#message').should('contain', 'Picture uploaded!')
+      cy.get('h4').should('contain', 'Picture loaded and saved!')
+      cy.get('h3').should('contain', 'Update picture info')
+    })
+  })
 
-    // cy.visit('/pictures')
-    // cy.get('h2').should('contain', 'Kuvat')
-    // cy.get('[data-cy=picture]').its('length').should('eq', 15)
+  describe('upload/save picture and update picture info', () => {
+    beforeEach(function () {
+      const filePath = 'testikuva.jpg'
+      cy.get('[data-cy=newPicture]').click()
+      cy.get('input[type=file]').attachFile(filePath)
+      cy.get('#file-submit').click()
     })
 
+    it('should update picture', function() {
+      cy.get('h3').should('contain', 'Update picture info')
+      cy.get('[data-cy=title]').should('be.visible')
+      cy.get('[data-cy=content]').should('be.visible')
+      cy.get('[type="title"]').clear()
+      cy.get('[data-cy=title]').type('Kuva 1')
+      cy.get('[data-cy=content]').type('Hieno kuva.')
+      cy.get('[data-cy=submit]').click()
+      cy.get('.header').contains('Kuva 1')
+    })
+  })
 
-    // it('get all pictures', function() {
-    //   cy.server()
-    //   cy.route('pictures', 'fixture:pictures').as('getPictures')
-    //   cy.visit('http://localhost:3000/pictures')
-    //   cy.wait('@getPictures')
+  describe('delete picture', () => {
+    beforeEach(function () {
+      const filePath = 'testikuva.jpg'
+      cy.get('[data-cy=newPicture]').click()
+      cy.get('input[type=file]').attachFile(filePath)
+      cy.get('#file-submit').click()
+    })
 
-    //   cy.get('h2').should('contain', 'Kuvat')
-    //   cy.get('[data-cy=picture]').its('length').should('eq', 15)
-    // })
-
-    // it('get one picture', function() {
-    //   // cy.server()
-    //   // cy.route('pictures/*', 'fixture:picture').as('getPicture')
-    //   cy.visit('http://localhost:3000/pictures/1')
-    //   // cy.wait('@getPicture')
-
-  //   cy.get('[data-cy=picture]').its('length').should('eq', 1)
-  // })
+    // eslint-disable-next-line jest/no-focused-tests
+    it.only('should delete picture', function() {
+      cy.get('h3').should('contain', 'Update picture info')
+      cy.get('[data-cy=submit]').click()
+      cy.get('h3').should('not.contain', 'no pictures yet!')
+      cy.get('.trash').should('be.visible')
+      cy.get('.trash').click()
+      cy.get('h3').should('contain', 'no pictures yet!')
+    })
   })
 
 })

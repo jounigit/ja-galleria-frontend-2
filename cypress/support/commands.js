@@ -1,3 +1,5 @@
+import 'cypress-file-upload'
+
 Cypress.Commands.add('resetDatabase', () => {
   // reset database url
   const url = Cypress.env('serverUrl')+'/testing/reset'
