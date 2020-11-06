@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import PictureDetails from './PictureDetails'
 import { Grid, Header } from 'semantic-ui-react'
 import CreatePicture from './CreatePicture'
-import ModalSection from '../../Shared/modal/ModalSection'
 import { AuthContext } from '../../../contexts/AuthContext'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const PictureList = ({ pictures }) => {
   const { auth } = useContext(AuthContext)
@@ -16,13 +16,14 @@ const PictureList = ({ pictures }) => {
   return (
     <div className='PictureList'>
       { auth.user &&
-      <ModalSection
-        btnIcon={'edit'}
-        dataCy={'newPicture'}
-        btnContent={'new picture'}
-        compToModal={ CreatePicture }
-        headerContent={'New Picture'}
-      />
+       <ModalPortal
+         header='New Picture'
+         btnContent='new picture'
+         btnIcon='edit'
+         dataCy='newPicture'
+       >
+         <CreatePicture  />
+       </ModalPortal>
       }
 
       <Header as='h2' dividing content='Kuvat' />

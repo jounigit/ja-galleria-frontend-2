@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import UserDetails from './UserDetails'
 import { AuthContext } from '../../../contexts/AuthContext'
 // import CreateUser from './CreateUser'
-import ModalSection from '../../Shared/modal/ModalSection'
+// import ModalSection from '../../Shared/modal/ModalSection'
 import { Header, Grid } from 'semantic-ui-react'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const UserList = ({ users }) => {
   const { auth } = useContext(AuthContext)
@@ -13,13 +14,13 @@ const UserList = ({ users }) => {
   return (
     <div className='UserList'>
       {isAdmin &&
-      <ModalSection
-        btnIcon={'edit'}
-        btnContent={'new user'}
-        dataCy={'addNewUser'}
-        // compToModal={ CreateUser }
-        headerContent={'New User'}
+      <ModalPortal
+        header='New User'
+        btnContent='new user'
+        btnIcon='edit'
+        dataCy='addNewUser'
       />
+
       }
 
       <Header as='h2' dividing content='Userit' />
@@ -42,3 +43,11 @@ const UserList = ({ users }) => {
 }
 
 export default UserList
+
+{/* <ModalSection
+        btnIcon={'edit'}
+        btnContent={'new user'}
+        dataCy={'addNewUser'}
+        // compToModal={ CreateUser }
+        headerContent={'New User'}
+      /> */}

@@ -3,7 +3,6 @@ import { Card, Header, Form, Button } from 'semantic-ui-react'
 import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 import { UserContext } from '../../contexts/UserContext'
 import { CREATE_USER } from '../../reducers/actionTypes'
-import createUser from '../../services/apiService'
 import axios from 'axios'
 
 const baseUrl = process.env.REACT_APP_API

@@ -45,7 +45,7 @@ describe('Admin category', function() {
   })
 
   describe('admin update', () => {
-    it('can update album', function() {
+    it('can update category', function() {
       const newType = 'Updated'
       cy.get('[data-cy=category] .edit').first().click()
       cy.get('[type="title"]').clear()
@@ -56,7 +56,7 @@ describe('Admin category', function() {
   })
 
   describe('admin delete', () => {
-    it('can delete album', function() {
+    it('can delete category', function() {
       cy.get('[data-cy=delete]').first().click()
       cy.get('[data-cy=category]').should('not.exist')
     })

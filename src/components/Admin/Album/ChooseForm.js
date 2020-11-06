@@ -13,9 +13,6 @@ const ChooseForm = ({ picture_id, thumb, handleSelected }) => {
     <Container>
       <Image size='small' src={thumb} />
       <Checkbox label='choose' onChange={handleCheck} />
-      {/* <input type="checkbox"
-        onChange={handleCheck}
-        defaultChecked={checked}/> */}
     </Container>
   )
 }

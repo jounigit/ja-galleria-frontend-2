@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
-import { UPDATE_ALBUM } from '../../../reducers/actionTypes'
+import { CLOSE_MODAL, UPDATE_ALBUM } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 import { updateData } from '../../../services/apiService'
+import { ModalContext } from '../../../contexts/modalContext'
 
 const UpdateAlbum = ({ ...props }) => {
   const initialState = {
@@ -16,6 +17,7 @@ const UpdateAlbum = ({ ...props }) => {
   // Component's state
   const [data, setData] = useState(initialState)
   const { albums, dispatch } = useContext(AlbumContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
@@ -33,7 +35,6 @@ const UpdateAlbum = ({ ...props }) => {
       errorMessage: error
     })
   }
-  // console.log('INPUTS :::', data)
 
   // ----- handle form submit - post new data ---------- //
   const handleFormSubmit = async(event) => {
@@ -64,7 +65,7 @@ const UpdateAlbum = ({ ...props }) => {
       })
 
       localStorage.setItem('reloadPage', 'categories')
-      props.setModalOpen()
+      modalDispatch({ type: CLOSE_MODAL })
     }
   }
 

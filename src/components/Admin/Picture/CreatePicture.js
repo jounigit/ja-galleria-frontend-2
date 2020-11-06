@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, Header } from 'semantic-ui-react'
 import UploadPicture from './UploadPicture'
 import SavePictureData from './SavePictureData'
+import { ModalContext } from '../../../contexts/modalContext'
+import { CLOSE_MODAL } from '../../../reducers/actionTypes'
 
-const CreatePicture = ({ ...props }) => {
+const CreatePicture = () => {
   const [uploaded, setUploaded] = useState(null)
   const [dataSaved, setDataSaved] = useState(false)
   const [message, setMessage] = useState(null)
+  const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
 
@@ -14,14 +17,14 @@ const CreatePicture = ({ ...props }) => {
 
   // :::::::::::::::::::::::::::::::::::: //
   if (dataSaved) {
-    setTimeout(() => props.setModalOpen(), 2000)
+    setTimeout(() => modalDispatch({ type: CLOSE_MODAL }), 2000)
   }
 
   if (message) {
     setTimeout(() => setMessage(), 2000)
   }
 
-  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+  return (
     <Container>
       {
         !uploaded &&

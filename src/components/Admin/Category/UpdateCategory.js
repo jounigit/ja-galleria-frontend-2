@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
-import { UPDATE_CATEGORY } from '../../../reducers/actionTypes'
+import { CLOSE_MODAL, UPDATE_CATEGORY } from '../../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
 import { updateData } from '../../../services/apiService'
+import { ModalContext } from '../../../contexts/modalContext'
 
 const UpdateCategory = ({ ...props } ) => {
   const initialState = {
@@ -15,6 +16,7 @@ const UpdateCategory = ({ ...props } ) => {
   }
   const [data, setData] = useState(initialState)
   const { categories, dispatch } = useContext(CategoryContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -59,7 +61,7 @@ const UpdateCategory = ({ ...props } ) => {
         errorMessage: null,
         message: 'Category updated successfully.'
       })
-      props.setModalOpen()
+      modalDispatch({ type: CLOSE_MODAL })
     }
   }
 
@@ -73,7 +75,7 @@ const UpdateCategory = ({ ...props } ) => {
   //   )
   // }
 
-  return ( // <Modal as={Form} onSubmit={e => handleSubmit(e)} open={true} size="tiny">
+  return (
     <Container>
       <CategoryForm
         errorMessage={data.errorMessage}

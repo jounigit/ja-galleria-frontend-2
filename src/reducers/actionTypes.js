@@ -28,6 +28,9 @@ export const FAILURE = 'FAILURE'
 export const NEW_MSG = 'NEW_MSG'
 export const HIDE_MSG = 'HIDE_MSG'
 
+export const OPEN_MODAL = 'OPEN_MODAL'
+export const CLOSE_MODAL = 'CLOSE_MODAL'
+
 export const ADD_ERROR = 'ADD_ERROR'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
 

@@ -2,13 +2,13 @@ import React, { useContext } from 'react'
 import { Picture } from '../Picture'
 import { Grid, Header, Container } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
-import ModalSection from '../../Shared/modal/ModalSection'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { AlbumContext } from '../../../contexts/AlbumContext'
 import { PictureContext } from '../../../contexts/PictureContext'
 import { useParams } from 'react-router'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumDetails = () => {
   const { albums } = useContext(AlbumContext)
@@ -34,24 +34,29 @@ const AlbumDetails = () => {
     author={album.user.name}
   />
 
-  const updateAction = <ModalSection
-    btnIcon={'edit'}
-    compToModal={ UpdateAlbum }
-    headerContent={'Update Album'}
-    id={ album.id }
-    title={album.title}
-    content={album.content}
-    category_id={album.category_id}
-  />
+  const updateAction =
+  <ModalPortal btnIcon='edit'>
+    <UpdateAlbum
+      id={ album.id }
+      title={album.title}
+      content={album.content}
+      category_id={album.category_id}
+    />
+  </ModalPortal>
 
-  const chooseAction = <ModalSection
-    btnIcon={'file image outline'}
-    btnContent={'choose/delete pictures'}
-    compToModal={ ChoosePicture }
-    headerContent={'Choose pictures to album'}
-    id={ album.id }
-    albumPics={ album.pictures }
-  />
+  const chooseAction =
+  <ModalPortal
+    btnIcon='file image outline'
+    btnContent='choose/delete pictures'
+  >
+    <ChoosePicture
+      header='Choose pictures to album'
+      id={ album.id }
+      albumPics={ album.pictures }
+    />
+  </ModalPortal>
+
+
 
   return (
     <div className='album' data-cy='album'>
@@ -64,7 +69,7 @@ const AlbumDetails = () => {
 
           </Grid.Column>
           <Grid.Column>
-          {/* <Grid.Column color='grey'> */}
+            {/* <Grid.Column color='grey'> */}
             {/* <Header as='h3' content='Pictures' /> */}
             { auth.user && chooseAction }
           </Grid.Column>

@@ -2,14 +2,15 @@ import React, { useState, useContext } from 'react'
 import ListItemAlbum from './ListItemAlbum'
 import RemoveCategory from './RemoveCategory'
 import UpdateCategory from './UpdateCategory'
-import ModalSection from '../../Shared/modal/ModalSection'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { Segment, Grid, Header } from 'semantic-ui-react'
+// import { ModalContext } from '../../../contexts/modalContext'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
   const { auth } = useContext(AuthContext)
-  console.log('Cat detail: ', category)
+  // const { modalDispatch } = useContext(ModalContext)
 
   const albums = () => category.albums.map((a, i ) =>
     <ListItemAlbum key={i} albumID={a} />
@@ -21,14 +22,14 @@ const CategoryDetails = ({ category }) => {
     textDecoration: 'Underline'
   }
 
-  const editAction = <ModalSection
-    btnIcon={'edit'}
-    compToModal={ UpdateCategory }
-    headerContent={'Update Category'}
-    id={category.id}
-    title={category.title}
-    content={category.content}
-  />
+  const editAction =
+    <ModalPortal btnIcon='edit'>
+      <UpdateCategory
+        id={category.id}
+        title={category.title}
+        content={category.content}
+      />
+    </ModalPortal>
 
   const removeAction = <RemoveCategory
     id={category.id}

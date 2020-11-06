@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
-import { CREATE_ALBUM } from '../../../reducers/actionTypes'
+import { CLOSE_MODAL, CREATE_ALBUM } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 import { createData } from '../../../services/apiService'
 import { NotificationContext, notify } from '../../../contexts/NotificationContext'
+import { ModalContext } from '../../../contexts/modalContext'
 
 const initialState = {
   title: '',
@@ -15,10 +16,11 @@ const initialState = {
   message: null
 }
 
-const CreateAlbum = ({ ...props }) => {
+const CreateAlbum = () => {
   const [data, setData] = useState(initialState)
   const { albums, dispatch } = useContext(AlbumContext)
   const { msgDispatch } = useContext(NotificationContext)
+  const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -66,10 +68,11 @@ const CreateAlbum = ({ ...props }) => {
         errorMessage: null,
         message: 'Album stored successfully.'
       })
-      // update Categories, message, close modal
+
       localStorage.setItem('reloadPage', 'categories')
       notify( msgDispatch, 'Album stored successfully.', 4, 'green')
-      props.setModalOpen()
+
+      modalDispatch({ type: CLOSE_MODAL })
     }
   }
 

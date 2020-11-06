@@ -3,12 +3,31 @@ import { Card, Image } from 'semantic-ui-react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import RemovePicture from './RemovePicture'
 import UpdatePicture from './UpdatePicture'
-import ModalSection from '../../Shared/modal/ModalSection'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const PictureDetails = ({ picture }) => {
   const { auth } = useContext(AuthContext)
 
   console.log('PICTURE DETAIL ---', picture)
+
+  const updateAction =
+  <ModalPortal
+    btnIcon='edit'
+    header='Update Picture'
+  >
+    <UpdatePicture
+      id={ picture.id }
+      title={ picture.title }
+      content={ picture.content || '' }
+      thumb={ picture.thumb }
+    />
+  </ModalPortal>
+
+  const removeAction = <RemovePicture
+    id={ picture.id }
+    title={ picture.title }
+  />
+
   return (
     <div data-cy='picture'>
       <Card>
@@ -21,23 +40,8 @@ const PictureDetails = ({ picture }) => {
         </Card.Content>
         <Card.Content description={picture.content} />
         <Card.Content extra>
-          { auth.user &&
-              <RemovePicture
-                id={ picture.id }
-                title={ picture.title }
-              />
-          }
-          { auth.user &&
-              <ModalSection
-                btnIcon={'edit'}
-                compToModal={ UpdatePicture }
-                headerContent={'Update Picture'}
-                id={ picture.id }
-                title={ picture.title }
-                content={ picture.content || '' }
-                thumb={ picture.thumb }
-              />
-          }
+          { auth.user && removeAction }
+          { auth.user && updateAction }
         </Card.Content>
       </Card>
     </div>

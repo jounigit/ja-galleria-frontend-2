@@ -4,9 +4,9 @@ import { Image, Header, Grid, Segment } from 'semantic-ui-react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
-import ModalSection from '../../Shared/modal/ModalSection'
 import ChoosePicture from './ChoosePicture'
 import { PictureContext } from '../../../contexts/PictureContext'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
@@ -19,23 +19,24 @@ const AlbumListItem = ({ album }) => {
     pictures.data.filter(p => p.id === getFirst)
 
   // ::::::::::: actions ::::::::::::::::::::::::: //
-  const chooseAction = <ModalSection
-    btnIcon={'file image outline'}
-    compToModal={ ChoosePicture }
-    headerContent={'Choose pictures to album'}
-    id={ album.id }
-    albumPics={ album.pictures }
-  />
+  const chooseAction =
+  <ModalPortal btnIcon='file image outline'>
+    <ChoosePicture
+      header='Choose pictures to album'
+      id={ album.id }
+      albumPics={ album.pictures }
+    />
+  </ModalPortal>
 
-  const editAction = <ModalSection
-    btnIcon={'edit'}
-    compToModal={ UpdateAlbum }
-    headerContent={'Update Album'}
-    id={ album.id }
-    title={album.title}
-    content={album.content}
-    category_id={album.category_id}
-  />
+  const editAction =
+  <ModalPortal btnIcon='edit'>
+    <UpdateAlbum
+      id={ album.id }
+      title={album.title}
+      content={album.content}
+      category_id={album.category_id}
+    />
+  </ModalPortal>
 
   const removeAction = <RemoveAlbum
     id={ album.id }
@@ -43,7 +44,6 @@ const AlbumListItem = ({ album }) => {
     author={album.user.username}
   />
 
-  // console.log('AlbumListItem -> Album', album)
   return (
     <div className='album' data-cy='albumListItem'>
       { auth.user &&
@@ -94,3 +94,13 @@ const AlbumListItem = ({ album }) => {
 }
 
 export default AlbumListItem
+
+// const editAction = <ModalSection
+// btnIcon={'edit'}
+// compToModal={ UpdateAlbum }
+// headerContent={'Update Album'}
+// id={ album.id }
+// title={album.title}
+// content={album.content}
+// category_id={album.category_id}
+// />

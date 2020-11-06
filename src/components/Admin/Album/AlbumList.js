@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../../contexts/AuthContext'
 import CreateAlbum from './CreateAlbum'
-import ModalSection from '../../Shared/modal/ModalSection'
 import { Header } from 'semantic-ui-react'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumList = ({ albums }) => {
   const { auth } = useContext(AuthContext)
@@ -13,13 +13,14 @@ const AlbumList = ({ albums }) => {
   return (
     <div className='AlbumList'>
       {auth.user &&
-      <ModalSection
-        btnIcon={'edit'}
-        btnContent={'new album'}
-        dataCy={'addNewAlbum'}
-        compToModal={ CreateAlbum }
-        headerContent={'New Album'}
-      />
+      <ModalPortal
+        header='New Album'
+        btnContent='new album'
+        btnIcon='edit'
+        dataCy='addNewAlbum'
+      >
+        <CreateAlbum  />
+      </ModalPortal>
       }
 
       <Header as='h2' dividing content='Albumit' />

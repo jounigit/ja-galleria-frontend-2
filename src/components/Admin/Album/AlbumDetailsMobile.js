@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import { Picture } from '../Picture'
 import { Grid, Header, Container, Divider } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
-import ModalSection from '../../Shared/modal/ModalSection'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
+import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumDetailsMobile = ({ album }) => {
   const { auth } = useContext(AuthContext)
@@ -16,24 +16,30 @@ const AlbumDetailsMobile = ({ album }) => {
     author={album.user.name}
   />
 
-  const updateAction = <ModalSection
-    btnIcon={'edit'}
-    compToModal={ UpdateAlbum }
-    headerContent={'Update Album'}
-    id={ album.id }
-    title={album.title}
-    content={album.content}
-    category_id={album.category_id}
-  />
+  const updateAction =
+  <ModalPortal
+    btnIcon='edit'
+    header='Update Album'
+  >
+    <UpdateAlbum
+      id={ album.id }
+      title={album.title}
+      content={album.content}
+      category_id={album.category_id}
+    />
+  </ModalPortal>
 
-  const chooseAction = <ModalSection
-    btnIcon={'file image outline'}
-    btnContent={'choose/delete'}
-    compToModal={ ChoosePicture }
-    headerContent={'Choose pictures to album'}
-    id={ album.id }
-    albumPics={ album.pictures }
-  />
+  const chooseAction =
+  <ModalPortal
+    btnIcon='file image outline'
+    btnContent='choose/delete'
+  >
+    <ChoosePicture
+      header='Choose pictures to album'
+      id={ album.id }
+      albumPics={ album.pictures }
+    />
+  </ModalPortal>
 
   //console.log('A pics -- ', pictures)
   return (

@@ -8,7 +8,8 @@ import {
   PictureContextProvider,
   AuthContextProvider,
   UserContextProvider,
-  NotificationContextProvider
+  NotificationContextProvider,
+  ModalContextProvider
 } from './contexts'
 import App from './App'
 
@@ -21,7 +22,9 @@ ReactDOM.render(
           <CategoryContextProvider>
             <UserContextProvider>
               <NotificationContextProvider>
-                <App />
+                <ModalContextProvider>
+                  <App />
+                </ModalContextProvider>
               </NotificationContextProvider>
             </UserContextProvider>
           </CategoryContextProvider>
