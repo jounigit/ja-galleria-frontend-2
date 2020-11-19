@@ -12,6 +12,8 @@ const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
   const { pictures } = useContext(PictureContext)
 
+  console.log('Album list item: ', album)
+
   const albumPictures = album.pictures
   const getFirst = albumPictures && albumPictures.length && albumPictures[0]
 
@@ -34,7 +36,7 @@ const AlbumListItem = ({ album }) => {
       id={ album.id }
       title={album.title}
       content={album.content}
-      category_id={album.category_id}
+      category_id={ album.category && album.category.id }
     />
   </ModalPortal>
 

@@ -15,7 +15,9 @@ const AlbumForm = ({
   const defaultVal = [{ id:'', title:'choose category...' }]
   const cats = defaultVal.concat(categories.data)
 
-  const catOptions = cats.map((cat, i) => <option key={i} value={cat.id}>{cat.title}</option>)
+  const categoryOptions = cats.map((cat, i) => <option key={i} value={cat.id}>{cat.title}</option>)
+  const options = categories.data.map((cat) => ( { key: cat.id, value: cat.id, text: cat.title } ) )
+  console.log('Dropdown opstions: ', options)
 
   return (
     <Container>
@@ -32,7 +34,7 @@ const AlbumForm = ({
               value={category_id}
               onChange={handleInputChange}
             >
-              { catOptions }
+              { categoryOptions }
             </select>
           </label>
         </Form.Field>

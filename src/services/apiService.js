@@ -98,7 +98,7 @@ export const updateData = async (dispatch, TYPE, path, id, data) => {
   try {
     const result = await axios.put(`${apiUrl}/${path}/${id}`, data, config)
     // const result = await update(path, id, data)
-    // console.log('== Service updateData ==', result.data)
+    console.log('Service updateData: ', result.data)
     dispatch({
       type: TYPE,
       data: result.data,

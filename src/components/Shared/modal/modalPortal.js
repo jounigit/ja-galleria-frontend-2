@@ -8,11 +8,12 @@ const ModalPortal = ({ children, btnContent, btnIcon, dataCy, header }) => {
   const [show, setShow] = useState(false)
   const { modal, modalDispatch } = useContext(ModalContext)
 
-  console.log('Modal portal state: show-', show, ' modal: ', modal.open)
+  // console.log('Modal portal state: show-', show, ' modal: ', modal.open)
+  // console.log('Modal portal rerender', modal)
 
   const openModal = () => {
     setShow(true)
-    modalDispatch({ type: OPEN_MODAL })
+    modalDispatch({ type: OPEN_MODAL, header })
   }
 
   const closeModal = () => {
@@ -20,7 +21,9 @@ const ModalPortal = ({ children, btnContent, btnIcon, dataCy, header }) => {
     modalDispatch({ type: CLOSE_MODAL })
   }
 
-  const content = show && modal.open && (
+  const content = show &&
+  modal.open &&
+  (
     <Modal
       open={show}
       closeOnEscape={true}

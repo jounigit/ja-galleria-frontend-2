@@ -18,6 +18,8 @@ const UpdateCategory = ({ ...props } ) => {
   const { categories, dispatch } = useContext(CategoryContext)
   const { modalDispatch } = useContext(ModalContext)
 
+  console.log('Update category rerender', )
+
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
   const handleInputChange = event => {

@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import UserDetails from './UserDetails'
 import { AuthContext } from '../../../contexts/AuthContext'
-// import CreateUser from './CreateUser'
-// import ModalSection from '../../Shared/modal/ModalSection'
 import { Header, Grid } from 'semantic-ui-react'
 import ModalPortal from '../../Shared/modal/modalPortal'
 
@@ -43,11 +41,3 @@ const UserList = ({ users }) => {
 }
 
 export default UserList
-
-{/* <ModalSection
-        btnIcon={'edit'}
-        btnContent={'new user'}
-        dataCy={'addNewUser'}
-        // compToModal={ CreateUser }
-        headerContent={'New User'}
-      /> */}

@@ -1,47 +1,22 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import {
   Responsive,
   Segment,
   Menu,
   Container,
   Visibility,
-  Button,
-  // Header
 } from 'semantic-ui-react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
-import { AuthContext } from '../../../../contexts/AuthContext'
-import { UserContext } from '../../../../contexts/UserContext'
-import { removeData } from '../../../../services/apiService'
-import { DELETE_USER, LOGOUT } from '../../../../reducers/actionTypes'
-import { NotificationContext, notify } from '../../../../contexts/NotificationContext'
+import PopupLinks from '../menus/popupLinks'
+import { DropdownMenuUser } from '../menus/DropdownMenuUser'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
-  const { auth, dispatch } = useContext(AuthContext)
-  const { userDispatch } = useContext(UserContext)
-  const { msgDispatch } = useContext(NotificationContext)
 
   const hideFixedMenu = () => setFixed(false)
   const showFixedMenu = () => setFixed(true)
-
-  // console.log('Desktop user: ', auth)
-  // resign actions
-  const handleResign = () => () => {
-    // console.log('Resign user: ', auth)
-    const ok = window.confirm(`remove user ${auth.user}?`)
-    if ( ok===false) { return }
-    removeData(userDispatch, DELETE_USER, 'users', auth.id)
-    dispatch({ type: LOGOUT })
-    notify( msgDispatch, 'user resigned successfully', 5, 'orange' )
-  }
-
-  // logout actions
-  const handleLogout = () => () => {
-    dispatch({ type: LOGOUT })
-    notify( msgDispatch, 'User logged out.', 5, 'teal' )
-  }
 
   // ----------------- menu, navigation -------------------------- //
   return (
@@ -66,13 +41,18 @@ export default function DesktopContainer({ children }) {
             secondary={!fixed}
             size='small'>
             <Container>
+              {/* -------- menu links ------------- */}
               <Menu.Item
                 as={NavLink}
                 to={routes.HOME}
                 name='home'
-                content='Home'
+                content='ABOUT'
               />
-              <Menu.Item
+
+              {/* ------ popup galleria links ------------ */}
+              <PopupLinks />
+
+              {/* <Menu.Item
                 as={NavLink}
                 to={routes.CATEGORIES}
                 name='categories'
@@ -89,59 +69,13 @@ export default function DesktopContainer({ children }) {
                 to={routes.PICTURES}
                 name='pictures'
                 content='Pictures'
-              />
+              /> */}
 
               {/* ------ right, login logout ------------ */}
               <Menu.Item position='right'>
-                {
-                  auth.user &&
-                  <Menu.Item
-                    as={NavLink}
-                    to={routes.ADMIN}
-                    data-cy='adminLink'
-                    name='admin'
-                    content='Admin page'
-                  />
-                }
 
-                {
-                  auth.user === null ?
-                    <Button as={Link}
-                      to={routes.LOGIN}
-                      data-cy='login'
-                      name='login'
-                      inverted size='tiny'
-                      content='Log in'
-                    />
-                    :
-                    <Button as='a'
-                      data-cy='logout'
-                      onClick={ handleLogout() }
-                      inverted size='tiny'>
-                      Logout - {auth.user}
-                    </Button>
-                }
+                <DropdownMenuUser />
 
-                {
-                  auth.user === null &&
-                  <Button as={Link}
-                    to={routes.SIGNUP}
-                    data-cy='signup'
-                    inverted primary={fixed}
-                    style={{ marginLeft: '0.5em' }}
-                    content='Sign Up'
-                  />
-                }
-                {
-                  auth.user &&
-                  <Button as='a'
-                    data-cy='resign'
-                    onClick={ handleResign() }
-                    inverted primary={fixed}
-                    style={{ marginLeft: '0.5em' }}
-                    content='Resign'
-                  />
-                }
               </Menu.Item>
             </Container>
           </Menu>

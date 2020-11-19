@@ -36,3 +36,25 @@ const CategoryList = ({ categories }) => {
 }
 
 export default CategoryList
+
+
+// const menuLinks = <Dropdown text='Galleria' pointing className='link item'> // LINKKI
+//   <Dropdown.Menu> // DROPDOWN 1 ALKAA
+//     <Dropdown.Header>Categories</Dropdown.Header> // HEADER
+//     <Dropdown.Item> // DROPDOWN ELEMENTTI 1.1
+//        <Dropdown text='Clothing'>
+//          <Dropdown.Menu> // DROPDOWN 2 ALKAA
+//            <Dropdown.Header>Mens</Dropdown.Header>
+//            <Dropdown.Item>Shirts</Dropdown.Item> // DROPDOWN ELEMENTTI 2.1
+//            <Dropdown.Item>Bags</Dropdown.Item> // DROPDOWN ELEMENTTI 2.2
+//          </Dropdown.Menu> // DROPDOWN 2 LOPPUU
+//         </Dropdown>
+//     </Dropdown.Item> // DROPDOWN ELEMENTTI 1.1 LOPPUU
+//     <Dropdown.Item>Home Goods</Dropdown.Item> // DROPDOWN ELEMENTTI 1.2
+//     <Dropdown.Item>Bedroom</Dropdown.Item> // DROPDOWN ELEMENTTI 1.3
+//     <Dropdown.Divider />
+//     <Dropdown.Header>Order</Dropdown.Header>
+//     <Dropdown.Item>Status</Dropdown.Item> // DROPDOWN ELEMENTTI 1.4
+//     <Dropdown.Item>Cancellations</Dropdown.Item> // DROPDOWN ELEMENTTI 1.5
+//   </Dropdown.Menu> // DROPDOWN 1 LOPPUU
+// </Dropdown>

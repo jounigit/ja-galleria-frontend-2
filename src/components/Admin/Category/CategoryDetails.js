@@ -11,6 +11,8 @@ const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
   const { auth } = useContext(AuthContext)
   // const { modalDispatch } = useContext(ModalContext)
+  // console.log('CategoryDetail rerender', category.id)
+
 
   const albums = () => category.albums.map((a, i ) =>
     <ListItemAlbum key={i} albumID={a} />

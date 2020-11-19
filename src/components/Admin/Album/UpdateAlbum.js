@@ -19,6 +19,8 @@ const UpdateAlbum = ({ ...props }) => {
   const { albums, dispatch } = useContext(AlbumContext)
   const { modalDispatch } = useContext(ModalContext)
 
+  console.log('Initial: ', initialState)
+  console.log('State data: ', data)
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
   const handleInputChange = event => {
@@ -27,6 +29,7 @@ const UpdateAlbum = ({ ...props }) => {
       [event.target.name]: event.target.value
     })
   }
+
   // handle errors
   const handleError = error => {
     setData({
@@ -46,8 +49,9 @@ const UpdateAlbum = ({ ...props }) => {
     const newData = {
       title: data.title,
       content: data.content,
-      category_id: data.category_id
+      category: data.category_id
     }
+    console.log('Update album: ', newData)
 
     setData({
       ...data,
