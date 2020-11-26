@@ -28,7 +28,7 @@ export default function DesktopContainer({ children }) {
     dispatch({ type: LOGOUT })
     notify( msgDispatch, 'User logged out.', 5, 'teal' )
   }
-  
+
   // ----------------- menu, navigation -------------------------- //
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>

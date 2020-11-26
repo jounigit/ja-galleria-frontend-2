@@ -4,7 +4,7 @@ import { NotificationContext, notify } from '../../../../contexts/NotificationCo
 import { AuthContext } from '../../../../contexts/AuthContext'
 import { UserContext } from '../../../../contexts/UserContext'
 import { removeData } from '../../../../services/apiService'
-import { Dropdown, Icon } from 'semantic-ui-react'
+import { Dropdown, Icon, Menu } from 'semantic-ui-react'
 import { NavLink, Link } from 'react-router-dom'
 import * as routes from '../../../../shared/constants/routes'
 
@@ -72,7 +72,7 @@ export const AdminUserMenu = () => {
           text='Resign'
         />
       }
-      <Dropdown.Divider />
+      {/* <Dropdown.Divider />
       {
         auth.user &&
         <Dropdown.Item
@@ -82,13 +82,24 @@ export const AdminUserMenu = () => {
           name='admin'
           text='Admin page'
         />
-      }
+      } */}
     </Dropdown.Menu>
   </Dropdown>
 
 
+  const menuLinks2 = <>
+    <Menu.Item
+      as={NavLink}
+      to={routes.ADMIN}
+      data-cy='adminLink'
+      name='admin'
+      content='ADMIN PAGE'
+    />
+  </>
+
   return (
     <>
+      { menuLinks2 }
       { menuLinks }
     </>
   )

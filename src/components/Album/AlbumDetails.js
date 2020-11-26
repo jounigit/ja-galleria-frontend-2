@@ -25,28 +25,31 @@ const AlbumDetails = () => {
     <div className='album' data-cy='album'>
       {albums.loading && <div className="loader">Loading ...</div>}
       { id && album &&
-      <Grid columns={2} divided>
-        <Grid.Column>
-          <Header as='h2'>
-            {album.title}
-            <Header.Subheader>
+      <Grid.Column>
+
+        <Header as='h4'>
+          {album.title}
+          <Header.Subheader>
               Author - {album.user.username}
-            </Header.Subheader>
-          </Header>
-          <p>
-            {album.content}
-          </p>
-        </Grid.Column>
-        <Grid columns={4}>
-          { albumPictures &&
+          </Header.Subheader>
+        </Header>
+
+        <Grid columns={2} divided>
+          <Grid.Column>
+            <div dangerouslySetInnerHTML={{ __html: album.content }}></div>
+          </Grid.Column>
+          <Grid columns={4}>
+            { albumPictures &&
             albumPictures.map( (picture, i) =>
               <Grid.Column  key={i}>
                 <PictureListItem key={picture.id} picture={picture} />
               </Grid.Column>
             )
-          }
+            }
+          </Grid>
         </Grid>
-      </Grid>
+      </Grid.Column>
+
       }
 
     </div>

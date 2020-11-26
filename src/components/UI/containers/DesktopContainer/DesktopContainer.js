@@ -10,7 +10,8 @@ import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
 import PopupLinks from '../menus/popupLinks'
-import { DropdownMenuUser } from '../menus/DropdownMenuUser'
+// import { DropdownMenuUser } from '../menus/DropdownMenuUser'
+import { AdminUserMenu } from '../menus/AdminUserMenu'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
@@ -74,7 +75,7 @@ export default function DesktopContainer({ children }) {
               {/* ------ right, login logout ------------ */}
               <Menu.Item position='right'>
 
-                <DropdownMenuUser />
+                <AdminUserMenu />
 
               </Menu.Item>
             </Container>

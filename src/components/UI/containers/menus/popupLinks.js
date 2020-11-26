@@ -6,7 +6,7 @@ import ListItemAlbum from '../../../Category/ListItemAlbum'
 const PopupLinks = () => {
   const [ isOpen, setIsOpen ] = useState(false)
   const { categories } = useContext(CategoryContext)
-  console.log('Popup links: ', isOpen)
+  // console.log('Popup links: ', isOpen)
 
   const handleOpen = () => {
     setIsOpen(true)
@@ -32,7 +32,7 @@ const PopupLinks = () => {
   const columnsWithLinks = categories && categories.data &&
   categories.data.map( (data, i) => columns(i, data.title, data.albums) )
 
-  console.log('Popup colums: ', columnsWithLinks)
+  // console.log('Popup colums: ', columnsWithLinks)
 
   return (
     <Popup
@@ -44,7 +44,7 @@ const PopupLinks = () => {
       onClose={handleClose}
       onOpen={handleOpen}
     >
-      <Grid centered divided columns={3}>
+      <Grid centered divided columns={2}>
         { columnsWithLinks }
       </Grid>
     </Popup>

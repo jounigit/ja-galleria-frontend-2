@@ -27,7 +27,7 @@ const CategoryData = () => {
     dispatch({ type: CLEAR_MSG })
     notify( msgDispatch, msg, 4, 'green')
   }
-  console.log('= Cats state ==', categories)
+  // console.log('= CategoryData state:', categories)
 
   const categoriesData = categories.data && categories.data
 

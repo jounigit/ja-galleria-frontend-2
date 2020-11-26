@@ -1,14 +1,18 @@
 import React, { useContext } from 'react'
-import { Header, Form, Input, Button, Container, TextArea } from 'semantic-ui-react'
+import ReactQuill from 'react-quill'
+// import EditorToolbar from '../../Editor/EditorToolbar'
+import { Header, Form, Input, Button, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
 
 const AlbumForm = ({
   errorMessage,
+  editorState,
   title,
-  content,
+  // content,
   category_id,
   handleFormSubmit,
-  handleInputChange
+  handleInputChange,
+  handleEditorChange
 }) => {
 
   const { categories } = useContext(CategoryContext) //
@@ -16,8 +20,8 @@ const AlbumForm = ({
   const cats = defaultVal.concat(categories.data)
 
   const categoryOptions = cats.map((cat, i) => <option key={i} value={cat.id}>{cat.title}</option>)
-  const options = categories.data.map((cat) => ( { key: cat.id, value: cat.id, text: cat.title } ) )
-  console.log('Dropdown opstions: ', options)
+  // const options = categories.data.map((cat) => ( { key: cat.id, value: cat.id, text: cat.title } ) )
+  // console.log('Dropdown options: ', options)
 
   return (
     <Container>
@@ -26,43 +30,39 @@ const AlbumForm = ({
       )}
 
       <Form onSubmit={ handleFormSubmit }>
-        <Form.Field>
-          <label>category
-            <select
-              data-cy='category'
-              name='category_id'
-              value={category_id}
-              onChange={handleInputChange}
-            >
-              { categoryOptions }
-            </select>
-          </label>
-        </Form.Field>
 
         <Form.Field>
-          <label>title
-            <Input
-              data-cy='title'
-              type='title'
-              value={title}
-              onChange={handleInputChange}
-              name='title'
-              id='title'
-            />
-          </label>
+          <label>title</label>
+          <Input
+            data-cy='title'
+            type='title'
+            value={title}
+            onChange={handleInputChange}
+            name='title'
+            id='title'
+          />
+
         </Form.Field>
         <Form.Field>
-          <label>Content
-            <TextArea
-              data-cy='content'
-              value={content}
-              onChange={handleInputChange}
-              name='content'
-            />
-          </label>
-        </Form.Field>
+          <label>category</label>
+          <select
+            data-cy='category'
+            name='category_id'
+            value={category_id}
+            onChange={handleInputChange}
+          >
+            { categoryOptions }
+          </select>
 
-        <Button data-cy='submit' type='submit'>submit</Button>
+        </Form.Field>
+        <Form.Field>
+          <label>content</label>
+          <ReactQuill
+            value={editorState}
+            onChange={handleEditorChange}
+          />
+        </Form.Field>
+        <Button data-cy='submit' size='small' color='olive' type='submit'>submit</Button>
       </Form>
     </Container>
 

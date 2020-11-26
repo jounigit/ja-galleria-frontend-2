@@ -16,7 +16,7 @@ const userReducer = (state, action) => {
   case LOADING:
     return { data: state.data, isLoading: true, errorMessage: '' }
   case INIT_USERS:
-    console.log('=user data init ==', action.data)
+    console.log('=user data init: ', action.data)
     return { data: action.data, isLoading: false, errorMessage: '' }
   case CREATE_USER:
     const newData = [...state.data, action.data]

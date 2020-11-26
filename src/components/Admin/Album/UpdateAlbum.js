@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
-import { CLOSE_MODAL, UPDATE_ALBUM } from '../../../reducers/actionTypes'
+import {
+  CLOSE_MODAL,
+  UPDATE_ALBUM } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
 import { updateData } from '../../../services/apiService'
 import { ModalContext } from '../../../contexts/modalContext'
@@ -16,11 +18,17 @@ const UpdateAlbum = ({ ...props }) => {
   }
   // Component's state
   const [data, setData] = useState(initialState)
+  const [editorState, setEditorState] = React.useState({ value: initialState.content })
+
+  const handleEditorChange = value => {
+    setEditorState({ value })
+  }
   const { albums, dispatch } = useContext(AlbumContext)
   const { modalDispatch } = useContext(ModalContext)
 
-  console.log('Initial: ', initialState)
-  console.log('State data: ', data)
+  // console.log('Initial: ', initialState)
+  // console.log('Update album state data: ', data)
+  // console.log('Update edotir: ', editorState)
   // :::::::::::::::::::::::::::::::::::: //
   // handle input values
   const handleInputChange = event => {
@@ -48,7 +56,8 @@ const UpdateAlbum = ({ ...props }) => {
 
     const newData = {
       title: data.title,
-      content: data.content,
+      // content: data.content,
+      content: editorState.value,
       category: data.category_id
     }
     console.log('Update album: ', newData)
@@ -79,11 +88,13 @@ const UpdateAlbum = ({ ...props }) => {
     <Container>
       <AlbumForm
         errorMessage={data.errorMessage}
+        editorState={editorState.value}
         title={data.title}
         content={data.content}
         category_id={data.category_id}
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
+        handleEditorChange={handleEditorChange}
         formHeader={'Päivitä albumi'}
       />
     </Container>

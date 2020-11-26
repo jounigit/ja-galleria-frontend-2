@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Picture } from '../Picture'
-import { Grid, Header, Container } from 'semantic-ui-react'
+import { Grid, Header, Button, Segment, Divider, Container, Label, Popup } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
@@ -14,6 +14,7 @@ const AlbumDetails = () => {
   const { albums } = useContext(AlbumContext)
   const { pictures } = useContext(PictureContext)
   const { auth } = useContext(AuthContext)
+  const [isFormOpen, setIsFormOpen] = useState(false)
   let { id } = useParams()
 
   // :::::::::: find album :::::::::::::::::::: //
@@ -34,16 +35,6 @@ const AlbumDetails = () => {
     author={album.user.name}
   />
 
-  const updateAction =
-  <ModalPortal btnIcon='edit'>
-    <UpdateAlbum
-      id={ album.id }
-      title={album.title}
-      content={album.content}
-      category_id={album.category_id}
-    />
-  </ModalPortal>
-
   const chooseAction =
   <ModalPortal
     btnIcon='file image outline'
@@ -56,50 +47,77 @@ const AlbumDetails = () => {
     />
   </ModalPortal>
 
+  // ::::::::::::::::::::::::::::::::::::::::::::: //
+  const category_id = album.category ? album.category.id : ''
 
+  const albumContentInfo = album.content ?
+    <div dangerouslySetInnerHTML={{ __html: album.content }}></div> :
+    <Header as='h5'>No content yet. Edit album content.</Header>
+
+  const showForm =
+    <Segment>
+      <Label color='olive' attached='top'>Edit {album.title}</Label>
+      <UpdateAlbum
+        id={ album.id }
+        title={album.title}
+        content={album.content}
+        category_id={ category_id }
+      />
+    </Segment>
+
+  const showTexContent =
+  <>
+    <Header as='h5'>
+      {album.title}
+      <Header.Subheader>
+            Author - {album.user.username}
+      </Header.Subheader>
+    </Header>
+    <Header as='h5'>Category - { album.category && album.category.title }</Header>
+    {albumContentInfo}
+  </>
+
+  const editButton = <Popup
+    trigger={<Button color='olive' size='mini' content='edit' onClick={ () => setIsFormOpen(!isFormOpen) } />}
+    content="Open or close update form."
+    basic
+  />
 
   return (
-    <div className='album' data-cy='album'>
-      <Container>
-        <Grid columns={2} padded='horizontally'>
+    <Container>
+      <Segment>
+        { removeAction }
+        <Grid columns={2} relaxed='very' divided>
           <Grid.Column>
-            {/* <Header as='h2'>Album</Header> */}
-            { updateAction }
-            { removeAction }
-
-          </Grid.Column>
-          <Grid.Column>
-            {/* <Grid.Column color='grey'> */}
-            {/* <Header as='h3' content='Pictures' /> */}
-            { auth.user && chooseAction }
-          </Grid.Column>
-        </Grid>
-        <Grid columns={2} divided>
-          {/* <Grid.Row> */}
-          <Grid.Column>
-            <Header as='h2'>
-              {album.title}
-              <Header.Subheader>
-            Author - {album.user.name}
-              </Header.Subheader>
-            </Header>
-            <p>
-              {album.content}
-            </p>
-          </Grid.Column>
-          <Grid columns={4}>
-            {
-              albumPictures.map(picture =>
-                <Grid.Column  key={picture.id}>
-                  <Picture key={picture.id} picture={picture} />
-                </Grid.Column>
-              )
+            { editButton }
+            <Divider section />
+            { isFormOpen &&
+              showForm
             }
-          </Grid>
-        </Grid>
+            { !isFormOpen &&
+              showTexContent
+            }
+          </Grid.Column>
+          <Grid.Column>
+            { auth.user && chooseAction }
 
-      </Container>
-    </div>
+            <Divider section />
+
+            <Grid columns={4}>
+              {
+                albumPictures.map(picture =>
+                  <Grid.Column  key={picture.id}>
+                    <Picture key={picture.id} picture={picture} />
+                  </Grid.Column>
+                )
+              }
+            </Grid>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+    </Container>
+
+
 
 
   )
