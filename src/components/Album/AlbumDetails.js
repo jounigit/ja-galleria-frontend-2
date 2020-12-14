@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import { PictureListItem } from '../Picture'
 import { Grid, Header } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
+import SimpleReactLightbox from 'simple-react-lightbox'
+import LightboxWithCustomCaptions from '../Lightbox/LightboxWithCustomCaptions'
 
 const AlbumDetails = () => {
   const { albums } = useContext(AlbumContext)
@@ -38,15 +39,11 @@ const AlbumDetails = () => {
           <Grid.Column>
             <div dangerouslySetInnerHTML={{ __html: album.content }}></div>
           </Grid.Column>
-          <Grid columns={4}>
-            { albumPictures &&
-            albumPictures.map( (picture, i) =>
-              <Grid.Column  key={i}>
-                <PictureListItem key={picture.id} picture={picture} />
-              </Grid.Column>
-            )
-            }
-          </Grid>
+          <Grid.Column>
+            <SimpleReactLightbox>
+              { albumPictures && <LightboxWithCustomCaptions pictures={albumPictures} />}
+            </SimpleReactLightbox>
+          </Grid.Column>
         </Grid>
       </Grid.Column>
 

@@ -10,7 +10,6 @@ import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
 import PopupLinks from '../menus/popupLinks'
-// import { DropdownMenuUser } from '../menus/DropdownMenuUser'
 import { AdminUserMenu } from '../menus/AdminUserMenu'
 
 export default function DesktopContainer({ children }) {
@@ -52,25 +51,6 @@ export default function DesktopContainer({ children }) {
 
               {/* ------ popup galleria links ------------ */}
               <PopupLinks />
-
-              {/* <Menu.Item
-                as={NavLink}
-                to={routes.CATEGORIES}
-                name='categories'
-                content='Categories'
-              />
-              <Menu.Item
-                as={NavLink}
-                to={routes.ALBUMS}
-                name='album'
-                content='Albums'
-              />
-              <Menu.Item
-                as={NavLink}
-                to={routes.PICTURES}
-                name='pictures'
-                content='Pictures'
-              /> */}
 
               {/* ------ right, login logout ------------ */}
               <Menu.Item position='right'>

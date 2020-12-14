@@ -9,7 +9,9 @@ const ListItem = ({ albumID, handleClose }) => {
   const album = albums.data &&
     albums.data.find((item) => item.id === albumID)
   // console.log('A item: ', album)
-  const subContent = album && album.content && <p>{album.content.substring(0,30)} ...</p>
+  const subContent = album && album.content &&
+  <div dangerouslySetInnerHTML={{ __html: album.content.substring(0,30) }}></div>
+
   return(
     <>
       <Divider fitted />

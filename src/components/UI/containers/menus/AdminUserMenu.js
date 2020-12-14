@@ -29,10 +29,10 @@ export const AdminUserMenu = () => {
     notify( msgDispatch, 'user resigned successfully', 5, 'orange' )
   }
 
-  const menuLinks =
-  <Dropdown text='USER ACTIONS' pointing className='link item'>
+  const userLinks =
+  <Dropdown text='user account' pointing className='link item'>
     <Dropdown.Menu>
-      <Dropdown.Header><Icon name='user' />  User - {auth.user}</Dropdown.Header>
+      <Dropdown.Header><Icon name='user' /> {auth.user}</Dropdown.Header>
       {
         auth.user === null ?
           <Dropdown.Item as={Link}
@@ -72,35 +72,24 @@ export const AdminUserMenu = () => {
           text='Resign'
         />
       }
-      {/* <Dropdown.Divider />
-      {
-        auth.user &&
-        <Dropdown.Item
-          as={NavLink}
-          to={routes.ADMIN}
-          data-cy='adminLink'
-          name='admin'
-          text='Admin page'
-        />
-      } */}
     </Dropdown.Menu>
   </Dropdown>
 
 
-  const menuLinks2 = <>
+  const adminpage = <>
     <Menu.Item
       as={NavLink}
       to={routes.ADMIN}
       data-cy='adminLink'
       name='admin'
-      content='ADMIN PAGE'
+      content='admin page'
     />
   </>
 
   return (
     <>
-      { menuLinks2 }
-      { menuLinks }
+      { adminpage }
+      { userLinks }
     </>
   )
 }
