@@ -1,0 +1,23 @@
+.Pic-ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding-left: 0px;
+  }
+  
+  .Pic-li {
+    height: 40vh;
+    flex-grow: 1;
+  }
+  
+  .Pic-img {
+    max-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+    padding: .2em;
+  }
+
+  .Pic-li:last-child {
+    flex-grow: 10;
+  }

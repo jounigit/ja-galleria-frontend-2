@@ -53,7 +53,7 @@ const LightboxWithCustomCaptions = ({ pictures }) => {
   return (
     <SRLWrapper customCaptions={customCaptions} options={options}>
 
-      <Image.Group size='small'>
+      <Image.Group size='medium'>
         { pictures &&
           pictures.map((p,i) =>
             <a key={i} href={ p.image } data-attribute="SRL">

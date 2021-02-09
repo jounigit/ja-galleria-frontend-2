@@ -1,25 +1,21 @@
-import React, { useContext } from 'react'
-import { CategoryContext } from '../../contexts/CategoryContext'
-import { CategoryDetails } from '../Category'
-import { Grid } from 'semantic-ui-react'
+import React from 'react'
+import { AlbumContext } from '../../contexts/AlbumContext'
+import AlbumListHome from '../Album/AlbumListHome'
+import CategoryList from '../Category/CategoryList'
 
-const Home = () => {
-  const { categories } = useContext(CategoryContext)
-  const categoriesData = categories.data && categories.data
+const Home = (props) => {
+  const { albums } = React.useContext(AlbumContext)
+  console.log('A test: ', albums)
 
+  console.log(props.location)
+  // console.log(props.match)
+  // console.log(props.history)
   return (
     <div>
-      <h1>Kuvagalleria</h1>
 
-      <Grid doubling columns={3}>
-        { categoriesData &&
-          categoriesData.map(category =>
-            <Grid.Column  key={category.id}>
-              <CategoryDetails key={category.id} category={category} />
-            </Grid.Column>
-          )
-        }
-      </Grid>
+      <CategoryList amount='2' />
+      <AlbumListHome amount='3' />
+
     </div>
   )
 }

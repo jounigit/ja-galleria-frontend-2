@@ -1,39 +1,62 @@
-import React, { useState } from 'react'
-import ListItemAlbum from './ListItemAlbum'
+import React, { useContext, } from 'react'
+import { useParams } from 'react-router'
+import { Container, Divider, Header, Segment } from 'semantic-ui-react'
+import { AlbumContext } from '../../contexts/AlbumContext'
+import { CategoryContext } from '../../contexts/CategoryContext'
+import AlbumListItem from '../Album/AlbumListItem'
+import Breadcrumbs from '../Shared/Breadcrumbs'
 
-const CategoryDetails = ({ category }) => {
-  const [visible, setVisible] = useState(false)
+const CategoryDetails = () => {
+  const { categories: { data: Categories } } = useContext(CategoryContext)
+  const { albums: { data: Albums } } = useContext(AlbumContext)
+  let { slug } = useParams()
 
-  const albums = () => category.albums.map(a =>
-    <ListItemAlbum key={a} albumID={a} />
+  // :::::::::: find category :::::::::::::::::::: //
+  let category = Categories && Categories.find((item) => item.slug === slug)
+
+  if (category === undefined) { return <div className='Item-center'>Loading...</div> }
+
+  const { title, content, user, albums: Ids } = category
+
+  // :::::::::: find albums :::::::::::::::::::: //
+  // const ids = category.albums && category.albums
+
+  const catAlbumsObjs = Albums && Ids &&
+  Albums.map(a => Ids.includes(a.id) ? a : null).filter(a => a !== null)
+
+  console.log('CATS Albums: ', catAlbumsObjs)
+
+  /*********** map data to girds *************************************/
+  const mappedAlbums = catAlbumsObjs && catAlbumsObjs.map( (album, i) =>
+    <div key={i}>
+      <AlbumListItem album={album} cssClass='Light-gray' />
+    </div>
   )
 
-  const showWhenVisible = { display: visible ? '' : 'none' }
-  const linkable = {
-    color: 'Blue',
-    textDecoration: 'Underline'
-  }
+  console.log('CATS Albums 000: ', mappedAlbums)
 
+  /**************************************************************** */
   return (
-    <div className='category' data-cy='category'>
+    <Container>
+      <Segment basic>
+        <Breadcrumbs path='/categories' linkName='Categories' active={ title } />
+      </Segment>
 
-      <h3 data-cy='header'>
-        {category.title}
-      </h3>
+      <Divider horizontal>{title}</Divider>
 
-      <p>
-        {category.content}
-      </p>
-      <h5>
-          Author - { category.user && category.user.username }
-      </h5>
-      <h3  data-cy='linkable' style={linkable} onClick={() => setVisible(!visible)}>Albums</h3>
-      <ul style={showWhenVisible}>
-        {albums().length > 0 ? albums() : 'no albums'}
-      </ul>
+      <Header as='h1' data-cy='header'>
+        { title.toUpperCase() }
+      </Header>
 
-      <hr />
-    </div>
+      { content }
+
+      <Header as='h4'> Author - { user.username } </Header>
+
+      <div className='Grid2'>
+        { Albums && mappedAlbums }
+      </div>
+
+    </Container>
   )
 }
 

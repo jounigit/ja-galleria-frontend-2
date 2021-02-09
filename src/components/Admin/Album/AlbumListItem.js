@@ -1,18 +1,15 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Image, Header, Button, Grid } from 'semantic-ui-react'
+import { Image, Header, Button, Table, Segment, } from 'semantic-ui-react'
 import { AuthContext } from '../../../contexts/AuthContext'
-// import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
-// import ChoosePicture from './ChoosePicture'
 import { PictureContext } from '../../../contexts/PictureContext'
-// import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
-  const { pictures } = useContext(PictureContext)
+  const { pictures: { data: Pictures } } = useContext(PictureContext)
 
-  console.log('Album list item: ', album)
+  // console.log('Album list item: ', album)
 
   //******* album pictures vars *************/
   const albumPictures = album.pictures
@@ -20,16 +17,16 @@ const AlbumListItem = ({ album }) => {
     albumPictures.length + ' - kuvaa' : 'no pictures'
 
   const getFirst = albumPictures && albumPictures.length && albumPictures[0]
-  const firstPic = getFirst && pictures.data &&
-    pictures.data.filter(p => p.id === getFirst)
+  const firstPic = getFirst && Pictures && Pictures.filter(p => p.id === getFirst)
 
   const firstPicInfo = firstPic ?
-    <Image size='small' src={firstPic && firstPic[0].image} /> : ''
+    <Image fluid src={ firstPic[0].landscape } /> : ''
 
   //********************************************/
   const link = <Link to={`/admin/album/${album.id}`}>
     <Button size='tiny' positive icon='edit' />
   </Link>
+
   const removeAction = <RemoveAlbum
     id={ album.id }
     title={album.title}
@@ -40,7 +37,7 @@ const AlbumListItem = ({ album }) => {
   return (
     <div className='album' data-cy='albumListItem'>
       { auth.user &&
-      <>
+      <Segment>
 
         { firstPicInfo }
 
@@ -50,19 +47,16 @@ const AlbumListItem = ({ album }) => {
           <Header.Subheader>{ albumPicturesInfo }</Header.Subheader>
         </Header>
 
-        <Grid>
-          <Grid.Row>
-            <Grid.Column>
-              { link }
-            </Grid.Column>
-            <Grid.Column></Grid.Column>
-            <Grid.Column>
-              { removeAction }
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Table.Row>
+          <Table.Cell>
+            { link }
+          </Table.Cell>
+          <Table.Cell>
+            { removeAction }
+          </Table.Cell>
+        </Table.Row>
 
-      </>
+      </Segment>
       }
     </div>
   )

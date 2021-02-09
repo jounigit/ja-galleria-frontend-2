@@ -1,29 +1,50 @@
 import React, { useContext } from 'react'
-import AlbumListItem from './AlbumListItem'
+// import AlbumListItem from './AlbumListItem'
 import { AlbumContext } from '../../contexts/AlbumContext'
-import { Header, Grid } from 'semantic-ui-react'
+// import {
+//   // Header,
+//   Grid, Responsive } from 'semantic-ui-react'
+import {
+// colors,
+// setBgColor,
+// shuffleArray,
+} from '../../helpers'
+import '../../helpers/Colors.scss'
+import { usePathname } from '../../helpers/getPathName'
+import AlbumListItem from './AlbumListItem'
 
-const AlbumList = () => {
-  const { albums } = useContext(AlbumContext)
 
-  const sortedAlbums = albums.data
-  && albums.data.sort((a,b) =>  b.id-a.id )
+const AlbumList = ({ amount }) => {
+  const { albums: { data: Albums } } = useContext(AlbumContext)
 
+  console.log('PATHNAME Albumlist: ', usePathname())
+
+  if (Albums === undefined) { return <div className='Item-center'>Loading...</div> }
+
+  /** constants */
+  const isArr = Array.isArray(Albums)
+
+  let sortedAlbums = Albums.sort((a,b) =>  b.id-a.id)
+  sortedAlbums = ( isArr && amount ) ? sortedAlbums.slice(0, amount) : sortedAlbums
+
+  /*********** map data to girds *************************************/
+  const mappedAlbums = isArr && sortedAlbums.map( (album, i) =>
+    <div key={i}>
+      <AlbumListItem album={album} cssClass='Light-gray' />
+    </div>
+  )
+
+  /***********************************************************************/
   return (
-    <div className='AlbumList'>
-      {albums.loading && <div className="loader">Loading ...</div>}
+    <div className='AlbumList' style={{ margin: '2em' }}>
 
-      <Header as='h2' dividing content='Albumit' />
+      <div className='Item-center'><h1>ALBUMS</h1></div>
 
-      <Grid>
-        { !albums.loading && albums.data &&
-        sortedAlbums.map(album =>
-          <Grid.Column mobile={16} tablet={8} computer={4}  key={album.id}>
-            <AlbumListItem album={album} />
-          </Grid.Column>
-        )
-        }
-      </Grid>
+      <div className='Grid2'>
+
+        { Albums && mappedAlbums }
+
+      </div>
 
     </div>
   )

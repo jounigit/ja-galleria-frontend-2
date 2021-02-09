@@ -1,38 +1,40 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, } from 'react'
 import { Picture } from '../Picture'
-import { Grid, Header, Button, Segment, Divider, Container, Label, Popup } from 'semantic-ui-react'
+import { Grid, Header, Segment, Divider, Container } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
 import UpdateAlbum from './UpdateAlbum'
 import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
-import { AlbumContext } from '../../../contexts/AlbumContext'
 import { PictureContext } from '../../../contexts/PictureContext'
-import { useParams } from 'react-router'
 import ModalPortal from '../../Shared/modal/modalPortal'
+import { CategoryContext } from '../../../contexts/CategoryContext'
 
-const AlbumDetails = () => {
-  const { albums } = useContext(AlbumContext)
-  const { pictures } = useContext(PictureContext)
+const AlbumDetails = ({ album }) => {
+  const { categories: { data: CatData } } = useContext(CategoryContext)
+  const { pictures: { data: Pictures } } = useContext(PictureContext)
   const { auth } = useContext(AuthContext)
-  const [isFormOpen, setIsFormOpen] = useState(false)
-  let { id } = useParams()
 
-  // :::::::::: find album :::::::::::::::::::: //
-  let album = albums.data && albums.data.find((item) => item.id === id)
+  const { id: AlbumId, title, content, category: CategoryId, user, pictures: PicIds } = album
+  console.log('AlbumDetails: ',AlbumId,'', title,' ', content,' - ',CategoryId,' - ', user,' ', PicIds)
 
-  console.log('AlbumDetails: ', album)
+  // :::::::::: find category :::::::::::::::::::: //
+  let categoryTitle = 'no category yet'
+  if ( CategoryId ) {
+    const cat = CatData.find(c => c.id === CategoryId)
+    console.log('AlbumDetails CAT: ', cat)
+    console.log('AlbumDetails CAT id: ', CategoryId)
+    categoryTitle = cat && cat.title
+  }
+
   // :::::::::: find pictures ::::::::::::::::: //
-  const ids = album && album.pictures
-  const pics = pictures.data
-
-  const albumPictures = pics && ids &&
-    pics.map(p => ids.includes(p.id) ? p : null).filter(p => p !== null)
+  const albumPictures = Pictures && PicIds &&
+    Pictures.map(p => PicIds.includes(p.id) ? p : null).filter(p => p !== null)
 
   // ::::::::::: actions ::::::::::::::::::::::::: //
   const removeAction = <RemoveAlbum
-    id={ album.id }
-    title={album.title}
-    author={album.user.name}
+    id={ AlbumId }
+    title={title}
+    author={user.name}
   />
 
   const chooseAction =
@@ -42,62 +44,61 @@ const AlbumDetails = () => {
   >
     <ChoosePicture
       header='Choose pictures to album'
-      id={ album.id }
+      id={ AlbumId }
       albumPics={ album.pictures }
     />
   </ModalPortal>
 
-  // ::::::::::::::::::::::::::::::::::::::::::::: //
-  const category_id = album.category ? album.category.id : ''
+  const editAction =
+  <ModalPortal btnIcon='edit'>
+    <UpdateAlbum
+      id={ AlbumId }
+      title={title}
+      content={content}
+      categoryId={ CategoryId }
+    />
+  </ModalPortal>
+  // :::::::::::::::: content variables ::::::::::::::::::::::: //
 
-  const albumContentInfo = album.content ?
+  const albumContentInfo = content ?
     <div dangerouslySetInnerHTML={{ __html: album.content }}></div> :
     <Header as='h5'>No content yet. Edit album content.</Header>
-
-  const showForm =
-    <Segment>
-      <Label color='olive' attached='top'>Edit {album.title}</Label>
-      <UpdateAlbum
-        id={ album.id }
-        title={album.title}
-        content={album.content}
-        category_id={ category_id }
-      />
-    </Segment>
 
   const showTexContent =
   <>
     <Header as='h5'>
-      {album.title}
+      {title}
       <Header.Subheader>
-            Author - {album.user.username}
+            Author - {user.username}
       </Header.Subheader>
     </Header>
-    <Header as='h5'>Category - { album.category && album.category.title }</Header>
+    <Header as='h5'>Category - { categoryTitle }</Header>
     {albumContentInfo}
   </>
 
-  const editButton = <Popup
-    trigger={<Button color='olive' size='mini' content='edit' onClick={ () => setIsFormOpen(!isFormOpen) } />}
-    content="Open or close update form."
-    basic
-  />
-
+  //********************************************/
   return (
     <Container>
       <Segment>
-        { removeAction }
-        <Grid columns={2} relaxed='very' divided>
+
+        <Grid
+          columns={2} relaxed='very' divided>
+
+          {/************* text part ************************/}
           <Grid.Column>
-            { editButton }
+
+            <Grid>
+              <Grid.Column tablet={2} computer={2}>{ editAction }</Grid.Column>
+              <Grid.Column tablet={2} computer={2}>{ removeAction }</Grid.Column>
+            </Grid>
+
             <Divider section />
-            { isFormOpen &&
-              showForm
-            }
-            { !isFormOpen &&
+            {
               showTexContent
             }
           </Grid.Column>
+
+          {/************** picture part ******************* */}
           <Grid.Column>
             { auth.user && chooseAction }
 
@@ -113,6 +114,7 @@ const AlbumDetails = () => {
               }
             </Grid>
           </Grid.Column>
+
         </Grid>
       </Segment>
     </Container>

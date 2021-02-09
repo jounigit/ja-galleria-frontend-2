@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
-import { CLOSE_MODAL, CREATE_ALBUM } from '../../../reducers/actionTypes'
+import { CLOSE_MODAL, CREATE_ALBUM, INIT_CATEGORIES } from '../../../reducers/actionTypes'
 import AlbumForm from './AlbumForm'
-import { createData } from '../../../services/apiService'
+import { createData, fetchData } from '../../../services/apiService'
 import { NotificationContext, notify } from '../../../contexts/NotificationContext'
 import { ModalContext } from '../../../contexts/modalContext'
+import { CategoryContext } from '../../../contexts/CategoryContext'
 
 const initialState = {
   title: '',
@@ -18,12 +19,19 @@ const initialState = {
 
 const CreateAlbum = () => {
   const [data, setData] = useState(initialState)
+  const [editorState, setEditorState] = React.useState({ value: initialState.content })
   const { albums, dispatch } = useContext(AlbumContext)
+  const { dispatch: CategoryDispatch } = useContext(CategoryContext)
   const { msgDispatch } = useContext(NotificationContext)
   const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
+
+  const handleEditorChange = value => {
+    setEditorState({ value })
+  }
+
   const handleInputChange = event => {
     setData({
       ...data,
@@ -48,7 +56,7 @@ const CreateAlbum = () => {
 
     const newData = {
       title: data.title,
-      content: data.content,
+      content: editorState.value,
       category_id: data.category_id
     }
 
@@ -69,7 +77,9 @@ const CreateAlbum = () => {
         message: 'Album stored successfully.'
       })
 
-      localStorage.setItem('reloadPage', 'categories')
+      fetchData(CategoryDispatch, INIT_CATEGORIES, 'categories')
+
+      // localStorage.setItem('reloadPage', 'categories')
       notify( msgDispatch, 'Album stored successfully.', 4, 'green')
 
       modalDispatch({ type: CLOSE_MODAL })
@@ -77,17 +87,16 @@ const CreateAlbum = () => {
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-
   return (
     <Container>
       <AlbumForm
         errorMessage={data.errorMessage}
+        editorState={editorState.value}
         title={data.title}
-        content={data.content}
         category_id={data.category_id}
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
-        formHeader={'Uusi albumi'}
+        handleEditorChange={handleEditorChange}
       />
     </Container>
 

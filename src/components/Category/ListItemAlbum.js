@@ -9,20 +9,17 @@ const ListItem = ({ albumID, handleClose }) => {
   const album = albums.data &&
     albums.data.find((item) => item.id === albumID)
   // console.log('A item: ', album)
-  const subContent = album && album.content &&
-  <div dangerouslySetInnerHTML={{ __html: album.content.substring(0,30) }}></div>
+  // const subContent = album && album.content &&
+  // <div dangerouslySetInnerHTML={{ __html: album.content.substring(0,30) }}></div>
 
   return(
     <>
-      <Divider fitted />
-      <Link to={`/album/${album && album.id}`}
+      <Link to={`/album/${album && album.slug}`}
         style={{ color:'grey', paddingBottom:'50' }}
         onClick={handleClose}>
         <h4>
           {album && album.title}
         </h4>
-
-        {album && subContent }
 
       </Link>
       <Divider hidden />

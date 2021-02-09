@@ -1,0 +1,39 @@
+.Image-grid {
+  /* Arrange children using flexbox */
+  display: flex;
+  /* ALlow images to display on multiple lines rather than a single line */
+  flex-wrap: wrap;
+  /* Container should take up only 90% of the browser, leave 5% space on each side */
+  width: 90%;
+  /* Center container */
+  margin: 0 auto;
+}
+.Fleximg { 
+  padding: .2vw;
+  font-size: 0;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  -webkit-flex-flow: row wrap; 
+  flex-flow: row wrap; 
+  display: -webkit-box;
+  display: flex;
+}
+.Fleximg div { 
+  -webkit-box-flex: auto;
+  -ms-flex: auto;
+  flex: auto; 
+  width: 300px; 
+  margin: .2vw; 
+}
+.Fleximg div img { 
+  width: 100%; 
+  height: auto; 
+}
+@media screen and (max-width: 400px) {
+  .Fleximg div { margin: 0; }
+  .Fleximg { padding: 0; }
+  
+}

@@ -30,12 +30,13 @@ const CategoryData = () => {
   // console.log('= CategoryData state:', categories)
 
   const categoriesData = categories.data && categories.data
+  const reverseData = categoriesData.reverse()
 
   return (
     <Fragment>
       {categories.loading && <div className="loader">Loading ...</div>}
 
-      { categoriesData && <CategoryList categories = { categoriesData.reverse() } /> }
+      { categoriesData && <CategoryList categories = { reverseData } /> }
     </Fragment>
   )
 }

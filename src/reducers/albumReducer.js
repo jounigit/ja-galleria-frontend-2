@@ -14,6 +14,7 @@ import {
 const albumReducer = (state, action) => {
   switch (action.type) {
   case FAILURE:
+    console.log('Album reducer err: ', action.error)
     return { data: state.data, isLoading: false, errorMessage: action.error }
   case CLEAR_ERROR:
     return { data: state.data, isLoading: false, errorMessage: '', message: '' }
