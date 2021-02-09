@@ -48,16 +48,6 @@ const Lightbox = ({ pictures }) => {
             </Grid.Column>
           )
         }
-        {/* <Grid.Column>
-          <a href={ kuva1 } data-attribute="SRL">
-            <Image src={ kuva1Thumb } alt="Umbrella" />
-          </a>
-        </Grid.Column>
-        <Grid.Column>
-          <a href={ kuva2 } data-attribute="SRL">
-            <Image src={ kuva2Thumb } alt="Pöööö" />
-          </a>
-        </Grid.Column> */}
       </Grid>
     </SRLWrapper>
   )

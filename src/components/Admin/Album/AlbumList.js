@@ -2,16 +2,19 @@ import React, { useContext } from 'react'
 import AlbumListItem from './AlbumListItem'
 import { AuthContext } from '../../../contexts/AuthContext'
 import CreateAlbum from './CreateAlbum'
-import { Grid, Header } from 'semantic-ui-react'
+import { Grid, Header, Segment } from 'semantic-ui-react'
 import ModalPortal from '../../Shared/modal/modalPortal'
 
 const AlbumList = ({ albums }) => {
   const { auth } = useContext(AuthContext)
 
+  console.log('= AlbumList: ', albums)
+
   const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
 
+  //********************************************/
   return (
-    <div className='AlbumList'>
+    <div className='AlbumList' style={{ marginBottom: 100 }}>
       {auth.user &&
       <ModalPortal
         header='New Album'
@@ -23,7 +26,7 @@ const AlbumList = ({ albums }) => {
       </ModalPortal>
       }
 
-      <Header as='h2' dividing content='Albumit' />
+      <Segment basic textAlign='center'><Header as='h1' content='ALBUMS' /></Segment>
 
       { albums.length < 1 && <p>no albums yet.</p> }
 
@@ -38,8 +41,6 @@ const AlbumList = ({ albums }) => {
           )
         }
       </Grid>
-
-
 
     </div>
   )

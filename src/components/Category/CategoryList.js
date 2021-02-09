@@ -1,25 +1,61 @@
-import React from 'react'
-import CategoryDetails from './CategoryDetails'
-import { Header, Grid } from 'semantic-ui-react'
+import React, { useContext } from 'react'
+import { colors, shuffleArray } from '../../helpers'
+import { CategoryContext } from '../../contexts/CategoryContext'
+import CategoryItemHomePage from './CategoryItemHomePage'
 
-const CategoryList = ({ categories }) => {
+const CategoryList = ({ amount }) => {
+  const { categories: { data: Categories } } = useContext(CategoryContext)
 
+  if (Categories === undefined) { return <div className='Item-center'>Loading...</div> }
+  /** constants */
+  const isArr = Array.isArray(Categories)
+  const colorArr = shuffleArray(colors.redish)
+  console.log(isArr, amount)
+
+  /********** items wanted for show ********************************/
+  const catsToShow = ( isArr && amount ) ? Categories.slice(0, amount) : Categories
+
+  /*********** map data to girds *************************************/
+  const mappedCategories = Categories && catsToShow.map((category, i) =>
+    <div key={i} className={ colorArr[i]}>
+      <CategoryItemHomePage key={i} category={category} cssClass={ colorArr[i] }  />
+    </div>
+  )
+
+  /***********************************************************************/
   return (
-    <div className='CategoryList'>
+    <div className='CategoryList Grid2'>
 
-      <Header as='h2' dividing content='Kategoriat' />
+      { mappedCategories }
 
-      <Grid doubling columns={3}>
-        {
-          categories.map(category =>
-            <Grid.Column  key={category.id}>
-              <CategoryDetails key={category.id} category={category} />
-            </Grid.Column>
-          )
-        }
-      </Grid>
     </div>
   )
 }
 
 export default CategoryList
+
+
+{/* <Header as='h2' dividing content='Kategoriat' /> */}
+
+{/* Tablet, mobile */}
+{/* <Responsive maxWidth={Responsive.onlyTablet.maxWidth}>
+        <Grid columns={2}>
+          { mappedCategories }
+        </Grid>
+      </Responsive> */}
+
+{/* Computer */}
+{/* <Responsive minWidth={Responsive.onlyComputer.minWidth}> */}
+
+{/* { mappedCategories } */}
+
+{/* <Grid>
+          {
+            <Grid.Row columns={ computerCols } style={ columnStyle }>
+              { mappedCategories }
+            </Grid.Row>
+
+          }
+        </Grid> */}
+
+{/* </Responsive> */}

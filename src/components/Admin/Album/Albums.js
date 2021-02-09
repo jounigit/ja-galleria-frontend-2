@@ -8,8 +8,11 @@ const Albums = () => {
   const { albums, dispatch } = useContext(AlbumContext)
   const { msgDispatch } = useContext(NotificationContext)
   let albumsData = albums.data && albums.data
-  console.log('= Albums state ==', albums)
 
+  console.log('= Albums dataaaaa:', albumsData)
+  // console.log('= Albums album:', album)
+
+  /******************** messages *************************/
   if(albums.errorMessage) {
     let errorMsg = albums.errorMessage.response.data.message
     dispatch({ type: CLEAR_ERROR })
@@ -22,12 +25,13 @@ const Albums = () => {
     notify( msgDispatch, msg, 4, 'green')
   }
 
+  /****************************************************************/
   return (
     <div className="Albums">
       {albums.loading && <div className="loader">Loading ...</div>}
-      {albums.data
-         && <AlbumList albums = { albumsData } />
+      { albumsData && <AlbumList albums = { albumsData } />
       }
+
     </div>
   )
 }

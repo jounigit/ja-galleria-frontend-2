@@ -37,7 +37,7 @@ const createUser = async ( url, newObject ) => {
   return response.data
 }
 
-const update = async (url, id, newObject) => {
+export const update = async (url, id, newObject) => {
   const response = await axios.put(`${apiUrl}/${url}/${id}`, newObject, config)
   console.log('== Service update response ==', response.data)
   return response.data
@@ -88,6 +88,7 @@ export const createData = async (dispatch, TYPE, path, data) => {
       message: result.message
     })
   } catch (error) {
+    console.log('Service updateData error: ', error)
     dispatch({
       type: FAILURE, error
     })
@@ -97,17 +98,20 @@ export const createData = async (dispatch, TYPE, path, data) => {
 export const updateData = async (dispatch, TYPE, path, id, data) => {
   try {
     const result = await axios.put(`${apiUrl}/${path}/${id}`, data, config)
-    // const result = await update(path, id, data)
-    console.log('Service updateData: ', result.data)
+    // console.log('Service updateData: ', result.data)
     dispatch({
       type: TYPE,
       data: result.data,
       message: result.message
     })
+    return result
   } catch (error) {
+    // console.log('Service updateData error: ', error)
     dispatch({
-      type: FAILURE, error
+      type: FAILURE,
+      error: error
     })
+    return error.Error
   }
 }
 

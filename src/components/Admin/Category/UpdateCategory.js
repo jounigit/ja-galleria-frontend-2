@@ -6,10 +6,10 @@ import CategoryForm from './CategoryForm'
 import { updateData } from '../../../services/apiService'
 import { ModalContext } from '../../../contexts/modalContext'
 
-const UpdateCategory = ({ ...props } ) => {
+const UpdateCategory = ({ id: CategoryID, title, content }) => {
   const initialState = {
-    title: props.title,
-    content: props.content,
+    title,
+    content,
     isSubmitting: false,
     errorMessage: null,
     message: null
@@ -17,8 +17,6 @@ const UpdateCategory = ({ ...props } ) => {
   const [data, setData] = useState(initialState)
   const { categories, dispatch } = useContext(CategoryContext)
   const { modalDispatch } = useContext(ModalContext)
-
-  console.log('Update category rerender', )
 
   // :::::::::::::::::::::::::::::::::::: //
   // hande input values
@@ -54,7 +52,7 @@ const UpdateCategory = ({ ...props } ) => {
       errorMessage: null
     })
 
-    updateData(dispatch, UPDATE_CATEGORY, 'categories', props.id, newData)
+    updateData(dispatch, UPDATE_CATEGORY, 'categories', CategoryID, newData)
     if( !categories.isLoading && categories.errorMessage==='') {
       setData({
         title: '',

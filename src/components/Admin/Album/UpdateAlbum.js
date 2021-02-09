@@ -1,18 +1,24 @@
-import React, { useState, useContext } from 'react'
+import React, { useState,
+  useContext
+} from 'react'
 import { Container } from 'semantic-ui-react'
 import { AlbumContext } from '../../../contexts/AlbumContext'
+import { CategoryContext } from '../../../contexts/CategoryContext'
 import {
   CLOSE_MODAL,
-  UPDATE_ALBUM } from '../../../reducers/actionTypes'
-import AlbumForm from './AlbumForm'
-import { updateData } from '../../../services/apiService'
+  INIT_CATEGORIES,
+  UPDATE_ALBUM,
+} from '../../../reducers/actionTypes'
+import { fetchData, updateData } from '../../../services/apiService'
 import { ModalContext } from '../../../contexts/modalContext'
+import AlbumForm from './AlbumForm'
+import { NotificationContext, notify } from '../../../contexts/NotificationContext'
 
-const UpdateAlbum = ({ ...props }) => {
+const UpdateAlbum = ({ id: AlbumID, title, content, categoryId }) => {
   const initialState = {
-    title: props.title,
-    content: props.content,
-    category_id: props.category_id,
+    title,
+    content,
+    categoryId,
     isSubmitting: false,
     errorMessage: null
   }
@@ -20,17 +26,18 @@ const UpdateAlbum = ({ ...props }) => {
   const [data, setData] = useState(initialState)
   const [editorState, setEditorState] = React.useState({ value: initialState.content })
 
+  const { albums, dispatch } = useContext(AlbumContext)
+  const { dispatch: CategoryDispatch } = useContext(CategoryContext)
+  const { msgDispatch } = useContext(NotificationContext)
+  const { modalDispatch } = useContext(ModalContext)
+
+  // :::::::::::::::::::::::::::::::::::: //
+  // handle input values
+
   const handleEditorChange = value => {
     setEditorState({ value })
   }
-  const { albums, dispatch } = useContext(AlbumContext)
-  const { modalDispatch } = useContext(ModalContext)
 
-  // console.log('Initial: ', initialState)
-  // console.log('Update album state data: ', data)
-  // console.log('Update edotir: ', editorState)
-  // :::::::::::::::::::::::::::::::::::: //
-  // handle input values
   const handleInputChange = event => {
     setData({
       ...data,
@@ -56,11 +63,11 @@ const UpdateAlbum = ({ ...props }) => {
 
     const newData = {
       title: data.title,
-      // content: data.content,
       content: editorState.value,
-      category: data.category_id
+      category: data.categoryId
+      // category: { title, id }
     }
-    console.log('Update album: ', newData)
+    console.log('Update album: ', newData, ' A ID: ', AlbumID)
 
     setData({
       ...data,
@@ -68,7 +75,8 @@ const UpdateAlbum = ({ ...props }) => {
       errorMessage: null
     })
 
-    updateData(dispatch, UPDATE_ALBUM, 'albums', props.id, newData)
+    const result = await updateData(dispatch, UPDATE_ALBUM, 'albums', AlbumID, newData)
+
     if( !albums.isLoading && albums.errorMessage==='') {
       setData({
         title: '',
@@ -76,8 +84,15 @@ const UpdateAlbum = ({ ...props }) => {
         isSubmitting: false,
         errorMessage: null
       })
+      console.log('Album result err: ', result )
+      console.log('Album result type: ', typeof(result) )
+      result && result === Error && console.log('PÖÖÖÖ')
 
-      localStorage.setItem('reloadPage', 'categories')
+      fetchData(CategoryDispatch, INIT_CATEGORIES, 'categories')
+      //   localStorage.setItem('reloadPage', 'categories')
+      // console.log('Album error: ', albums.errorMessage, ' album: ', albums)
+
+      notify( msgDispatch, 'Album stored successfully.', 4, 'green')
       modalDispatch({ type: CLOSE_MODAL })
     }
   }
@@ -91,11 +106,10 @@ const UpdateAlbum = ({ ...props }) => {
         editorState={editorState.value}
         title={data.title}
         content={data.content}
-        category_id={data.category_id}
+        categoryId={data.categoryId}
         handleFormSubmit={handleFormSubmit}
         handleInputChange={handleInputChange}
         handleEditorChange={handleEditorChange}
-        formHeader={'Päivitä albumi'}
       />
     </Container>
   )

@@ -1,3 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+/* body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+} */
+
+.box {
+  /* background-color: #444;
+  color: #fff; */
+  /* border-radius: 3px; */
+  padding: 20px;
+  /* font-size: 150%; */
+}
+
+.box:nth-child(even) {
+  background-color: #ccc;
+  color: #000;
+}
+
+.Grid-with-gap {
+  /* width: 100; */
+  display: grid;
+  grid-gap: 10px;
+  /* grid-template-columns: minmax(25%, 40%) 1fr; */
+  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+}
+
+.Grid-pics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.Grid2 {
+  display: grid;
+  /* border:1px solid #000; */
+  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-rows: auto;
+  /* grid-gap: 5px; */
+}
+
+.Item-center {
+  display: flex;
+  flex-wrap:wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  min-height: 100px;
+}
+
 .App {
   text-align: center;
 }
@@ -23,11 +81,3 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

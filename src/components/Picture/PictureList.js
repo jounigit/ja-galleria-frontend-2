@@ -1,42 +1,38 @@
-import React, { useContext } from 'react'
-import PictureListItem from './PictureListItem'
-import { Grid, Header } from 'semantic-ui-react'
+import React, { useState, useContext } from 'react'
 import { PictureContext } from '../../contexts/PictureContext'
+import PicturesToColumns from './galleria1/PicturesToColumns'
+import PicturesToFlex from './galleria2/PicturesToFlex'
+import PicturesToFlexGrid from './galleria3/PicturesToFlexGrid'
+import PicturesGallery from './galleria4/PicturesGallery'
 
+// import PicturesGallery from './PicturesGallery'
+// import PicturesToFlexGrid from './PicturesToFlexGrid'
 
 const PictureList = () => {
-  const { pictures } = useContext(PictureContext)
-  console.log('Pic list ---', pictures)
-  console.log('Pic data ---', pictures.data)
+  const [picGallery, setPicGallery] = useState(1)
+  const { pictures: { data: Pictures } } = useContext(PictureContext)
 
-  const sortedPics = pictures.data && pictures.data.sort((a,b) =>  b.id-a.id )
-
-  const mappedPics = pictures.data && sortedPics.map(picture =>
-    <Grid.Column
-      // color='grey'
-      mobile={16} tablet={8} computer={2}
-      key={picture.id}>
-      <PictureListItem picture={picture} />
-    </Grid.Column>
-  )
+  if (Pictures === undefined) { return <div className='Item-center'>Loading...</div> }
+  const pictureArray = Pictures || []
+  console.log('Pic list ---', Pictures)
 
   return (
     <div className='PictureList'>
-      {pictures.loading && <div className="loader">Loading ...</div>}
+      <div style={{ display: 'inline' }}>
+        <button onClick={ () => setPicGallery(1)}>gallery 1</button>
+        <button onClick={ () => setPicGallery(2)}>gallery 2</button>
+        <button onClick={ () => setPicGallery(3)}>gallery 3</button>
+        <button onClick={ () => setPicGallery(4)}>gallery 4</button>
+        <p>Gallery {picGallery}</p>
+      </div>
 
-      <Header as='h2' content='Kuvat' />
+      { !pictureArray.length > 0 && <h3>no pictures yet!</h3>}
 
-      { pictures.data && !pictures.data.length > 0 && <h3>no pictures yet!</h3>}
+      { picGallery === 1 && <PicturesToColumns pictures={pictureArray} /> }
+      { picGallery === 2 && <PicturesToFlex pictures={pictureArray} /> }
+      { picGallery === 3 && <PicturesToFlexGrid pictures={pictureArray} /> }
+      { picGallery === 4 && <PicturesGallery pictures={pictureArray} /> }
 
-      <Grid padded>
-        <Grid.Column color='grey'>
-          <Grid>
-            { !pictures.loading && pictures.data &&
-              mappedPics
-            }
-          </Grid>
-        </Grid.Column>
-      </Grid>
     </div>
   )
 }

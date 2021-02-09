@@ -82,7 +82,7 @@ const Login = () => {
       <MessageWithRedirect
         message='Login successfully!'
         color='green'
-        path='home'
+        path='/'
       />
     )
   }

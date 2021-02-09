@@ -111,7 +111,10 @@ export default function DesktopContainer({ children }) {
           </Menu>
         </Segment>
       </Visibility>
-      {children}
+      <Container>
+        {children}
+      </Container>
+
     </Responsive>
   )
 }

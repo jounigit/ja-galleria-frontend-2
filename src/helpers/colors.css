@@ -1,0 +1,99 @@
+.margins-with-subhead > h2, .black > h2, .Gold-fusion > h2, a.Gold-fusion:link > h2, a.Gold-fusion:hover > h2, .Granny-smith-apple > h2, a.Granny-smith-apple:link > h2, a.Granny-smith-apple:hover > h2, .Tea-green > h2, a.Tea-green:link > h2, a.Tea-green:hover > h2, .Baby-pink > h2, a.Baby-pink:link > h2, a.Baby-pink:hover > h2, .Beau-blue > h2, a.Beau-blue:link > h2, a.Beau-blue:hover > h2, .Light-cyan > h2, a.Light-cyan:link > h2, a.Light-cyan:hover > h2, .Unbleached-silk > h2, a.Unbleached-silk:link > h2, a.Unbleached-silk:hover > h2, .Champagne-pink > h2, a.Champagne-pink:link > h2, a.Champagne-pink:hover > h2, .Light-gray > h2, a.Light-gray:link > h2, a.Light-gray:hover > h2, .Platinum > h2, a.Platinum:link > h2, a.Platinum:hover > h2, a.black:hover > h2, a.black:link > h2, .white > h2, .Rajah > h2, a.Rajah:hover > h2, .Orange-pantone > h2, a.Orange-pantone:hover > h2, .Ruby-red > h2, a.Ruby-red:hover > h2, .Spanish-bistre > h2, a.Spanish-bistre:hover > h2, .Olive-green > h2, a.Olive-green:hover > h2, .Green-leaf > h2, a.Green-leaf:hover > h2, .Sacramento-state-green > h2, a.Sacramento-state-green:hover > h2, a.white:hover > h2 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+.margins-with-subhead > h3, .black > h3, .Gold-fusion > h3, a.Gold-fusion:link > h3, a.Gold-fusion:hover > h3, a.Gold-fusion:link:hover > h3, .Granny-smith-apple > h3, a.Granny-smith-apple:link > h3, a.Granny-smith-apple:hover > h3, .Tea-green > h3, a.Tea-green:link > h3, a.Tea-green:hover > h3, .Baby-pink > h3, a.Baby-pink:link > h3, a.Baby-pink:hover > h3, .Beau-blue > h3, a.Beau-blue:link > h3, a.Beau-blue:hover > h3, .Light-cyan > h3, a.Light-cyan:link > h3, a.Light-cyan:hover > h3, .Unbleached-silk > h3, a.Unbleached-silk:link > h3, a.Unbleached-silk:hover > h3, .Champagne-pink > h3, a.Champagne-pink:link > h3, a.Champagne-pink:hover > h3, .Light-gray > h3, a.Light-gray:link > h3, a.Light-gray:hover > h3, .Platinum > h3, a.Platinum:link > h3, a.Platinum:hover > h3, a.black:hover > h3, a.Gold-fusion:hover > h3, a.Gold-fusion:hover:link > h3, a.Gold-fusion:hover > h3, a.Gold-fusion:hover:link > h3, a.black:link > h3, a.Gold-fusion:link > h3, a.Gold-fusion:link > h3, a.Gold-fusion:link:hover > h3, a.Gold-fusion:link:hover > h3, .white > h3, .Rajah > h3, a.Rajah:hover > h3, .Orange-pantone > h3, a.Orange-pantone:hover > h3, .Ruby-red > h3, a.Ruby-red:hover > h3, .Spanish-bistre > h3, a.Spanish-bistre:hover > h3, .Olive-green > h3, a.Olive-green:hover > h3, .Green-leaf > h3, a.Green-leaf:hover > h3, .Sacramento-state-green > h3, a.Sacramento-state-green:hover > h3, a.white:hover > h3, .margins-with-subhead h4, .black h4, .Gold-fusion h4, a.Gold-fusion:link h4, a.Gold-fusion:hover h4, a.Gold-fusion:link:hover h4, .Granny-smith-apple h4, a.Granny-smith-apple:link h4, a.Granny-smith-apple:hover h4, .Tea-green h4, a.Tea-green:link h4, a.Tea-green:hover h4, .Baby-pink h4, a.Baby-pink:link h4, a.Baby-pink:hover h4, .Beau-blue h4, a.Beau-blue:link h4, a.Beau-blue:hover h4, .Light-cyan h4, a.Light-cyan:link h4, a.Light-cyan:hover h4, .Unbleached-silk h4, a.Unbleached-silk:link h4, a.Unbleached-silk:hover h4, .Champagne-pink h4, a.Champagne-pink:link h4, a.Champagne-pink:hover h4, .Light-gray h4, a.Light-gray:link h4, a.Light-gray:hover h4, .Platinum h4, a.Platinum:link h4, a.Platinum:hover h4, a.black:hover h4, a.Gold-fusion:hover h4, a.Gold-fusion:hover:link h4, a.Gold-fusion:hover h4, a.Gold-fusion:hover:link h4, a.black:link h4, a.Gold-fusion:link h4, a.Gold-fusion:link h4, a.Gold-fusion:link:hover h4, a.Gold-fusion:link:hover h4, .white h4, .Rajah h4, a.Rajah:hover h4, .Orange-pantone h4, a.Orange-pantone:hover h4, .Ruby-red h4, a.Ruby-red:hover h4, .Spanish-bistre h4, a.Spanish-bistre:hover h4, .Olive-green h4, a.Olive-green:hover h4, .Green-leaf h4, a.Green-leaf:hover h4, .Sacramento-state-green h4, a.Sacramento-state-green:hover h4, a.white:hover h4 {
+  margin: 0px 0px 0px;
+}
+
+.white, .Rajah, a.Rajah:hover, .Orange-pantone, a.Orange-pantone:hover, .Ruby-red, a.Ruby-red:hover, .Spanish-bistre, a.Spanish-bistre:hover, .Olive-green, a.Olive-green:hover, .Green-leaf, a.Green-leaf:hover, .Sacramento-state-green, a.Sacramento-state-green:hover, a.white:hover {
+  color: white;
+}
+
+.black, .Gold-fusion, a.Gold-fusion:link, a.Gold-fusion:hover, .Granny-smith-apple, a.Granny-smith-apple:link, a.Granny-smith-apple:hover, .Tea-green, a.Tea-green:link, a.Tea-green:hover, .Baby-pink, a.Baby-pink:link, a.Baby-pink:hover, .Beau-blue, a.Beau-blue:link, a.Beau-blue:hover, .Light-cyan, a.Light-cyan:link, a.Light-cyan:hover, .Unbleached-silk, a.Unbleached-silk:link, a.Unbleached-silk:hover, .Champagne-pink, a.Champagne-pink:link, a.Champagne-pink:hover, .Light-gray, a.Light-gray:link, a.Light-gray:hover, .Platinum, a.Platinum:link, a.Platinum:hover, a.black:hover, a.black:link {
+  color: black;
+}
+
+.white:hover, .Rajah:hover, a.Rajah:hover, .Orange-pantone:hover, a.Orange-pantone:hover, .Ruby-red:hover, a.Ruby-red:hover, .Spanish-bistre:hover, a.Spanish-bistre:hover, .Olive-green:hover, a.Olive-green:hover, .Green-leaf:hover, a.Green-leaf:hover, .Sacramento-state-green:hover, a.Sacramento-state-green:hover, a.white:hover {
+  text-decoration: underline;
+}
+
+.black:hover, .Gold-fusion:hover, a.Gold-fusion:hover, .Granny-smith-apple:hover, a.Granny-smith-apple:hover, .Tea-green:hover, a.Tea-green:hover, .Baby-pink:hover, a.Baby-pink:hover, .Beau-blue:hover, a.Beau-blue:hover, .Light-cyan:hover, a.Light-cyan:hover, .Unbleached-silk:hover, a.Unbleached-silk:hover, .Champagne-pink:hover, a.Champagne-pink:hover, .Light-gray:hover, a.Light-gray:hover, .Platinum:hover, a.Platinum:hover, a.black:hover {
+  color: #302f2f;
+  text-decoration: underline;
+}
+
+a.black:hover, a.Gold-fusion:hover, a.Granny-smith-apple:hover, a.Tea-green:hover, a.Baby-pink:hover, a.Beau-blue:hover, a.Light-cyan:hover, a.Unbleached-silk:hover, a.Champagne-pink:hover, a.Light-gray:hover, a.Platinum:hover {
+  text-decoration: underline;
+}
+
+/* Light */
+.Platinum {
+  background-color: #e2e2dfff;
+}
+
+.Light-gray {
+  background-color: #d2d2cfff;
+}
+
+.Champagne-pink {
+  background-color: #e2cfc4ff;
+}
+
+.Unbleached-silk {
+  background-color: #f7d9c4ff;
+}
+
+.Light-cyan {
+  background-color: #c9e4deff;
+}
+
+.Beau-blue {
+  background-color: #c6def1ff;
+}
+
+.Baby-pink {
+  background-color: #f9c6c9ff;
+}
+
+/* Greenish */
+.Sacramento-state-green {
+  background-color: #093824;
+}
+
+.Green-leaf {
+  background-color: #39603D;
+}
+
+.Tea-green {
+  background-color: #dbf4adff;
+}
+
+.Granny-smith-apple {
+  background-color: #a9e190ff;
+}
+
+.Olive-green {
+  background-color: #a5aa52ff;
+}
+
+.Spanish-bistre {
+  background-color: #767522ff;
+}
+
+/* Redish */
+.Ruby-red {
+  background-color: #a41623ff;
+}
+
+.Orange-pantone {
+  background-color: #f85e00ff;
+}
+
+.Rajah {
+  background-color: #ffb563ff;
+}
+
+.Gold-fusion {
+  background-color: #918450ff;
+}

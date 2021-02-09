@@ -9,8 +9,9 @@ import {
 import { NavLink } from 'react-router-dom'
 import { AppHeader } from '../../headers/AppHeader'
 import * as routes from '../../../../shared/constants/routes'
-import PopupLinks from '../menus/popupLinks'
-import { AdminUserMenu } from '../menus/AdminUserMenu'
+import GalleriaLinks from '../menus/GalleriaLinks'
+import { PopupAdminUserMenu } from '../menus/PopupAdminUserMenu'
+import SiteLinks from '../menus/SiteLinks'
 
 export default function DesktopContainer({ children }) {
   const [fixed, setFixed] = useState()
@@ -20,6 +21,7 @@ export default function DesktopContainer({ children }) {
 
   // ----------------- menu, navigation -------------------------- //
   return (
+    // <Container>
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
       <Visibility
         once={false}
@@ -30,39 +32,45 @@ export default function DesktopContainer({ children }) {
           inverted
           textAlign="center"
           vertical
-          style={{ padding: '1em 0em', marginBottom: '1.5em' }}
+          // style={{ padding: '1em 0em', marginBottom: '1.5em' }}
         >
           <AppHeader />
           <Menu
             data-cy='menu'
             fixed={fixed ? 'top' : null}
             inverted
-            pointing={!fixed}
+            // pointing={!fixed}
             secondary={!fixed}
-            size='small'>
+            size='small'
+          >
             <Container>
               {/* -------- menu links ------------- */}
               <Menu.Item
                 as={NavLink}
                 to={routes.HOME}
                 name='home'
-                content='ABOUT'
+                content='HOME'
               />
 
               {/* ------ popup galleria links ------------ */}
-              <PopupLinks />
+              <GalleriaLinks />
+
+              <SiteLinks />
 
               {/* ------ right, login logout ------------ */}
-              <Menu.Item position='right'>
+              <Menu.Menu position='right'>
 
-                <AdminUserMenu />
+                <PopupAdminUserMenu />
 
-              </Menu.Item>
+                {/* <AdminUserMenu /> */}
+
+              </Menu.Menu>
             </Container>
           </Menu>
         </Segment>
       </Visibility>
       {children}
     </Responsive>
+    // </Container>
   )
 }
