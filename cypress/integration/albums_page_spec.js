@@ -8,16 +8,11 @@ describe('The Albums Page', function() {
       cy.route('albums', 'fixture:albums').as('getAlbums')
       cy.visit('/albums')
       cy.wait('@getPictures')
-      // cy.wait('@getAlbums')
     })
 
     it('get all albums', function() {
-      cy.get('h2').should('contain', 'Albumit')
+      cy.get('h1').should('contain', 'ALBUMS')
       cy.get('[data-cy=albumListItem]').its('length').should('eq', 3)
-    })
-
-    it('can see show link', function() {
-      cy.get('[data-cy=albumListItem]').first().should('contain', 'show')
     })
 
     it('can open first album', function() {

@@ -6,9 +6,10 @@ describe('The Pictures Page', function() {
     cy.wait('@getPictures')
   })
 
+  // Pictures length 10 x 3, look galleries folder
   it('get all pictures', function() {
-    cy.get('h2').should('contain', 'Kuvat')
-    cy.get('[data-cy=picture]').its('length').should('eq', 15)
+    cy.get('h1').should('contain', 'PICTURES')
+    cy.get('[data-cy=pictureListItem]').its('length').should('eq', 30)
   })
 
 })

@@ -24,17 +24,17 @@ const SiteLinks = () => {
   }
 
   const page1 =
-  <Link style={ linkStyle } to={routes.CATEGORIES} onClick={handleClose}>
+  <Link style={ linkStyle } to={routes.CATEGORIES} onClick={handleClose} data-cy='categoriesLink'>
     <h4>Categories</h4>
   </Link>
 
   const page2 =
-  <Link style={ linkStyle } to={routes.ALBUMS} onClick={handleClose}>
+  <Link style={ linkStyle } to={routes.ALBUMS} onClick={handleClose} data-cy='albumsLink'>
     <h4>Albums</h4>
   </Link>
 
   const page3 =
-  <Link style={ linkStyle } to={routes.PICTURES} onClick={handleClose}>
+  <Link style={ linkStyle } to={routes.PICTURES} onClick={handleClose} data-cy='picturesLink'>
     <h4>Pictures</h4>
   </Link>
 
@@ -53,9 +53,14 @@ const SiteLinks = () => {
     </Grid.Column>
   </>
 
+  const trigger =
+    <Menu.Item data-cy='siteLinks'>
+      Site links &nbsp; <Icon name='caret down' />
+    </Menu.Item>
+
   return (
     <Popup
-      trigger={<Menu.Item> Site links &nbsp; <Icon name='caret down' /> </Menu.Item>}
+      trigger={trigger}
       flowing
       hoverable
       open={isOpen}

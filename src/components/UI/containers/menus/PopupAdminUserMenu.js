@@ -65,23 +65,23 @@ export const PopupAdminUserMenu = () => {
   </Link>
 
   const loginLink =
-  <Link style={ linkStyle } to={routes.LOGIN} onClick={handleClose}>
-    <Icon name='sign in' />Login
+  <Link style={ linkStyle } to={routes.LOGIN} onClick={handleClose} data-cy='loginLink'>
+    <h4><Icon name='sign in' />Login</h4>
   </Link>
 
   const logoutLink =
-  <a style={ linkStyle } onClick={ clickLogout } >
+  <a style={ linkStyle } onClick={ clickLogout } data-cy='logoutLink'>
     <h4><Icon name='sign out' />Logout</h4>
   </a>
 
   const resignLink =
-  <a style={ linkStyle } onClick={ clickResign }>
+  <a style={ linkStyle } onClick={ clickResign } data-cy='resignLink'>
     <h4><Icon name='remove user' />Resign</h4>
   </a>
 
   const signupLink =
-  <Link  style={ linkStyle } to={routes.SIGNUP} onClick={handleClose}>
-    <h4><Icon name='sign in' />Sign Up</h4>
+  <Link  style={ linkStyle } to={routes.SIGNUP} onClick={handleClose} data-cy='signupLink'>
+    <h4><Icon name='sign in' />Signup</h4>
   </Link>
 
   const columns =
@@ -105,7 +105,9 @@ export const PopupAdminUserMenu = () => {
 
   const triggerAction =
   <Menu.Item>
-    <Button inverted size='tiny'>user actions <Icon name='caret down' /></Button>
+    <Button inverted size='tiny' data-cy='userActsBtn'>
+      user actions <Icon name='caret down' />
+    </Button>
   </Menu.Item>
 
   return (

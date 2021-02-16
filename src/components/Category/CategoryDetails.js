@@ -42,18 +42,22 @@ const CategoryDetails = () => {
         <Breadcrumbs path='/categories' linkName='Categories' active={ title } />
       </Segment>
 
-      <Divider horizontal>{title}</Divider>
+      <div className='category' data-cy='category'>
 
-      <Header as='h1' data-cy='header'>
-        { title.toUpperCase() }
-      </Header>
+        <Divider horizontal>{title}</Divider>
 
-      { content }
+        <Header as='h1' data-cy='header'>
+          { title.toUpperCase() }
+        </Header>
 
-      <Header as='h4'> Author - { user.username } </Header>
+        { content }
 
-      <div className='Grid2'>
-        { Albums && mappedAlbums }
+        <Header as='h4'> Author - { user.username } </Header>
+
+        <div className='Grid2'>
+          { Albums && mappedAlbums }
+        </div>
+
       </div>
 
     </Container>

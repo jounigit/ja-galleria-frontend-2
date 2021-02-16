@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 // import { Segment } from 'semantic-ui-react'
 
-const CategoryItemHomePage = ({ category, cssClass }) => {
+const CategoryListHomeItem = ({ category, cssClass }) => {
 
   const center = {
     margin: auto,
@@ -43,5 +43,5 @@ const CategoryItemHomePage = ({ category, cssClass }) => {
   )
 }
 
-export default CategoryItemHomePage
+export default CategoryListHomeItem
 

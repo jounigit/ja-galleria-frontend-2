@@ -29,11 +29,11 @@ const AlbumListItem = ({ album, cssClass }) => {
 
   /***********************************************************************/
   return (
-    <div style={{ marginBottom: 30, textAlign:'center' }}>
+    <div style={{ marginBottom: 30, textAlign:'center' }} data-cy='albumListItem'>
 
       <Segment raised>
 
-        <Link className={ cssClass } to={`/album/${album.slug}`} data-cy='AlbumListItemLink'>
+        <Link className={ cssClass } to={`/album/${album.slug}`} data-cy='albumListItemLink'>
 
           { image }
 

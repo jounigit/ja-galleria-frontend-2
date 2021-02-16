@@ -10,13 +10,15 @@ describe('The Categories Page', function() {
     })
 
     it('get all categories', function() {
-      cy.get('h2').should('contain', 'Kategoriat')
-      cy.get('[data-cy=category]').its('length').should('eq', 2)
+      cy.get('h1').should('contain', 'CATEGORIES')
+      cy.get('[data-cy=categoryListItem]').its('length').should('eq', 2)
     })
 
-    it('hidden content can be opened', function() {
-      cy.get('[data-cy=linkable]').first().click({ force: true })
+    it('can open first category', function() {
+      cy.get('[data-cy=categoryListItemLink]').first().click()
+      cy.get('[data-cy=category]').its('length').should('eq', 1)
     })
+
   })
 
 })

@@ -14,7 +14,7 @@ import { usePathname } from '../../helpers/getPathName'
 import AlbumListItem from './AlbumListItem'
 
 
-const AlbumList = ({ amount }) => {
+const AlbumList = () => {
   const { albums: { data: Albums } } = useContext(AlbumContext)
 
   console.log('PATHNAME Albumlist: ', usePathname())
@@ -25,7 +25,6 @@ const AlbumList = ({ amount }) => {
   const isArr = Array.isArray(Albums)
 
   let sortedAlbums = Albums.sort((a,b) =>  b.id-a.id)
-  sortedAlbums = ( isArr && amount ) ? sortedAlbums.slice(0, amount) : sortedAlbums
 
   /*********** map data to girds *************************************/
   const mappedAlbums = isArr && sortedAlbums.map( (album, i) =>

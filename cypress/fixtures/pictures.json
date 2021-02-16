@@ -109,61 +109,6 @@
         "publicID": "10",
         "publicIDThumb": "10",
         "user": "1"
-    },
-    {
-        "id": "11",
-        "title": "Kuva 11",
-        "slug": "nam-quas-qui-dolorem-sint-voluptatum-quidem-qui",
-        "content": "Et officia tempore officia tempore expedita inventore quaerat. Nihil consequatur deleniti nobis aut sit distinctio. Beatae ipsa impedit vero accusantium nemo pariatur qui.",
-        "image": "https://source.unsplash.com/random",
-        "thumb": "https://source.unsplash.com/random",
-        "publicID": "11",
-        "publicIDThumb": "11",
-        "user": "1"
-    },
-    {
-        "id": "12",
-        "title": "Kuva 12",
-        "slug": "nesciunt-pariatur-pariatur-quia-repellat-distinctio-quidem-eos-quisquam",
-        "content": "Repellat dolorem dolorem maiores consectetur omnis amet possimus. Natus corporis et velit harum. Nobis odit ex odit necessitatibus dignissimos. Consequatur amet dignissimos rerum consequatur harum.",
-        "image": "https://source.unsplash.com/random",
-        "thumb": "https://source.unsplash.com/random",
-        "publicID": "12",
-        "publicIDThumb": "12",
-        "user": "1"
-    },
-    {
-        "id": "13",
-        "title": "Kuva 13",
-        "slug": "ducimus-sint-minus-quam-ut",
-        "content": "Tempora vel non ipsum expedita et velit. Cumque facilis et aut sapiente quia. Eveniet autem ea consequuntur enim.",
-        "image": "https://source.unsplash.com/random",
-        "thumb": "https://source.unsplash.com/random",
-        "publicID": "13",
-        "publicIDThumb": "13",
-        "user": "1"
-    },
-    {
-        "id": "14",
-        "title": "Kuva 14",
-        "slug": "dignissimos-rerum-autem-nobis-nostrum-est",
-        "content": "Fugiat molestias expedita repudiandae nulla nisi sit. Repudiandae quo itaque nam exercitationem. Eveniet ipsam fugit quia repellendus et. Maxime sed omnis aut eveniet itaque vitae facilis.",
-        "image": "https://source.unsplash.com/random",
-        "thumb": "https://source.unsplash.com/random",
-        "publicID": "14",
-        "publicIDThumb": "14",
-        "user": "1"
-    },
-    {
-        "id": "15",
-        "title": "Kuva 15",
-        "slug": "molestiae-cupiditate-non-eos-ducimus-rerum",
-        "content": "Quisquam laudantium nesciunt ea consequatur et quasi. Odio est tempore debitis quas placeat. Fugit culpa sit rem adipisci labore consectetur nemo.",
-        "image": "https://source.unsplash.com/random",
-        "thumb": "https://source.unsplash.com/random",
-        "publicID": "15",
-        "publicIDThumb": "15",
-        "user": "1"
     }
 ]
 

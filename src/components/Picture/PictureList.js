@@ -5,9 +5,6 @@ import PicturesToFlex from './galleria2/PicturesToFlex'
 import PicturesToFlexGrid from './galleria3/PicturesToFlexGrid'
 import PicturesGallery from './galleria4/PicturesGallery'
 
-// import PicturesGallery from './PicturesGallery'
-// import PicturesToFlexGrid from './PicturesToFlexGrid'
-
 const PictureList = () => {
   const [picGallery, setPicGallery] = useState(1)
   const { pictures: { data: Pictures } } = useContext(PictureContext)
