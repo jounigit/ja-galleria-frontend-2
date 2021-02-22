@@ -6,12 +6,13 @@ import {
   Segment
 } from 'semantic-ui-react'
 import { PictureContext } from '../../contexts/PictureContext'
-import { usePathname } from '../../helpers/getPathName'
 
 const AlbumListItem = ({ album, cssClass }) => {
   const { pictures: { data: Pictures } } = useContext(PictureContext)
-  const currentPath = usePathname()
-  console.log('PATHNAME Albumlist Itembg: ', currentPath)
+
+  // console.log('PATHNAME Albumlist Itembg: ', Pictures)
+
+  if (album === undefined) { return <div className='Item-center'>Loading...</div> }
 
   const albumPictures = album.pictures
 
@@ -21,11 +22,14 @@ const AlbumListItem = ({ album, cssClass }) => {
         'No pictures yet'
   }
 
-  /****** get first album picture id, filter picture form pictures array ***/
-  const getFirst = albumPictures && albumPictures.length && albumPictures[0]
-  const firstPic = getFirst && Pictures && Pictures.filter(p => p.id === getFirst)
+  /****** get first album picture id, filter picture from pictures array ***/
+  const getFirst = albumPictures.length && albumPictures[0]
+  let firstPic = getFirst && Pictures.find(p => p.id === getFirst)
 
-  const image = firstPic ? <Image src={ firstPic[0].landscape } fluid /> : ''
+  firstPic = firstPic ? <Image src={ firstPic.landscape } fluid /> : null
+
+  console.log('ALBUM list item getFirst: ', albumPictures, getFirst)
+  console.log('ALBUM list item PICS: ', albumPictures, albumPictures.length, firstPic)
 
   /***********************************************************************/
   return (
@@ -35,7 +39,7 @@ const AlbumListItem = ({ album, cssClass }) => {
 
         <Link className={ cssClass } to={`/album/${album.slug}`} data-cy='albumListItemLink'>
 
-          { image }
+          { firstPic && firstPic }
 
           <h2>{album.title}</h2>
           { <h5>Author - {album.user.username}</h5> }

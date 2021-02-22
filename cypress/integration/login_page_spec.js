@@ -13,7 +13,8 @@ describe('Login page',  function() {
 
   it('login form can be opened', function() {
     cy.visit('/')
-    cy.get('[data-cy=login]').click()
+    cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+    cy.get('[data-cy=loginLink]').click()
     cy.get('h2').should('contain', 'Kirjaudu sovellukseen')
   })
 
@@ -58,15 +59,24 @@ describe('Login page',  function() {
 
 
   describe('can logout', function () {
+
     it('username is visible', function() {
-      cy.get('[data-cy=logout]').should('contain', username)
+      cy.login({ email, password })
+      cy.visit('/')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=logoutLink]').should('contain', 'Logout')
     })
 
     it('user can logout', function() {
-      cy.get('[data-cy=logout]').click()
+      cy.login({ email, password })
+      cy.visit('/')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=logoutLink]').click()
       cy.get('[data-cy=message]').should('contain', 'User logged out.')
       cy.get('[data-cy=message]').should('be.visible')
-      cy.get('[data-cy=login]').should('be.visible')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=loginLink]').should('be.visible')
+
     })
   })
 

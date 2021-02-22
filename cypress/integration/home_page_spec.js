@@ -5,12 +5,11 @@ describe('The Home Page', function() {
     beforeEach(function() {
       cy.visit('/')
       cy.get('[data-cy=menu] > .container > .item').as('menuLinks')
-      cy.get('[data-cy=userActsBtn]').as('userActsBtn')
+      cy.get('[data-cy=userActsBtn]').as('userActsBtn') // user actions popup links
       cy.get('[data-cy=siteLinks]').as('siteLinks')
     })
 
     it('can see menu links', function() {
-      // cy.get('@menuLinks').its('length').should('eq', 4)
       cy.get('@menuLinks').should('contain', 'HOME')
       cy.get('@menuLinks').should('contain', 'GALLERIA')
       cy.get('@menuLinks').should('contain', 'Site links')

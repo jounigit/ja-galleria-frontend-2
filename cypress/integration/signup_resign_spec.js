@@ -12,7 +12,8 @@ describe('Signup page',  function() {
 
   it('signup form can be opened', function() {
     cy.visit('/')
-    cy.get('[data-cy=signup]').click()
+    cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+    cy.get('[data-cy=signupLink]').click()
     cy.get('h2').should('contain', 'Sign up')
   })
 
@@ -34,12 +35,13 @@ describe('Signup page',  function() {
     })
 
     it('user can resign', function() {
-      cy.visit('/login')
-      cy.get('[data-cy=resign]').should('be.visible')
-      cy.get('[data-cy=resign]').click()
+      cy.visit('/')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=resignLink]').click()
       cy.on('window:confirm', () => true)
       cy.get('[data-cy=message]').should('contain', 'user resigned successfully')
-      cy.get('[data-cy=login]').should('be.visible')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=signupLink]').should('be.visible')
     })
   })
 
@@ -51,7 +53,8 @@ describe('Signup page',  function() {
 
     it('resigned can not login', function() {
       cy.visit('/')
-      cy.get('[data-cy=resign]').click()
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=resignLink]').click()
       cy.visit('/login')
       cy.get('[data-cy=email]').type(email)
       cy.get('[data-cy=password]').type(password)
@@ -68,23 +71,23 @@ describe('Signup page',  function() {
     })
 
     it('user can see logout', function() {
-      cy.get('[data-cy=logout]').should('contain', username)
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=logoutLink]').should('be.visible')
     })
 
     it('admin page link is visible', function() {
-      cy.get('[data-cy=adminLink]').should('contain', 'Admin page')
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
     })
 
     it('user can go to admin page', function() {
+      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+      cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
       cy.get('[data-cy=adminLink]').click()
-      cy.get('[data-cy=usersLink]').should('contain', 'Users')
+      cy.get('[data-cy=menu] > .container > .item').should('contain', 'Public page')
+      // cy.get('[data-cy=usersLink]').should('contain', 'Users')
     })
 
-    it('user exists in users page', function() {
-      cy.get('[data-cy=adminLink]').click()
-      cy.get('[data-cy=usersLink]').click()
-      cy.get('[data-cy=user]').should('contain', username)
-    })
   })
 
 

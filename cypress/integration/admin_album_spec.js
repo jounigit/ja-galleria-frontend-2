@@ -10,9 +10,12 @@ describe('Admin album', function() {
     cy.signUp({ username, email, password })
     cy.login({ email, password })
     cy.createAlbum({ title: 'Album 1' })
+    cy.createCategory({ title: 'Category 1' })
     cy.visit('/')
+    cy.get('[data-cy=userActsBtn]').trigger('mouseover')
     cy.get('[data-cy=adminLink]').click()
-    cy.get('[href="/admin/albums"]').click()
+    cy.get('[data-cy=albumsLink]').should('be.visible')
+    cy.get('[data-cy=albumsLink]').click()
   })
 
   describe('logged in user', () => {
@@ -21,12 +24,12 @@ describe('Admin album', function() {
       cy.get('@createButton').should('contain', 'new album')
       cy.get('@createButton').click()
       cy.get('[data-cy=title]').should('be.visible')
-      cy.get('[data-cy=content]').should('be.visible')
+      cy.get('.ql-editor').should('be.visible')
+      cy.get('label').should('contain', 'content')
       cy.get('label').should('contain', 'category')
     })
 
     it('can see delete button', function () {
-      cy.createAlbum({ title: 'Album 1' })
       cy.get('[data-cy=delete]').should('be.visible')
     })
 
@@ -36,7 +39,7 @@ describe('Admin album', function() {
 
     it('title is required', function () {
       cy.get('.AlbumList button:first').click()
-      cy.get('textarea[name=content]').type('content')
+      cy.get('.ql-editor').type('content')
       cy.get('form').submit()
       cy.get('[data-cy=error-message]').should('be.visible')
       cy.get('[data-cy=error-message]').should('contain', 'title is required!')
@@ -47,7 +50,7 @@ describe('Admin album', function() {
     it('can add new album', function() {
       cy.get('[data-cy=addNewAlbum]').click()
       cy.get('[data-cy=title]').type(title)
-      cy.get('[data-cy=content]').type('Sisusta tässä.')
+      cy.get('.ql-editor').type('Sisusta tässä.')
       cy.get('form').submit()
       cy.get('[data-cy=albumListItem]').should('contain', title)
     })
@@ -57,11 +60,23 @@ describe('Admin album', function() {
     it('can update album', function() {
       const newType = 'Updated'
       cy.get('[data-cy=albumListItem] .edit').first().click()
+      cy.get('[data-cy=album] .edit').should('be.visible')
+      cy.get('[data-cy=album] .edit').first().click()
       cy.get('[type="title"]').clear()
       cy.get('[data-cy=title]').type(newType)
-      cy.get('select').find('option').first()
+      cy.get('.ql-editor').type('Sisusta tässä.')
       cy.get('form').submit()
-      cy.get('[data-cy=albumListItem]').should('contain', newType)
+      cy.get('[data-cy=album]').should('contain', newType)
+    })
+  })
+
+  describe('admin update select category', () => {
+    it('can update album with category', function() {
+      cy.get('[data-cy=albumListItem] .edit').first().click()
+      cy.get('[data-cy=album] .edit').first().click()
+      cy.get('#categoryId').select('Category 1')
+      cy.get('form').submit()
+      cy.get('[data-cy=album]').should('contain', 'Category 1')
     })
   })
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Image, Header, Button, Table, Segment, } from 'semantic-ui-react'
+import { Image, Header, Button, Segment, Grid, } from 'semantic-ui-react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import RemoveAlbum from './RemoveAlbum'
 import { PictureContext } from '../../../contexts/PictureContext'
@@ -9,18 +9,18 @@ const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
   const { pictures: { data: Pictures } } = useContext(PictureContext)
 
-  // console.log('Album list item: ', album)
+  if (album === undefined) { return <div className='Item-center'>Loading...</div> }
 
   //******* album pictures vars *************/
   const albumPictures = album.pictures
   const albumPicturesInfo = albumPictures.length ?
     albumPictures.length + ' - kuvaa' : 'no pictures'
 
+  /****** get first album picture id, filter picture form pictures array ***/
   const getFirst = albumPictures && albumPictures.length && albumPictures[0]
-  const firstPic = getFirst && Pictures && Pictures.filter(p => p.id === getFirst)
+  let firstPic = getFirst !== 0 && Pictures.find(p => p.id === getFirst)
 
-  const firstPicInfo = firstPic ?
-    <Image fluid src={ firstPic[0].landscape } /> : ''
+  firstPic = firstPic && <Image src={ firstPic.landscape } fluid />
 
   //********************************************/
   const link = <Link to={`/admin/album/${album.id}`}>
@@ -39,7 +39,7 @@ const AlbumListItem = ({ album }) => {
       { auth.user &&
       <Segment>
 
-        { firstPicInfo }
+        { firstPic && firstPic }
 
         <Header as='h3'>
           {album.title}
@@ -47,14 +47,10 @@ const AlbumListItem = ({ album }) => {
           <Header.Subheader>{ albumPicturesInfo }</Header.Subheader>
         </Header>
 
-        <Table.Row>
-          <Table.Cell>
-            { link }
-          </Table.Cell>
-          <Table.Cell>
-            { removeAction }
-          </Table.Cell>
-        </Table.Row>
+        <Grid>
+          <Grid.Column tablet={3} computer={3}>{ link }</Grid.Column>
+          <Grid.Column tablet={3} computer={3}>{ removeAction }</Grid.Column>
+        </Grid>
 
       </Segment>
       }

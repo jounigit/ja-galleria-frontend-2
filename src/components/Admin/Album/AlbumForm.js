@@ -22,14 +22,14 @@ const AlbumForm = ({
     <option key={i} value={cat.id}>{cat.title}</option>
   )
   // const options = categories.data.map((cat) => ( { key: cat.id, value: cat.id, text: cat.title } ) )
-  // console.log('Dropdown options: ', options)
+  console.log('Album Form Dropdown options: ', categoryOptions)
 
   return (
     <Container>
       {errorMessage && (
         <Header as='h4' color='red' data-cy='error-message'>{errorMessage}</Header>
       )}
-      <p>PÖÖÖÖÖ</p>
+
       <Form onSubmit={ handleFormSubmit }>
 
         <Form.Field>
@@ -47,7 +47,7 @@ const AlbumForm = ({
         <Form.Field>
           <label>category</label>
           <select
-            data-cy='category'
+            id='categoryId'
             name='categoryId'
             value={categoryId}
             onChange={handleInputChange}
@@ -60,7 +60,7 @@ const AlbumForm = ({
           <label>content</label>
           <div  style={{ backgroundColor: 'white' }}>
             <ReactQuill
-              value={editorState}
+              value={editorState || ''}
               onChange={handleEditorChange}
             />
           </div>

@@ -60,7 +60,7 @@ export const PopupAdminUserMenu = () => {
   }
 
   const adminpage =
-  <Link style={ linkStyle } to={routes.ADMIN} onClick={handleClose}>
+  <Link style={ linkStyle } to={routes.ADMIN} onClick={handleClose} data-cy='adminLink'>
     <h4>ADMIN PAGE</h4>
   </Link>
 

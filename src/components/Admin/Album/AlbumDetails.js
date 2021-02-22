@@ -78,49 +78,51 @@ const AlbumDetails = ({ album }) => {
 
   //********************************************/
   return (
-    <Container>
-      <Segment>
 
-        <Grid
-          columns={2} relaxed='very' divided>
+    <div className='album' data-cy='album'>
 
-          {/************* text part ************************/}
-          <Grid.Column>
+      <Container>
+        <Segment>
 
-            <Grid>
-              <Grid.Column tablet={2} computer={2}>{ editAction }</Grid.Column>
-              <Grid.Column tablet={2} computer={2}>{ removeAction }</Grid.Column>
-            </Grid>
+          <Grid
+            columns={2} relaxed='very' divided>
 
-            <Divider section />
-            {
-              showTexContent
-            }
-          </Grid.Column>
+            {/************* text part ************************/}
+            <Grid.Column>
 
-          {/************** picture part ******************* */}
-          <Grid.Column>
-            { auth.user && chooseAction }
+              <Grid>
+                <Grid.Column tablet={2} computer={2}>{ editAction }</Grid.Column>
+                <Grid.Column tablet={2} computer={2}>{ removeAction }</Grid.Column>
+              </Grid>
 
-            <Divider section />
-
-            <Grid columns={4}>
+              <Divider section />
               {
-                albumPictures.map(picture =>
-                  <Grid.Column  key={picture.id}>
-                    <Picture key={picture.id} picture={picture} />
-                  </Grid.Column>
-                )
+                showTexContent
               }
-            </Grid>
-          </Grid.Column>
+            </Grid.Column>
 
-        </Grid>
-      </Segment>
-    </Container>
+            {/************** picture part ******************* */}
+            <Grid.Column>
+              { auth.user && chooseAction }
 
+              <Divider section />
 
+              <Grid columns={4}>
+                {
+                  albumPictures.map(picture =>
+                    <Grid.Column  key={picture.id}>
+                      <Picture key={picture.id} picture={picture} />
+                    </Grid.Column>
+                  )
+                }
+              </Grid>
+            </Grid.Column>
 
+          </Grid>
+        </Segment>
+      </Container>
+
+    </div>
 
   )
 }

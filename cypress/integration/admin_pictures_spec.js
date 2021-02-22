@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-focused-tests */
 
 describe('Admin picture', function() {
   const username = 'testi'
@@ -12,6 +13,7 @@ describe('Admin picture', function() {
     cy.signUp({ username, email, password })
     cy.login({ email, password })
     cy.visit('/')
+    cy.get('[data-cy=userActsBtn]').trigger('mouseover')
     cy.get('[data-cy=adminLink]').click()
     cy.get('[href="/admin/pictures"]').click()
   })
@@ -60,8 +62,7 @@ describe('Admin picture', function() {
       cy.get('#file-submit').click()
     })
 
-    // eslint-disable-next-line jest/no-focused-tests
-    it.only('should delete picture', function() {
+    it('should delete picture', function() {
       cy.get('h3').should('contain', 'Update picture info')
       cy.get('[data-cy=submit]').click()
       cy.get('h3').should('not.contain', 'no pictures yet!')

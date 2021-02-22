@@ -39,8 +39,6 @@ Cypress.Commands.add('createCategory', ({ title, content }) => {
       'Authorization': `Bearer ${JSON.parse(localStorage.getItem('token'))}`
     }
   })
-
-  cy.visit('/admin/categories')
 })
 
 Cypress.Commands.add('createAlbum', ({ title, content }) => {

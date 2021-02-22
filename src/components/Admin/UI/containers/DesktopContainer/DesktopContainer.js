@@ -69,12 +69,14 @@ export default function DesktopContainer({ children }) {
                     to={routes.ADMINCATEGORIES}
                     name='categories'
                     content='Categories'
+                    data-cy='categoriesLink'
                   />
                   <Menu.Item
                     as={NavLink}
                     to={routes.ADMINALBUMS}
                     name='album'
                     content='Albums'
+                    data-cy='albumsLink'
                   />
                   <Menu.Item
                     as={NavLink}
@@ -100,7 +102,7 @@ export default function DesktopContainer({ children }) {
                     />
 
                     <Button as='a'
-                      data-cy='logout'
+                      data-cy='logoutLink'
                       onClick={ handleLogout() }
                       inverted size='tiny'>
                       Logout - {auth.user}

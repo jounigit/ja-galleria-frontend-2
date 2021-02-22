@@ -22,7 +22,7 @@ const CategoryList = ({ categories }) => {
           </ModalPortal>
       }
 
-      <Header as='h2' dividing content='Kategoriat' />
+      <Header as='h2' dividing content='CATEGORIES' />
 
       { categories.length < 1 && <p>no albums yet.</p> }
 
