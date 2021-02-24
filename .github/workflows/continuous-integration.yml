@@ -36,6 +36,7 @@ jobs:
         id: merge
         with:
           source: 'master'
+          target: 'release'
       - run: echo "Merging to master" 
 
   deploy:
