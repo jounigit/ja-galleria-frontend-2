@@ -26,9 +26,10 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+
     needs: buildAndTest
+
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
-      - name: Testing
       - run: echo $(echo $GITHUB_REF | cut -d'/' -f 3)
