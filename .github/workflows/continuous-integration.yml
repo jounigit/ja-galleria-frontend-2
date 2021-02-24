@@ -34,6 +34,8 @@ jobs:
       - name: merge
         uses: mtanzi/action-automerge@v1
         id: merge
+        with:
+          source: 'master'
       - run: echo "Merging to master" 
 
   deploy:
