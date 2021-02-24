@@ -31,13 +31,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - name: merge
-        uses: mtanzi/action-automerge@v1
-        id: merge
+      - name: merge me!
+        uses: ridedott/merge-me-action@v1
         with:
-          base-ref: 'master'
-          source: 'master'
-          target: 'release'
+          MERGE_METHOD: MERGE
       - run: echo "Merging to master" 
 
   deploy:
