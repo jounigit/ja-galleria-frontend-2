@@ -25,11 +25,12 @@ jobs:
     - run: npm run build --if-present
 
   deploy:
+    if: success() && github.ref == 'refs/heads/master'
+
     runs-on: ubuntu-latest
 
     needs: buildAndTest
 
-    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
       - run: echo $(echo $GITHUB_REF | cut -d'/' -f 3)
