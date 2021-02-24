@@ -33,8 +33,6 @@ jobs:
         uses: actions/checkout@v2
       - name: merge me!
         uses: ridedott/merge-me-action@v1
-        with:
-          MERGE_METHOD: MERGE
       - run: echo "Merging to master" 
 
   deploy:
