@@ -35,6 +35,7 @@ jobs:
         uses: mtanzi/action-automerge@v1
         id: merge
         with:
+          base-ref: 'master'
           source: 'master'
           target: 'release'
       - run: echo "Merging to master" 
