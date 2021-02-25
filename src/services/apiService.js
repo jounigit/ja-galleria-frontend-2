@@ -1,6 +1,12 @@
 import axios from 'axios'
 import { FAILURE } from '../reducers/actionTypes'
-const apiUrl = process.env.REACT_APP_API
+let apiUrl = process.env.REACT_APP_API
+
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+  apiUrl = process.env.REACT_APP_API_LOCAL
+  console.log('== Api Service: ENV ==', process.env.NODE_ENV)
+  console.log('== Api Service: URL ==', apiUrl)
+}
 
 let token = null
 let config = []
