@@ -33,7 +33,6 @@ jobs:
         command: npm run test:e2e
         start: npm start
         wait-on: 'http://localhost:3000'
-        config: baseUrl=https://localhost:3000
 
   deploy:
     if: success() && github.ref == 'refs/heads/master'
