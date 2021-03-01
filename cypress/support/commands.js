@@ -27,6 +27,10 @@ Cypress.Commands.add('signUp', ({ username, email, password }) => {
   }
 
   cy.request('POST', url, user)
+    .then((response) => {
+      cy.log('Cy Signup:', response.body)
+      response.body
+    })
 })
 
 Cypress.Commands.add('createCategory', ({ title, content }) => {
