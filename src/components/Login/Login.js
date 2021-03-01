@@ -7,6 +7,7 @@ import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 const baseUrl = process.env.REACT_APP_API
 
 const url = `${baseUrl}/login`
+console.log('Loginurl: ', url, ' BaseUrl: ', baseUrl)
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext)
