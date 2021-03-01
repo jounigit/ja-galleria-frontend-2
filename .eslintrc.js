@@ -1,55 +1,56 @@
+// eslint-disable-next-line no-undef
 module.exports = {
-    "env": {
-      "browser": true,
-      "es6": true,
-      "jest/globals": true 
+  'env': {
+    'browser': true,
+    'es6': true,
+    'jest/globals': true
+  },
+  'extends': [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jest/recommended',
+    'plugin:cypress/recommended'
+  ],
+  'parserOptions': {
+    'ecmaFeatures': {
+      'jsx': true
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended",
-      "plugin:jest/recommended",
-      "plugin:cypress/recommended"
+    'ecmaVersion': 2018,
+    'sourceType': 'module',
+    'allowImportExportEverywhere': true
+  },
+  'plugins': [
+    'react', 'jest'
+  ],
+  'globals': {
+    'process': true
+  },
+  'rules': {
+    'indent': [
+      'error',
+      2
     ],
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module",
-      "allowImportExportEverywhere": true
-    },
-    "plugins": [
-      "react", "jest" 
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "globals": {
-      "process": true
-    },
-    "rules": {
-      "indent": [
-        "error",
-        2  
-      ],
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "quotes": [
-        "error",
-        "single"
-      ],
-      "semi": [
-        "error",
-        "never"
-      ],
-      "eqeqeq": "error",
-      "no-trailing-spaces": "error",
-      "object-curly-spacing": [
-        "error", "always"
-      ],
-      "arrow-spacing": [
-        "error", { "before": true, "after": true }
-      ],
-      "no-console": 0,
-      "react/prop-types": 0
-    }
-  };
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'semi': [
+      'error',
+      'never'
+    ],
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+      'error', 'always'
+    ],
+    'arrow-spacing': [
+      'error', { 'before': true, 'after': true }
+    ],
+    'no-console': 0,
+    'react/prop-types': 0
+  }
+}
