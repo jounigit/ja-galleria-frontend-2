@@ -115,7 +115,7 @@ const Signup = () => {
         <Card.Content>
 
           {data.errorMessage &&
-            <Header as='h4' color='red' data-cy='error-message'>{data.errorMessage}</Header>
+            <Header as='h4' color='red' data-cy='error-message'>Jooo VIKAA!!</Header>
           }
           <Form onSubmit={ handleFormSubmit }>
             <Form.Field>
