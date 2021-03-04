@@ -62,21 +62,21 @@ describe('Signup page',  function() {
     before(function () {
       cy.signUp({ username, email, password })
       cy.login({ email, password })
-      cy.visit('/')
     })
 
-    after(function () {
-      cy.deleteUser()
-    })
+    // after(function () {
+    //   cy.deleteUser()
+    // })
 
     it('user can see admin page and logout links', function() {
       cy.log('Cy resign Spec localstorage:', localStorage)
+      cy.visit('/')
       cy.get('[data-cy=userActsBtn]').trigger('mouseover')
       cy.get('[data-cy=logoutLink]').should('be.visible')
       cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
       cy.get('[data-cy=adminLink]').click()
       cy.get('[data-cy=menu] > .container > .item').should('contain', 'Public page')
-      // cy.deleteUser()
+      cy.deleteUser()
     })
 
     // it.only('user can go to admin page', function() {
