@@ -6,9 +6,9 @@ describe('Signup page',  function() {
   const password = 'signuppass'
   const username = 'signup'
 
-  beforeEach(function () {
-    cy.resetDatabase()
-  })
+  // beforeEach(function () {
+  //   cy.resetDatabase()
+  // })
 
   it('signup form can be opened', function() {
     cy.visit('/')
@@ -17,7 +17,7 @@ describe('Signup page',  function() {
     cy.get('h2').should('contain', 'Sign up')
   })
 
-  describe('User signup', function () {
+  describe('User signup and resign', function () {
     it('user can signup', function() {
       cy.visit('/signup')
       cy.get('input[name=username]').type(username)
@@ -26,15 +26,9 @@ describe('Signup page',  function() {
       cy.get('form').submit()
       cy.get('[data-cy=message]').should('contain', 'User signed up successfully')
     })
-  })
-
-  describe('User resign', function () {
-    before(function () {
-      cy.signUp({ username, email, password })
-      cy.login({ email, password })
-    })
 
     it('user can resign', function() {
+      cy.login({ email, password })
       cy.visit('/')
       cy.get('[data-cy=userActsBtn]').trigger('mouseover')
       cy.get('[data-cy=resignLink]').click()
@@ -53,6 +47,7 @@ describe('Signup page',  function() {
 
     it('resigned can not login', function() {
       cy.visit('/')
+      cy.log('Cy resign Spec localstorage:', localStorage)
       cy.get('[data-cy=userActsBtn]').trigger('mouseover')
       cy.get('[data-cy=resignLink]').click()
       cy.visit('/login')
@@ -64,29 +59,33 @@ describe('Signup page',  function() {
   })
 
   describe('User signup and resign by command', function () {
-    beforeEach(function () {
+    before(function () {
       cy.signUp({ username, email, password })
       cy.login({ email, password })
       cy.visit('/')
     })
 
-    it('user can see logout', function() {
+    after(function () {
+      cy.deleteUser()
+    })
+
+    it('user can see admin page and logout links', function() {
+      cy.log('Cy resign Spec localstorage:', localStorage)
       cy.get('[data-cy=userActsBtn]').trigger('mouseover')
       cy.get('[data-cy=logoutLink]').should('be.visible')
-    })
-
-    it('admin page link is visible', function() {
-      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
-      cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
-    })
-
-    it('user can go to admin page', function() {
-      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
       cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
       cy.get('[data-cy=adminLink]').click()
       cy.get('[data-cy=menu] > .container > .item').should('contain', 'Public page')
-      // cy.get('[data-cy=usersLink]').should('contain', 'Users')
+      // cy.deleteUser()
     })
+
+    // it.only('user can go to admin page', function() {
+    //   cy.get('[data-cy=userActsBtn]').trigger('mouseover')
+    //   cy.get('[data-cy=adminLink]').should('contain', 'ADMIN PAGE')
+    //   cy.get('[data-cy=adminLink]').click()
+    //   cy.get('[data-cy=menu] > .container > .item').should('contain', 'Public page')
+    //   cy.log('Cy resign Spec localstorage:', localStorage)
+    // })
 
   })
 

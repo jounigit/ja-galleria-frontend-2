@@ -150,15 +150,33 @@ export const removeAlbumPicture = async (dispatch, TYPE, path, id, pictureID) =>
   }
 }
 
-export const removeData = async (dispatch, TYPE, path, id) => {
+export const removeUser = async (dispatch, TYPE, path, id) => {
   try {
+    const result = await axios.delete(`${apiUrl}/${path}/${id}`, config)
 
-    console.log('== Service remove data: ', path, ' id: ', id)
-    await remove(path, id)
     dispatch({
       type: TYPE,
       id
     })
+    console.log('== Service remove user: ', result)
+    return result
+  } catch(error) {
+    dispatch({
+      type: FAILURE, error
+    })
+  }
+}
+
+export const removeData = async (dispatch, TYPE, path, id) => {
+  try {
+
+    console.log('== Service remove data: ', path, ' id: ', id)
+    const result = await remove(path, id)
+    dispatch({
+      type: TYPE,
+      id
+    })
+    return result
   } catch(error) {
     dispatch({
       type: FAILURE, error
@@ -176,5 +194,6 @@ export default {
   remove,
   setToken,
   upload,
-  updateAlbumPictures
+  updateAlbumPictures,
+  removeUser
 }

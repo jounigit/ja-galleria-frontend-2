@@ -5,7 +5,7 @@ import React, {
 import { Container, Header, Card } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 
-const MessageWithRedirect = ({ message, color, path = null }) => {
+const MessageWithRedirect = ({ message, color, path }) => {
   const [redirect, setRedirect] = useState(false)
   const pathTo = `/${path}`
 

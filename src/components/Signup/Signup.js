@@ -123,7 +123,6 @@ const Signup = () => {
               <label>Userame</label>
               <input
                 data-cy='username'
-                type='username'
                 value={data.name}
                 onChange={handleInputChange}
                 name='username'
@@ -154,7 +153,7 @@ const Signup = () => {
             </Form.Field>
 
 
-            <Button data-cy='submit' type='submit'>login</Button>
+            <Button data-cy='submit' type='submit'>signup</Button>
           </Form>
         </Card.Content>
       </Card>

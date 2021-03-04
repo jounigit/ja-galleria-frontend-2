@@ -1,5 +1,7 @@
 import 'cypress-file-upload'
 
+const server = 'https://sleepy-mesa-77635.herokuapp.com/api'
+
 Cypress.Commands.add('resetDatabase', () => {
   // reset database url
   const url = Cypress.env('serverUrl')+'/testing/reset'
@@ -7,18 +9,21 @@ Cypress.Commands.add('resetDatabase', () => {
 })
 
 Cypress.Commands.add('login', ({ email, password }) => {
-  const url = Cypress.env('serverUrl')+'/login'
+  const url = server+'/login'
+  cy.log('Cy server url:', url)
 
   cy.request('POST', url, { email, password })
     .then((response) => {
+      cy.log('Cy login reponse body:', response.body)
       window.localStorage.setItem('user', JSON.stringify(response.body.user))
       window.localStorage.setItem('id', JSON.stringify(response.body.id))
       window.localStorage.setItem('token', JSON.stringify(response.body.token))
+      cy.log('Cy login localstorage:', localStorage)
     })
 })
 
 Cypress.Commands.add('signUp', ({ username, email, password }) => {
-  const url = Cypress.env('serverUrl')+'/users'
+  const url = server+'/users'
 
   const user = {
     username,
@@ -34,7 +39,7 @@ Cypress.Commands.add('signUp', ({ username, email, password }) => {
 })
 
 Cypress.Commands.add('createCategory', ({ title, content }) => {
-  const url = Cypress.env('serverUrl')+'/categories'
+  const url = server+'/categories'
   cy.request({
     url: url,
     method: 'POST',
@@ -46,7 +51,7 @@ Cypress.Commands.add('createCategory', ({ title, content }) => {
 })
 
 Cypress.Commands.add('createAlbum', ({ title, content }) => {
-  const url = Cypress.env('serverUrl')+'/albums'
+  const url = server+'/albums'
 
   cy.request({
     url: url,
@@ -59,7 +64,7 @@ Cypress.Commands.add('createAlbum', ({ title, content }) => {
 })
 
 Cypress.Commands.add('deleteAlbum', (id) => {
-  const url = Cypress.env('serverUrl')+'/albums/'+id
+  const url = server+'/albums/'+id
 
   cy.request({
     method: 'DELETE',
@@ -72,8 +77,8 @@ Cypress.Commands.add('deleteAlbum', (id) => {
 
 Cypress.Commands.add('deleteUser', () => {
   const id = JSON.parse(localStorage.getItem('id'))
-  const url = Cypress.env('serverUrl')+'/users/'+id
-  // cy.log('=Cy url ==', url)
+  const url = server+'/users/'+id
+  cy.log('Cy deleteUser localstorage:', localStorage)
 
   cy.request({
     method: 'DELETE',

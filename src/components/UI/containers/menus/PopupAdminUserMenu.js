@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import {
-  DELETE_USER, LOGOUT } from '../../../../reducers/actionTypes'
+  DELETE_USER,
+  LOGOUT } from '../../../../reducers/actionTypes'
 import { NotificationContext, notify } from '../../../../contexts/NotificationContext'
 import { AuthContext } from '../../../../contexts/AuthContext'
 import { UserContext } from '../../../../contexts/UserContext'
-import { removeData } from '../../../../services/apiService'
+import { removeUser } from '../../../../services/apiService'
 import { Button, Divider, Grid, Header, Icon, Menu, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import * as routes from '../../../../shared/constants/routes'
@@ -15,6 +16,8 @@ export const PopupAdminUserMenu = () => {
   const { auth, dispatch } = useContext(AuthContext)
   const { userDispatch } = useContext(UserContext)
   const { msgDispatch } = useContext(NotificationContext)
+
+  console.log('PopupUsermenu AUTH: ', auth)
 
   /************ popup actions ********************/
   const handleOpen = () => {
@@ -32,13 +35,20 @@ export const PopupAdminUserMenu = () => {
   }
 
   // resign action
-  const handleResign = () => {
-    const ok = window.confirm(`remove user ${auth.user}?`)
+  const handleResign = async() => {
+    const ok = window.confirm(`remove user ${auth.user} ${auth.id}?`)
     if ( ok===false) { return }
-    removeData(userDispatch, DELETE_USER, 'users', auth.id)
-    dispatch({ type: LOGOUT })
-    notify( msgDispatch, 'user resigned successfully', 5, 'orange' )
+    try {
+      const res = await removeUser(userDispatch, DELETE_USER, 'users', auth.id)
+      console.log('RESIGN user status: ', res.status)
+      dispatch({ type: LOGOUT })
+      notify( msgDispatch, 'user resigned successfully', 5, 'orange' )
+    } catch (error) {
+      notify( msgDispatch, 'could not resigned user', 5, 'red' )
+    }
+
   }
+  // const handleResign = <Resign />
 
   const clickLogout = (e) => {
     e.preventDefault()
@@ -88,7 +98,7 @@ export const PopupAdminUserMenu = () => {
   <>
     <Grid.Column>
       <Header as='h3'>
-        <Icon name='user' /> {auth.user}
+        <Icon name='user' /> {auth.id}
       </Header>
       <Divider fitted />
       { auth.user && adminpage }

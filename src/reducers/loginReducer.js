@@ -9,22 +9,23 @@ import apiService from '../services/apiService'
 const loginReducer = (state, action) => {
   switch (action.type) {
   case LOGIN:
-    localStorage.setItem('user', JSON.stringify(action.payload.user))
     localStorage.setItem('id', JSON.stringify(action.payload.id))
+    localStorage.setItem('user', JSON.stringify(action.payload.user))
     localStorage.setItem('token', JSON.stringify(action.payload.token))
     // set token for api
     apiService.setToken(state.token)
     return {
       ...state,
       isAuthenticated: true,
-      user: action.payload.user,
       id: action.payload.id,
+      user: action.payload.user,
       token: action.payload.token
     }
   case LOGGEDIN:
     return {
       ...state,
       isAuthenticated: true,
+      id: action.payload.id,
       user: action.payload.user,
       token: action.payload.token
     }
@@ -33,6 +34,7 @@ const loginReducer = (state, action) => {
     return {
       ...state,
       isAuthenticated: false,
+      id: null,
       user: null,
       token: null
     }

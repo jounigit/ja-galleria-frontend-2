@@ -53,6 +53,5 @@
     "cypress-file-upload": "^4.1.1",
     "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-react": "^7.21.5"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }
