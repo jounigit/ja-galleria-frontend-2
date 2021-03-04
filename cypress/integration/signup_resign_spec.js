@@ -18,7 +18,7 @@ describe('Signup page',  function() {
   })
 
   describe('User signup and resign', function () {
-    it('user can signup', function() {
+    it.only('user can signup', function() {
       cy.visit('/signup')
       cy.get('input[name=username]').type(username)
       cy.get('[data-cy=email]').type(email)
