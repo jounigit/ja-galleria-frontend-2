@@ -61,7 +61,6 @@ describe('Login page',  function() {
   })
 
   describe('can logout', function () {
-
     it('username is visible', function() {
       cy.login({ email, password })
       cy.visit('/')
