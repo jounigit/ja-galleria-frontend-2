@@ -52,11 +52,7 @@ describe('Login page',  function() {
       cy.get('[data-cy=email]').type(email)
       cy.get('[data-cy=password]').type(password)
       cy.get('form').submit()
-      // cy.visit('/')
-      // cy.get('[data-cy=userActsBtn]').trigger('mouseover')
-      // cy.get('[data-cy=logoutLink]').should('contain', 'Logout')
-      cy.get('[data-cy=message]').should('be.visible')
-      // cy.get('[data-cy=message]').should('contain', 'Login successfully!')
+      cy.get('[data-cy=message]').should('contain', 'Login successfully!')
     })
   })
 
