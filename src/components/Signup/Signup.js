@@ -89,7 +89,7 @@ const Signup = () => {
 
     } catch (error) {
       console.log('=ERROR: ', error.message)
-      handleError(error)
+      handleError('Signup failed!')
     }
 
   }
@@ -115,7 +115,7 @@ const Signup = () => {
         <Card.Content>
 
           {data.errorMessage &&
-            <Header as='h4' color='red' data-cy='error-message'>Jooo VIKAA!!</Header>
+            <Header as='h4' color='red' data-cy='error-message'>{data.errorMessage}</Header>
           }
           <Form onSubmit={ handleFormSubmit }>
             <Form.Field>
