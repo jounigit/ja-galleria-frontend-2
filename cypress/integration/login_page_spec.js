@@ -11,6 +11,7 @@ describe('Login page',  function() {
     cy.signUp({ username, email, password })
   })
 
+
   it('login form can be opened', function() {
     cy.visit('/')
     cy.get('[data-cy=userActsBtn]').trigger('mouseover')
