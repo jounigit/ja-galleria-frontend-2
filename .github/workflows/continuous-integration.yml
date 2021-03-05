@@ -17,12 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install
-      run: npm install
-    - name: lint
-      run: npm run eslint
-    - name: build
-      run: npm run build
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm run eslint
 
   deploy:
     if: success() && github.ref == 'refs/heads/master'
