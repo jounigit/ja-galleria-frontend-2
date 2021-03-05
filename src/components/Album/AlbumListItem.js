@@ -24,11 +24,11 @@ const AlbumListItem = ({ album, cssClass }) => {
 
   /****** get first album picture id, filter picture from pictures array ***/
   const getFirst = albumPictures.length && albumPictures[0]
-  let firstPic = getFirst && Pictures.find(p => p.id === getFirst)
+  let firstPic = !getFirst === 0 && Pictures.find(p => p.id === getFirst)
 
   firstPic = firstPic ? <Image src={ firstPic.landscape } fluid /> : null
 
-  console.log('ALBUM list item getFirst: ', albumPictures, getFirst)
+  console.log('ALBUM list item getFirst: ', getFirst)
   console.log('ALBUM list item PICS: ', albumPictures, albumPictures.length, firstPic)
 
   /***********************************************************************/

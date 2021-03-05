@@ -19,7 +19,7 @@ const AlbumListHomeItem = ({ album }) => {
 
   /****** get first album picture id, filter picture form pictures array ***/
   const getFirst = albumPictures && albumPictures.length && albumPictures[0]
-  let firstPic = getFirst && Pictures.find(p => p.id === getFirst)
+  let firstPic = !getFirst === 0 && Pictures.find(p => p.id === getFirst)
 
   firstPic = firstPic ? firstPic.landscape : defaultBg
 

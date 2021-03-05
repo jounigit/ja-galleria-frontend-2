@@ -7,7 +7,7 @@ describe('Login page',  function() {
   const username = Cypress.env('username')
 
   before(function () {
-    // cy.resetDatabase()
+    cy.resetDatabase()
     cy.signUp({ username, email, password })
   })
 
@@ -57,12 +57,6 @@ describe('Login page',  function() {
   })
 
   describe('can logout', function () {
-    it('username is visible', function() {
-      cy.login({ email, password })
-      cy.visit('/')
-      cy.get('[data-cy=userActsBtn]').trigger('mouseover')
-      cy.get('[data-cy=logoutLink]').should('contain', 'Logout')
-    })
 
     it('user can logout', function() {
       cy.login({ email, password })

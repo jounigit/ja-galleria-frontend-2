@@ -1,11 +1,14 @@
 import 'cypress-file-upload'
 
-const server = 'https://sleepy-mesa-77635.herokuapp.com/api'
+const server = Cypress.env('serverUrl')
 
 Cypress.Commands.add('resetDatabase', () => {
   // reset database url
-  const url = Cypress.env('serverUrl')+'/testing/reset'
+  const url = server+'/testing/reset'
   cy.request('POST', url)
+    .then((response) => {
+      cy.log('Cy resetDB reponse body:', response.body)
+    })
 })
 
 Cypress.Commands.add('login', ({ email, password }) => {

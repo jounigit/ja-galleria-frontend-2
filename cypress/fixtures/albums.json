@@ -6,7 +6,7 @@
         "title": "Album 1",
         "slug": "album-1",
         "content": "Veniam fugit et qui optio. Aut eaque ipsam quo officia ut sequi est. Minus nemo placeat aliquid aut quaerat.",
-        "pictures": ["9", "10", "11", "12"]
+        "pictures": []
     },
     {
         "id": "2",
@@ -24,6 +24,6 @@
         "title": "Album 3",
         "slug": "album-3",
         "content": "Hic odit veniam veritatis. Veritatis culpa tempora sequi magnam vel molestiae eius. Adipisci cum rerum hic perferendis corporis ratione quae.",
-        "pictures": ["15", "21", "22", "23"]
+        "pictures": ["15"]
     }
 ]
