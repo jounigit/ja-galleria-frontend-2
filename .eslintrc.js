@@ -2,7 +2,7 @@
 module.exports = {
   'env': {
     'browser': true,
-    'node': true,
+    'es6': true,
     'jest/globals': true
   },
   'extends': [
@@ -10,20 +10,15 @@ module.exports = {
     'plugin:react/recommended'
   ],
   'parserOptions': {
-    'ecmaVersion': 2018,
-    'sourceType': 'module',
-    'allowImportExportEverywhere': true,
     'ecmaFeatures': {
       'jsx': true
-    }
+    },
+    'ecmaVersion': 2018,
+    'sourceType': 'module'
   },
   'plugins': [
-    'react',
-    'jest'
+    'react', 'jest'
   ],
-  'globals': {
-    'process': true
-  },
   'rules': {
     'indent': [
       'error',

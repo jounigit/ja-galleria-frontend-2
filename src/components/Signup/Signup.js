@@ -5,6 +5,7 @@ import { UserContext } from '../../contexts/UserContext'
 import { CREATE_USER } from '../../reducers/actionTypes'
 import axios from 'axios'
 
+// eslint-disable-next-line no-undef
 const baseUrl = process.env.REACT_APP_API
 
 const url = `${baseUrl}/users`

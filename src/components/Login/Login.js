@@ -4,6 +4,7 @@ import { Card, Header, Form, Button, Container } from 'semantic-ui-react'
 import { AuthContext } from '../../contexts/AuthContext'
 import MessageWithRedirect from '../Shared/MessageWtihRedirect'
 
+// eslint-disable-next-line no-undef
 const baseUrl = process.env.REACT_APP_API
 
 const url = `${baseUrl}/login`
