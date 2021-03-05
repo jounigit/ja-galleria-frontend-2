@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe('The Pictures Page', function() {
   beforeEach(function() {
     cy.server()

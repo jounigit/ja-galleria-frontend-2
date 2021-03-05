@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jest/no-focused-tests */
 describe('Admin album', function() {
   const username = 'testi'

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jest/valid-expect-in-promise */
 /* eslint-disable jest/no-focused-tests */
 
