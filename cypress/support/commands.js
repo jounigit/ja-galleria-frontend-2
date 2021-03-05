@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import 'cypress-file-upload'
 
 const server = Cypress.env('serverUrl')
