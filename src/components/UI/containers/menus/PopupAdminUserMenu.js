@@ -98,7 +98,7 @@ export const PopupAdminUserMenu = () => {
   <>
     <Grid.Column>
       <Header as='h3'>
-        <Icon name='user' /> {auth.id}
+        <Icon name='user' /> {auth.user}
       </Header>
       <Divider fitted />
       { auth.user && adminpage }
