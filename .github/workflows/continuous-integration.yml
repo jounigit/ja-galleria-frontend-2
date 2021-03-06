@@ -34,4 +34,4 @@ jobs:
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "ja-galleria-2"
-          heroku_email: "airaksinen.jouni@gmail.com"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
