@@ -6,7 +6,7 @@ const style = {
   bottom: '0px',
   width: '100%',
   // padding: '5em 0em',
-  marginTop: '1.5em'
+  // marginTop: '1.5em'
 }
 
 export default function AppFooter() {

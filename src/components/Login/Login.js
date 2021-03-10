@@ -92,7 +92,7 @@ const Login = () => {
   // :::::::::::::::::::::::::::::::::::: //
   return (
     <Container>
-      <Card centered style={{ marginTop: 20 }}>
+      <Card centered style={{ marginTop: 80, marginBottom: 80 }}>
         <Card.Content>
           <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
         </Card.Content>

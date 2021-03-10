@@ -109,7 +109,7 @@ const Signup = () => {
   // :::::::::::::::::::::::::::::::::::: //
   return (
     <>
-      <Card centered style={{ marginTop: 20 }}>
+      <Card centered style={{ marginTop: 60, marginBottom: 60 }}>
         <Card.Content>
           <Header as='h2' color='green'>Sign up</Header>
         </Card.Content>

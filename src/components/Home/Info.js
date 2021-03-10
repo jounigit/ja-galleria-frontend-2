@@ -18,14 +18,15 @@ const Info = () => {
     textAlign: 'center',
     color: 'white',
     opacity: 1,
-    paddingTop: '4.75em'
+    paddingTop: '4.75em',
+    paddingBottom: '1em'
   }
 
   /**** background image for div */
   const module = {
     // margin: '10px',
     width: '100%',
-    height: '20em',
+    minHeight: '25em',
     backgroundImage:
     `linear-gradient(
       rgba(0, 0, 0, 0.5),
@@ -54,7 +55,11 @@ const Info = () => {
             Albumit kootaan teemoittain kategorioiden alle.<br />
             Kuvat valitaan kuva-arkistosta.
           </h4>
-          <h3></h3>
+          <h4>
+            Voit testata näillä tunnuksilla tai tehdä omat:<br />
+            Email: demo@mail.com<br />
+            Password: demopass
+          </h4>
         </span>
       </div>
 
