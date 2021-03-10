@@ -1,6 +1,7 @@
 import { auto } from '@popperjs/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import BaseSpinning from '../Shared/loaders/BaseSpinning'
 // import { Segment } from 'semantic-ui-react'
 
 const CategoryListHomeItem = ({ category, cssClass }) => {
@@ -15,7 +16,7 @@ const CategoryListHomeItem = ({ category, cssClass }) => {
     fontSize: 'calc(8px + 2vmin)'
   }
 
-  if (category === undefined) { return <div className='Item-center'>Loading...</div> }
+  if (category === undefined) { return <BaseSpinning /> }
 
   const { title, slug, content, albums: CatAlbums } = category
   const albumsLen = CatAlbums.length

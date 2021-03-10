@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { AlbumContext } from '../../contexts/AlbumContext'
 import '../../helpers/Colors.scss'
+import BaseSpinning from '../Shared/loaders/BaseSpinning'
 import AlbumListHomeItem from './AlbumListHomeItem'
 
 
 const AlbumListHome = ({ amount }) => {
   const { albums: { data: Albums } } = useContext(AlbumContext)
-  console.log(amount)
+
+  if (Albums === undefined) { return <BaseSpinning /> }
 
   /** constants */
   const isArr = Array.isArray(Albums)

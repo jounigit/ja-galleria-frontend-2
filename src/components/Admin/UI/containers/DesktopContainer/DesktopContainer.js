@@ -113,7 +113,7 @@ export default function DesktopContainer({ children }) {
           </Menu>
         </Segment>
       </Visibility>
-      <Container>
+      <Container style={{ marginBottom: 40 }}>
         {children}
       </Container>
 

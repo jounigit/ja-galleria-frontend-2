@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import '../../helpers/colors.css'
 import { PictureContext } from '../../contexts/PictureContext'
 import defaultBg from '../../assets/default_bg.jpg'
+import BaseSpinning from '../Shared/loaders/BaseSpinning'
 
 const AlbumListHomeItem = ({ album }) => {
   const { pictures: { data: Pictures } } = useContext(PictureContext)
 
-  if (album === undefined) { return <div className='Item-center'>Loading...</div> }
+  if (album === undefined) { return <BaseSpinning /> }
 
   const albumPictures = album.pictures
 

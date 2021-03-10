@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { PictureContext } from '../../contexts/PictureContext'
+import BaseSpinning from '../Shared/loaders/BaseSpinning'
 import PicturesToColumns from './galleria1/PicturesToColumns'
 import PicturesToFlex from './galleria2/PicturesToFlex'
 import PicturesToFlexGrid from './galleria3/PicturesToFlexGrid'
@@ -9,7 +10,7 @@ const PictureList = () => {
   const [picGallery, setPicGallery] = useState(1)
   const { pictures: { data: Pictures } } = useContext(PictureContext)
 
-  if (Pictures === undefined) { return <div className='Item-center'>Loading...</div> }
+  if (Pictures === undefined)  { return <BaseSpinning /> }
   const pictureArray = Pictures || []
   console.log('Pic list ---', Pictures)
 

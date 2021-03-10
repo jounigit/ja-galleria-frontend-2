@@ -19,7 +19,6 @@ export default function AppFooter() {
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='About' />
                 <List link inverted>
-                  <List.Item as='a'>Sitemap</List.Item>
                   <List.Item as='a'>Contact Us</List.Item>
                   <List.Item as='a'>
                     <Button circular icon='facebook' size='mini' />
@@ -32,10 +31,9 @@ export default function AppFooter() {
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='Services' />
                 <List link inverted>
-                  <List.Item as='a'>Something else</List.Item>
-                  <List.Item as='a'>DNA FAQ</List.Item>
-                  <List.Item as='a'>How To Access</List.Item>
-                  <List.Item as='a'>Favorite X</List.Item>
+                  <List.Item as='a'>Some link</List.Item>
+                  <List.Item as='a'>SOME LINK</List.Item>
+                  <List.Item as='a'>Again a link</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
