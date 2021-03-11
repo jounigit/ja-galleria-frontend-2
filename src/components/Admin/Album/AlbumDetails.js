@@ -3,7 +3,7 @@ import { Picture } from '../Picture'
 import { Grid, Header, Segment, Divider, Container } from 'semantic-ui-react'
 import ChoosePicture from './ChoosePicture'
 import UpdateAlbum from './UpdateAlbum'
-import RemoveAlbum from './RemoveAlbum'
+// import RemoveAlbum from './RemoveAlbum'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { PictureContext } from '../../../contexts/PictureContext'
 import ModalPortal from '../../Shared/modal/modalPortal'
@@ -21,8 +21,6 @@ const AlbumDetails = ({ album }) => {
   let categoryTitle = 'no category yet'
   if ( CategoryId ) {
     const cat = CatData.find(c => c.id === CategoryId)
-    console.log('AlbumDetails CAT: ', cat)
-    console.log('AlbumDetails CAT id: ', CategoryId)
     categoryTitle = cat && cat.title
   }
 
@@ -31,11 +29,11 @@ const AlbumDetails = ({ album }) => {
     Pictures.map(p => PicIds.includes(p.id) ? p : null).filter(p => p !== null)
 
   // ::::::::::: actions ::::::::::::::::::::::::: //
-  const removeAction = <RemoveAlbum
-    id={ AlbumId }
-    title={title}
-    author={user.name}
-  />
+  // const removeAction = <RemoveAlbum
+  //   id={ AlbumId }
+  //   title={title}
+  //   author={user.name}
+  // />
 
   const chooseAction =
   <ModalPortal
@@ -92,7 +90,7 @@ const AlbumDetails = ({ album }) => {
 
               <Grid>
                 <Grid.Column tablet={2} computer={2}>{ editAction }</Grid.Column>
-                <Grid.Column tablet={2} computer={2}>{ removeAction }</Grid.Column>
+                {/* <Grid.Column tablet={2} computer={2}>{ removeAction }</Grid.Column> */}
               </Grid>
 
               <Divider section />

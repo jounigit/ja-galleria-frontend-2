@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import ReactQuill from 'react-quill'
-// import EditorToolbar from '../../Editor/EditorToolbar'
+import ToolbarSmall, { modules, formats } from '../../Editor/ToolbarSmall'
+import 'react-quill/dist/quill.snow.css'
 import { Header, Form, Input, Button, Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
 
@@ -21,8 +22,6 @@ const AlbumForm = ({
   const categoryOptions = cats.map((cat, i) =>
     <option key={i} value={cat.id}>{cat.title}</option>
   )
-  // const options = categories.data.map((cat) => ( { key: cat.id, value: cat.id, text: cat.title } ) )
-  console.log('Album Form Dropdown options: ', categoryOptions)
 
   return (
     <Container>
@@ -59,9 +58,12 @@ const AlbumForm = ({
         <Form.Field>
           <label>content</label>
           <div  style={{ backgroundColor: 'white' }}>
+            <ToolbarSmall />
             <ReactQuill
               value={editorState || ''}
               onChange={handleEditorChange}
+              modules={modules}
+              formats={formats}
             />
           </div>
 

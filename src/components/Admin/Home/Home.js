@@ -1,4 +1,5 @@
 import React from 'react'
+// import Editor from '../../Editor/Editor'
 
 const Home = () => {
 
@@ -9,7 +10,7 @@ const Home = () => {
       <h4>Albums-sivulta voit hallinnoida albumeja/projekteja,
         lisätä tekstiä ja hakea kuvia kuva-arkistosta.</h4>
       <h4>Categories-sivulla voit koota albumeita/projekteja sopivien teemojen alle.</h4>
-
+      {/* <Editor /> */}
     </div>
   )
 }
