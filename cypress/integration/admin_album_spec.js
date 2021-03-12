@@ -57,29 +57,29 @@ describe('Admin album', function() {
     })
   })
 
-  describe('admin update', () => {
-    it('can update album', function() {
-      const newType = 'Updated'
-      cy.get('[data-cy=albumListItem] .edit').first().click()
-      cy.get('[data-cy=album] .edit').should('be.visible')
-      cy.get('[data-cy=album] .edit').first().click()
-      cy.get('[type="title"]').clear()
-      cy.get('[data-cy=title]').type(newType)
-      cy.get('.ql-editor').type('Sisusta tässä.')
-      cy.get('form').submit()
-      cy.get('[data-cy=album]').should('contain', newType)
-    })
-  })
+  // describe('admin update', () => {
+  //   it('can update album', function() {
+  //     const newType = 'Updated'
+  //     cy.get('[data-cy=albumListItem] .edit').first().click()
+  //     cy.get('[data-cy=album] .edit').should('be.visible')
+  //     cy.get('[data-cy=album] .edit').first().click()
+  //     cy.get('[type="title"]').clear()
+  //     cy.get('[data-cy=title]').type(newType)
+  //     cy.get('.ql-editor').type('Sisusta tässä.')
+  //     cy.get('form').submit()
+  //     cy.get('[data-cy=album]').should('contain', newType)
+  //   })
+  // })
 
-  describe('admin update select category', () => {
-    it('can update album with category', function() {
-      cy.get('[data-cy=albumListItem] .edit').first().click()
-      cy.get('[data-cy=album] .edit').first().click()
-      cy.get('#categoryId').select('Category 1')
-      cy.get('form').submit()
-      cy.get('[data-cy=album]').should('contain', 'Category 1')
-    })
-  })
+  // describe('admin update select category', () => {
+  //   it('can update album with category', function() {
+  //     cy.get('[data-cy=albumListItem] .edit').first().click()
+  //     cy.get('[data-cy=album] .edit').first().click()
+  //     cy.get('#categoryId').select('Category 1')
+  //     cy.get('form').submit()
+  //     cy.get('[data-cy=album]').should('contain', 'Category 1')
+  //   })
+  // })
 
   describe('admin delete', () => {
     it('can delete album', function() {

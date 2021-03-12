@@ -49,16 +49,16 @@ describe('Admin category', function() {
     })
   })
 
-  describe('admin update', () => {
-    it('can update category', function() {
-      const newType = 'Updated'
-      cy.get('[data-cy=category] .edit').first().click()
-      cy.get('[type="title"]').clear()
-      cy.get('[data-cy=title]').type(newType)
-      cy.get('form').submit()
-      cy.get('[data-cy=category]').should('contain', newType)
-    })
-  })
+  // describe('admin update', () => {
+  //   it('can update category', function() {
+  //     const newType = 'Updated'
+  //     cy.get('[data-cy=category] .edit').first().click()
+  //     cy.get('[type="title"]').clear()
+  //     cy.get('[data-cy=title]').type(newType)
+  //     cy.get('form').submit()
+  //     cy.get('[data-cy=category]').should('contain', newType)
+  //   })
+  // })
 
   describe('admin delete', () => {
     it('can delete category', function() {

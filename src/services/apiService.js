@@ -90,7 +90,7 @@ export const createData = async (dispatch, TYPE, path, data) => {
       message: result.message
     })
   } catch (error) {
-    console.log('Service updateData error: ', error)
+    console.log('Service createData error: ', error)
     dispatch({
       type: FAILURE, error
     })
@@ -100,7 +100,7 @@ export const createData = async (dispatch, TYPE, path, data) => {
 export const updateData = async (dispatch, TYPE, path, id, data) => {
   try {
     const result = await axios.put(`${apiUrl}/${path}/${id}`, data, config)
-    // console.log('Service updateData: ', result.data)
+    console.log('Service updateData: ', result.data)
     dispatch({
       type: TYPE,
       data: result.data,
@@ -108,7 +108,7 @@ export const updateData = async (dispatch, TYPE, path, id, data) => {
     })
     return result
   } catch (error) {
-    // console.log('Service updateData error: ', error)
+    console.log('Service updateData error: ', error)
     dispatch({
       type: FAILURE,
       error: error

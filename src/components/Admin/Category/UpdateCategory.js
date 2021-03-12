@@ -3,8 +3,9 @@ import { Container } from 'semantic-ui-react'
 import { CategoryContext } from '../../../contexts/CategoryContext'
 import { CLOSE_MODAL, UPDATE_CATEGORY } from '../../../reducers/actionTypes'
 import CategoryForm from './CategoryForm'
-import { updateData } from '../../../services/apiService'
+import { update } from '../../../services/apiService'
 import { ModalContext } from '../../../contexts/modalContext'
+import { NotificationContext, notify } from '../../../contexts/NotificationContext'
 
 const UpdateCategory = ({ id: CategoryID, title, content }) => {
   const initialState = {
@@ -15,7 +16,8 @@ const UpdateCategory = ({ id: CategoryID, title, content }) => {
     message: null
   }
   const [data, setData] = useState(initialState)
-  const { categories, dispatch } = useContext(CategoryContext)
+  const { dispatch } = useContext(CategoryContext)
+  const { msgDispatch } = useContext(NotificationContext)
   const { modalDispatch } = useContext(ModalContext)
 
   // :::::::::::::::::::::::::::::::::::: //
@@ -52,28 +54,37 @@ const UpdateCategory = ({ id: CategoryID, title, content }) => {
       errorMessage: null
     })
 
-    updateData(dispatch, UPDATE_CATEGORY, 'categories', CategoryID, newData)
-    if( !categories.isLoading && categories.errorMessage==='') {
+    try {
+      const result = await update('categories', CategoryID, newData)
+      console.log('Updated album: ', result)
+      dispatch({
+        type: UPDATE_CATEGORY,
+        data: result.data,
+        message: result.message
+      })
       setData({
         title: '',
         content: '',
         isSubmitting: false,
-        errorMessage: null,
-        message: 'Category updated successfully.'
+        errorMessage: null
       })
+      notify( msgDispatch, 'Album stored successfully.', 4, 'green')
+      modalDispatch({ type: CLOSE_MODAL })
+
+    } catch (error) {
+      console.log('UpdateData error: ', error.message)
+      setData({
+        title: '',
+        content: '',
+        isSubmitting: false
+      })
+
+      notify( msgDispatch, error.message, 4, 'red')
       modalDispatch({ type: CLOSE_MODAL })
     }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
-  // if (data.message) {
-  //   setTimeout(() => props.setModalOpen(), 2000)
-  //   return (
-  //     <Container>
-  //       <Header as='h3' color='green' data-cy='message'>{data.message}</Header>
-  //     </Container>
-  //   )
-  // }
 
   return (
     <Container>
