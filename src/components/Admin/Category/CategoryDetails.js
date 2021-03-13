@@ -11,8 +11,18 @@ const CategoryDetails = ({ category }) => {
   const [visible, setVisible] = useState(false)
   const { auth } = useContext(AuthContext)
   // const { modalDispatch } = useContext(ModalContext)
-  // console.log('CategoryDetail rerender', category.id)
+  console.log('CategoryDetail auth:', auth.id)
 
+  const permission  = (user, documentUser) => {
+    const permission = (user.id === documentUser.toString()) || (user.role === 'editor')
+    console.log('Params: ', user.id, documentUser)
+    // console.log('Grant Access: ', permission)
+    return permission
+  }
+
+  console.log('Permission: ', category.title, permission(auth, category.user.id))
+
+  if (!permission(auth, category.user.id)) { return null }
 
   const albums = () => category.albums.map((a, i ) =>
     <ListItemAlbum key={i} albumID={a} />

@@ -10,6 +10,7 @@ const initialState = {
   user: null,
   id: null,
   token: null,
+  role: null
 }
 
 const AuthContextProvider = (props) => {
@@ -19,11 +20,13 @@ const AuthContextProvider = (props) => {
     let storageToken = JSON.parse(localStorage.getItem('token'))
     let storageUser = JSON.parse(localStorage.getItem('user'))
     let storageID = JSON.parse(localStorage.getItem('id'))
+    let storageRole = JSON.parse(localStorage.getItem('role'))
     apiService.setToken(auth.token)
     const loggedUser = {
       token: storageToken,
       user: storageUser,
-      id: storageID
+      id: storageID,
+      role: storageRole
     }
     if (storageUser && auth.user === null) {
       // set token for api

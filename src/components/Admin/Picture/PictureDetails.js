@@ -4,11 +4,13 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import RemovePicture from './RemovePicture'
 import UpdatePicture from './UpdatePicture'
 import ModalPortal from '../../Shared/modal/modalPortal'
+import permission from '../../Shared/Permission'
 
 const PictureDetails = ({ picture }) => {
   const { auth } = useContext(AuthContext)
 
   console.log('PICTURE DETAIL ---', picture)
+  if (!permission(auth, picture.user)) { return null }
 
   const updateAction =
   <ModalPortal

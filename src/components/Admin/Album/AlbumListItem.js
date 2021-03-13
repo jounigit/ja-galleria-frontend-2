@@ -4,10 +4,13 @@ import { Image, Header, Button, Segment, Grid, } from 'semantic-ui-react'
 import { AuthContext } from '../../../contexts/AuthContext'
 import RemoveAlbum from './RemoveAlbum'
 import { PictureContext } from '../../../contexts/PictureContext'
+import permission from '../../Shared/Permission'
 
 const AlbumListItem = ({ album }) => {
   const { auth } = useContext(AuthContext)
   const { pictures: { data: Pictures } } = useContext(PictureContext)
+
+  if (!permission(auth, album.user.id)) { return null }
 
   if (album === undefined) { return <div className='Item-center'>Loading...</div> }
 

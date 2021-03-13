@@ -12,6 +12,7 @@ const loginReducer = (state, action) => {
     localStorage.setItem('id', JSON.stringify(action.payload.id))
     localStorage.setItem('user', JSON.stringify(action.payload.user))
     localStorage.setItem('token', JSON.stringify(action.payload.token))
+    localStorage.setItem('role', JSON.stringify(action.payload.role))
     // set token for api
     apiService.setToken(state.token)
     return {
@@ -19,7 +20,8 @@ const loginReducer = (state, action) => {
       isAuthenticated: true,
       id: action.payload.id,
       user: action.payload.user,
-      token: action.payload.token
+      token: action.payload.token,
+      role: action.payload.role
     }
   case LOGGEDIN:
     return {
@@ -27,7 +29,8 @@ const loginReducer = (state, action) => {
       isAuthenticated: true,
       id: action.payload.id,
       user: action.payload.user,
-      token: action.payload.token
+      token: action.payload.token,
+      role: action.payload.role
     }
   case LOGOUT:
     localStorage.clear()
@@ -36,7 +39,8 @@ const loginReducer = (state, action) => {
       isAuthenticated: false,
       id: null,
       user: null,
-      token: null
+      token: null,
+      role: null
     }
   default:
     return state

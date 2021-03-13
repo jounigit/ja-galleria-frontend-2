@@ -92,6 +92,14 @@ const Login = () => {
   // :::::::::::::::::::::::::::::::::::: //
   return (
     <Container>
+      <div className='Item-center'>
+        <h4>
+        Voit testata näillä tunnuksilla tai tehdä omat:<br />
+        Email: demo@mail.com<br />
+        Password: demopass
+        </h4>
+      </div>
+
       <Card centered style={{ marginTop: 80, marginBottom: 80 }}>
         <Card.Content>
           <Header as='h2' color='green'>Kirjaudu sovellukseen</Header>
