@@ -8,3 +8,6 @@ Käytössä nodejs backend ja mongoDB
 
 Backend repositorio: 
 https://github.com/jounigit/ja-galleria-node
+
+Työaikakirjanpito ja esittely:
+https://github.com/jounigit/fullstack-harjoitustyo-tiedot
