@@ -6,13 +6,22 @@ import { removeAlbumPicture, addAlbumPicture } from '../../../services/apiServic
 import { AlbumContext } from '../../../contexts/AlbumContext'
 import { UPDATE_ALBUM } from '../../../reducers/actionTypes'
 import UnChooseForm from './UnChooseForm'
+// import { AuthContext } from '../../../contexts/AuthContext'
 
 const ChoosePicture = ({ id, albumPics }) => {
   const { pictures: { data: Pictures } } = useContext(PictureContext)
   const { dispatch } = useContext(AlbumContext)
+  // const { auth } = useContext(AuthContext)
 
   // ::::::::: handle pictures ::::::::::::::::: //
   const ids = albumPics
+
+  console.log('Choose pics: ', Pictures)
+
+  const kaikki = Pictures.map(p => p.title)
+  // const omat = Pictures.map(p => p.user === auth.id ? p : null)
+  console.log('Kaikki kuvat --', kaikki)
+  // console.log('Omat kuvat --', omat)
 
   const chosen = Pictures.map(p => ids.includes(p.id) ? p : null).filter(p => p !== null)
 
