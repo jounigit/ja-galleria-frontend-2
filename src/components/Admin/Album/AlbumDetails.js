@@ -8,16 +8,18 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import { PictureContext } from '../../../contexts/PictureContext'
 import ModalPortal from '../../Shared/modal/modalPortal'
 import { CategoryContext } from '../../../contexts/CategoryContext'
-import permission from '../../Shared/Permission'
+// import permission from '../../Shared/Permission'
 
 const AlbumDetails = ({ album }) => {
   const { categories: { data: CatData } } = useContext(CategoryContext)
   const { pictures: { data: Pictures } } = useContext(PictureContext)
   const { auth } = useContext(AuthContext)
+  // const albumUserId = album.user.id
 
-  if (!permission(auth, album.user.id)) { return null }
+  // console.log('Album user id: ', albumUserId)
 
-  console.log('Album perm: ', permission(auth, album.user.id))
+  // if (!permission(auth, album.user.id)) { return null }
+
   const { id: AlbumId, title, content, category: CategoryId, user, pictures: PicIds } = album
   console.log('AlbumDetails: ',AlbumId,'', title,' ', content,' - ',CategoryId,' - ', user,' ', PicIds)
 

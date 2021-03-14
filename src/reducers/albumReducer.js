@@ -27,7 +27,8 @@ const albumReducer = (state, action) => {
   case CREATE_ALBUM:
     const newData = [...state.data, action.data]  // console.log('Album reducer: ', action.data)
     return { data: newData, isLoading: false, errorMessage: '', message: action.message }
-  case UPDATE_ALBUM: // console.log('Album reducer to update: ', action.data)
+  case UPDATE_ALBUM:
+    console.log('Album reducer to update: ', action.data)
     const updated = state.data.map(b => b.id !== action.data.id ? b : action.data)
     return { data: updated, isLoading: false, errorMessage: '', message: action.message }
   case UPDATE_ALBUM_PICTURE: //  console.log('Album reducer to update: ', action.data)

@@ -11,8 +11,8 @@ import {
   // FAILURE
 } from '../../../reducers/actionTypes'
 import { fetchData,
-  update,
-  // updateData
+  // update,
+  updateData
 } from '../../../services/apiService'
 import { ModalContext } from '../../../contexts/modalContext'
 import AlbumForm from './AlbumForm'
@@ -30,7 +30,7 @@ const UpdateAlbum = ({ id: AlbumID, title, content, categoryId }) => {
   const [data, setData] = useState(initialState)
   const [editorState, setEditorState] = React.useState({ value: initialState.content })
 
-  const { dispatch } = useContext(AlbumContext)
+  const { albums, dispatch } = useContext(AlbumContext)
   const { dispatch: CategoryDispatch } = useContext(CategoryContext)
   const { msgDispatch } = useContext(NotificationContext)
   const { modalDispatch } = useContext(ModalContext)
@@ -78,41 +78,27 @@ const UpdateAlbum = ({ id: AlbumID, title, content, categoryId }) => {
       errorMessage: null
     })
 
-    try {
-      const result = await update('albums', AlbumID, newData)
-      console.log('Updated album: ', result)
-      dispatch({
-        type: UPDATE_ALBUM,
-        data: result.data,
-        message: result.message
-      })
+    const result = await updateData(dispatch, UPDATE_ALBUM, 'albums', AlbumID, newData)
+
+    if( !albums.isLoading && albums.errorMessage==='') {
       setData({
         title: '',
         content: '',
         isSubmitting: false,
         errorMessage: null
       })
-      fetchData(CategoryDispatch, INIT_CATEGORIES, 'categories')
-      notify( msgDispatch, 'Album stored successfully.', 4, 'green')
-      modalDispatch({ type: CLOSE_MODAL })
+      console.log('Album result err: ', result )
+      console.log('Album result type: ', typeof(result) )
+      result && result === Error && console.log('PÖÖÖÖ')
 
-    } catch (error) {
-      notify( msgDispatch, error.message, 4, 'red')
+      fetchData(CategoryDispatch, INIT_CATEGORIES, 'categories')
+      //   localStorage.setItem('reloadPage', 'categories')
+      // console.log('Album error: ', albums.errorMessage, ' album: ', albums)
+
+      notify( msgDispatch, 'Album stored successfully.', 4, 'green')
       modalDispatch({ type: CLOSE_MODAL })
     }
 
-    // const result = await updateData(dispatch, UPDATE_ALBUM, 'albums', AlbumID, newData)
-    // console.log('Updated album: ', result)
-    // if( !albums.isLoading && albums.errorMessage==='') {
-    //   setData({
-    //     title: '',
-    //     content: '',
-    //     isSubmitting: false,
-    //     errorMessage: null
-    //   })
-
-
-    // }
   }
 
   // :::::::::::::::::::::::::::::::::::: //
