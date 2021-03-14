@@ -68,7 +68,7 @@ const AlbumDetails = () => {
   // :::::::::::::::::::::::::::::::::::: //
 
   return (
-    <Container>
+    <Container style={{ marginBottom: 50 }}>
       <Segment basic>
         <Breadcrumbs path='/albums' linkName='Albums' active={title} />
       </Segment>

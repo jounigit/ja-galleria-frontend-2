@@ -18,23 +18,25 @@ const App = () => {
 
   return (
     <>
-      <Switch>
-        <Route path={routes.ADMIN} component={Admin} />
-        <ResponsiveContainer>
-          <Notification />
-          <Route path={routes.CATEGORIES} component={CategoryList} />
-          <Route path={routes.CATEGORY} component={CategoryDetails} />
-          <Route path={routes.ALBUM} component={AlbumDetails} />
-          <Route path={routes.ALBUMS} component={AlbumList} />
-          <Route path={routes.PICTURE} component={PictureData} />
-          <Route path={routes.PICTURES} component={PictureList} />
-          <Route path={routes.LOGIN} component={Login} />
-          <Route path={routes.SIGNUP} component={Signup} />
-          {/* <Route path={routes.HOME} component={Home} /> */}
-          <Route exact path="/" component={Home} />
-          {/* <Route component={NotFound} /> */}
-        </ResponsiveContainer>
-      </Switch>
+      <div  className='page-container'>
+        <Switch>
+          <Route path={routes.ADMIN} component={Admin} />
+          <ResponsiveContainer>
+            <Notification />
+            <Route path={routes.CATEGORIES} component={CategoryList} />
+            <Route path={routes.CATEGORY} component={CategoryDetails} />
+            <Route path={routes.ALBUM} component={AlbumDetails} />
+            <Route path={routes.ALBUMS} component={AlbumList} />
+            <Route path={routes.PICTURE} component={PictureData} />
+            <Route path={routes.PICTURES} component={PictureList} />
+            <Route path={routes.LOGIN} component={Login} />
+            <Route path={routes.SIGNUP} component={Signup} />
+            {/* <Route path={routes.HOME} component={Home} /> */}
+            <Route exact path="/" component={Home} />
+            {/* <Route component={NotFound} /> */}
+          </ResponsiveContainer>
+        </Switch>
+      </div>
       <Footer />
     </>
   )

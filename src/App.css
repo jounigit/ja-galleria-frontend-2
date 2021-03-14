@@ -2,15 +2,39 @@
   box-sizing: border-box;
 }
 
-/* body {
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* html, body, #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+} */
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+ .page-container {
+  flex: 1 0 auto;
+  padding: 10px;
 }
 
 footer {
-  margin-top: auto;
-} */
+  flex-shrink: 0;
+  /* position: absolute;
+  bottom: 0;
+  width: 100%; */
+  /* margin-top: auto; */
+} 
 
 .box {
   /* background-color: #444;

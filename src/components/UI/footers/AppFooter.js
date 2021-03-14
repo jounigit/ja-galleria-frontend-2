@@ -1,17 +1,17 @@
 import React from 'react'
 import { Segment, Container, Grid, Header, List, Button } from 'semantic-ui-react'
 
-const style = {
-  position: 'relative',
-  bottom: '0px',
-  width: '100%',
-  // padding: '5em 0em',
-  // marginTop: '1.5em'
-}
+// const style = {
+//   position: 'fixed',
+//   bottom: '0px',
+//   width: '100%',
+//   padding: '5em 0em',
+//   marginTop: '1.5em'
+// }
 
 export default function AppFooter() {
   return (
-    <div style={ style }>
+    <div>
       <Segment inverted vertical>
         <Container>
           <Grid divided inverted stackable  style={{ marginLeft: '3em' }}>
