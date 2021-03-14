@@ -1,26 +1,14 @@
 import React, { Fragment } from 'react'
 import '../../helpers/colors.css'
 import defaultBg from '../../assets/default_bg.jpg'
+import { Responsive } from 'semantic-ui-react'
 
 const Info = () => {
 
   // if (album === undefined) { return <div className='Item-center'>Loading...</div> }
 
-  /****** get first album picture id, filter picture form pictures array ***/
+  /*********************************/
 
-  const textWrapper = {
-    position: 'relative',
-    width: '100%',
-    height: '265px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    textAlign: 'center',
-    color: 'white',
-    opacity: 1,
-    paddingTop: '4.75em',
-    paddingBottom: '1em'
-  }
 
   /**** background image for div */
   const module = {
@@ -37,6 +25,50 @@ const Info = () => {
     // resize: 'both'
   }
 
+  const textWrapper = {
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+    color: 'white',
+    opacity: 1,
+    paddingTop: '4em',
+    paddingBottom: '3em',
+    fontSize: '.8em'
+  }
+
+  const textWrapperMobile = {
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+    color: 'white',
+    opacity: 1,
+    padding: '3em 2em 2em'
+  }
+
+  const infoText =
+  <>
+    <h1>GALLERIA - PORTFOLIO</h1>
+    <h5 style={{ marginBottom: '-0.4em' }}>
+            Sovellusta voi käyttää portfoliona erilaisten projektien ja teosten esittelyyn.<br />
+            Mahdollisia käyttäjiä ovat eri alojen suunnittelijat, taitelijat jne.
+    </h5>
+    <h5 style={{ marginBottom: '-0.4em' }}>
+            Projektit esitellään albumeissa, jotka sisältävät teksti- ja kuvaosion.<br />
+            Albumit kootaan teemoittain kategorioiden alle.<br />
+            Kuvat valitaan kuva-arkistosta.
+    </h5>
+    <h4>
+            Voit testata näillä tunnuksilla tai tehdä omat:<br />
+            Email: demo@mail.com<br />
+            Password: demopass
+    </h4>
+  </>
 
   console.log('Info module: ', module)
   /**********************************************************/
@@ -44,23 +76,18 @@ const Info = () => {
     <Fragment>
 
       <div style={ module }>
-        <span style={ textWrapper }>
-          <h1>GALLERIA - PORTFOLIO</h1>
-          <h3>
-            Sovellusta voi käyttää portfoliona erilaisten projektien ja teosten esittelyyn.<br />
-            Mahdollisia käyttäjiä ovat eri alojen suunnittelijat, taitelijat jne.
-          </h3>
-          <h4>
-            Projektit esitellään albumeissa, jotka sisältävät teksti- ja kuvaosion.<br />
-            Albumit kootaan teemoittain kategorioiden alle.<br />
-            Kuvat valitaan kuva-arkistosta.
-          </h4>
-          <h4>
-            Voit testata näillä tunnuksilla tai tehdä omat:<br />
-            Email: demo@mail.com<br />
-            Password: demopass
-          </h4>
-        </span>
+        <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+          <span style={ textWrapperMobile }>
+            { infoText }
+          </span>
+        </Responsive>
+
+        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          <span style={ textWrapper }>
+            { infoText }
+          </span>
+        </Responsive>
+
       </div>
 
     </Fragment>

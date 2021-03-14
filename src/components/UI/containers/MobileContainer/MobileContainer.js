@@ -79,9 +79,11 @@ export default function MobileContainer({ children }) {
             inverted
             textAlign="center"
             vertical
-            style={{ minHeight: '100px',
-              padding: '1em 0em',
-              marginBottom: '10px' }}
+            style={{
+              minHeight: '100px',
+              padding: '1em 0em 1em',
+              // marginBottom: '10px'
+            }}
           >
             <AppHeader mobile />
             <Container>
