@@ -10,7 +10,7 @@ const AlbumList = ({ albums }) => {
 
   console.log('= AlbumList: ', albums)
 
-  const sortedAlbums = albums.sort((a,b) =>  b.id-a.id )
+  const sortedAlbums = albums.filter(a =>  a.user.id === auth.id )
 
   //********************************************/
   return (

@@ -9,9 +9,11 @@ const PictureList = ({ pictures }) => {
   const { auth } = useContext(AuthContext)
 
 
-  const sortedPics = auth.user &&
-    pictures &&
-    pictures.sort((a,b) =>  b.id-a.id )
+  // const sortedPics = auth.user &&
+  //   pictures &&
+  //   pictures.sort((a,b) =>  b.id-a.id )
+
+  const usersPictures = pictures.filter(p => p.user === auth.id)
 
   return (
     <div className='PictureList'>
@@ -31,8 +33,8 @@ const PictureList = ({ pictures }) => {
       { pictures && !pictures.length > 0 && <h3>no pictures yet!</h3>}
 
       <Grid doubling columns={4}>
-        { sortedPics &&
-          sortedPics.map(picture =>
+        { usersPictures &&
+          usersPictures.map(picture =>
             <Grid.Column  key={picture.id}>
               <PictureDetails key={picture.id} picture={picture} />
             </Grid.Column>

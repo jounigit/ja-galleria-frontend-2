@@ -7,6 +7,10 @@ import { Header } from 'semantic-ui-react'
 
 const CategoryList = ({ categories }) => {
   const { auth } = useContext(AuthContext)
+  console.log('Categories: ', categories)
+
+  const ownCategories = categories.filter(c => c.user.id === auth.id)
+  console.log('Omat Categories: ', ownCategories)
 
   return (
     <div className='CategoryList'>
@@ -24,10 +28,10 @@ const CategoryList = ({ categories }) => {
 
       <Header as='h2' dividing content='CATEGORIES' />
 
-      { categories.length < 1 && <p>no albums yet.</p> }
+      { ownCategories.length < 1 && <p>no albums yet.</p> }
 
       {
-        categories.map(category =>
+        ownCategories.map(category =>
           <CategoryDetails key={category.id} category={category} />
         )
       }
