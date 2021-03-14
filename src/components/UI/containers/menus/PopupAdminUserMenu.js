@@ -17,7 +17,7 @@ export const PopupAdminUserMenu = () => {
   const { userDispatch } = useContext(UserContext)
   const { msgDispatch } = useContext(NotificationContext)
 
-  console.log('PopupUsermenu AUTH: ', auth)
+  // console.log('PopupUsermenu AUTH: ', auth)
 
   /************ popup actions ********************/
   const handleOpen = () => {

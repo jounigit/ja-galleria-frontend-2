@@ -2,7 +2,7 @@ import axios from 'axios'
 import { FAILURE } from '../reducers/actionTypes'
 // eslint-disable-next-line no-undef
 const apiUrl = process.env.REACT_APP_API
-console.log('Apiurl: ', apiUrl)
+// console.log('Apiurl: ', apiUrl)
 
 let token = null
 let config = []

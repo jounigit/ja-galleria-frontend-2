@@ -20,9 +20,13 @@ const AlbumListHomeItem = ({ album }) => {
 
   /****** get first album picture id, filter picture form pictures array ***/
   const getFirst = albumPictures && albumPictures.length && albumPictures[0]
-  let firstPic = !getFirst === 0 && Pictures.find(p => p.id === getFirst)
+  console.log('AlbumListhomeitem getFirst: ', getFirst)
+  console.log('AlbumListhomeitem getFirst boolean: ', getFirst!==0)
+  let firstPic = getFirst !== 0 && Pictures.find(p => p.id === getFirst)
+  console.log('AlbumListhomeitem firstPic: ', firstPic)
 
   firstPic = firstPic ? firstPic.landscape : defaultBg
+  console.log('Last firstPic: ', firstPic)
 
   const textWrapper = {
     position: 'relative',
@@ -52,7 +56,7 @@ const AlbumListHomeItem = ({ album }) => {
   }
 
 
-  console.log('ALBUMlistItem module: ', module, firstPic)
+  // console.log('ALBUMlistItem module: ', module, firstPic)
   /**********************************************************/
   return (
     <div>

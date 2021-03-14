@@ -20,7 +20,7 @@ const CategoryListHomeItem = ({ category, cssClass }) => {
 
   const { title, slug, content, albums: CatAlbums } = category
   const albumsLen = CatAlbums.length
-  console.log('CAT item home page: ', cssClass, center)
+  // console.log('CAT item home page: ', cssClass, center)
 
   /********************* padded='very' **********************************  className='category' */
   return (
